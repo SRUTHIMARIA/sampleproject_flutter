@@ -260,6 +260,12 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "flutter_colorpicker",
+      "rootUri": "file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_colorpicker-1.0.3",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "flutter_gen_core",
       "rootUri": "file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_gen_core-4.3.0",
       "packageUri": "lib/",
@@ -764,7 +770,7 @@
       "languageVersion": "2.17"
     }
   ],
-  "generated": "2022-10-11T09:21:40.639279Z",
+  "generated": "2022-10-11T12:41:46.410144Z",
   "generator": "pub",
   "generatorVersion": "2.18.1"
 }
