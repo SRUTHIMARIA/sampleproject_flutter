@@ -4,6 +4,7 @@ import 'package:flutter_template/providers/authentication_provider.dart';
 import 'package:flutter_template/providers/provider_registrar.dart';
 import 'package:flutter_template/providers/theme_provider.dart';
 import 'package:flutter_template/ui/home_screen/home.dart';
+import 'package:flutter_template/utils/globals.dart';
 import 'package:provider/provider.dart';
 
 
@@ -23,12 +24,15 @@ class MyApp extends StatelessWidget {
       child: Consumer<ThemeProvider>(
         builder: (context, themeProvider, child) => MaterialApp(
           title: 'Flutter Provider Demo',
+
+            debugShowCheckedModeBanner: false,
+
           theme: ThemeData(
             primarySwatch: Colors.blue,
             appBarTheme: const AppBarTheme(systemOverlayStyle: SystemUiOverlayStyle.light),
 
           ),
-          home: Home(),
+          home: HomePage(title: 'Provider Counter',),
         ),
       ),
     );
