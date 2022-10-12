@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_template/providers/authentication_provider.dart';
-import 'package:flutter_template/providers/theme_provider.dart';
 import 'package:flutter_template/utils/globals.dart';
 import 'package:provider/provider.dart';
 import 'package:provider/single_child_widget.dart';
 
 class ProviderRegistrar {
   static final List<SingleChildWidget> providers = [
-    ChangeNotifierProvider(create: (_) => ThemeProvider()),
+    // ChangeNotifierProvider(create: (_) => ThemeProvider()),
   ];
 
   static clearProviders() {
