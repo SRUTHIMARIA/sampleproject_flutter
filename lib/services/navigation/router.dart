@@ -1,5 +1,6 @@
 import 'package:auto_route/annotations.dart';
-import 'package:flutter_template/ui/home_screen/home.dart';
+import 'package:flutter_template/ui/splash_screen/splash_animation.dart';
+import 'package:flutter_template/ui/splash_screen/splash_screen.dart';
 
 // @CupertinoAutoRouter
 // @AdaptiveAutoRouter
@@ -8,7 +9,9 @@ import 'package:flutter_template/ui/home_screen/home.dart';
 @MaterialAutoRouter(
   replaceInRouteName: 'Page,Route',
   routes: <AutoRoute>[
-    AutoRoute(page: Home, initial: true),
+    AutoRoute(page: SplashScreen, initial: true),
+    // AutoRoute(page: SplashAnimationScreen),
+
   ],
 )
 class $AppRouter {}

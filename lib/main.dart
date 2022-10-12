@@ -1,35 +1,32 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_template/providers/authentication_provider.dart';
-import 'package:flutter_template/ui/home_screen/home.dart';
-
+import 'package:flutter_template/services/navigation/router.gr.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   // await ThemeProvider.retrieveTheme();
   await AuthenticationProvider.retrieveAuthUser();
-  runApp( const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  MyApp({Key? key}) : super(key: key);
+  final _appRouter = AppRouter();
 
   @override
   Widget build(BuildContext context) {
-
-    return
-
-      MaterialApp(
-        title: 'Athelete Assist',
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
-        ),
-        // home: ChangeNotifierProvider(
-        //   create: (_) => MapsProvider(),
-        //   child: const HomeScreen(),
-        // ),
-        home: const Home(),
-
-      );
+    return MaterialApp.router(
+      routerDelegate: _appRouter.delegate(),
+      routeInformationParser: _appRouter.defaultRouteParser(),
+      title: 'Athelete Assist',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      // home: ChangeNotifierProvider(
+      //   create: (_) => MapsProvider(),
+      //   child: const HomeScreen(),
+      // ),
+    );
 
     // return MaterialApp.router(
     //   //Todo: add app name here

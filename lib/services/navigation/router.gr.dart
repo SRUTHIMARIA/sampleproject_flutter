@@ -13,7 +13,7 @@
 import 'package:auto_route/auto_route.dart' as _i2;
 import 'package:flutter/material.dart' as _i3;
 
-import '../../ui/home_screen/home.dart' as _i1;
+import '../../ui/splash_screen/splash_screen.dart' as _i1;
 
 class AppRouter extends _i2.RootStackRouter {
   AppRouter([_i3.GlobalKey<_i3.NavigatorState>? navigatorKey])
@@ -21,20 +21,21 @@ class AppRouter extends _i2.RootStackRouter {
 
   @override
   final Map<String, _i2.PageFactory> pagesMap = {
-    Home.name: (routeData) {
+    SplashScreen.name: (routeData) {
       return _i2.MaterialPageX<dynamic>(
-          routeData: routeData, child: const _i1.Home());
+          routeData: routeData, child: const _i1.SplashScreen());
     }
   };
 
   @override
-  List<_i2.RouteConfig> get routes => [_i2.RouteConfig(Home.name, path: '/')];
+  List<_i2.RouteConfig> get routes =>
+      [_i2.RouteConfig(SplashScreen.name, path: '/')];
 }
 
 /// generated route for
-/// [_i1.Home]
-class Home extends _i2.PageRouteInfo<void> {
-  const Home() : super(Home.name, path: '/');
+/// [_i1.SplashScreen]
+class SplashScreen extends _i2.PageRouteInfo<void> {
+  const SplashScreen() : super(SplashScreen.name, path: '/');
 
-  static const String name = 'Home';
+  static const String name = 'SplashScreen';
 }
