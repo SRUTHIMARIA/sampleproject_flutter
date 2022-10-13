@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_template/gen/assets.gen.dart';
+import 'package:flutter_template/ui/login_screen/login_screen.dart';
+import 'package:flutter_template/ui/register_screen/register_activation_link.dart';
 import 'package:flutter_template/utils/constants/fontdata.dart';
 import 'package:flutter_template/utils/constants/strings.dart';
 import 'package:flutter_template/utils/extensions/context_extensions.dart';
@@ -253,7 +255,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
                 GestureDetector(
                   onTap: () {
-                   Navigator.push(context, MaterialPageRoute(builder: (context)=>RegisterScreen()));
+                   Navigator.push(context, MaterialPageRoute(builder: (context)=>RegisterActivationLink()));
                   },
 
                   child: Container(
@@ -284,9 +286,16 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       style: const FontData().montFont60012TextStyle ,
                     ),
                     SizedBox(width:context.widthPx *4),
-                    Text(
-                     signin,
-                      style: const FontData().montFont70012TextStyle ,
+                    GestureDetector(
+                      onTap: (){
+                        Navigator.push(context, MaterialPageRoute(builder: (context)=>LoginScreen()));
+                      },
+                      child: Container(
+                        child: Text(
+                         signin,
+                          style: const FontData().montFont70012TextStyle ,
+                        ),
+                      ),
                     ),
                   ],),
 

@@ -72,24 +72,31 @@ class _RegisterActivationLinkState extends State<RegisterActivationLink> {
             SizedBox(height:context.heightPx *160),
 
 
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Image.asset(Assets.icons.iconBack.path),
-                SizedBox(width:context.widthPx *4),
-                GestureDetector(
-                  onTap: (){
-                    Navigator.push(context, MaterialPageRoute(builder: (context)=>LoginScreen()));
-                  },
-                  child: Container(
-                    child: Text(
-                      backToLogin,
-                      style: const FontData().montFont60014TextStyle ,
+            GestureDetector(
+              onTap: (){
+                Navigator.push(context, MaterialPageRoute(builder: (context)=>LoginScreen()));
+              },
+              child: Container(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Image.asset(Assets.icons.iconBack.path),
+                    SizedBox(width:context.widthPx *4),
+                    GestureDetector(
+                      onTap: (){
+                        Navigator.push(context, MaterialPageRoute(builder: (context)=>LoginScreen()));
+                      },
+                      child: Container(
+                        child: Text(
+                          backToLogin,
+                          style: const FontData().montFont60014TextStyle,
+                        ),
+                      ),
                     ),
-                  ),
-                ),
-              ],),
+                  ],),
+              ),
+            ),
 
 
 

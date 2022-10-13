@@ -37,7 +37,7 @@ class MyApp extends StatelessWidget {
         //   create: (_) => MapsProvider(),
         //   child: const HomeScreen(),
         // ),
-        home: RegisterActivationLink(),
+        home: LoginScreen(),
 
       );
   }
