@@ -45,6 +45,7 @@ class SplashAnimationScreen extends StatelessWidget {
                   ),
                   SizedBox(height: 30,),
 
+
                   Image.asset(Assets.icons.iconForward.path),
                 ],
               ),
