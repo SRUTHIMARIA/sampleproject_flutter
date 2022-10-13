@@ -6,7 +6,7 @@ class SplashAnimationScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.splashColor,
+      backgroundColor: AppColors.primaryColor.withOpacity(0.40),
       body: Column(
         children: [
           Expanded(
@@ -28,7 +28,26 @@ class SplashAnimationScreen extends StatelessWidget {
           ),
           Expanded(
             flex: 3,
-            child: Container(
+            child: Align(
+              alignment: Alignment.center,
+              child: Column(
+                children: [
+                  SizedBox(height: 30,),
+                  Container(
+
+                    child: Text('THE ASSIST ATHLETE\n - GROWTH MINDSET\n JOURNEY',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontFamily: 'Mont',
+                        fontSize: 22,
+                      fontWeight: FontWeight.w700,
+                    ),),
+                  ),
+                  SizedBox(height: 30,),
+
+                  Image.asset(Assets.icons.iconForward.path),
+                ],
+              ),
             ),
           ),
         ],

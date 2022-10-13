@@ -43,11 +43,15 @@ flutter:
 
   assets:
     - assets/images/
+    - assets/icons/
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
 
 
-  # fonts:
+  fonts:
+    - family: "Mont"
+      fonts:
+        - asset: "assets/fonts/Monsterrat/Montserrat-Regular.ttf"
   #   - family: Schyler
   #     fonts:
   #       - asset: fonts/Schyler-Regular.ttf
