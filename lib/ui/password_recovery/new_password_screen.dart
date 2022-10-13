@@ -1,24 +1,24 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_template/gen/assets.gen.dart';
-import 'package:flutter_template/ui/password_recovery/new_password_screen.dart';
 import 'package:flutter_template/ui/register_screen/resgister_screen.dart';
 import 'package:flutter_template/utils/constants/fontdata.dart';
 import 'package:flutter_template/utils/constants/strings.dart';
 import 'package:flutter_template/utils/extensions/context_extensions.dart';
 import 'package:flutter_template/utils/static/static_padding.dart';
+import 'package:flutter_template/widgets/text_form/text_form_widget.dart';
 
+import '../../utils/static/values.dart';
 import '../../utils/theme/app_colors.dart';
 
-class AuthenticationCodeScreen extends StatefulWidget {
-  const AuthenticationCodeScreen({Key? key}) : super(key: key);
+class NewPasswordScreen extends StatefulWidget {
+  const NewPasswordScreen({Key? key}) : super(key: key);
 
   @override
-  State<AuthenticationCodeScreen> createState() => _AuthenticationCodeScreenState();
+  State<NewPasswordScreen> createState() => _NewPasswordScreenState();
 }
 
-class _AuthenticationCodeScreenState extends State<AuthenticationCodeScreen> {
+class _NewPasswordScreenState extends State<NewPasswordScreen> {
   final List<Color> _colors = [
     AppColors.gradientColorSplash,
     AppColors.gradientColor2Splash
@@ -45,7 +45,7 @@ class _AuthenticationCodeScreenState extends State<AuthenticationCodeScreen> {
           children: [
             Image.asset(Assets.images.imageLogin.path),
             SizedBox(
-              height: context.heightPx * 190,
+              height: context.heightPx * 145,
             ),
             Align(
               alignment: Alignment.centerLeft,
@@ -55,7 +55,7 @@ class _AuthenticationCodeScreenState extends State<AuthenticationCodeScreen> {
                   child: Container(
                     margin: EdgeInsets.only(left: 12.0),
                     child: Text(
-                      authentication,
+                      passwordRecovery,
                       style: const FontData().montFont22TextStyle,
                     ),
                   )),
@@ -67,46 +67,82 @@ class _AuthenticationCodeScreenState extends State<AuthenticationCodeScreen> {
                 child: Container(
                   margin: EdgeInsets.only(left: 12.0),
                   child: Text(
-                    authenticationCode,
+                    createnewPassword,
                     style: const FontData().montFont14TextStyle,
                   ),
                 ),),
             ),
-            SizedBox(
-              height: context.heightPx * 30,
-            ),
-
-            OtpTextField(
-              numberOfFields: 4,
-              borderColor: AppColors.textFieldBgColor,
-              showFieldAsBox: true,
-              fieldWidth: 56,
+            SizedBox(height:context.heightPx *27),
 
 
-              decoration: InputDecoration(
-                enabledBorder: InputBorder.none,
-                disabledBorder: InputBorder.none,
+            Container(
+              margin: EdgeInsets.symmetric(horizontal: 56),
+              decoration: BoxDecoration(
+                color: AppColors.textFieldBgColor,
+                borderRadius: BorderRadius.circular(6.0),
               ),
-             enabledBorderColor:  AppColors.textFieldBgColor,
-              borderRadius: const BorderRadius.all(Radius.circular(6.0)),
-              focusedBorderColor: Colors.transparent,
-              disabledBorderColor: Colors.transparent,
-              cursorColor: AppColors.textFieldBgColor,
-              borderWidth: 0.0,
-
-              // textStyle: const FontData().otpTextStyle,
+              child: TextFormField(
+                style: FontData().montFont500TextStyle,
+                decoration: InputDecoration(
+                  focusColor: Colors.white,
+                  enabledBorder: InputBorder.none,
 
 
+                  prefixIcon: SvgPicture.asset(Assets.icons.iconPassword,fit: BoxFit.scaleDown,color: AppColors.textGrey,),
+
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(6.0),
+                  ),
+
+                  fillColor: Colors.grey,
+
+                  hintText: newpassword,
+
+                  //make hint text
+                  hintStyle:  FontData().montFont500TextStyle,
+
+
+
+                ),
+              ),
             ),
-            SizedBox(
-              height: context.heightPx * 24,
+            SizedBox(height:context.heightPx *27),
+            Container(
+              margin: EdgeInsets.symmetric(horizontal: 56),
+              decoration: BoxDecoration(
+                color: AppColors.textFieldBgColor,
+                borderRadius: BorderRadius.circular(6.0),
+              ),
+              child: TextFormField(
+                style: FontData().montFont500TextStyle,
+
+                decoration: InputDecoration(
+                  focusColor: Colors.white,
+                  enabledBorder: InputBorder.none,
+
+                  prefixIcon: SvgPicture.asset(Assets.icons.iconPassword,fit: BoxFit.scaleDown,color: AppColors.textGrey,),
+
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(6.0),
+                  ),
+
+                  fillColor: Colors.grey,
+
+                  hintText: confirmPassword,
+
+                  //make hint text
+                  hintStyle:  FontData().montFont500TextStyle,
+
+                ),
+              ),
             ),
+
 
             SizedBox(height:context.heightPx *27),
 
             GestureDetector(
               onTap: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context)=>NewPasswordScreen()));
+                Navigator.push(context, MaterialPageRoute(builder: (context)=>RegisterScreen()));
               },
 
               child: Container(
@@ -118,7 +154,7 @@ class _AuthenticationCodeScreenState extends State<AuthenticationCodeScreen> {
                     borderRadius: BorderRadius.all(Radius.circular(8.0)),),
                   child: Center(
                     child: Text(
-                      submit,
+                      save,
                       // _display ? "hide logo" : "display logo",
                       style: const FontData().montFont70016TextStyle,
                     ),

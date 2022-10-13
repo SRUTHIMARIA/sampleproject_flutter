@@ -10,7 +10,7 @@ class StaticPadding {
   }
 
   static EdgeInsetsGeometry paddingH60(BuildContext context) {
-  return EdgeInsets.symmetric(horizontal: context.widthPx * 66);
+  return EdgeInsets.symmetric(horizontal: context.widthPx * 60);
   }
 
 

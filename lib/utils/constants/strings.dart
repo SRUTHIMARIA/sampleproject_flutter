@@ -24,6 +24,12 @@ const String recover="Recover";
 const String authentication="Authentication";
 const String authenticationCode="An authentication code has been sent to debra.holt@example.com";
 const String submit="Submit";
+const String createnewPassword="Create a new password";
+const String newpassword="New Password";
+const String confirmPassword="Confirm Password";
+const String save="Save";
+
+
 
 
 

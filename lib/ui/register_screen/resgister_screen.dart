@@ -188,7 +188,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   ),
                 ),
                 SizedBox(
-                  height: context.heightPx * 20,
+                  height: context.heightPx * 16,
                 ),
 
                 Align(
@@ -196,27 +196,50 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   child: Padding(
                     padding: StaticPadding.paddingH30(context),
                     child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        Theme(
-                          data: Theme.of(context).copyWith(
-                            unselectedWidgetColor: AppColors.textFieldBgColor,
-                          ),
-                          child: Checkbox(
-                            value: this.isAgree,
-                            checkColor: AppColors.themeColor,
-                            onChanged: (bool? value) {
-                              setState(() {
-                                this.isAgree = value!;
-                              });
-                            },
-                          ), //Ch
-                          // Checkbox(
-                          //   value: isAgree,
-                          //   onChanged: (bool? value) {
-                          //     isAgree = value!;
-                          //   },
-                          // ),
+                        // Theme(
+                        //   data: Theme.of(context).copyWith(
+                        //     unselectedWidgetColor: AppColors.textFieldBgColor,
+                        //   ),
+                        //   child: Checkbox(
+                        //     value: this.isAgree,
+                        //     checkColor: AppColors.themeColor,
+                        //     onChanged: (bool? value) {
+                        //       setState(() {
+                        //         this.isAgree = value!;
+                        //       });
+                        //     },
+                        //   ), //Ch
+                        //   // Checkbox(
+                        //   //   value: isAgree,
+                        //   //   onChanged: (bool? value) {
+                        //   //     isAgree = value!;
+                        //   //   },
+                        //   // ),
+                        // ),
+                        SizedBox(
+                            height:12.0,
+                            width: 12.0,
+                            child: Theme(
+                                data: Theme.of(context).copyWith(
+                                  unselectedWidgetColor: AppColors.textFieldBgColor,
+                                ),
+                              child: Checkbox(
+                                    value: this.isAgree,
+                                    checkColor: AppColors.themeColor,
+                                    onChanged: (bool? value) {
+                                      setState(() {
+                                        this.isAgree = value!;
+                                      });
+                                    },
+                                  ),
+                            ),
                         ),
+                        // You can play with the width to adjust your
+                        // desired spacing
+                        SizedBox(width: 10.0),
                         Text(
                           Iagree,
                           style: const FontData().montFont50010TextStyle,
@@ -230,7 +253,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
                 GestureDetector(
                   onTap: () {
-                   // Navigator.push(context, MaterialPageRoute(builder: (context)=>RegisterScreen()));
+                   Navigator.push(context, MaterialPageRoute(builder: (context)=>RegisterScreen()));
                   },
 
                   child: Container(

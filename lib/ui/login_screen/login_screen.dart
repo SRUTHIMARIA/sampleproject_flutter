@@ -136,6 +136,8 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
               ),
             ),
+            SizedBox(height:context.heightPx *16),
+
 
             Align(
               alignment: Alignment.centerRight,
@@ -179,9 +181,16 @@ class _LoginScreenState extends State<LoginScreen> {
                 style: const FontData().montFont60012TextStyle ,
               ),
                 SizedBox(width:context.widthPx *4),
-              Text(
-               register,
-                style: const FontData().montFont70012TextStyle ,
+              GestureDetector(
+                onTap: (){
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=>RegisterScreen()));
+                },
+                child: Container(
+                  child: Text(
+                   register,
+                    style: const FontData().montFont70012TextStyle ,
+                  ),
+                ),
               ),
             ],),
 

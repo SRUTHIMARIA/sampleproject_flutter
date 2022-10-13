@@ -35,7 +35,7 @@ class MyApp extends StatelessWidget {
         //   create: (_) => MapsProvider(),
         //   child: const HomeScreen(),
         // ),
-        home: PasswordRecovery(),
+        home: LoginScreen(),
 
       );
   }
