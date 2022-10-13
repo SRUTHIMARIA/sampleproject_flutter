@@ -9,14 +9,14 @@ import 'package:flutter_template/utils/static/static_padding.dart';
 
 import '../../utils/theme/app_colors.dart';
 
-class PasswordActivationLink extends StatefulWidget {
-  const PasswordActivationLink({Key? key}) : super(key: key);
+class RegisterActivationLink extends StatefulWidget {
+  const RegisterActivationLink({Key? key}) : super(key: key);
 
   @override
-  State<PasswordActivationLink> createState() => _PasswordActivationLinkState();
+  State<RegisterActivationLink> createState() => _RegisterActivationLinkState();
 }
 
-class _PasswordActivationLinkState extends State<PasswordActivationLink> {
+class _RegisterActivationLinkState extends State<RegisterActivationLink> {
   final List<Color> _colors = [
     AppColors.gradientColorSplash,
     AppColors.gradientColor2Splash
@@ -48,20 +48,8 @@ class _PasswordActivationLinkState extends State<PasswordActivationLink> {
             Image.asset(Assets.images.imageSuccess.path),
             SizedBox(height:context.heightPx *33),
 
-            Align(
-              alignment: Alignment.center,
-              child: Padding(
 
-                  padding: StaticPadding.paddingH50(context),
-                  child: Container(
-                    margin: EdgeInsets.only(left: 12.0),
-                    child: Text(
-                      passwordRecovery,
-                      style: const FontData().montFont22TextStyle,
-                    ),
-                  )),
-            ),
-            SizedBox(height:context.heightPx *12),
+
 
             Align(
               alignment: Alignment.center,
@@ -70,7 +58,7 @@ class _PasswordActivationLinkState extends State<PasswordActivationLink> {
                 child: Container(
                   margin: EdgeInsets.only(left: 12.0),
                   child: Text(
-                    passwordChanged,
+                    authSucess,
                     style: const FontData().montFont14TextStyle,
                   ),
                 ),),

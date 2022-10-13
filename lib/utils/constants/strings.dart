@@ -30,6 +30,7 @@ const String confirmPassword="Confirm Password";
 const String save="Save";
 const String passwordChanged="Your password has been\n changed successfully";
 const String backToLogin="Back to login";
+const String authSucess="Activation link sent successfully.";
 
 
 

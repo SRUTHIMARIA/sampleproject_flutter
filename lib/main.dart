@@ -3,6 +3,7 @@ import 'package:flutter_template/providers/authentication_provider.dart';
 import 'package:flutter_template/ui/login_screen/login_screen.dart';
 import 'package:flutter_template/ui/password_recovery/password_activation_link.dart';
 import 'package:flutter_template/ui/password_recovery/password_recovery.dart';
+import 'package:flutter_template/ui/register_screen/register_activation_link.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -36,7 +37,7 @@ class MyApp extends StatelessWidget {
         //   create: (_) => MapsProvider(),
         //   child: const HomeScreen(),
         // ),
-        home: ActivationLink(),
+        home: RegisterActivationLink(),
 
       );
   }
