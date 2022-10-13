@@ -50,7 +50,6 @@ class _NewPasswordScreenState extends State<NewPasswordScreen> {
             Align(
               alignment: Alignment.centerLeft,
               child: Padding(
-
                   padding: StaticPadding.paddingH50(context),
                   child: Container(
                     margin: EdgeInsets.only(left: 12.0),
@@ -70,11 +69,10 @@ class _NewPasswordScreenState extends State<NewPasswordScreen> {
                     createnewPassword,
                     style: const FontData().montFont14TextStyle,
                   ),
-                ),),
+                ),
+              ),
             ),
-            SizedBox(height:context.heightPx *27),
-
-
+            SizedBox(height: context.heightPx * 27),
             Container(
               margin: EdgeInsets.symmetric(horizontal: 56),
               decoration: BoxDecoration(
@@ -86,27 +84,21 @@ class _NewPasswordScreenState extends State<NewPasswordScreen> {
                 decoration: InputDecoration(
                   focusColor: Colors.white,
                   enabledBorder: InputBorder.none,
-
-
-                  prefixIcon: SvgPicture.asset(Assets.icons.iconPassword,fit: BoxFit.scaleDown,color: AppColors.textGrey,),
-
+                  prefixIcon: SvgPicture.asset(
+                    Assets.icons.iconPassword,
+                    fit: BoxFit.scaleDown,
+                    color: AppColors.textGrey,
+                  ),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(6.0),
                   ),
-
                   fillColor: Colors.grey,
-
                   hintText: newpassword,
-
-                  //make hint text
-                  hintStyle:  FontData().montFont500TextStyle,
-
-
-
+                  hintStyle: FontData().montFont500TextStyle,
                 ),
               ),
             ),
-            SizedBox(height:context.heightPx *27),
+            SizedBox(height: context.heightPx * 27),
             Container(
               margin: EdgeInsets.symmetric(horizontal: 56),
               decoration: BoxDecoration(
@@ -115,58 +107,47 @@ class _NewPasswordScreenState extends State<NewPasswordScreen> {
               ),
               child: TextFormField(
                 style: FontData().montFont500TextStyle,
-
                 decoration: InputDecoration(
                   focusColor: Colors.white,
                   enabledBorder: InputBorder.none,
-
-                  prefixIcon: SvgPicture.asset(Assets.icons.iconPassword,fit: BoxFit.scaleDown,color: AppColors.textGrey,),
-
+                  prefixIcon: SvgPicture.asset(
+                    Assets.icons.iconPassword,
+                    fit: BoxFit.scaleDown,
+                    color: AppColors.textGrey,
+                  ),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(6.0),
                   ),
-
                   fillColor: Colors.grey,
-
                   hintText: confirmPassword,
-
-                  //make hint text
-                  hintStyle:  FontData().montFont500TextStyle,
-
+                  hintStyle: FontData().montFont500TextStyle,
                 ),
               ),
             ),
-
-
-            SizedBox(height:context.heightPx *27),
-
+            SizedBox(height: context.heightPx * 27),
             GestureDetector(
               onTap: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context)=>RegisterScreen()));
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => RegisterScreen()));
               },
-
               child: Container(
                 height: context.heightPx * 42,
                 width: context.widthPx * 276,
                 child: Container(
                   decoration: const BoxDecoration(
                     color: AppColors.themeColor,
-                    borderRadius: BorderRadius.all(Radius.circular(8.0)),),
+                    borderRadius: BorderRadius.all(Radius.circular(8.0)),
+                  ),
                   child: Center(
                     child: Text(
                       save,
-                      // _display ? "hide logo" : "display logo",
                       style: const FontData().montFont70016TextStyle,
                     ),
                   ),
                 ),
               ),
             ),
-            SizedBox(height:context.heightPx *16),
-
-
-
-
+            SizedBox(height: context.heightPx * 16),
           ],
         ),
       ),
