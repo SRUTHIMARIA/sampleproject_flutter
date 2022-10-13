@@ -16,4 +16,16 @@ const String register="REGISTER";
 const String alreadyhaveaccount="Already I have an account?";
 const String signin="SIGN IN";
 
+//password recovery
+
+const String passwordRecovery="Password Recovery";
+const String emailToRecover="Enter your email to recover your password...";
+const String recover="Recover";
+const String authentication="Authentication";
+const String authenticationCode="An authentication code has been sent to debra.holt@example.com";
+const String submit="Submit";
+
+
+
+
 

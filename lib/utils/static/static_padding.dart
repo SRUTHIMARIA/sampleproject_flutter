@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_template/utils/extensions/context_extensions.dart';
 
 class StaticPadding {
+  static EdgeInsetsGeometry paddingH30(BuildContext context) {
+    return EdgeInsets.symmetric(horizontal: context.widthPx * 30);
+  }
   static EdgeInsetsGeometry paddingH50(BuildContext context) {
     return EdgeInsets.symmetric(horizontal: context.widthPx * 50);
   }

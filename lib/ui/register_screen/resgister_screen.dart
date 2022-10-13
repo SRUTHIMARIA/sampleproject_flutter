@@ -16,6 +16,8 @@ class RegisterScreen extends StatefulWidget {
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
+  bool isAgree = false;
+
   final List<Color> _colors = [
     AppColors.gradientColorSplash,
     AppColors.gradientColor2Splash
@@ -38,204 +40,238 @@ class _RegisterScreenState extends State<RegisterScreen> {
           //
           // ),
         ),
-        child: Column(
-          children: [
-            Image.asset(Assets.images.imageLogin.path),
-            SizedBox(
-              height: context.heightPx * 21,
-            ),
-            Align(
-              alignment: Alignment.centerLeft,
-              child: Padding(
+        child: SingleChildScrollView(
 
-                  padding: StaticPadding.paddingH50(context),
+          child: Container(
+            child: Column(
+              children: [
+                Image.asset(Assets.images.imageLogin.path),
+                SizedBox(
+                  height: context.heightPx * 21,
+                ),
+                Align(
+                  alignment: Alignment.centerLeft,
                   child: Container(
+                    padding: EdgeInsets.symmetric(horizontal: 46),
                     margin: EdgeInsets.only(left: 12.0),
                     child: Text(
                       getStarted,
                       style: const FontData().montFont22TextStyle,
                     ),
-                  )),
-            ),
-            SizedBox(
-              height: context.heightPx * 20,
-            ),
-            Padding(
-              padding: StaticPadding.paddingH50(context),
-              child: Container(
-                margin: EdgeInsets.all(15),
-                color: AppColors.textFieldBgColor,
-                child: TextFormField(
-                  style: FontData().montFont500TextStyle,
-                  decoration: InputDecoration(
-                    focusColor: Colors.white,
-                    enabledBorder: InputBorder.none,
-
-
-                    prefixIcon: SvgPicture.asset(Assets.icons.iconUsername,fit: BoxFit.scaleDown,color: AppColors.textGrey,),
-
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(6.0),
-                    ),
-
-                    fillColor: Colors.grey,
-
-                    hintText: firstname,
-
-                    //make hint text
-                    hintStyle:  FontData().montFont500TextStyle,
-
-
-
                   ),
                 ),
-              ),
-            ),
-            Padding(
-              padding: StaticPadding.paddingH50(context),
-              child: Container(
-                margin: EdgeInsets.all(15),
-                color: AppColors.textFieldBgColor,
-                child: TextFormField(
-                  style: FontData().montFont500TextStyle,
-
-                  decoration: InputDecoration(
-                    focusColor: Colors.white,
-                    enabledBorder: InputBorder.none,
-
-                    prefixIcon: SvgPicture.asset(Assets.icons.iconUsername,fit: BoxFit.scaleDown,color: AppColors.textGrey,),
-
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(6.0),
-                    ),
-
-                    fillColor: Colors.grey,
-
-                    hintText: secondname,
-
-                    //make hint text
-                    hintStyle:  FontData().montFont500TextStyle,
-
-                  ),
+                SizedBox(
+                  height: context.heightPx * 20,
                 ),
-              ),
-            ),
+                Container(
+                  margin: EdgeInsets.symmetric(horizontal: 56),
 
-            Padding(
-              padding: StaticPadding.paddingH50(context),
-              child: Container(
-                margin: EdgeInsets.all(15),
-                color: AppColors.textFieldBgColor,
-                child: TextFormField(
-                  style: FontData().montFont500TextStyle,
-
-                  decoration: InputDecoration(
-                    focusColor: Colors.white,
-                    enabledBorder: InputBorder.none,
-
-                    prefixIcon: SvgPicture.asset(Assets.icons.iconPassword,fit: BoxFit.scaleDown,color: AppColors.textGrey,),
-
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(6.0),
-                    ),
-
-                    fillColor: Colors.grey,
-
-                    hintText: email,
-
-                    //make hint text
-                    hintStyle:  FontData().montFont500TextStyle,
-
+                  decoration: BoxDecoration(
+                    color: AppColors.textFieldBgColor,
+                    borderRadius: BorderRadius.circular(6.0),
                   ),
-                ),
-              ),
-            ),
-            Padding(
-              padding: StaticPadding.paddingH50(context),
-              child: Container(
-                margin: EdgeInsets.all(15),
-                color: AppColors.textFieldBgColor,
-                child: TextFormField(
-                  style: FontData().montFont500TextStyle,
+                  child: TextFormField(
+                    style: FontData().montFont500TextStyle,
+                    decoration: InputDecoration(
+                      focusColor: Colors.white,
+                      enabledBorder: InputBorder.none,
 
-                  decoration: InputDecoration(
-                    focusColor: Colors.white,
-                    enabledBorder: InputBorder.none,
 
-                    prefixIcon: SvgPicture.asset(Assets.icons.iconPassword,fit: BoxFit.scaleDown,color: AppColors.textGrey,),
+                      prefixIcon: SvgPicture.asset(Assets.icons.iconUsername,fit: BoxFit.scaleDown,color: AppColors.textGrey,),
 
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(6.0),
-                    ),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(6.0),
+                      ),
 
-                    fillColor: Colors.grey,
+                      fillColor: Colors.grey,
 
-                    hintText: password,
+                      hintText: firstname,
 
-                    //make hint text
-                    hintStyle:  FontData().montFont500TextStyle,
+                      //make hint text
+                      hintStyle:  FontData().montFont500TextStyle,
 
-                  ),
-                ),
-              ),
-            ),
-            SizedBox(
-              height: context.heightPx * 20,
-            ),
 
-            Align(
-              alignment: Alignment.center,
-              child: Padding(
-                padding: StaticPadding.paddingH60(context),
-                child: Text(
-                  Iagree,
-                  style: const FontData().montFont50010TextStyle,
-                ),),
-            ),
-            SizedBox(
-              height: context.heightPx * 16,
-            ),
 
-            GestureDetector(
-              onTap: () {
-               // Navigator.push(context, MaterialPageRoute(builder: (context)=>RegisterScreen()));
-              },
-
-              child: Container(
-                height: context.heightPx * 42,
-                width: context.widthPx * 300,
-                child: Container(
-                  decoration: const BoxDecoration(
-                      color: AppColors.themeColor,
-                      borderRadius: BorderRadius.all(Radius.circular(8.0)),),
-                  child: Center(
-                    child: Text(
-                      register,
-                      // _display ? "hide logo" : "display logo",
-                      style: const FontData().montFont70016TextStyle,
                     ),
                   ),
                 ),
-              ),
+                SizedBox(height: context.heightPx*20,),
+                Container(
+                  margin: EdgeInsets.symmetric(horizontal: 56),
+                  decoration: BoxDecoration(
+                    color: AppColors.textFieldBgColor,
+                    borderRadius: BorderRadius.circular(6.0),
+                  ),
+                  child: TextFormField(
+                    style: FontData().montFont500TextStyle,
+
+                    decoration: InputDecoration(
+                      focusColor: Colors.white,
+                      enabledBorder: InputBorder.none,
+
+                      prefixIcon: SvgPicture.asset(Assets.icons.iconUsername,fit: BoxFit.scaleDown,color: AppColors.textGrey,),
+
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(6.0),
+                      ),
+
+                      fillColor: Colors.grey,
+
+                      hintText: secondname,
+
+                      //make hint text
+                      hintStyle:  FontData().montFont500TextStyle,
+
+                    ),
+                  ),
+                ),
+                SizedBox(height: context.heightPx*20,),
+
+                Container(
+                  margin: EdgeInsets.symmetric(horizontal: 56),
+                  decoration: BoxDecoration(
+                    color: AppColors.textFieldBgColor,
+                    borderRadius: BorderRadius.circular(6.0),
+                  ),
+                  child: TextFormField(
+                    style: FontData().montFont500TextStyle,
+
+                    decoration: InputDecoration(
+                      focusColor: Colors.white,
+                      enabledBorder: InputBorder.none,
+
+                      prefixIcon: SvgPicture.asset(Assets.icons.iconEmail,fit: BoxFit.scaleDown,color: AppColors.textGrey,),
+
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(6.0),
+                      ),
+
+                      fillColor: Colors.grey,
+
+                      hintText: email,
+
+                      //make hint text
+                      hintStyle:  FontData().montFont500TextStyle,
+
+                    ),
+                  ),
+                ),
+                SizedBox(height: context.heightPx*20,),
+
+                Container(
+                  margin: EdgeInsets.symmetric(horizontal: 56),
+                  decoration: BoxDecoration(
+                    color: AppColors.textFieldBgColor,
+                    borderRadius: BorderRadius.circular(6.0),
+                  ),
+                  child: TextFormField(
+                    style: FontData().montFont500TextStyle,
+
+                    decoration: InputDecoration(
+                      focusColor: Colors.white,
+                      enabledBorder: InputBorder.none,
+
+                      prefixIcon: SvgPicture.asset(Assets.icons.iconPassword,fit: BoxFit.scaleDown,color: AppColors.textGrey,),
+
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(6.0),
+                      ),
+
+                      fillColor: Colors.grey,
+
+                      hintText: password,
+
+                      //make hint text
+                      hintStyle:  FontData().montFont500TextStyle,
+
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: context.heightPx * 20,
+                ),
+
+                Align(
+                  alignment: Alignment.center,
+                  child: Padding(
+                    padding: StaticPadding.paddingH30(context),
+                    child: Row(
+                      children: [
+                        Theme(
+                          data: Theme.of(context).copyWith(
+                            unselectedWidgetColor: AppColors.textFieldBgColor,
+                          ),
+                          child: Checkbox(
+                            value: this.isAgree,
+                            checkColor: AppColors.themeColor,
+                            onChanged: (bool? value) {
+                              setState(() {
+                                this.isAgree = value!;
+                              });
+                            },
+                          ), //Ch
+                          // Checkbox(
+                          //   value: isAgree,
+                          //   onChanged: (bool? value) {
+                          //     isAgree = value!;
+                          //   },
+                          // ),
+                        ),
+                        Text(
+                          Iagree,
+                          style: const FontData().montFont50010TextStyle,
+                        ),
+                      ],
+                    ),),
+                ),
+                SizedBox(
+                  height: context.heightPx * 16,
+                ),
+
+                GestureDetector(
+                  onTap: () {
+                   // Navigator.push(context, MaterialPageRoute(builder: (context)=>RegisterScreen()));
+                  },
+
+                  child: Container(
+                    height: context.heightPx * 42,
+                    width: context.widthPx * 276,
+                    child: Container(
+                      decoration: const BoxDecoration(
+                          color: AppColors.themeColor,
+                          borderRadius: BorderRadius.all(Radius.circular(8.0)),),
+                      child: Center(
+                        child: Text(
+                          register,
+                          // _display ? "hide logo" : "display logo",
+                          style: const FontData().montFont70016TextStyle,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(height:context.heightPx *16),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+
+                  children: [
+
+                    Text(
+                      alreadyhaveaccount,
+                      style: const FontData().montFont60012TextStyle ,
+                    ),
+                    SizedBox(width:context.widthPx *4),
+                    Text(
+                     signin,
+                      style: const FontData().montFont70012TextStyle ,
+                    ),
+                  ],),
+
+
+
+              ],
             ),
-            SizedBox(height:context.heightPx *16),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  alreadyhaveaccount,
-                  style: const FontData().montFont60012TextStyle ,
-                ),
-                SizedBox(width:context.widthPx *4),
-                Text(
-                 signin,
-                  style: const FontData().montFont70012TextStyle ,
-                ),
-              ],),
-
-
-
-          ],
+          ),
         ),
       ),
     );

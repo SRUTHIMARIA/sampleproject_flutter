@@ -74,63 +74,65 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
             SizedBox(height:context.heightPx *16),
 
-            Padding(
-              padding: StaticPadding.paddingH50(context),
-              child: Container(
-                margin: EdgeInsets.all(15),
+
+            Container(
+              margin: EdgeInsets.symmetric(horizontal: 56),
+              decoration: BoxDecoration(
                 color: AppColors.textFieldBgColor,
-                child: TextFormField(
-                  style: FontData().montFont500TextStyle,
-                  decoration: InputDecoration(
-                    focusColor: Colors.white,
-                    enabledBorder: InputBorder.none,
+                borderRadius: BorderRadius.circular(6.0),
+              ),
+              child: TextFormField(
+                style: FontData().montFont500TextStyle,
+                decoration: InputDecoration(
+                  focusColor: Colors.white,
+                  enabledBorder: InputBorder.none,
 
 
-                    prefixIcon: SvgPicture.asset(Assets.icons.iconUsername,fit: BoxFit.scaleDown,color: AppColors.textGrey,),
+                  prefixIcon: SvgPicture.asset(Assets.icons.iconUsername,fit: BoxFit.scaleDown,color: AppColors.textGrey,),
 
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(6.0),
-                    ),
-
-                    fillColor: Colors.grey,
-
-                    hintText: username,
-
-                    //make hint text
-                    hintStyle:  FontData().montFont500TextStyle,
-
-
-
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(6.0),
                   ),
+
+                  fillColor: Colors.grey,
+
+                  hintText: username,
+
+                  //make hint text
+                  hintStyle:  FontData().montFont500TextStyle,
+
+
+
                 ),
               ),
             ),
-            Padding(
-              padding: StaticPadding.paddingH50(context),
-              child: Container(
-                margin: EdgeInsets.all(15),
+            SizedBox(height:context.heightPx *20),
+            Container(
+              margin: EdgeInsets.symmetric(horizontal: 56),
+              decoration: BoxDecoration(
                 color: AppColors.textFieldBgColor,
-                child: TextFormField(
-                  style: FontData().montFont500TextStyle,
+                borderRadius: BorderRadius.circular(6.0),
+              ),
+              child: TextFormField(
+                style: FontData().montFont500TextStyle,
 
-                  decoration: InputDecoration(
-                    focusColor: Colors.white,
-                    enabledBorder: InputBorder.none,
+                decoration: InputDecoration(
+                  focusColor: Colors.white,
+                  enabledBorder: InputBorder.none,
 
-                    prefixIcon: SvgPicture.asset(Assets.icons.iconPassword,fit: BoxFit.scaleDown,color: AppColors.textGrey,),
+                  prefixIcon: SvgPicture.asset(Assets.icons.iconPassword,fit: BoxFit.scaleDown,color: AppColors.textGrey,),
 
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(6.0),
-                    ),
-
-                    fillColor: Colors.grey,
-
-                    hintText: password,
-
-                    //make hint text
-                    hintStyle:  FontData().montFont500TextStyle,
-
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(6.0),
                   ),
+
+                  fillColor: Colors.grey,
+
+                  hintText: password,
+
+                  //make hint text
+                  hintStyle:  FontData().montFont500TextStyle,
+
                 ),
               ),
             ),
@@ -153,7 +155,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
               child: Container(
                 height: context.heightPx * 42,
-                width: context.widthPx * 300,
+                width: context.widthPx * 270,
                 child: Container(
                   decoration: const BoxDecoration(
                     color: AppColors.themeColor,
@@ -182,24 +184,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 style: const FontData().montFont70012TextStyle ,
               ),
             ],),
-            // RichText(
-            //   text: const TextSpan(
-            //     text: 'Don’t have an account?',
-            //     style: FontData().montFont60012TextStyle,
-            //     children: [
-            //       TextSpan(
-            //         text: 'REGISTER',
-            //         style: TextStyle(
-            //           fontWeight: FontWeight.w400,
-            //           fontSize: 12,
-            //           color:Colors.white,
-            //           fontFamily: 'Opensans',
-            //         ),
-            //       ),
-            //
-            //     ],
-            //   ),
-            // ),
+
 
 
           ],
