@@ -88,11 +88,11 @@ class TextFormWidget extends StatelessWidget {
           contentPadding ?? EdgeInsets.symmetric(vertical: context.heightPx * 25, horizontal: context.widthPx * 20),
           focusedBorder: OutlineInputBorder(
             borderSide: BorderSide(color: AppColors.primaryColor, width: context.widthPx * 1.0),
-            borderRadius: BorderRadius.circular(10.0),
+            borderRadius: const BorderRadius.all(Radius.circular(10.0)),
           ),
           enabledBorder: UnderlineInputBorder(
             borderSide: const BorderSide(color: AppColors.greyColor),
-            borderRadius: BorderRadius.circular(10.0),
+            borderRadius: const BorderRadius.all(Radius.circular(10.0)),
           ),
         ),
         textAlignVertical: TextAlignVertical.center,

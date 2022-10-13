@@ -43,7 +43,7 @@ class TextFontStyle {
 
   static TextStyle large({required Color color, required double size}) {
     return TextStyle(
-        color: color, height: 1.2, fontWeight: FontWeight.w900, fontStyle: FontStyle.normal, fontSize: size);
+        color: color, height: 1.2, fontWeight: FontWeight.w900, fontStyle: FontStyle.normal, fontSize: size,);
   }
 
   static TextStyle med({required Color color, required double size}) {

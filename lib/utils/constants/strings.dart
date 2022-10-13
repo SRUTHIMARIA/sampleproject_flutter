@@ -28,6 +28,9 @@ const String createnewPassword="Create a new password";
 const String newpassword="New Password";
 const String confirmPassword="Confirm Password";
 const String save="Save";
+const String passwordChanged="Your password has been\n changed successfully";
+const String backToLogin="Back to login";
+
 
 
 

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_template/providers/authentication_provider.dart';
 import 'package:flutter_template/ui/login_screen/login_screen.dart';
+import 'package:flutter_template/ui/password_recovery/password_activation_link.dart';
 import 'package:flutter_template/ui/password_recovery/password_recovery.dart';
 
 Future<void> main() async {
@@ -35,7 +36,7 @@ class MyApp extends StatelessWidget {
         //   create: (_) => MapsProvider(),
         //   child: const HomeScreen(),
         // ),
-        home: LoginScreen(),
+        home: ActivationLink(),
 
       );
   }
