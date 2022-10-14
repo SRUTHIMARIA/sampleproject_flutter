@@ -2,6 +2,8 @@ import 'package:auto_route/annotations.dart';
 import 'package:flutter_template/ui/splash_screen/splash_animation.dart';
 import 'package:flutter_template/ui/splash_screen/splash_screen.dart';
 
+import '../../ui/login_screen/login_screen.dart';
+
 // @CupertinoAutoRouter
 // @AdaptiveAutoRouter
 // @CustomAutoRouter
@@ -12,6 +14,7 @@ import 'package:flutter_template/ui/splash_screen/splash_screen.dart';
     AutoRoute(page: SplashScreen, initial: true),
     // AutoRoute(page: SplashAnimationScreen),
 
+    AutoRoute(page: LoginScreen, initial: true),
   ],
 )
 class $AppRouter {}

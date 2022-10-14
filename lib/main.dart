@@ -1,32 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_template/providers/authentication_provider.dart';
-import 'package:flutter_template/services/navigation/router.gr.dart';
+import 'package:flutter_template/ui/splash_screen/splash_screen.dart';
+
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  // await ThemeProvider.retrieveTheme();
   await AuthenticationProvider.retrieveAuthUser();
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
   MyApp({Key? key}) : super(key: key);
-  final _appRouter = AppRouter();
+  // final _appRouter = AppRouter();
 
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp.router(
-      routerDelegate: _appRouter.delegate(),
-      routeInformationParser: _appRouter.defaultRouteParser(),
-      title: 'Athelete Assist',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      // home: ChangeNotifierProvider(
-      //   create: (_) => MapsProvider(),
-      //   child: const HomeScreen(),
-      // ),
-    );
+
+
 
     // return MaterialApp.router(
     //   //Todo: add app name here
@@ -52,5 +40,33 @@ class MyApp extends StatelessWidget {
     //
     //
     // );
+  // final _appRouter = AppRouter();
+
+  @override
+  Widget build(BuildContext context) {
+    return
+      // MaterialApp.router(
+      //   routerDelegate: _appRouter.delegate(),
+      //   routeInformationParser: _appRouter.defaultRouteParser(),
+      //   builder: (context, router) => router!,
+      // );
+
+      // ChangeNotifierProvider(
+      //   create: (context) => SignupValidation(),
+      MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'Athelete Assist',
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+
+
+        ),
+        // home: ChangeNotifierProvider(
+        //   create: (_) => MapsProvider(),
+        //   child: const HomeScreen(),
+        // ),
+        home: SplashScreen(),
+
+      );
   }
 }

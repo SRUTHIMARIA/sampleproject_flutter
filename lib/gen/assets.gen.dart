@@ -12,12 +12,26 @@ import 'package:flutter/widgets.dart';
 class $AssetsIconsGen {
   const $AssetsIconsGen();
 
+  /// File path: assets/icons/icon_back.png
+  AssetGenImage get iconBack =>
+      const AssetGenImage('assets/icons/icon_back.png');
+
+  /// File path: assets/icons/icon_email.svg
+  String get iconEmail => 'assets/icons/icon_email.svg';
+
   /// File path: assets/icons/icon_forward.png
   AssetGenImage get iconForward =>
       const AssetGenImage('assets/icons/icon_forward.png');
 
+  /// File path: assets/icons/icon_password.svg
+  String get iconPassword => 'assets/icons/icon_password.svg';
+
+  /// File path: assets/icons/icon_username.svg
+  String get iconUsername => 'assets/icons/icon_username.svg';
+
   /// List of all assets
-  List<AssetGenImage> get values => [iconForward];
+  List<dynamic> get values =>
+      [iconBack, iconEmail, iconForward, iconPassword, iconUsername];
 }
 
 class $AssetsImagesGen {
@@ -27,8 +41,16 @@ class $AssetsImagesGen {
   AssetGenImage get atheleteSplash =>
       const AssetGenImage('assets/images/athelete_splash.png');
 
+  /// File path: assets/images/image_login.png
+  AssetGenImage get imageLogin =>
+      const AssetGenImage('assets/images/image_login.png');
+
+  /// File path: assets/images/image_success.png
+  AssetGenImage get imageSuccess =>
+      const AssetGenImage('assets/images/image_success.png');
+
   /// List of all assets
-  List<AssetGenImage> get values => [atheleteSplash];
+  List<AssetGenImage> get values => [atheleteSplash, imageLogin, imageSuccess];
 }
 
 class Assets {

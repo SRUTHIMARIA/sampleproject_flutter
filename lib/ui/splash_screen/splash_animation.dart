@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_template/gen/assets.gen.dart';
+import 'package:flutter_template/ui/login_screen/login_screen.dart';
 import 'package:flutter_template/utils/theme/app_colors.dart';
 
 class SplashAnimationScreen extends StatelessWidget {
@@ -46,7 +47,11 @@ class SplashAnimationScreen extends StatelessWidget {
                   SizedBox(height: 30,),
 
 
-                  Image.asset(Assets.icons.iconForward.path),
+                  GestureDetector(
+                    onTap: (){
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=>LoginScreen()));
+                    },
+                      child: Image.asset(Assets.icons.iconForward.path)),
                 ],
               ),
             ),
