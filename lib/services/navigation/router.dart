@@ -1,8 +1,7 @@
 import 'package:auto_route/annotations.dart';
-import 'package:flutter_template/ui/splash_screen/splash_animation.dart';
-import 'package:flutter_template/ui/splash_screen/splash_screen.dart';
+import 'package:flutter_template/ui/student_basic_profile/sports_type_screen.dart';
 
-import '../../ui/login_screen/login_screen.dart';
+
 
 // @CupertinoAutoRouter
 // @AdaptiveAutoRouter
@@ -11,10 +10,9 @@ import '../../ui/login_screen/login_screen.dart';
 @MaterialAutoRouter(
   replaceInRouteName: 'Page,Route',
   routes: <AutoRoute>[
-    AutoRoute(page: SplashScreen, initial: true),
-    // AutoRoute(page: SplashAnimationScreen),
+    AutoRoute(page: SportsTypeScreen, initial: true),
 
-    AutoRoute(page: LoginScreen, initial: true),
+
   ],
 )
 class $AppRouter {}

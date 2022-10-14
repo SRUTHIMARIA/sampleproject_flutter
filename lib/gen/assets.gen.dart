@@ -9,54 +9,65 @@
 
 import 'package:flutter/widgets.dart';
 
-class $AssetsIconsGen {
-  const $AssetsIconsGen();
-
-  /// File path: assets/icons/icon_back.png
-  AssetGenImage get iconBack =>
-      const AssetGenImage('assets/icons/icon_back.png');
-
-  /// File path: assets/icons/icon_email.svg
-  String get iconEmail => 'assets/icons/icon_email.svg';
-
-  /// File path: assets/icons/icon_forward.png
-  AssetGenImage get iconForward =>
-      const AssetGenImage('assets/icons/icon_forward.png');
-
-  /// File path: assets/icons/icon_password.svg
-  String get iconPassword => 'assets/icons/icon_password.svg';
-
-  /// File path: assets/icons/icon_username.svg
-  String get iconUsername => 'assets/icons/icon_username.svg';
-
-  /// List of all assets
-  List<dynamic> get values =>
-      [iconBack, iconEmail, iconForward, iconPassword, iconUsername];
-}
-
 class $AssetsImagesGen {
   const $AssetsImagesGen();
 
-  /// File path: assets/images/athelete_splash.png
-  AssetGenImage get atheleteSplash =>
-      const AssetGenImage('assets/images/athelete_splash.png');
+  /// File path: assets/images/sports_afl.svg
+  String get sportsAfl => 'assets/images/sports_afl.svg';
 
-  /// File path: assets/images/image_login.png
-  AssetGenImage get imageLogin =>
-      const AssetGenImage('assets/images/image_login.png');
+  /// File path: assets/images/sports_batminton.svg
+  String get sportsBatminton => 'assets/images/sports_batminton.svg';
 
-  /// File path: assets/images/image_success.png
-  AssetGenImage get imageSuccess =>
-      const AssetGenImage('assets/images/image_success.png');
+  /// File path: assets/images/sports_cricket.svg
+  String get sportsCricket => 'assets/images/sports_cricket.svg';
+
+  /// File path: assets/images/sports_gynastic.svg
+  String get sportsGynastic => 'assets/images/sports_gynastic.svg';
+
+  /// File path: assets/images/sports_netball.svg
+  String get sportsNetball => 'assets/images/sports_netball.svg';
+
+  /// File path: assets/images/sports_ruby.svg
+  String get sportsRuby => 'assets/images/sports_ruby.svg';
+
+  /// File path: assets/images/sports_ruby_league.svg
+  String get sportsRubyLeague => 'assets/images/sports_ruby_league.svg';
+
+  /// File path: assets/images/sports_running.svg
+  String get sportsRunning => 'assets/images/sports_running.svg';
+
+  /// File path: assets/images/sports_soccer.svg
+  String get sportsSoccer => 'assets/images/sports_soccer.svg';
+
+  /// File path: assets/images/sports_swimming.svg
+  String get sportsSwimming => 'assets/images/sports_swimming.svg';
+
+  /// File path: assets/images/sports_tennis.svg
+  String get sportsTennis => 'assets/images/sports_tennis.svg';
+
+  /// File path: assets/images/sports_touchball.svg
+  String get sportsTouchball => 'assets/images/sports_touchball.svg';
 
   /// List of all assets
-  List<AssetGenImage> get values => [atheleteSplash, imageLogin, imageSuccess];
+  List<String> get values => [
+        sportsAfl,
+        sportsBatminton,
+        sportsCricket,
+        sportsGynastic,
+        sportsNetball,
+        sportsRuby,
+        sportsRubyLeague,
+        sportsRunning,
+        sportsSoccer,
+        sportsSwimming,
+        sportsTennis,
+        sportsTouchball
+      ];
 }
 
 class Assets {
   Assets._();
 
-  static const $AssetsIconsGen icons = $AssetsIconsGen();
   static const $AssetsImagesGen images = $AssetsImagesGen();
 }
 
