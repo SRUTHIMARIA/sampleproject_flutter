@@ -9,7 +9,7 @@ class AppColors {
   static const Color splashColor=Color(0xff006F7B);
    static const Color themeColor=Color(0xff10CDE1);
   static const Color greyColor=Color(0xff7E7E7E);
-  static const Color darkGreyColor=Color(0xff7787878);
+  static const Color darkGreyColor =Color(0xff7787878);
   static const Color whiteColor=Color(0xffFFFFFF);
   static const Color blackColor =Color(0xff000000);
   static const Color fontColor = Color(0xFF989898);

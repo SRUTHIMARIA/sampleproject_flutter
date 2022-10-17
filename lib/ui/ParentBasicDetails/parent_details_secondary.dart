@@ -1,23 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:flutter_template/gen/assets.gen.dart';
-import 'package:flutter_template/ui/login_screen/login_screen.dart';
-import 'package:flutter_template/ui/register_screen/register_activation_link.dart';
+
 import 'package:flutter_template/utils/constants/fontdata.dart';
 import 'package:flutter_template/utils/constants/strings.dart';
 import 'package:flutter_template/utils/extensions/context_extensions.dart';
-import 'package:flutter_template/utils/static/static_padding.dart';
 
 import '../../utils/theme/app_colors.dart';
 
-class RegisterScreen extends StatefulWidget {
-  const RegisterScreen({Key? key}) : super(key: key);
+class ParentDetailsSecondary extends StatefulWidget {
+  const ParentDetailsSecondary({Key? key}) : super(key: key);
 
   @override
-  State<RegisterScreen> createState() => _RegisterScreenState();
+  State<ParentDetailsSecondary> createState() => _ParentDetailsSecondaryState();
 }
 
-class _RegisterScreenState extends State<RegisterScreen> {
+class _ParentDetailsSecondaryState extends State<ParentDetailsSecondary> {
   bool isAgree = false;
 
   final List<Color> _colors = [
@@ -47,9 +43,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
           child: Container(
             child: Column(
               children: [
-                Image.asset(Assets.images.imageLogin.path),
                 SizedBox(
-                  height: context.heightPx * 21,
+                  height: context.heightPx * 70,
                 ),
                 Align(
                   alignment: Alignment.centerLeft,
@@ -57,14 +52,30 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     padding: EdgeInsets.symmetric(horizontal: 46),
                     margin: EdgeInsets.only(left: 12.0),
                     child: Text(
-                      getStarted,
-                      style: const FontData().montFont22TextStyle,
+                      addParentDetails,
+                      style: const FontData().montFont70020TextStyle,
                     ),
                   ),
                 ),
                 SizedBox(
                   height: context.heightPx * 20,
                 ),
+
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: Container(
+                    padding: EdgeInsets.symmetric(horizontal: 46),
+                    margin: EdgeInsets.only(left: 12.0),
+                    child: Text(
+                      primaryContact,
+                      style: const FontData().montFont500TextStyle,
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: context.heightPx * 16,
+                ),
+
                 Container(
                   margin: EdgeInsets.symmetric(horizontal: 56),
 
@@ -77,9 +88,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     decoration: InputDecoration(
                       focusColor: Colors.white,
                       enabledBorder: InputBorder.none,
+                      contentPadding: EdgeInsets.only(left: context.heightPx *16),
 
 
-                      prefixIcon: SvgPicture.asset(Assets.icons.iconUsername,fit: BoxFit.scaleDown,color: AppColors.textGrey,),
 
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(6.0),
@@ -87,7 +98,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
                       fillColor: Colors.grey,
 
-                      hintText: firstname,
+                      hintText: name,
 
                       //make hint text
                       hintStyle:  FontData().montFont500TextStyle,
@@ -110,8 +121,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     decoration: InputDecoration(
                       focusColor: Colors.white,
                       enabledBorder: InputBorder.none,
+                      contentPadding: EdgeInsets.only(left: context.heightPx *16),
 
-                      prefixIcon: SvgPicture.asset(Assets.icons.iconUsername,fit: BoxFit.scaleDown,color: AppColors.textGrey,),
 
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(6.0),
@@ -119,7 +130,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
                       fillColor: Colors.grey,
 
-                      hintText: secondname,
+                      hintText: dob,
 
                       //make hint text
                       hintStyle:  FontData().montFont500TextStyle,
@@ -141,8 +152,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     decoration: InputDecoration(
                       focusColor: Colors.white,
                       enabledBorder: InputBorder.none,
+                      contentPadding: EdgeInsets.only(left: context.heightPx *16),
 
-                      prefixIcon: SvgPicture.asset(Assets.icons.iconEmail,fit: BoxFit.scaleDown,color: AppColors.textGrey,),
 
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(6.0),
@@ -172,8 +183,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     decoration: InputDecoration(
                       focusColor: Colors.white,
                       enabledBorder: InputBorder.none,
+                      contentPadding: EdgeInsets.only(left: context.heightPx *16),
 
-                      prefixIcon: SvgPicture.asset(Assets.icons.iconPassword,fit: BoxFit.scaleDown,color: AppColors.textGrey,),
 
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(6.0),
@@ -181,7 +192,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
                       fillColor: Colors.grey,
 
-                      hintText: password,
+                      hintText: relationship,
 
                       //make hint text
                       hintStyle:  FontData().montFont500TextStyle,
@@ -190,84 +201,27 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   ),
                 ),
                 SizedBox(
-                  height: context.heightPx * 16,
+                  height: context.heightPx * 20,
                 ),
 
-                Align(
-                  alignment: Alignment.center,
-                  child: Padding(
-                    padding: StaticPadding.paddingH30(context),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        // Theme(
-                        //   data: Theme.of(context).copyWith(
-                        //     unselectedWidgetColor: AppColors.textFieldBgColor,
-                        //   ),
-                        //   child: Checkbox(
-                        //     value: this.isAgree,
-                        //     checkColor: AppColors.themeColor,
-                        //     onChanged: (bool? value) {
-                        //       setState(() {
-                        //         this.isAgree = value!;
-                        //       });
-                        //     },
-                        //   ), //Ch
-                        //   // Checkbox(
-                        //   //   value: isAgree,
-                        //   //   onChanged: (bool? value) {
-                        //   //     isAgree = value!;
-                        //   //   },
-                        //   // ),
-                        // ),
-                        SizedBox(
-                            height:12.0,
-                            width: 12.0,
-                            child: Theme(
-                                data: Theme.of(context).copyWith(
-                                  unselectedWidgetColor: AppColors.textFieldBgColor,
-                                ),
-                              child: Checkbox(
-                                    value: this.isAgree,
-                                    checkColor: AppColors.themeColor,
-                                    onChanged: (bool? value) {
-                                      setState(() {
-                                        this.isAgree = value!;
-                                      });
-                                    },
-                                  ),
-                            ),
-                        ),
-                        // You can play with the width to adjust your
-                        // desired spacing
-                        SizedBox(width: 10.0),
-                        Text(
-                          Iagree,
-                          style: const FontData().montFont50010TextStyle,
-                        ),
-                      ],
-                    ),),
-                ),
-                SizedBox(
-                  height: context.heightPx * 16,
-                ),
+
+
 
                 GestureDetector(
                   onTap: () {
-                   Navigator.push(context, MaterialPageRoute(builder: (context)=>RegisterActivationLink()));
+                    // Navigator.push(context, MaterialPageRoute(builder: (context)=>RegisterActivationLink()));
                   },
 
                   child: Container(
                     height: context.heightPx * 42,
-                    width: context.widthPx * 276,
+                    width: context.widthPx * 310,
                     child: Container(
                       decoration: const BoxDecoration(
-                          color: AppColors.themeColor,
-                          borderRadius: BorderRadius.all(Radius.circular(8.0)),),
+                        color: AppColors.themeColor,
+                        borderRadius: BorderRadius.all(Radius.circular(8.0)),),
                       child: Center(
                         child: Text(
-                          register,
+                          save,
                           // _display ? "hide logo" : "display logo",
                           style: const FontData().montFont70016TextStyle,
                         ),
@@ -275,29 +229,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     ),
                   ),
                 ),
-                SizedBox(height:context.heightPx *16),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
 
-                  children: [
-
-                    Text(
-                      alreadyhaveaccount,
-                      style: const FontData().montFont60012TextStyle ,
-                    ),
-                    SizedBox(width:context.widthPx *4),
-                    GestureDetector(
-                      onTap: (){
-                        Navigator.push(context, MaterialPageRoute(builder: (context)=>LoginScreen()));
-                      },
-                      child: Container(
-                        child: Text(
-                         signin,
-                          style: const FontData().montFont70012TextStyle ,
-                        ),
-                      ),
-                    ),
-                  ],),
 
 
 
