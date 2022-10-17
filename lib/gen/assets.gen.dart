@@ -9,8 +9,31 @@
 
 import 'package:flutter/widgets.dart';
 
+class $AssetsIconsGen {
+  const $AssetsIconsGen();
+
+  /// File path: assets/icons/icon_backarrow.svg
+  String get iconBackarrow => 'assets/icons/icon_backarrow.svg';
+
+  /// List of all assets
+  List<String> get values => [iconBackarrow];
+}
+
 class $AssetsImagesGen {
   const $AssetsImagesGen();
+
+  /// File path: assets/images/children.png
+  AssetGenImage get childrenPng =>
+      const AssetGenImage('assets/images/children.png');
+
+  /// File path: assets/images/children.svg
+  String get childrenSvg => 'assets/images/children.svg';
+
+  /// File path: assets/images/old.png
+  AssetGenImage get oldPng => const AssetGenImage('assets/images/old.png');
+
+  /// File path: assets/images/old.svg
+  String get oldSvg => 'assets/images/old.svg';
 
   /// File path: assets/images/sports_afl.svg
   String get sportsAfl => 'assets/images/sports_afl.svg';
@@ -48,8 +71,21 @@ class $AssetsImagesGen {
   /// File path: assets/images/sports_touchball.svg
   String get sportsTouchball => 'assets/images/sports_touchball.svg';
 
+  /// File path: assets/images/teen.png
+  AssetGenImage get teenPng => const AssetGenImage('assets/images/teen.png');
+
+  /// File path: assets/images/teen.svg
+  String get teenSvg => 'assets/images/teen.svg';
+
+  /// File path: assets/images/young.png
+  AssetGenImage get young => const AssetGenImage('assets/images/young.png');
+
   /// List of all assets
-  List<String> get values => [
+  List<dynamic> get values => [
+        childrenPng,
+        childrenSvg,
+        oldPng,
+        oldSvg,
         sportsAfl,
         sportsBatminton,
         sportsCricket,
@@ -61,13 +97,17 @@ class $AssetsImagesGen {
         sportsSoccer,
         sportsSwimming,
         sportsTennis,
-        sportsTouchball
+        sportsTouchball,
+        teenPng,
+        teenSvg,
+        young
       ];
 }
 
 class Assets {
   Assets._();
 
+  static const $AssetsIconsGen icons = $AssetsIconsGen();
   static const $AssetsImagesGen images = $AssetsImagesGen();
 }
 

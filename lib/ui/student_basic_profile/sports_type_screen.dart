@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_template/gen/assets.gen.dart';
-import 'package:flutter_template/ui/student_basic_profile/age_selection.dart';
+import 'package:flutter_template/ui/student_basic_profile/age_group_selection.dart';
 import 'package:flutter_template/ui/student_basic_profile/sports_type_widgets/sports_type_widgets.dart';
 import 'package:flutter_template/utils/constants/fontdata.dart';
 import 'package:flutter_template/utils/constants/strings.dart';
@@ -46,7 +46,8 @@ class _SportsTypeScreenState extends State<SportsTypeScreen> {
 
             ),
           ),
-          child: Column(
+          child:
+          Column(
             children: [
               SizedBox(
                 height: context.heightPx * 64,
@@ -89,7 +90,7 @@ class _SportsTypeScreenState extends State<SportsTypeScreen> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        MainHomeItemWidget(
+                        SportsTypeWidget(
                           nextLine: false,
                           label:  'BASKET BALL',
                           image: Assets.images.sportsBatminton,
@@ -97,7 +98,7 @@ class _SportsTypeScreenState extends State<SportsTypeScreen> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) =>  AgeSelection(
+                                builder: (context) =>  AgeGroupSelection(
 
                                 ),
                               ),
@@ -106,7 +107,7 @@ class _SportsTypeScreenState extends State<SportsTypeScreen> {
                         ),
 
                         SizedBox(width: context.widthPx * 20),
-                        MainHomeItemWidget(
+                        SportsTypeWidget(
                           nextLine: false,
                           label:  'AFL',
                           image: Assets.images.sportsAfl,
@@ -114,7 +115,7 @@ class _SportsTypeScreenState extends State<SportsTypeScreen> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) =>  AgeSelection(
+                                builder: (context) =>  AgeGroupSelection(
 
                                 ),
                               ),
@@ -134,7 +135,7 @@ class _SportsTypeScreenState extends State<SportsTypeScreen> {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-          MainHomeItemWidget(
+          SportsTypeWidget(
             nextLine: false,
             label:  'SOCCER',
             image: Assets.images.sportsSoccer,
@@ -142,7 +143,7 @@ class _SportsTypeScreenState extends State<SportsTypeScreen> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) =>  AgeSelection(
+                  builder: (context) =>  AgeGroupSelection(
 
                   ),
                 ),
@@ -151,7 +152,7 @@ class _SportsTypeScreenState extends State<SportsTypeScreen> {
           ),
 
           SizedBox(width: context.widthPx * 20),
-          MainHomeItemWidget(
+          SportsTypeWidget(
             nextLine: false,
             label:  'CRICKET',
             image: Assets.images.sportsCricket,
@@ -159,7 +160,7 @@ class _SportsTypeScreenState extends State<SportsTypeScreen> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) =>  AgeSelection(
+                  builder: (context) =>  AgeGroupSelection(
 
                   ),
                 ),
@@ -175,7 +176,7 @@ class _SportsTypeScreenState extends State<SportsTypeScreen> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  MainHomeItemWidget(
+                  SportsTypeWidget(
                     nextLine: false,
                     label:  'TENNIS',
                     image: Assets.images.sportsTennis,
@@ -183,7 +184,7 @@ class _SportsTypeScreenState extends State<SportsTypeScreen> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) =>  AgeSelection(
+                          builder: (context) =>  AgeGroupSelection(
 
                           ),
                         ),
@@ -192,7 +193,7 @@ class _SportsTypeScreenState extends State<SportsTypeScreen> {
                   ),
 
                   SizedBox(width: context.widthPx * 20),
-                  MainHomeItemWidget(
+                  SportsTypeWidget(
                     nextLine: false,
                     label:  'RUGBY UNION',
                     image: Assets.images.sportsRuby,
@@ -200,7 +201,7 @@ class _SportsTypeScreenState extends State<SportsTypeScreen> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) =>  AgeSelection(
+                          builder: (context) =>  AgeGroupSelection(
 
                           ),
                         ),
@@ -216,7 +217,7 @@ class _SportsTypeScreenState extends State<SportsTypeScreen> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  MainHomeItemWidget(
+                  SportsTypeWidget(
                     nextLine: false,
                     label:  'RUGBY LEAGUE',
                     image: Assets.images.sportsRubyLeague,
@@ -224,7 +225,7 @@ class _SportsTypeScreenState extends State<SportsTypeScreen> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) =>  AgeSelection(
+                          builder: (context) =>  AgeGroupSelection(
 
                           ),
                         ),
@@ -233,7 +234,7 @@ class _SportsTypeScreenState extends State<SportsTypeScreen> {
                   ),
 
                   SizedBox(width: context.widthPx * 20),
-                  MainHomeItemWidget(
+                  SportsTypeWidget(
                     nextLine: false,
                     label:  'SWIMMING',
                     image: Assets.images.sportsSwimming,
@@ -241,7 +242,7 @@ class _SportsTypeScreenState extends State<SportsTypeScreen> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) =>  AgeSelection(
+                          builder: (context) =>  AgeGroupSelection(
 
                           ),
                         ),
@@ -257,7 +258,7 @@ class _SportsTypeScreenState extends State<SportsTypeScreen> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  MainHomeItemWidget(
+                  SportsTypeWidget(
                     nextLine: false,
                     label:  'GYMNASTICS',
                     image: Assets.images.sportsGynastic,
@@ -265,7 +266,7 @@ class _SportsTypeScreenState extends State<SportsTypeScreen> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) =>  AgeSelection(
+                          builder: (context) =>  AgeGroupSelection(
 
                           ),
                         ),
@@ -274,7 +275,7 @@ class _SportsTypeScreenState extends State<SportsTypeScreen> {
                   ),
 
                   SizedBox(width: context.widthPx * 20),
-                  MainHomeItemWidget(
+                  SportsTypeWidget(
                     nextLine: false,
                     label:  'RUNNING',
                     image: Assets.images.sportsRunning,
@@ -282,7 +283,7 @@ class _SportsTypeScreenState extends State<SportsTypeScreen> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) =>  AgeSelection(
+                          builder: (context) =>  AgeGroupSelection(
 
                           ),
                         ),
@@ -298,7 +299,7 @@ class _SportsTypeScreenState extends State<SportsTypeScreen> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  MainHomeItemWidget(
+                  SportsTypeWidget(
                     nextLine: false,
                     label:  'NETBALL',
                     image: Assets.images.sportsNetball,
@@ -306,7 +307,7 @@ class _SportsTypeScreenState extends State<SportsTypeScreen> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) =>  AgeSelection(
+                          builder: (context) =>  AgeGroupSelection(
 
                           ),
                         ),
@@ -315,7 +316,7 @@ class _SportsTypeScreenState extends State<SportsTypeScreen> {
                   ),
 
                   SizedBox(width: context.widthPx * 20),
-                  MainHomeItemWidget(
+                  SportsTypeWidget(
                     nextLine: false,
                     label:  'TOUCH FOOTBALL',
                     image: Assets.images.sportsTouchball,
@@ -323,7 +324,7 @@ class _SportsTypeScreenState extends State<SportsTypeScreen> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) =>  AgeSelection(
+                          builder: (context) =>  AgeGroupSelection(
 
                           ),
                         ),

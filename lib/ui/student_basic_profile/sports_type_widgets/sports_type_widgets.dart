@@ -6,7 +6,7 @@ import 'package:flutter_template/utils/theme/app_colors.dart';
 import 'package:flutter_template/widgets/text/text_style.dart';
 
 
-class MainHomeItemWidget extends StatelessWidget {
+class SportsTypeWidget extends StatelessWidget {
   final String image;
   final String label;
   final String secondLabel;
@@ -15,7 +15,7 @@ class MainHomeItemWidget extends StatelessWidget {
 
   final void Function() onPress;
 
-  const MainHomeItemWidget(
+  const SportsTypeWidget(
       {Key? key,
         required this.image,
         required this.label,
