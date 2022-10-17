@@ -18,6 +18,7 @@ class AppColors {
   static const Color textFieldBgColor = Color(0xFFCAEBEF);
   static const Color gridColor1 = Color(0xFFEBFDFF);
   static const Color gridColor2 = Color(0xFFD9FBFF);
+  static const Color darkBlue =Color(0xFF006F7B);
 
 
 

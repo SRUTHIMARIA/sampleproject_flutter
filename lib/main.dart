@@ -3,6 +3,7 @@ import 'package:flutter_template/providers/authentication_provider.dart';
 import 'package:flutter_template/ui/student_basic_profile//sports_type_screen.dart';
 import 'package:flutter_template/ui/student_basic_profile/age_group_selection.dart';
 import 'package:flutter_template/ui/student_basic_profile/sports_selection.dart';
+import 'package:flutter_template/ui/student_basic_profile/whyjoin_screen.dart';
 
 
 Future<void> main() async {
@@ -67,7 +68,7 @@ class MyApp extends StatelessWidget {
         //   create: (_) => MapsProvider(),
         //   child: const HomeScreen(),
         // ),
-        home: const AgeGroupSelection(),
+        home:  WhyJoinScreen(),
 
       );
   }

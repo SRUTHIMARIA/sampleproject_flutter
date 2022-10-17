@@ -12,11 +12,14 @@ import 'package:flutter/widgets.dart';
 class $AssetsIconsGen {
   const $AssetsIconsGen();
 
-  /// File path: assets/icons/icon_backarrow.svg
-  String get iconBackarrow => 'assets/icons/icon_backarrow.svg';
+  /// File path: assets/icons/backarrow.svg
+  String get backarrow => 'assets/icons/backarrow.svg';
+
+  /// File path: assets/icons/icon_forward.svg
+  String get iconForward => 'assets/icons/icon_forward.svg';
 
   /// List of all assets
-  List<String> get values => [iconBackarrow];
+  List<String> get values => [backarrow, iconForward];
 }
 
 class $AssetsImagesGen {
@@ -28,6 +31,13 @@ class $AssetsImagesGen {
 
   /// File path: assets/images/children.svg
   String get childrenSvg => 'assets/images/children.svg';
+
+  /// File path: assets/images/image_athelete.png
+  AssetGenImage get imageAtheletePng =>
+      const AssetGenImage('assets/images/image_athelete.png');
+
+  /// File path: assets/images/image_athelete.svg
+  String get imageAtheleteSvg => 'assets/images/image_athelete.svg';
 
   /// File path: assets/images/old.png
   AssetGenImage get oldPng => const AssetGenImage('assets/images/old.png');
@@ -84,6 +94,8 @@ class $AssetsImagesGen {
   List<dynamic> get values => [
         childrenPng,
         childrenSvg,
+        imageAtheletePng,
+        imageAtheleteSvg,
         oldPng,
         oldSvg,
         sportsAfl,

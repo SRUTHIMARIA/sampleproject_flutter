@@ -14,7 +14,9 @@ class FontData {
   double get fontMontserratMedium3 => 16.0;
   double get fontMontserratMedium4 => 18.0;
   double get fontMontserratLarge => 20.0;
+  double get fontMontserratLarge2 => 27.0;
   double get fontMontserratLarge1 => 23.0;
+
   double get fontMontserratExtraLarge => 32.0;
 
   String get mtFontFamily => 'Roboto';
@@ -56,6 +58,21 @@ class FontData {
     fontFamily: 'Mont',
     fontWeight: FontWeight.w700,
     color:  AppColors.whiteColor,
+
+  );
+
+  TextStyle get montFont70027TextStyle => mtTextStyle.copyWith(
+    fontSize: fontMontserratLarge2,
+    fontFamily: 'Mont',
+    fontWeight: FontWeight.w700,
+    color:  AppColors.darkGreyColor,
+
+  );
+  TextStyle get montFont70027DarkBlueTextStyle => mtTextStyle.copyWith(
+    fontSize: fontMontserratLarge2,
+    fontFamily: 'Mont',
+    fontWeight: FontWeight.w700,
+    color:  AppColors.darkBlue,
 
   );
 

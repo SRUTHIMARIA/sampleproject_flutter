@@ -35,14 +35,14 @@ class AgeSelectionWidget extends StatelessWidget {
         // width: (context.screenWidth - context.widthPx * 40) / (context.screenWidth > 600 ? 2.13 : 2.2),
         decoration: BoxDecoration(
             gradient: LinearGradient(
-                begin: Alignment.topRight, stops: [
+                begin: Alignment.topRight, stops: const [
               0.0,
               0.0,
             ], colors: [
               AppColors.gridColor1.withOpacity(0.8),
               AppColors.gridColor2.withOpacity(0.25),
-            ]),
-            borderRadius: BorderRadius.circular(15)),
+            ],),
+            borderRadius: const BorderRadius.all(Radius.circular(15)),),
         // margin: EdgeInsets.only(left: commonHPadding(context)/2,right: commonHPadding(context)/2, top: context.widthPx * 10,bottom: context.widthPx * 10),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
