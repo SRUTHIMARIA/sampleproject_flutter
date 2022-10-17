@@ -217,7 +217,7 @@ class _ParentDetailPrimaryState extends State<ParentDetailPrimary> {
 
                   child: Container(
                     height: context.heightPx * 42,
-                    width: context.widthPx * 310,
+                    width: context.widthPx *280,
                     child: Container(
                       decoration: const BoxDecoration(
                           color: AppColors.themeColor,

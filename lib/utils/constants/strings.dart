@@ -1,5 +1,7 @@
 const String addParentDetails = 'Add Parent Details...';
 const String primaryContact='Primary Contact';
+const String secondaryContact='Secondary Contact';
+
 const String name='Name';
 const String dob='Date of birth';
 const String email='Email';

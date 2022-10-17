@@ -67,7 +67,7 @@ class _ParentDetailsSecondaryState extends State<ParentDetailsSecondary> {
                     padding: EdgeInsets.symmetric(horizontal: 46),
                     margin: EdgeInsets.only(left: 12.0),
                     child: Text(
-                      primaryContact,
+                      secondaryContact,
                       style: const FontData().montFont500TextStyle,
                     ),
                   ),
@@ -214,7 +214,7 @@ class _ParentDetailsSecondaryState extends State<ParentDetailsSecondary> {
 
                   child: Container(
                     height: context.heightPx * 42,
-                    width: context.widthPx * 310,
+                    width: context.widthPx * 280,
                     child: Container(
                       decoration: const BoxDecoration(
                         color: AppColors.themeColor,
