@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_template/gen/assets.gen.dart';
+import 'package:flutter_template/ui/parent_details/parent_details_secondary.dart';
 import 'package:flutter_template/utils/constants/fontdata.dart';
 import 'package:flutter_template/utils/constants/strings.dart';
 import 'package:flutter_template/utils/extensions/context_extensions.dart';
@@ -211,7 +212,7 @@ class _ParentDetailPrimaryState extends State<ParentDetailPrimary> {
 
                 GestureDetector(
                   onTap: () {
-                   // Navigator.push(context, MaterialPageRoute(builder: (context)=>RegisterActivationLink()));
+                   Navigator.push(context, MaterialPageRoute(builder: (context)=> ParentDetailsSecondary()));
                   },
 
                   child: Container(

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_template/ui/ParentBasicDetails/parent_details_primary.dart';
+import 'package:flutter_template/ui/parent_details/parent_details_primary.dart';
 
 
 
