@@ -19,6 +19,8 @@ class SportsTypeScreen extends StatefulWidget {
 }
 
 class _SportsTypeScreenState extends State<SportsTypeScreen> {
+  int? selectedCategory;
+
   final List<Color> _colors = [
     AppColors.gradientColorSplash.withOpacity(0.48),
     AppColors.bgPrimarySplash
