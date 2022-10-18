@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_template/providers/authentication_provider.dart';
-import 'package:flutter_template/ui/splash_screen/splash_screen.dart';
+import 'ui/enrollment_details/user_review.dart';
 
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await AuthenticationProvider.retrieveAuthUser();
+  // await AuthenticationProvider.retrieveAuthUser();
   runApp(MyApp());
 }
 
@@ -65,7 +64,7 @@ class MyApp extends StatelessWidget {
         //   create: (_) => MapsProvider(),
         //   child: const HomeScreen(),
         // ),
-        home: SplashScreen(),
+        home: const UserReview(),
 
       );
   }

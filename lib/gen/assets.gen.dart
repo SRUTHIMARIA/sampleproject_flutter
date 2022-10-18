@@ -16,41 +16,48 @@ class $AssetsIconsGen {
   AssetGenImage get iconBack =>
       const AssetGenImage('assets/icons/icon_back.png');
 
-  /// File path: assets/icons/icon_email.svg
-  String get iconEmail => 'assets/icons/icon_email.svg';
+  /// File path: assets/icons/icon_backarrow.svg
+  String get iconBackarrow => 'assets/icons/icon_backarrow.svg';
 
   /// File path: assets/icons/icon_forward.png
   AssetGenImage get iconForward =>
       const AssetGenImage('assets/icons/icon_forward.png');
 
-  /// File path: assets/icons/icon_password.svg
-  String get iconPassword => 'assets/icons/icon_password.svg';
-
-  /// File path: assets/icons/icon_username.svg
-  String get iconUsername => 'assets/icons/icon_username.svg';
-
   /// List of all assets
-  List<dynamic> get values =>
-      [iconBack, iconEmail, iconForward, iconPassword, iconUsername];
+  List<dynamic> get values => [iconBack, iconBackarrow, iconForward];
 }
 
 class $AssetsImagesGen {
   const $AssetsImagesGen();
 
-  /// File path: assets/images/athelete_splash.png
-  AssetGenImage get atheleteSplash =>
-      const AssetGenImage('assets/images/athelete_splash.png');
+  /// File path: assets/images/image_addphoto.png
+  AssetGenImage get imageAddphoto =>
+      const AssetGenImage('assets/images/image_addphoto.png');
 
-  /// File path: assets/images/image_login.png
-  AssetGenImage get imageLogin =>
-      const AssetGenImage('assets/images/image_login.png');
+  /// File path: assets/images/image_uploadphoto.png
+  AssetGenImage get imageUploadphoto =>
+      const AssetGenImage('assets/images/image_uploadphoto.png');
 
-  /// File path: assets/images/image_success.png
-  AssetGenImage get imageSuccess =>
-      const AssetGenImage('assets/images/image_success.png');
+  /// File path: assets/images/image_user_review.png
+  AssetGenImage get imageUserReview =>
+      const AssetGenImage('assets/images/image_user_review.png');
+
+  /// File path: assets/images/image_whoamI.png
+  AssetGenImage get imageWhoamI =>
+      const AssetGenImage('assets/images/image_whoamI.png');
+
+  /// File path: assets/images/uploaded_image.png
+  AssetGenImage get uploadedImage =>
+      const AssetGenImage('assets/images/uploaded_image.png');
 
   /// List of all assets
-  List<AssetGenImage> get values => [atheleteSplash, imageLogin, imageSuccess];
+  List<AssetGenImage> get values => [
+        imageAddphoto,
+        imageUploadphoto,
+        imageUserReview,
+        imageWhoamI,
+        uploadedImage
+      ];
 }
 
 class Assets {
