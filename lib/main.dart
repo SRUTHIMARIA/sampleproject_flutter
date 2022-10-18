@@ -68,7 +68,7 @@ class MyApp extends StatelessWidget {
         //   create: (_) => MapsProvider(),
         //   child: const HomeScreen(),
         // ),
-        home:  WhyJoinScreen(),
+        home:  SportsTypeScreen(),
 
       );
   }
