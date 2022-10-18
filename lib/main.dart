@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_template/providers/authentication_provider.dart';
-import 'package:flutter_template/ui/student_basic_profile//sports_type_screen.dart';
-import 'package:flutter_template/ui/student_basic_profile/age_group_selection.dart';
-import 'package:flutter_template/ui/student_basic_profile/sports_selection.dart';
-import 'package:flutter_template/ui/student_basic_profile/whyjoin_screen.dart';
+
 import 'ui/enrollment_details/user_review.dart';
 
 
