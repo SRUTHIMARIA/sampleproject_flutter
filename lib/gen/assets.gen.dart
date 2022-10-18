@@ -16,41 +16,25 @@ class $AssetsIconsGen {
   AssetGenImage get iconBack =>
       const AssetGenImage('assets/icons/icon_back.png');
 
-  /// File path: assets/icons/icon_email.svg
-  String get iconEmail => 'assets/icons/icon_email.svg';
-
-  /// File path: assets/icons/icon_forward.png
-  AssetGenImage get iconForward =>
-      const AssetGenImage('assets/icons/icon_forward.png');
-
-  /// File path: assets/icons/icon_password.svg
-  String get iconPassword => 'assets/icons/icon_password.svg';
-
-  /// File path: assets/icons/icon_username.svg
-  String get iconUsername => 'assets/icons/icon_username.svg';
+  /// File path: assets/icons/icon_backarrow.svg
+  String get iconBackarrow => 'assets/icons/icon_backarrow.svg';
 
   /// List of all assets
-  List<dynamic> get values =>
-      [iconBack, iconEmail, iconForward, iconPassword, iconUsername];
+  List<dynamic> get values => [iconBack, iconBackarrow];
 }
 
 class $AssetsImagesGen {
   const $AssetsImagesGen();
 
-  /// File path: assets/images/athelete_splash.png
-  AssetGenImage get atheleteSplash =>
-      const AssetGenImage('assets/images/athelete_splash.png');
+  /// File path: assets/images/image_physio.png
+  AssetGenImage get imagePhysioPng =>
+      const AssetGenImage('assets/images/image_physio.png');
 
-  /// File path: assets/images/image_login.png
-  AssetGenImage get imageLogin =>
-      const AssetGenImage('assets/images/image_login.png');
-
-  /// File path: assets/images/image_success.png
-  AssetGenImage get imageSuccess =>
-      const AssetGenImage('assets/images/image_success.png');
+  /// File path: assets/images/image_physio.svg
+  String get imagePhysioSvg => 'assets/images/image_physio.svg';
 
   /// List of all assets
-  List<AssetGenImage> get values => [atheleteSplash, imageLogin, imageSuccess];
+  List<dynamic> get values => [imagePhysioPng, imagePhysioSvg];
 }
 
 class Assets {

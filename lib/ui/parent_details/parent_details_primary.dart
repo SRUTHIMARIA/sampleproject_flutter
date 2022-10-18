@@ -49,17 +49,23 @@ class _ParentDetailPrimaryState extends State<ParentDetailPrimary> {
                 SizedBox(
                   height: context.heightPx * 70,
                 ),
-                Align(
-                  alignment: Alignment.centerLeft,
-                  child: Container(
-                    padding: EdgeInsets.symmetric(horizontal: 46),
-                    margin: EdgeInsets.only(left: 12.0),
-                    child: Text(
-                      addParentDetails,
-                      style: const FontData().montFont70020TextStyle,
+                Row(
+                  children: [
+                    Container(
+                      margin: EdgeInsets.only(left: context.heightPx * 49),
+                      child: SvgPicture.asset(Assets.icons.iconBackarrow),
                     ),
-                  ),
+                    Container(
+
+                      margin: EdgeInsets.only(left: 12.0),
+                      child: Text(
+                        addParentDetails,
+                        style: const FontData().montFont70020TextStyle,
+                      ),
+                    ),
+                  ],
                 ),
+
                 SizedBox(
                   height: context.heightPx * 20,
                 ),

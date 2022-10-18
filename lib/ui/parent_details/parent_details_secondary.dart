@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:flutter_template/gen/assets.gen.dart';
+import 'package:flutter_template/ui/medical_details/athelete_medical_info_allergies.dart';
 
 import 'package:flutter_template/utils/constants/fontdata.dart';
 import 'package:flutter_template/utils/constants/strings.dart';
@@ -46,16 +49,21 @@ class _ParentDetailsSecondaryState extends State<ParentDetailsSecondary> {
                 SizedBox(
                   height: context.heightPx * 70,
                 ),
-                Align(
-                  alignment: Alignment.centerLeft,
-                  child: Container(
-                    padding: EdgeInsets.symmetric(horizontal: 46),
-                    margin: EdgeInsets.only(left: 12.0),
-                    child: Text(
-                      addParentDetails,
-                      style: const FontData().montFont70020TextStyle,
+                Row(
+                  children: [
+                    Container(
+                      margin: EdgeInsets.only(left: context.heightPx * 49),
+                      child: SvgPicture.asset(Assets.icons.iconBackarrow),
                     ),
-                  ),
+                    Container(
+
+                      margin: EdgeInsets.only(left: 12.0),
+                      child: Text(
+                        addParentDetails,
+                        style: const FontData().montFont70020TextStyle,
+                      ),
+                    ),
+                  ],
                 ),
                 SizedBox(
                   height: context.heightPx * 20,
@@ -209,7 +217,7 @@ class _ParentDetailsSecondaryState extends State<ParentDetailsSecondary> {
 
                 GestureDetector(
                   onTap: () {
-                    // Navigator.push(context, MaterialPageRoute(builder: (context)=>RegisterActivationLink()));
+                    Navigator.push(context, MaterialPageRoute(builder: (context)=>AtheleteMedicalInfoAllergies()));
                   },
 
                   child: Container(
