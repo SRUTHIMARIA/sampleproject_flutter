@@ -4,11 +4,12 @@ import 'package:flutter_template/ui/student_basic_profile//sports_type_screen.da
 import 'package:flutter_template/ui/student_basic_profile/age_group_selection.dart';
 import 'package:flutter_template/ui/student_basic_profile/sports_selection.dart';
 import 'package:flutter_template/ui/student_basic_profile/whyjoin_screen.dart';
+import 'ui/enrollment_details/user_review.dart';
 
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await AuthenticationProvider.retrieveAuthUser();
+  // await AuthenticationProvider.retrieveAuthUser();
   runApp(MyApp());
 }
 
@@ -68,7 +69,7 @@ class MyApp extends StatelessWidget {
         //   create: (_) => MapsProvider(),
         //   child: const HomeScreen(),
         // ),
-        home:  SportsTypeScreen(),
+        home: const UserReview(),
 
       );
   }

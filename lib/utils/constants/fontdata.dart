@@ -30,11 +30,11 @@ class FontData {
     color:  AppColors.blackColor,
 
   );
-  TextStyle get montFont14TextStyle => mtTextStyle.copyWith(
-    fontSize: fontMontserratMedium1,
+  TextStyle get montFont13TextStyle => mtTextStyle.copyWith(
+    fontSize: fontMontserratSmall3,
     fontFamily: 'Mont',
     fontWeight: FontWeight.w500,
-    color:  AppColors.greyColor,
+    color:  AppColors.lightGreyColor,
 
   );
 

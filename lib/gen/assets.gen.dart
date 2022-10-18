@@ -14,12 +14,23 @@ class $AssetsIconsGen {
 
   /// File path: assets/icons/backarrow.svg
   String get backarrow => 'assets/icons/backarrow.svg';
+  /// File path: assets/icons/icon_back.png
+  AssetGenImage get iconBack =>
+      const AssetGenImage('assets/icons/icon_back.png');
+
+  /// File path: assets/icons/icon_backarrow.svg
+  String get iconBackarrow => 'assets/icons/icon_backarrow.svg';
 
   /// File path: assets/icons/icon_forward.svg
   String get iconForward => 'assets/icons/icon_forward.svg';
 
+  /// File path: assets/icons/icon_forward.png
+  AssetGenImage get iconForward =>
+      const AssetGenImage('assets/icons/icon_forward.png');
+
   /// List of all assets
   List<String> get values => [backarrow, iconForward];
+  List<dynamic> get values => [iconBack, iconBackarrow, iconForward];
 }
 
 class $AssetsImagesGen {
@@ -59,9 +70,19 @@ class $AssetsImagesGen {
 
   /// File path: assets/images/sports_netball.svg
   String get sportsNetball => 'assets/images/sports_netball.svg';
+  /// File path: assets/images/image_addphoto.png
+  AssetGenImage get imageAddphoto =>
+      const AssetGenImage('assets/images/image_addphoto.png');
+
+  /// File path: assets/images/image_uploadphoto.png
+  AssetGenImage get imageUploadphoto =>
+      const AssetGenImage('assets/images/image_uploadphoto.png');
 
   /// File path: assets/images/sports_ruby.svg
   String get sportsRuby => 'assets/images/sports_ruby.svg';
+  /// File path: assets/images/image_user_review.png
+  AssetGenImage get imageUserReview =>
+      const AssetGenImage('assets/images/image_user_review.png');
 
   /// File path: assets/images/sports_ruby_league.svg
   String get sportsRubyLeague => 'assets/images/sports_ruby_league.svg';
@@ -89,6 +110,13 @@ class $AssetsImagesGen {
 
   /// File path: assets/images/young.png
   AssetGenImage get young => const AssetGenImage('assets/images/young.png');
+  /// File path: assets/images/image_whoamI.png
+  AssetGenImage get imageWhoamI =>
+      const AssetGenImage('assets/images/image_whoamI.png');
+
+  /// File path: assets/images/uploaded_image.png
+  AssetGenImage get uploadedImage =>
+      const AssetGenImage('assets/images/uploaded_image.png');
 
   /// List of all assets
   List<dynamic> get values => [
@@ -113,6 +141,13 @@ class $AssetsImagesGen {
         teenPng,
         teenSvg,
         young
+      ];
+  List<AssetGenImage> get values => [
+        imageAddphoto,
+        imageUploadphoto,
+        imageUserReview,
+        imageWhoamI,
+        uploadedImage
       ];
 }
 
