@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_template/gen/assets.gen.dart';
-import 'package:flutter_template/ui/medical_details/athelete_medical_info_injuries.dart';
 
 import 'package:flutter_template/utils/constants/fontdata.dart';
 import 'package:flutter_template/utils/constants/strings.dart';
@@ -64,7 +63,7 @@ class _AtheleteMedicalInfoAboutState extends State<AtheleteMedicalInfoAbout> {
                             margin: EdgeInsets.only(left: 12.0),
                             child: Text(
                               atheleteinfo,
-                              style: const FontData().montFont70020TextStyle,
+                              style: const FontData().montFont70027TextStyle,
                             ),
                           ),
                         ],

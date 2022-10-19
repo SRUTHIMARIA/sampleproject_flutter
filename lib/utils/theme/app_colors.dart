@@ -17,6 +17,11 @@ class AppColors {
   static const Color textGrey=Color(0xff8E9A9C);
   static const Color textFieldBgColor = Color(0xFFCAEBEF);
   static const Color checkBoxColor=Color(0xFFF2FAFB);
+  static const Color gridColor1 = Color(0xFFEBFDFF);
+  static const Color gridColor2 = Color(0xFFD9FBFF);
+  static const Color darkBlue =Color(0xFF006F7B);
+  static const Color lightGreyColor=Color(0xff707070);
+
 
 
 
