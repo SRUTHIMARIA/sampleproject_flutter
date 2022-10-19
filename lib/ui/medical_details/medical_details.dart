@@ -53,9 +53,14 @@ class _MedicalDetailsState extends State<MedicalDetails> {
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Container(
-                      margin: EdgeInsets.only(left: context.heightPx * 49),
-                      child: SvgPicture.asset(Assets.icons.iconBackarrow),
+                    InkWell(
+                      onTap: (){
+                        Navigator.pop(context);
+                      },
+                      child: Container(
+                        margin: EdgeInsets.only(left: context.heightPx * 49),
+                        child: SvgPicture.asset(Assets.icons.iconBackarrow),
+                      ),
                     ),
 
                   ],
@@ -196,7 +201,7 @@ class _MedicalDetailsState extends State<MedicalDetails> {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     Container(
-                      margin: EdgeInsets.only(left: context.heightPx * 49),
+                      margin: EdgeInsets.only(left: context.heightPx * 240),
                       child: Image.asset(Assets.images.imagePhysioPng.path),
                     ),
 

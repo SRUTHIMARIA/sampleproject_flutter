@@ -8,14 +8,21 @@ class SplashAnimationScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.primaryColor.withOpacity(0.40),
+
+
+      backgroundColor: AppColors.gradientColor1.withOpacity(0.76),
       body: Column(
         children: [
           Expanded(
             flex: 7,
             child: Container(
               decoration: BoxDecoration(
-                color: AppColors.bgPrimarySplash,
+                // color: AppColors.bgPrimarySplash,
+                  gradient: LinearGradient(
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
+                      colors: [AppColors.bgPrimarySplash, AppColors.bgPrimarySplash]
+                  ),
                 borderRadius: BorderRadius.only(
                   bottomLeft: Radius.circular(40),
                   bottomRight: Radius.circular(40),

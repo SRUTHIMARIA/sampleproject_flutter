@@ -51,9 +51,14 @@ class _ParentDetailPrimaryState extends State<ParentDetailPrimary> {
                 ),
                 Row(
                   children: [
-                    Container(
-                      margin: EdgeInsets.only(left: context.heightPx * 49),
-                      child: SvgPicture.asset(Assets.icons.iconBackarrow),
+                    InkWell(
+                      onTap: (){
+                        Navigator.pop(context);
+                      },
+                      child: Container(
+                        margin: EdgeInsets.only(left: context.heightPx * 49),
+                        child: SvgPicture.asset(Assets.icons.iconBackarrow),
+                      ),
                     ),
                     Container(
 

@@ -53,9 +53,14 @@ class _WhoAmIScreenState extends State<WhoAmIScreen> {
                 ),
                 Row(
                   children: [
-                    Container(
-                      margin: EdgeInsets.only(left: context.heightPx * 49),
-                      child: SvgPicture.asset(Assets.icons.iconBackarrow),
+                    InkWell(
+                      onTap: (){
+                        Navigator.pop(context);
+                      },
+                      child: Container(
+                        margin: EdgeInsets.only(left: context.heightPx * 49),
+                        child: SvgPicture.asset(Assets.icons.iconBackarrow),
+                      ),
                     ),
                     Container(
                       margin: EdgeInsets.only(left: 12.0),

@@ -50,9 +50,15 @@ class _AgeSelectionScreenState extends State<AgeSelectionScreen> {
             ),
             Row(
               children: [
-                Container(
-                  margin: EdgeInsets.only(left: context.heightPx * 49),
-                  child: SvgPicture.asset(Assets.icons.backarrow),
+                InkWell(
+                  onTap:(){
+                    Navigator.pop(context);
+
+                  },
+                  child: Container(
+                    margin: EdgeInsets.only(left: context.heightPx * 49),
+                    child: SvgPicture.asset(Assets.icons.backarrow),
+                  ),
                 ),
                 Container(
                   margin: EdgeInsets.only(left: 12.0),

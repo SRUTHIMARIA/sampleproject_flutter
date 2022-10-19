@@ -6,8 +6,10 @@ class AppColors {
   static const Color gradientColorSplash =Color(0xff00B9D0);
   static const Color gradientColor2Splash =Color(0xff00A5B7);
   static const Color gradientColor3Splash=Color.fromRGBO(0, 165, 183, 0.67);
-  static const Color splashColor=Color(0xff006F7B);
-   static const Color themeColor=Color(0xff10CDE1);
+  static const Color gradientColor1=Color(0xff006F7B);
+  static const Color gradientColor2=Color(0xff11BBCD);
+
+  static const Color themeColor=Color(0xff10CDE1);
   static const Color greyColor=Color(0xff7E7E7E);
   static const Color darkGreyColor =Color(0xff787878);
   static const Color whiteColor=Color(0xffFFFFFF);
