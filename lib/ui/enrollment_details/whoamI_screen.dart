@@ -74,7 +74,7 @@ class _WhoAmIScreenState extends State<WhoAmIScreen> {
                   margin: EdgeInsets.symmetric(horizontal: 56),
                   decoration: BoxDecoration(
                     color: AppColors.textFieldBgColor,
-                    borderRadius: BorderRadius.circular(6.0),
+                    borderRadius: BorderRadius.circular(10.0),
                   ),
                   child: TextFormField(
                     style: FontData().montFont500TextStyle,
@@ -85,7 +85,7 @@ class _WhoAmIScreenState extends State<WhoAmIScreen> {
                           EdgeInsets.only(left: context.heightPx * 16),
 
                       border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(6.0),
+                        borderRadius: BorderRadius.circular(10.0),
                       ),
 
                       fillColor: Colors.grey,
@@ -105,7 +105,7 @@ class _WhoAmIScreenState extends State<WhoAmIScreen> {
                   margin: EdgeInsets.symmetric(horizontal: 56),
                   decoration: BoxDecoration(
                     color: AppColors.textFieldBgColor,
-                    borderRadius: BorderRadius.circular(6.0),
+                    borderRadius: BorderRadius.circular(10.0),
                   ),
                   child: TextFormField(
                     style: FontData().montFont500TextStyle,
@@ -116,7 +116,7 @@ class _WhoAmIScreenState extends State<WhoAmIScreen> {
                           EdgeInsets.only(left: context.heightPx * 16),
 
                       border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(6.0),
+                        borderRadius: BorderRadius.circular(10.0),
                       ),
 
                       fillColor: Colors.grey,

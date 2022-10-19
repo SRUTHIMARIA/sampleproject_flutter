@@ -13,6 +13,7 @@ class AppColors {
   static const Color hintColor = Color(0xFFCACACC);
   static const Color textGrey=Color(0xff8E9A9C);
   static const Color textFieldBgColor = Color(0xFFCAEBEF);
+  static const Color slidercolor=Color(0xFF00AAE0);
 
 
 

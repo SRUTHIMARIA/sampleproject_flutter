@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_template/ui/enrollment_details/aspirations.dart';
 import 'ui/enrollment_details/user_review.dart';
 
 
@@ -64,7 +65,7 @@ class MyApp extends StatelessWidget {
         //   create: (_) => MapsProvider(),
         //   child: const HomeScreen(),
         // ),
-        home: const UserReview(),
+        home: const Aspirations(),
 
       );
   }

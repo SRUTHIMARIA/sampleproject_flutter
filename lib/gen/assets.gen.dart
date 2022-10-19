@@ -34,6 +34,10 @@ class $AssetsImagesGen {
   AssetGenImage get imageAddphoto =>
       const AssetGenImage('assets/images/image_addphoto.png');
 
+  /// File path: assets/images/image_aspiration.png
+  AssetGenImage get imageAspiration =>
+      const AssetGenImage('assets/images/image_aspiration.png');
+
   /// File path: assets/images/image_uploadphoto.png
   AssetGenImage get imageUploadphoto =>
       const AssetGenImage('assets/images/image_uploadphoto.png');
@@ -53,6 +57,7 @@ class $AssetsImagesGen {
   /// List of all assets
   List<AssetGenImage> get values => [
         imageAddphoto,
+        imageAspiration,
         imageUploadphoto,
         imageUserReview,
         imageWhoamI,
