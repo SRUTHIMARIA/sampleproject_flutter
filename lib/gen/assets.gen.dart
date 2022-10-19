@@ -22,15 +22,36 @@ class $AssetsIconsGen {
   /// File path: assets/icons/icon_backarrow.svg
   String get iconBackarrow => 'assets/icons/icon_backarrow.svg';
 
+  /// File path: assets/icons/icon_email.svg
+  String get iconEmail => 'assets/icons/icon_email.svg';
+
   /// File path: assets/icons/icon_forward.svg
   String get iconForward => 'assets/icons/icon_forward.svg';
 
+  /// File path: assets/icons/icon_password.svg
+  String get iconPassword => 'assets/icons/icon_password.svg';
+
+  /// File path: assets/icons/icon_username.svg
+  String get iconUsername => 'assets/icons/icon_username.svg';
+
   /// List of all assets
-  List<dynamic> get values => [backarrow, iconBack, iconBackarrow, iconForward];
+  List<dynamic> get values => [
+        backarrow,
+        iconBack,
+        iconBackarrow,
+        iconEmail,
+        iconForward,
+        iconPassword,
+        iconUsername
+      ];
 }
 
 class $AssetsImagesGen {
   const $AssetsImagesGen();
+
+  /// File path: assets/images/athelete_splash.png
+  AssetGenImage get atheleteSplash =>
+      const AssetGenImage('assets/images/athelete_splash.png');
 
   /// File path: assets/images/children.png
   AssetGenImage get childrenPng =>
@@ -47,12 +68,20 @@ class $AssetsImagesGen {
   AssetGenImage get imageAthelete =>
       const AssetGenImage('assets/images/image_athelete.png');
 
+  /// File path: assets/images/image_login.png
+  AssetGenImage get imageLogin =>
+      const AssetGenImage('assets/images/image_login.png');
+
   /// File path: assets/images/image_physio.png
   AssetGenImage get imagePhysioPng =>
       const AssetGenImage('assets/images/image_physio.png');
 
   /// File path: assets/images/image_physio.svg
   String get imagePhysioSvg => 'assets/images/image_physio.svg';
+
+  /// File path: assets/images/image_success.png
+  AssetGenImage get imageSuccess =>
+      const AssetGenImage('assets/images/image_success.png');
 
   /// File path: assets/images/image_uploadphoto.png
   AssetGenImage get imageUploadphoto =>
@@ -123,12 +152,15 @@ class $AssetsImagesGen {
 
   /// List of all assets
   List<dynamic> get values => [
+        atheleteSplash,
         childrenPng,
         childrenSvg,
         imageAddphoto,
         imageAthelete,
+        imageLogin,
         imagePhysioPng,
         imagePhysioSvg,
+        imageSuccess,
         imageUploadphoto,
         imageUserReview,
         imageWhoamI,
