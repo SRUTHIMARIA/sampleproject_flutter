@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:flutter_template/ui/parent_details/parent_details_primary.dart';
 import 'package:flutter_template/utils/constants/fontdata.dart';
 import 'package:flutter_template/utils/constants/strings.dart';
 import 'package:flutter_template/utils/extensions/context_extensions.dart';
@@ -115,7 +116,7 @@ class _WhyJoinScreenState extends State<WhyJoinScreen> {
 
             GestureDetector(
               onTap: () {
-                // Navigator.push(context, MaterialPageRoute(builder: (context)=>RegisterScreen()));
+                Navigator.push(context, MaterialPageRoute(builder: (context)=>ParentDetailPrimary()));
               },
               child: Container(
                 margin: EdgeInsets.only(left: context.heightPx *52),

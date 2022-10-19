@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:flutter_template/ui/student_basic_profile/whyjoin_screen.dart';
 import 'package:flutter_template/utils/constants/fontdata.dart';
 import 'package:flutter_template/utils/constants/strings.dart';
 import 'package:flutter_template/utils/extensions/context_extensions.dart';
@@ -336,10 +337,13 @@ class _AgeSelectionScreenState extends State<AgeSelectionScreen> {
       ),
     ),
 
-    )
+    ),
 
 
-
+            InkWell(onTap:(){
+              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>WhyJoinScreen()));
+            },
+                child: Image.asset(Assets.icons.iconForwardPng.path)),
 
 
 

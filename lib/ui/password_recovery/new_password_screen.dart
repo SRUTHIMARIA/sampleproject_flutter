@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_template/gen/assets.gen.dart';
+import 'package:flutter_template/ui/password_recovery/password_activation_link.dart';
 import 'package:flutter_template/ui/register_screen/resgister_screen.dart';
 import 'package:flutter_template/utils/constants/fontdata.dart';
 import 'package:flutter_template/utils/constants/strings.dart';
@@ -128,7 +129,7 @@ class _NewPasswordScreenState extends State<NewPasswordScreen> {
             GestureDetector(
               onTap: () {
                 Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => RegisterScreen()));
+                    MaterialPageRoute(builder: (context) => PasswordActivationLink()));
               },
               child: Container(
                 height: context.heightPx * 42,

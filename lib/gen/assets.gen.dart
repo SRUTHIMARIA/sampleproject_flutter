@@ -25,8 +25,12 @@ class $AssetsIconsGen {
   /// File path: assets/icons/icon_email.svg
   String get iconEmail => 'assets/icons/icon_email.svg';
 
+  /// File path: assets/icons/icon_forward.png
+  AssetGenImage get iconForwardPng =>
+      const AssetGenImage('assets/icons/icon_forward.png');
+
   /// File path: assets/icons/icon_forward.svg
-  String get iconForward => 'assets/icons/icon_forward.svg';
+  String get iconForwardSvg => 'assets/icons/icon_forward.svg';
 
   /// File path: assets/icons/icon_password.svg
   String get iconPassword => 'assets/icons/icon_password.svg';
@@ -40,7 +44,8 @@ class $AssetsIconsGen {
         iconBack,
         iconBackarrow,
         iconEmail,
-        iconForward,
+        iconForwardPng,
+        iconForwardSvg,
         iconPassword,
         iconUsername
       ];

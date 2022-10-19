@@ -10,6 +10,8 @@ import 'package:flutter_template/widgets/text_form/text_form_widget.dart';
 
 import '../../utils/static/values.dart';
 import '../../utils/theme/app_colors.dart';
+import '../password_recovery/password_recovery.dart';
+import '../student_basic_profile/sports_type_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -139,20 +141,26 @@ class _LoginScreenState extends State<LoginScreen> {
             SizedBox(height:context.heightPx *16),
 
 
-            Align(
-              alignment: Alignment.centerRight,
-              child: Padding(
-                padding: StaticPadding.paddingH60(context),
-                child: Text(
-                  forgotPassword,
-                  style: const FontData().montFont50012TextStyle,
-                ),),
+            InkWell(
+              onTap: (){
+                Navigator.push(context, MaterialPageRoute(builder: (context)=>PasswordRecovery()));
+
+              },
+              child: Align(
+                alignment: Alignment.centerRight,
+                child: Padding(
+                  padding: StaticPadding.paddingH60(context),
+                  child: Text(
+                    forgotPassword,
+                    style: const FontData().montFont50012TextStyle,
+                  ),),
+              ),
             ),
             SizedBox(height:context.heightPx *16),
 
             GestureDetector(
               onTap: () {
-                // Navigator.push(context, MaterialPageRoute(builder: (context)=>RegisterScreen()));
+                Navigator.push(context, MaterialPageRoute(builder: (context)=>SportsTypeScreen()));
               },
 
               child: Container(

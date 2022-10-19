@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_template/gen/assets.gen.dart';
+import 'package:flutter_template/ui/login_screen/login_screen.dart';
 import 'package:flutter_template/utils/theme/app_colors.dart';
 
 class SplashAnimationScreen extends StatelessWidget {
@@ -34,7 +36,6 @@ class SplashAnimationScreen extends StatelessWidget {
                 children: [
                   SizedBox(height: 30,),
                   Container(
-
                     child: Text('THE ASSIST ATHLETE\n - GROWTH MINDSET\n JOURNEY',
                     style: TextStyle(
                       color: Colors.white,
@@ -44,6 +45,10 @@ class SplashAnimationScreen extends StatelessWidget {
                     ),),
                   ),
                   SizedBox(height: 30,),
+                  InkWell(onTap:(){
+                    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>LoginScreen()));
+                  },
+                      child: Image.asset(Assets.icons.iconForwardPng.path)),
 
                   //Image.asset(Assets.icons.iconForward.path),
                 ],

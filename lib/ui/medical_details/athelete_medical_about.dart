@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_template/gen/assets.gen.dart';
+import 'package:flutter_template/ui/enrollment_details/user_review.dart';
 
 import 'package:flutter_template/utils/constants/fontdata.dart';
 import 'package:flutter_template/utils/constants/strings.dart';
@@ -284,18 +285,24 @@ class _AtheleteMedicalInfoAboutState extends State<AtheleteMedicalInfoAbout> {
                                           ),
                                         ),
                                         SizedBox(width: context.widthPx*26,),
-                                        Container(
-                                          height: context.heightPx * 36,
-                                          width: context.widthPx * 125,
+                                        InkWell(
+                                          onTap:(){
+                                            Navigator.push(context, MaterialPageRoute(builder: (context)=>UserReview()));
+
+                                          },
                                           child: Container(
-                                            decoration: const BoxDecoration(
-                                              color: AppColors.themeColor,
-                                              borderRadius: BorderRadius.all(Radius.circular(8.0)),),
-                                            child: Center(
-                                              child: Text(
-                                                submit,
-                                                // _display ? "hide logo" : "display logo",
-                                                style: const FontData().montFont70016TextStyle,
+                                            height: context.heightPx * 36,
+                                            width: context.widthPx * 125,
+                                            child: Container(
+                                              decoration: const BoxDecoration(
+                                                color: AppColors.themeColor,
+                                                borderRadius: BorderRadius.all(Radius.circular(8.0)),),
+                                              child: Center(
+                                                child: Text(
+                                                  submit,
+                                                  // _display ? "hide logo" : "display logo",
+                                                  style: const FontData().montFont70016TextStyle,
+                                                ),
                                               ),
                                             ),
                                           ),
@@ -308,7 +315,6 @@ class _AtheleteMedicalInfoAboutState extends State<AtheleteMedicalInfoAbout> {
                             },
                           );
                           
-                          // Navigator.push(context, MaterialPageRoute(builder: (context)=>AtheleteMedicalInfoInjuries()));
                         },
 
                         child: Container(

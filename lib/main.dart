@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_template/ui/parent_details/parent_details_primary.dart';
+import 'package:flutter_template/ui/splash_screen/splash_screen.dart';
 
 
 
@@ -65,7 +66,7 @@ class MyApp extends StatelessWidget {
         //   create: (_) => MapsProvider(),
         //   child: const HomeScreen(),
         // ),
-        home: const ParentDetailPrimary(),
+        home: const SplashScreen(),
 
       );
   }
