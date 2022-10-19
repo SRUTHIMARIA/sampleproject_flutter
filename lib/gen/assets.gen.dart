@@ -28,14 +28,21 @@ class $AssetsIconsGen {
   AssetGenImage get iconForward =>
       const AssetGenImage('assets/icons/icon_forward.png');
 
+  /// File path: assets/icons/icon_backarrow.svg
+  String get iconBackarrow => 'assets/icons/icon_backarrow.svg';
+
   /// List of all assets
   List<String> get values => [backarrow, iconForward];
   List<dynamic> get values => [iconBack, iconBackarrow, iconForward];
+  List<dynamic> get values => [iconBack, iconBackarrow];
 }
 
 class $AssetsImagesGen {
   const $AssetsImagesGen();
 
+  /// File path: assets/images/image_physio.png
+  AssetGenImage get imagePhysioPng =>
+      const AssetGenImage('assets/images/image_physio.png');
   /// File path: assets/images/children.png
   AssetGenImage get childrenPng =>
       const AssetGenImage('assets/images/children.png');
@@ -96,6 +103,8 @@ class $AssetsImagesGen {
   /// File path: assets/images/sports_swimming.svg
   String get sportsSwimming => 'assets/images/sports_swimming.svg';
 
+  /// File path: assets/images/image_physio.svg
+  String get imagePhysioSvg => 'assets/images/image_physio.svg';
   /// File path: assets/images/sports_tennis.svg
   String get sportsTennis => 'assets/images/sports_tennis.svg';
 
@@ -119,6 +128,7 @@ class $AssetsImagesGen {
       const AssetGenImage('assets/images/uploaded_image.png');
 
   /// List of all assets
+  List<dynamic> get values => [imagePhysioPng, imagePhysioSvg];
   List<dynamic> get values => [
         childrenPng,
         childrenSvg,

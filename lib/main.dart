@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_template/ui/parent_details/parent_details_primary.dart';
 
-import 'ui/enrollment_details/user_review.dart';
 
 
 Future<void> main() async {
@@ -65,7 +65,7 @@ class MyApp extends StatelessWidget {
         //   create: (_) => MapsProvider(),
         //   child: const HomeScreen(),
         // ),
-        home: const UserReview(),
+        home: const ParentDetailPrimary(),
 
       );
   }

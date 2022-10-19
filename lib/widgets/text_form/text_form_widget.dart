@@ -43,8 +43,8 @@ class TextFormWidget extends StatelessWidget {
     this.contentPadding,
     this.textDirection,
     this.textAlign = TextAlign.start,
-    this.prefix = "",
-    this.suffix = "",
+    this.prefix = '',
+    this.suffix = '',
   }) : super(key: key);
 
   @override
@@ -68,7 +68,7 @@ class TextFormWidget extends StatelessWidget {
           prefixText: prefix,
           suffixText: suffix,
           hintText: labelText,
-          counterText: "",
+          counterText: '',
           border: OutlineInputBorder(
             borderSide: const BorderSide(color: AppColors.textFieldBgColor),
             borderRadius: BorderRadius.circular(radius),
@@ -76,9 +76,9 @@ class TextFormWidget extends StatelessWidget {
           hintStyle: TextFontStyle.regular(color: AppColors.hintColor, size: context.textPx * 16),
           filled: true,
           fillColor: AppColors.primaryColor,
-          disabledBorder: UnderlineInputBorder(
-            borderSide: const BorderSide(color: AppColors.greyColor),
-            borderRadius: BorderRadius.circular(10.0),
+          disabledBorder: const UnderlineInputBorder(
+            borderSide: BorderSide(color: AppColors.greyColor),
+            borderRadius: BorderRadius.all(Radius.circular(10.0)),
           ),
           errorBorder: OutlineInputBorder(
             borderSide: BorderSide(color: AppColors.textFieldBgColor, width: context.widthPx * 1.0),
@@ -90,9 +90,9 @@ class TextFormWidget extends StatelessWidget {
             borderSide: BorderSide(color: AppColors.primaryColor, width: context.widthPx * 1.0),
             borderRadius: const BorderRadius.all(Radius.circular(10.0)),
           ),
-          enabledBorder: UnderlineInputBorder(
-            borderSide: const BorderSide(color: AppColors.greyColor),
-            borderRadius: const BorderRadius.all(Radius.circular(10.0)),
+          enabledBorder: const UnderlineInputBorder(
+            borderSide: BorderSide(color: AppColors.greyColor),
+            borderRadius: BorderRadius.all(Radius.circular(10.0)),
           ),
         ),
         textAlignVertical: TextAlignVertical.center,
