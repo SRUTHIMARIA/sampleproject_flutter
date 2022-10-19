@@ -14,6 +14,7 @@ class $AssetsIconsGen {
 
   /// File path: assets/icons/backarrow.svg
   String get backarrow => 'assets/icons/backarrow.svg';
+
   /// File path: assets/icons/icon_back.png
   AssetGenImage get iconBack =>
       const AssetGenImage('assets/icons/icon_back.png');
@@ -24,25 +25,13 @@ class $AssetsIconsGen {
   /// File path: assets/icons/icon_forward.svg
   String get iconForward => 'assets/icons/icon_forward.svg';
 
-  /// File path: assets/icons/icon_forward.png
-  AssetGenImage get iconForward =>
-      const AssetGenImage('assets/icons/icon_forward.png');
-
-  /// File path: assets/icons/icon_backarrow.svg
-  String get iconBackarrow => 'assets/icons/icon_backarrow.svg';
-
   /// List of all assets
-  List<String> get values => [backarrow, iconForward];
-  List<dynamic> get values => [iconBack, iconBackarrow, iconForward];
-  List<dynamic> get values => [iconBack, iconBackarrow];
+  List<dynamic> get values => [backarrow, iconBack, iconBackarrow, iconForward];
 }
 
 class $AssetsImagesGen {
   const $AssetsImagesGen();
 
-  /// File path: assets/images/image_physio.png
-  AssetGenImage get imagePhysioPng =>
-      const AssetGenImage('assets/images/image_physio.png');
   /// File path: assets/images/children.png
   AssetGenImage get childrenPng =>
       const AssetGenImage('assets/images/children.png');
@@ -50,12 +39,32 @@ class $AssetsImagesGen {
   /// File path: assets/images/children.svg
   String get childrenSvg => 'assets/images/children.svg';
 
+  /// File path: assets/images/image_addphoto.png
+  AssetGenImage get imageAddphoto =>
+      const AssetGenImage('assets/images/image_addphoto.png');
+
   /// File path: assets/images/image_athelete.png
-  AssetGenImage get imageAtheletePng =>
+  AssetGenImage get imageAthelete =>
       const AssetGenImage('assets/images/image_athelete.png');
 
-  /// File path: assets/images/image_athelete.svg
-  String get imageAtheleteSvg => 'assets/images/image_athelete.svg';
+  /// File path: assets/images/image_physio.png
+  AssetGenImage get imagePhysioPng =>
+      const AssetGenImage('assets/images/image_physio.png');
+
+  /// File path: assets/images/image_physio.svg
+  String get imagePhysioSvg => 'assets/images/image_physio.svg';
+
+  /// File path: assets/images/image_uploadphoto.png
+  AssetGenImage get imageUploadphoto =>
+      const AssetGenImage('assets/images/image_uploadphoto.png');
+
+  /// File path: assets/images/image_user_review.png
+  AssetGenImage get imageUserReview =>
+      const AssetGenImage('assets/images/image_user_review.png');
+
+  /// File path: assets/images/image_whoamI.png
+  AssetGenImage get imageWhoamI =>
+      const AssetGenImage('assets/images/image_whoamI.png');
 
   /// File path: assets/images/old.png
   AssetGenImage get oldPng => const AssetGenImage('assets/images/old.png');
@@ -77,19 +86,9 @@ class $AssetsImagesGen {
 
   /// File path: assets/images/sports_netball.svg
   String get sportsNetball => 'assets/images/sports_netball.svg';
-  /// File path: assets/images/image_addphoto.png
-  AssetGenImage get imageAddphoto =>
-      const AssetGenImage('assets/images/image_addphoto.png');
-
-  /// File path: assets/images/image_uploadphoto.png
-  AssetGenImage get imageUploadphoto =>
-      const AssetGenImage('assets/images/image_uploadphoto.png');
 
   /// File path: assets/images/sports_ruby.svg
   String get sportsRuby => 'assets/images/sports_ruby.svg';
-  /// File path: assets/images/image_user_review.png
-  AssetGenImage get imageUserReview =>
-      const AssetGenImage('assets/images/image_user_review.png');
 
   /// File path: assets/images/sports_ruby_league.svg
   String get sportsRubyLeague => 'assets/images/sports_ruby_league.svg';
@@ -103,8 +102,6 @@ class $AssetsImagesGen {
   /// File path: assets/images/sports_swimming.svg
   String get sportsSwimming => 'assets/images/sports_swimming.svg';
 
-  /// File path: assets/images/image_physio.svg
-  String get imagePhysioSvg => 'assets/images/image_physio.svg';
   /// File path: assets/images/sports_tennis.svg
   String get sportsTennis => 'assets/images/sports_tennis.svg';
 
@@ -117,23 +114,24 @@ class $AssetsImagesGen {
   /// File path: assets/images/teen.svg
   String get teenSvg => 'assets/images/teen.svg';
 
-  /// File path: assets/images/young.png
-  AssetGenImage get young => const AssetGenImage('assets/images/young.png');
-  /// File path: assets/images/image_whoamI.png
-  AssetGenImage get imageWhoamI =>
-      const AssetGenImage('assets/images/image_whoamI.png');
-
   /// File path: assets/images/uploaded_image.png
   AssetGenImage get uploadedImage =>
       const AssetGenImage('assets/images/uploaded_image.png');
 
+  /// File path: assets/images/young.png
+  AssetGenImage get young => const AssetGenImage('assets/images/young.png');
+
   /// List of all assets
-  List<dynamic> get values => [imagePhysioPng, imagePhysioSvg];
   List<dynamic> get values => [
         childrenPng,
         childrenSvg,
-        imageAtheletePng,
-        imageAtheleteSvg,
+        imageAddphoto,
+        imageAthelete,
+        imagePhysioPng,
+        imagePhysioSvg,
+        imageUploadphoto,
+        imageUserReview,
+        imageWhoamI,
         oldPng,
         oldSvg,
         sportsAfl,
@@ -150,14 +148,8 @@ class $AssetsImagesGen {
         sportsTouchball,
         teenPng,
         teenSvg,
+        uploadedImage,
         young
-      ];
-  List<AssetGenImage> get values => [
-        imageAddphoto,
-        imageUploadphoto,
-        imageUserReview,
-        imageWhoamI,
-        uploadedImage
       ];
 }
 

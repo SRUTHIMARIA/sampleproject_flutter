@@ -57,7 +57,7 @@ class _WhyJoinScreenState extends State<WhyJoinScreen> {
             Center(
               child: Container(
                 margin: EdgeInsets.only(left: context.heightPx * 49),
-                child: Image.asset(Assets.images.imageAtheletePng.path),
+                child: Image.asset(Assets.images.imageAthelete.path),
               ),
             ),
             //
