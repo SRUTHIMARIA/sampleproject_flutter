@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_template/gen/assets.gen.dart';
+import 'package:flutter_template/ui/enrollment_details/skill_development_plan.dart';
 import 'package:flutter_template/ui/enrollment_details/whoamI_screen2.dart';
 
 import 'package:flutter_template/utils/constants/fontdata.dart';
@@ -56,9 +57,15 @@ RangeValues values=RangeValues(_lowerValue, _upperValue);
                 ),
                 Row(
                   children: [
-                    Container(
-                      margin: EdgeInsets.only(left: context.heightPx * 49),
-                      child: SvgPicture.asset(Assets.icons.iconBackarrow),
+                    InkWell(
+                      onTap: (){
+                        Navigator.pop(context);
+
+                      },
+                      child: Container(
+                        margin: EdgeInsets.only(left: context.heightPx * 49),
+                        child: SvgPicture.asset(Assets.icons.iconBackarrow),
+                      ),
                     ),
                     Container(
                       margin: EdgeInsets.only(left: 12.0),
@@ -105,12 +112,12 @@ RangeValues values=RangeValues(_lowerValue, _upperValue);
                   ),
                 ),
                 child: Slider(
-                    activeColor: AppColors.slidercolor.withOpacity(0.75),
+                    activeColor: AppColors.themeColor,
                     inactiveColor: AppColors.whiteColor,
                     thumbColor: AppColors.themeColor,
-                  //label:brightness.abs().toString(),
-                  min: _lowerValue,
-                  max: _upperValue,
+                  label: "$value",
+                  // min: _lowerValue,
+                  // max: _upperValue,
                   divisions: 5,
 
                   value: value,
@@ -166,9 +173,9 @@ RangeValues values=RangeValues(_lowerValue, _upperValue);
                       inactiveColor: AppColors.whiteColor,
                       thumbColor: AppColors.themeColor,
 
-                      // label:brightness.abs().toString(),
-                      min: _lowerValue,
-                      max: _upperValue,
+                      label: "$value",
+                      // min: _lowerValue,
+                      // max: _upperValue,
                       divisions: 5,
 
                       value: value,
@@ -208,10 +215,7 @@ RangeValues values=RangeValues(_lowerValue, _upperValue);
                       activeColor: AppColors.themeColor,
                       inactiveColor: AppColors.whiteColor,
                       thumbColor: AppColors.themeColor,
-
-                      // label:brightness.abs().toString(),
-                      min: _lowerValue,
-                      max: _upperValue,
+                      label: "$value",
                       divisions: 5,
 
                       value: value,
@@ -229,18 +233,24 @@ RangeValues values=RangeValues(_lowerValue, _upperValue);
 
                 Align(
                   alignment: Alignment.center,
-                  child: Container(
-                    height: context.heightPx * 42,
-                    width: context.widthPx * 280,
+                  child: InkWell(
+                    onTap: (){
+                      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>SkillDevelopmentPlan()));
+
+                    },
                     child: Container(
-                      decoration: const BoxDecoration(
-                        color: AppColors.themeColor,
-                        borderRadius: BorderRadius.all(Radius.circular(8.0)),),
-                      child: Center(
-                        child: Text(
-                          submit,
-                          // _display ? "hide logo" : "display logo",
-                          style: const FontData().montFont70016TextStyle,
+                      height: context.heightPx * 42,
+                      width: context.widthPx * 280,
+                      child: Container(
+                        decoration: const BoxDecoration(
+                          color: AppColors.themeColor,
+                          borderRadius: BorderRadius.all(Radius.circular(8.0)),),
+                        child: Center(
+                          child: Text(
+                            submit,
+                            // _display ? "hide logo" : "display logo",
+                            style: const FontData().montFont70016TextStyle,
+                          ),
                         ),
                       ),
                     ),
