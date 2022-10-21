@@ -35,6 +35,15 @@ const String popupquote2=' 1.How long you will spend on the skill?\n 2.How many 
 const String popupquote3='These skills are up to you to improve so make\n sure your goals and your directions are\n achievable, believable and you can commit to\n them consistently. ';
 const String gotit="Got it !";
 
+//physical and mindset
+const String physicalAndMindset="Physical & Mindset\n Goals";
+const String physicalGoal="Weekly physical goal ";
+const String goal="What is my goal this week?";
+const String important="Why it is important?";
+const String aboutIt="What am I going to do about it?\n(What exercises, How Many Reps/How Long For, At what intensity, How many days per week)";
+const String whenwill="When will I do it?";
+const String wherewill="Where will I do it?";
+
 
 
 

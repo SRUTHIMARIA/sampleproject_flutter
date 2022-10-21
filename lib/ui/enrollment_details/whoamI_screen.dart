@@ -77,6 +77,9 @@ class _WhoAmIScreenState extends State<WhoAmIScreen> {
                     borderRadius: BorderRadius.circular(10.0),
                   ),
                   child: TextFormField(
+                    keyboardType: TextInputType.multiline,
+                    minLines: 1,//Normal textInputField will be displayed
+                    maxLines: 5,
                     style: FontData().montFont500TextStyle,
                     decoration: InputDecoration(
                       focusColor: Colors.white,
@@ -87,8 +90,9 @@ class _WhoAmIScreenState extends State<WhoAmIScreen> {
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10.0),
                       ),
+                      focusedBorder: InputBorder.none,
 
-                      fillColor: Colors.grey,
+                      fillColor: AppColors.textFieldBgColor,
 
                       hintText: values,
 
@@ -108,6 +112,9 @@ class _WhoAmIScreenState extends State<WhoAmIScreen> {
                     borderRadius: BorderRadius.circular(10.0),
                   ),
                   child: TextFormField(
+                    keyboardType: TextInputType.multiline,
+                    minLines: 1,//Normal textInputField will be displayed
+                    maxLines: 5,
                     style: FontData().montFont500TextStyle,
                     decoration: InputDecoration(
                       focusColor: Colors.white,
@@ -119,7 +126,8 @@ class _WhoAmIScreenState extends State<WhoAmIScreen> {
                         borderRadius: BorderRadius.circular(10.0),
                       ),
 
-                      fillColor: Colors.grey,
+                      fillColor: AppColors.textFieldBgColor,
+                      focusedBorder: InputBorder.none,
 
                       hintText: motivated,
 

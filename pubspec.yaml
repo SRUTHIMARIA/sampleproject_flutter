@@ -24,6 +24,12 @@ dependencies:
   path_provider: ^2.0.11
   responsive_framework: ^0.2.0
   flutter_otp_text_field: ^1.1.1
+  flutter_rounded_date_picker: ^3.0.2
+  intl:
+  flutter_time_picker_spinner: ^2.0.0
+  syncfusion_flutter_calendar: ^20.1.58
+  date_picker_timeline: ^1.2.3
+
 
 
 dev_dependencies:
@@ -54,6 +60,9 @@ flutter:
     - family: "Mont"
       fonts:
         - asset: "assets/fonts/Monsterrat/Montserrat-Regular.ttf"
+    - family: "MontLight"
+      fonts:
+        - asset: "assets/fonts/Monsterrat/montserrat-light.ttf"
   #   - family: Schyler
   #     fonts:
   #       - asset: fonts/Schyler-Regular.ttf

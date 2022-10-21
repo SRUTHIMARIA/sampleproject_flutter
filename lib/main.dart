@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_template/ui/enrollment_details/aspirations.dart';
-import 'ui/enrollment_details/user_review.dart';
+import 'package:flutter_template/ui/enrollment_details/physical_and_mindset/physical&mindset.dart';
+import 'package:flutter_template/ui/enrollment_details/weekly_planner/weekly_palnner_screen.dart';
+
+
 
 
 Future<void> main() async {
@@ -65,7 +67,7 @@ class MyApp extends StatelessWidget {
         //   create: (_) => MapsProvider(),
         //   child: const HomeScreen(),
         // ),
-        home: const Aspirations(),
+        home: PhysicalAndMindset(),
 
       );
   }

@@ -4,8 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_template/gen/assets.gen.dart';
-import 'package:flutter_template/ui/enrollment_details/self_evaluation_quiz.dart';
-import 'package:flutter_template/ui/enrollment_details/whoamI_screen2.dart';
+import 'package:flutter_template/ui/enrollment_details/physical_and_mindset/physical&mindset.dart';
 
 import 'package:flutter_template/utils/constants/fontdata.dart';
 import 'package:flutter_template/utils/extensions/context_extensions.dart';
@@ -107,6 +106,7 @@ class _SkillDevelopmentPlanState extends State<SkillDevelopmentPlan> {
                   height: context.heightPx * 20,
                 ),
                 Container(
+
                   height: context.heightPx * 120,
                   margin: EdgeInsets.symmetric(horizontal: 56),
                   decoration: BoxDecoration(
@@ -114,6 +114,9 @@ class _SkillDevelopmentPlanState extends State<SkillDevelopmentPlan> {
                     borderRadius: BorderRadius.circular(10.0),
                   ),
                   child: TextFormField(
+                    keyboardType: TextInputType.multiline,
+                    minLines: 1,//Normal textInputField will be displayed
+                    maxLines: 5,
                     style: FontData().montFont500TextStyle,
                     decoration: InputDecoration(
                       focusColor: Colors.white,
@@ -124,6 +127,7 @@ class _SkillDevelopmentPlanState extends State<SkillDevelopmentPlan> {
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10.0),
                       ),
+                      focusedBorder: InputBorder.none,
 
                       fillColor: Colors.grey,
 
@@ -199,7 +203,7 @@ class _SkillDevelopmentPlanState extends State<SkillDevelopmentPlan> {
 
                                       InkWell(
                                         onTap: (){
-                                          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>SelfEvaluationQuiz()));
+                                          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>PhysicalAndMindset()));
                                         },
                                         child: Align(
                                           alignment: Alignment.center,
