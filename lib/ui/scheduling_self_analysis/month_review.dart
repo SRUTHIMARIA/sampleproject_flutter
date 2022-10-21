@@ -25,6 +25,7 @@ class _MonthReviewState extends State<MonthReview> {
   bool isAgree = false;
   double value = 1;
   int? selectedIndex;
+  bool enabled=false;
 
 
   final categories = [
@@ -157,33 +158,41 @@ class _MonthReviewState extends State<MonthReview> {
                   SizedBox(
                     height: context.heightPx * 16,
                   ),
-                  Container(
-                    height: 50,
-                    margin: StaticPadding.paddingH60(context),
-                    width: double.infinity,
-                    child: ListView.builder(
-                        scrollDirection: Axis.horizontal,
-                        itemCount: categories.length,
-                        itemBuilder: (BuildContext context, int index) =>
+                  InkWell(
+                    onTap: enabled ? () {} : null,
+                    child: Container(
+                      height: 50,
+                      margin: StaticPadding.paddingH60(context),
+                      width: double.infinity,
+                      child: ListView.builder(
+                          scrollDirection: Axis.horizontal,
+                          itemCount: categories.length,
+                          itemBuilder: (BuildContext context, int index) =>
 
-                            InkWell(
-                              child: Container(
-                                margin: StaticPadding.paddingH10(context),
-                                padding: StaticPadding.paddingH30(context),
-                                decoration: BoxDecoration(
-                                  color: AppColors.themeColor,
-                                  gradient: LinearGradient(colors: [
-                                    AppColors.themeColor.withOpacity(0.76), AppColors.categoryGradient.withOpacity(0.63),
-                                  ]),
-                                  borderRadius:BorderRadius.circular(16.0),
+                              InkWell(
+                                child: Container(
+                                  margin: StaticPadding.paddingH10(context),
+                                  padding: StaticPadding.paddingH30(context),
+                                  decoration: BoxDecoration(
+                                    color: enabled ? AppColors.whiteColor : AppColors.themeColor,
+                                    gradient: LinearGradient(colors: [
+                                      AppColors.themeColor.withOpacity(0.76), AppColors.categoryGradient.withOpacity(0.63),
+                                    ]),
+                                    borderRadius:BorderRadius.circular(16.0),
+                                  ),
+
+                                  child: Align(
+                                      alignment: Alignment.center,
+                                      child: Text(categories[index],style:TextStyle(
+                                        fontSize: context.heightPx *14,
+                                        fontFamily: 'Mont',
+                                        fontWeight: FontWeight.w500,
+                                        color:  enabled?AppColors.themeColor:AppColors.whiteColor,
+                                      ))),
                                 ),
-
-                                child: Align(
-                                    alignment: Alignment.center,
-                                    child: Text(categories[index],style: FontData().montFont50014WhiteTextStyle,)),
-                              ),
-                            )
-                    ),),
+                              )
+                      ),),
+                  ),
                   SizedBox(
                     height: context.heightPx * 20,
                   ),
