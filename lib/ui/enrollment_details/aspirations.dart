@@ -134,10 +134,7 @@ class _AspirationsState extends State<Aspirations> {
                     ),
                   ),
                 ),
-                SizedBox(
-                  height: context.heightPx * 20,
-                ),
-
+          
 
 
                 Align(
@@ -146,9 +143,6 @@ class _AspirationsState extends State<Aspirations> {
 
                     margin: const EdgeInsets.symmetric(horizontal: 56),
                     child: Image.asset(Assets.images.imageAspiration.path),),
-                ),
-                SizedBox(
-                  height: context.heightPx * 20,
                 ),
 
                 InkWell(
