@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_template/gen/assets.gen.dart';
 import 'package:flutter_template/ui/scheduling_self_analysis/self_analysis.dart';
+import 'package:flutter_template/ui/scheduling_self_analysis/weekly_review.dart';
 
 import 'package:flutter_template/utils/constants/fontdata.dart';
 import 'package:flutter_template/utils/constants/strings.dart';
@@ -311,6 +312,7 @@ class _SelfAnalysisNotesState extends State<SelfAnalysisNotes> {
 
                   InkWell(
                     onTap: (){
+                      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>WeeklyReview()));
 
                     },
                     child: Center(

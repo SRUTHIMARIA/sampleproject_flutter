@@ -28,6 +28,21 @@ const String goodquotes1="What was good/bad?\n\nAmet minim mollit non deserunt\n
 const String enjoyquotes1="What I did/didn't enjoy\n\nAmet minim mollit non deserunt\n ullamco est sit aliqua dolor do...";
 const String highquotes1="Why did I rate myself high/low?\n\nAmet minim mollit non deserunt\n ullamco est sit aliqua dolor do...";
 
+//weekly review
+const String weekReview="Week Review";
+const String highlight="The highlight of my week was...";
+const String madeFeel="This made me feel...";
+const String monthReview="Month in Review";
+const String nextFocus="Next Week Focus";
+const String sports = "Sports";
+const String family = "Family";
+const String health = "Health";
+const String learned="This month I have learned...";
+const String forward="Moving forward, I will use what I have\n learned by...";
+const String feelAbout="I feel ___ about this";
+
+
+
 
 //mycurrent mindset
 
@@ -43,6 +58,8 @@ const String yesalltime="Yes, all me...";
 const String feelHappy="I FEEL HAPPY MOST OF THE SAME";
 const String disagree="No, I disagree..";
 const String absolutely="Absolutely...";
+
+
 
 
 

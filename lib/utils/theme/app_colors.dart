@@ -24,6 +24,8 @@ class AppColors {
   static const Color darkBlue =Color(0xFF006F7B);
   static const Color lightGreyColor=Color(0xff707070);
   static const Color darkGrey=Color(0xff666B7A);
+  static const Color categoryGradient=Color(0xffC5E7EB);
+  static const Color categoryGradient1=Color(0xffC1E7EB);
 
 
 
