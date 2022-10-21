@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_template/ui/splash_screen/splash_screen.dart';
+import 'package:flutter_template/ui/homepage/homepage.dart';
 
 import 'package:responsive_framework/responsive_framework.dart';
 
@@ -14,9 +14,6 @@ Future<void> main() async {
 class MyApp extends StatelessWidget {
   MyApp({Key? key}) : super(key: key);
   // final _appRouter = AppRouter();
-
-
-
 
     // return MaterialApp.router(
     //   //Todo: add app name here
@@ -77,11 +74,8 @@ class MyApp extends StatelessWidget {
 
 
         ),
-        // home: ChangeNotifierProvider(
-        //   create: (_) => MapsProvider(),
-        //   child: const HomeScreen(),
-        // ),
-       home: const SplashScreen(),
+
+       home: HomePage(),
 
       );
   }

@@ -23,6 +23,12 @@ class AppColors {
   static const Color gridColor2 = Color(0xFFD9FBFF);
   static const Color darkBlue =Color(0xFF006F7B);
   static const Color lightGreyColor=Color(0xff707070);
+  static const Color offWhite=Color(0xffD7F1F4);
+  static const Color darkGreen=Color(0xff006F7B);
+
+  static const Color slidercolor=Color(0xFF00AAE0);
+  static const Color popTextGrey=Color(0xff81919D);
+  static const Color grey=Color(0xff7C8F9B);
 
 
 

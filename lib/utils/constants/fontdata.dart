@@ -37,32 +37,6 @@ class FontData {
     color:  AppColors.lightGreyColor,
 
   );
-
-  TextStyle get montFont70020TextStyle => mtTextStyle.copyWith(
-    fontSize: fontMontserratLarge,
-    fontFamily: 'Mont',
-    fontWeight: FontWeight.w700,
-    color:  AppColors.blackColor,
-
-  );
-
-
-  TextStyle get montFont14TextStyle => mtTextStyle.copyWith(
-    fontSize: fontMontserratMedium1,
-    fontFamily: 'Mont',
-    fontWeight: FontWeight.w500,
-    color:  AppColors.lightGreyColor,
-
-  );
-
-  TextStyle get montFont10TextStyle => mtTextStyle.copyWith(
-    fontSize: fontMontserratSmall1,
-    fontFamily: 'Mont',
-    fontWeight: FontWeight.w600,
-    color:  AppColors.greyColor,
-
-  );
-
   TextStyle get montFont500TextStyle => mtTextStyle.copyWith(
     fontSize: fontMontserratMedium1,
     fontFamily: 'Mont',
@@ -74,21 +48,63 @@ class FontData {
     fontSize: fontMontserratMedium1,
     fontFamily: 'Mont',
     fontWeight: FontWeight.w600,
-    color:  AppColors.textGrey,
+    color:  AppColors.grey,
 
   );
-  TextStyle get montFont70014TextStyle => mtTextStyle.copyWith(
-    fontSize: fontMontserratMedium1,
+  TextStyle get montFont60018TextStyle => mtTextStyle.copyWith(
+    fontSize: fontMontserratMedium4,
     fontFamily: 'Mont',
-    fontWeight: FontWeight.w700,
-    color:  AppColors.themeColor,
+    fontWeight: FontWeight.w600,
+    color:  AppColors.darkGreen,
 
   );
   TextStyle get montFont70012TextStyle => mtTextStyle.copyWith(
     fontSize: fontMontserratSmall2,
     fontFamily: 'Mont',
     fontWeight: FontWeight.w500,
-    color:  AppColors.themeColor,
+    color:  AppColors.textGrey,
+
+  );
+  TextStyle get montFont50012BlackTextStyle => mtTextStyle.copyWith(
+    fontSize: fontMontserratSmall2,
+    fontFamily: 'Mont',
+    fontWeight: FontWeight.w500,
+    color:  AppColors.blackColor,
+
+  );
+  // TextStyle get montFont50012GreyColorTextStyle => mtTextStyle.copyWith(
+  //   fontSize: fontMontserratSmall2,
+  //   fontFamily: 'Mont',
+  //   fontWeight: FontWeight.w500,
+  //   color:  AppColors.grey,
+  //
+  // );
+  TextStyle get montFont50012GreyTextStyle => mtTextStyle.copyWith(
+    fontSize: fontMontserratSmall2,
+    fontFamily: 'Mont',
+    fontWeight: FontWeight.w500,
+    color:  AppColors.popTextGrey,
+
+  );
+  TextStyle get montFont50012GreyLightTextStyle => mtTextStyle.copyWith(
+    fontSize: fontMontserratSmall2,
+    fontFamily: 'MontLight',
+    // fontWeight: FontWeight.w500,
+    color:  AppColors.popTextGrey,
+
+  );
+  TextStyle get montFont50012WhiteTextStyle => mtTextStyle.copyWith(
+    fontSize: fontMontserratSmall2,
+    fontFamily: 'Mont',
+    fontWeight: FontWeight.w500,
+    color:  AppColors.whiteColor,
+
+  );
+  TextStyle get montFont70016GreyTextStyle => mtTextStyle.copyWith(
+    fontSize: fontMontserratMedium3,
+    fontFamily: 'Mont',
+    fontWeight: FontWeight.w700,
+    color:  AppColors.darkGreyColor,
 
   );
   TextStyle get montFont70016TextStyle => mtTextStyle.copyWith(
@@ -98,12 +114,33 @@ class FontData {
     color:  AppColors.whiteColor,
 
   );
-
-  TextStyle get montFont70027TextStyle => mtTextStyle.copyWith(
-    fontSize: fontMontserratLarge2,
+  TextStyle get montFont70016ThemeColorTextStyle => mtTextStyle.copyWith(
+    fontSize: fontMontserratMedium3,
     fontFamily: 'Mont',
     fontWeight: FontWeight.w700,
-    color:  AppColors.greyColor,
+    color:  AppColors.themeColor,
+
+  );
+  TextStyle get montFont70018TextStyle => mtTextStyle.copyWith(
+    fontSize: fontMontserratMedium3,
+    fontFamily: 'Mont',
+    fontWeight: FontWeight.w700,
+    color:  AppColors.darkGreen,
+
+  );
+  TextStyle get montFont70014TextStyle => mtTextStyle.copyWith(
+    fontSize: fontMontserratMedium3,
+    fontFamily: 'Mont',
+    fontWeight: FontWeight.w700,
+    color:  AppColors.themeColor,
+
+  );
+
+  TextStyle get montFont50012TextStyle => mtTextStyle.copyWith(
+    fontSize: fontMontserratSmall2,
+    fontFamily: 'Mont',
+    fontWeight: FontWeight.w500,
+    color:  AppColors.themeColor,
 
   );
   TextStyle get montFont60012TextStyle => mtTextStyle.copyWith(
@@ -113,33 +150,35 @@ class FontData {
     color:  AppColors.darkGreyColor,
 
   );
-  TextStyle get montFont70027DarkBlueTextStyle => mtTextStyle.copyWith(
-    fontSize: fontMontserratLarge2,
-    fontFamily: 'Mont',
-    fontWeight: FontWeight.w700,
-    color:  AppColors.darkBlue,
 
-  );
-
-  TextStyle get montFont22TextStyle => mtTextStyle.copyWith(
-    fontSize: fontMontserratMedium,
-    fontFamily: 'Mont',
-    fontWeight: FontWeight.w700,
-    color:  AppColors.blackColor,
-
-  );
-
-
-
-
-  TextStyle get montFont50012TextStyle => mtTextStyle.copyWith(
+  TextStyle get montFont60012offwhiteTextStyle => mtTextStyle.copyWith(
     fontSize: fontMontserratSmall2,
     fontFamily: 'Mont',
-    fontWeight: FontWeight.w500,
-    color:  AppColors.greyColor,
+    fontWeight: FontWeight.w600,
+    color:  AppColors.offWhite,
 
   );
+  TextStyle get montFont60010offwhiteTextStyle => mtTextStyle.copyWith(
+    fontSize: fontMontserratSmall1,
+    fontFamily: 'Mont',
+    fontWeight: FontWeight.w600,
+    color:  AppColors.offWhite,
 
+  );
+  TextStyle get montFont4008offwhiteTextStyle => mtTextStyle.copyWith(
+    fontSize: fontMontserratSmall,
+    fontFamily: 'Mont',
+    fontWeight: FontWeight.w400,
+    color:  AppColors.offWhite,
+
+  );
+  TextStyle get montFont40010offwhiteTextStyle => mtTextStyle.copyWith(
+    fontSize: fontMontserratSmall1,
+    fontFamily: 'Mont',
+    // fontWeight: FontWeight.w400,
+    color:  AppColors.offWhite,
+
+  );
   TextStyle get montFont50010TextStyle => mtTextStyle.copyWith(
     fontSize: fontMontserratSmall1,
     fontFamily: 'Mont',
@@ -147,7 +186,5 @@ class FontData {
     color:  AppColors.darkGreyColor,
 
   );
-
-
 
 }
