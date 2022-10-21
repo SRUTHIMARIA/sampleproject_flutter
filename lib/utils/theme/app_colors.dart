@@ -23,6 +23,8 @@ class AppColors {
   static const Color gridColor2 = Color(0xFFD9FBFF);
   static const Color darkBlue =Color(0xFF006F7B);
   static const Color lightGreyColor=Color(0xff707070);
+  static const Color darkGrey=Color(0xff666B7A);
+
 
 
 
