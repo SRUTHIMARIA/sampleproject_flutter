@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_template/gen/assets.gen.dart';
+import 'package:flutter_template/providers/login_provider.dart';
 import 'package:flutter_template/ui/register_screen/resgister_screen.dart';
 import 'package:flutter_template/utils/constants/fontdata.dart';
 import 'package:flutter_template/utils/constants/strings.dart';
 import 'package:flutter_template/utils/extensions/context_extensions.dart';
 import 'package:flutter_template/utils/static/static_padding.dart';
-import 'package:flutter_template/widgets/text_form/text_form_widget.dart';
+import 'package:provider/provider.dart';
 
-import '../../utils/static/values.dart';
 import '../../utils/theme/app_colors.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -19,6 +19,9 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  var txtUserNameController = TextEditingController();
+  var txtUserPwdController = TextEditingController();
+
   final List<Color> _colors = [
     AppColors.gradientColorSplash,
     AppColors.gradientColor2Splash
@@ -82,6 +85,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 borderRadius: BorderRadius.circular(6.0),
               ),
               child: TextFormField(
+                controller: txtUserNameController,
                 style: FontData().montFont500TextStyle,
                 decoration: InputDecoration(
                   focusColor: Colors.white,
@@ -114,6 +118,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 borderRadius: BorderRadius.circular(6.0),
               ),
               child: TextFormField(
+                controller: txtUserPwdController,
                 style: FontData().montFont500TextStyle,
 
                 decoration: InputDecoration(
@@ -152,6 +157,9 @@ class _LoginScreenState extends State<LoginScreen> {
 
             GestureDetector(
               onTap: () {
+                Provider.of<LoginProvider>(context, listen: false).signIn(
+                    txtUserNameController.text.toString(),
+                    txtUserPwdController.text.toString());
                 // Navigator.push(context, MaterialPageRoute(builder: (context)=>RegisterScreen()));
               },
 
