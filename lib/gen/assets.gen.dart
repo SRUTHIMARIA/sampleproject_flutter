@@ -15,6 +15,9 @@ class $AssetsIconsGen {
   /// File path: assets/icons/backarrow.svg
   String get backarrow => 'assets/icons/backarrow.svg';
 
+  /// File path: assets/icons/icon_aspiration.svg
+  String get iconAspiration => 'assets/icons/icon_aspiration.svg';
+
   /// File path: assets/icons/icon_aspirations.svg
   String get iconAspirations => 'assets/icons/icon_aspirations.svg';
 
@@ -31,6 +34,12 @@ class $AssetsIconsGen {
   /// File path: assets/icons/icon_chat.svg
   String get iconChat => 'assets/icons/icon_chat.svg';
 
+  /// File path: assets/icons/icon_current.svg
+  String get iconCurrent => 'assets/icons/icon_current.svg';
+
+  /// File path: assets/icons/icon_daily.svg
+  String get iconDaily => 'assets/icons/icon_daily.svg';
+
   /// File path: assets/icons/icon_drawer.svg
   String get iconDrawer => 'assets/icons/icon_drawer.svg';
 
@@ -38,40 +47,123 @@ class $AssetsIconsGen {
   AssetGenImage get iconForward =>
       const AssetGenImage('assets/icons/icon_forward.png');
 
+  /// File path: assets/icons/icon_mindset.svg
+  String get iconMindset => 'assets/icons/icon_mindset.svg';
+
+  /// File path: assets/icons/icon_monthly.svg
+  String get iconMonthly => 'assets/icons/icon_monthly.svg';
+
+  /// File path: assets/icons/icon_notes.svg
+  String get iconNotes => 'assets/icons/icon_notes.svg';
+
   /// File path: assets/icons/icon_notification.svg
   String get iconNotification => 'assets/icons/icon_notification.svg';
+
+  /// File path: assets/icons/icon_passcode.svg
+  String get iconPasscode => 'assets/icons/icon_passcode.svg';
+
+  /// File path: assets/icons/icon_physicalgoal.svg
+  String get iconPhysicalgoal => 'assets/icons/icon_physicalgoal.svg';
+
+  /// File path: assets/icons/icon_review.svg
+  String get iconReview => 'assets/icons/icon_review.svg';
+
+  /// File path: assets/icons/icon_selfanaysis.svg
+  String get iconSelfanaysis => 'assets/icons/icon_selfanaysis.svg';
+
+  /// File path: assets/icons/icon_selfevaluation.svg
+  String get iconSelfevaluation => 'assets/icons/icon_selfevaluation.svg';
+
+  /// File path: assets/icons/icon_skill.svg
+  String get iconSkill => 'assets/icons/icon_skill.svg';
+
+  /// File path: assets/icons/icon_toggle.png
+  AssetGenImage get iconToggle =>
+      const AssetGenImage('assets/icons/icon_toggle.png');
 
   /// File path: assets/icons/icon_values.svg
   String get iconValues => 'assets/icons/icon_values.svg';
 
+  /// File path: assets/icons/icon_weekly.svg
+  String get iconWeekly => 'assets/icons/icon_weekly.svg';
+
+  /// File path: assets/icons/icon_whoamI.svg
+  String get iconWhoamI => 'assets/icons/icon_whoamI.svg';
+
   /// List of all assets
   List<dynamic> get values => [
         backarrow,
+        iconAspiration,
         iconAspirations,
         iconBack,
         iconBackarrow,
         iconCalender,
         iconChat,
+        iconCurrent,
+        iconDaily,
         iconDrawer,
         iconForward,
+        iconMindset,
+        iconMonthly,
+        iconNotes,
         iconNotification,
-        iconValues
+        iconPasscode,
+        iconPhysicalgoal,
+        iconReview,
+        iconSelfanaysis,
+        iconSelfevaluation,
+        iconSkill,
+        iconToggle,
+        iconValues,
+        iconWeekly,
+        iconWhoamI
       ];
 }
 
 class $AssetsImagesGen {
   const $AssetsImagesGen();
 
-  /// File path: assets/images/athelete_splash.png
-  AssetGenImage get atheleteSplash =>
-      const AssetGenImage('assets/images/athelete_splash.png');
-
-  /// File path: assets/images/children.png
-  AssetGenImage get childrenPng =>
-      const AssetGenImage('assets/images/children.png');
-
   /// File path: assets/images/children.svg
-  String get childrenSvg => 'assets/images/children.svg';
+  String get children => 'assets/images/children.svg';
+
+  /// File path: assets/images/icon_aspiration.svg
+  String get iconAspiration => 'assets/images/icon_aspiration.svg';
+
+  /// File path: assets/images/icon_current.svg
+  String get iconCurrent => 'assets/images/icon_current.svg';
+
+  /// File path: assets/images/icon_daily.svg
+  String get iconDaily => 'assets/images/icon_daily.svg';
+
+  /// File path: assets/images/icon_mindset.svg
+  String get iconMindset => 'assets/images/icon_mindset.svg';
+
+  /// File path: assets/images/icon_monthly.svg
+  String get iconMonthly => 'assets/images/icon_monthly.svg';
+
+  /// File path: assets/images/icon_notes.svg
+  String get iconNotes => 'assets/images/icon_notes.svg';
+
+  /// File path: assets/images/icon_physicalgoal.svg
+  String get iconPhysicalgoal => 'assets/images/icon_physicalgoal.svg';
+
+  /// File path: assets/images/icon_review.svg
+  String get iconReview => 'assets/images/icon_review.svg';
+
+  /// File path: assets/images/icon_selfanaysis.svg
+  String get iconSelfanaysis => 'assets/images/icon_selfanaysis.svg';
+
+  /// File path: assets/images/icon_selfevaluation.svg
+  String get iconSelfevaluation => 'assets/images/icon_selfevaluation.svg';
+
+  /// File path: assets/images/icon_skill.svg
+  String get iconSkill => 'assets/images/icon_skill.svg';
+
+  /// File path: assets/images/icon_weekly.svg
+  String get iconWeekly => 'assets/images/icon_weekly.svg';
+
+  /// File path: assets/images/icon_whoamI.svg
+  String get iconWhoamI => 'assets/images/icon_whoamI.svg';
 
   /// File path: assets/images/image_addphoto.png
   AssetGenImage get imageAddphoto =>
@@ -149,45 +241,26 @@ class $AssetsImagesGen {
   /// File path: assets/images/sports_netball.svg
   String get sportsNetball => 'assets/images/sports_netball.svg';
 
-  /// File path: assets/images/sports_ruby.svg
-  String get sportsRuby => 'assets/images/sports_ruby.svg';
-
-  /// File path: assets/images/sports_ruby_league.svg
-  String get sportsRubyLeague => 'assets/images/sports_ruby_league.svg';
-
-  /// File path: assets/images/sports_running.svg
-  String get sportsRunning => 'assets/images/sports_running.svg';
-
-  /// File path: assets/images/sports_soccer.svg
-  String get sportsSoccer => 'assets/images/sports_soccer.svg';
-
-  /// File path: assets/images/sports_swimming.svg
-  String get sportsSwimming => 'assets/images/sports_swimming.svg';
-
-  /// File path: assets/images/sports_tennis.svg
-  String get sportsTennis => 'assets/images/sports_tennis.svg';
-
-  /// File path: assets/images/sports_touchball.svg
-  String get sportsTouchball => 'assets/images/sports_touchball.svg';
-
-  /// File path: assets/images/teen.png
-  AssetGenImage get teenPng => const AssetGenImage('assets/images/teen.png');
-
-  /// File path: assets/images/teen.svg
-  String get teenSvg => 'assets/images/teen.svg';
-
   /// File path: assets/images/uploaded_image.png
   AssetGenImage get uploadedImage =>
       const AssetGenImage('assets/images/uploaded_image.png');
 
-  /// File path: assets/images/young.png
-  AssetGenImage get young => const AssetGenImage('assets/images/young.png');
-
   /// List of all assets
   List<dynamic> get values => [
-        atheleteSplash,
-        childrenPng,
-        childrenSvg,
+        children,
+        iconAspiration,
+        iconCurrent,
+        iconDaily,
+        iconMindset,
+        iconMonthly,
+        iconNotes,
+        iconPhysicalgoal,
+        iconReview,
+        iconSelfanaysis,
+        iconSelfevaluation,
+        iconSkill,
+        iconWeekly,
+        iconWhoamI,
         imageAddphoto,
         imageAthelete,
         imageLogin,
@@ -209,17 +282,7 @@ class $AssetsImagesGen {
         sportsCricket,
         sportsGynastic,
         sportsNetball,
-        sportsRuby,
-        sportsRubyLeague,
-        sportsRunning,
-        sportsSoccer,
-        sportsSwimming,
-        sportsTennis,
-        sportsTouchball,
-        teenPng,
-        teenSvg,
-        uploadedImage,
-        young
+        uploadedImage
       ];
 }
 

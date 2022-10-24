@@ -4,6 +4,8 @@ import 'package:flutter_template/providers/providers.dart';
 import 'package:flutter_template/ui/homepage/homepage.dart';
 import 'package:flutter_template/ui/homepage/main_screen.dart';
 import 'package:flutter_template/ui/profile/profile.dart';
+import 'package:flutter_template/ui/profile/profile_update.dart';
+import 'package:flutter_template/ui/settings/settings.dart';
 import 'package:provider/provider.dart';
 
 import 'package:responsive_framework/responsive_framework.dart';
@@ -35,7 +37,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: Profile(),
+      home: Settings(),
       // home: ChangeNotifierProvider(
       //   create: (context) => DrawerScreenProvider(),
       //   child:  HomePage(),

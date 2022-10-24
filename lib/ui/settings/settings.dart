@@ -1,10 +1,123 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class Settings extends StatelessWidget {
+import 'dart:ui';
+
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_template/gen/assets.gen.dart';
+import 'package:flutter_template/models/category_model.dart';
+
+import 'package:flutter_template/utils/constants/fontdata.dart';
+import 'package:flutter_template/utils/extensions/context_extensions.dart';
+import 'package:flutter_template/utils/static/static_padding.dart';
+
+import '../../utils/constants/strings.dart';
+import '../../utils/theme/app_colors.dart';
+import 'package:percent_indicator/linear_percent_indicator.dart';
+
+class Settings extends StatefulWidget {
+  const Settings({Key? key}) : super(key: key);
+
+  @override
+  State<Settings> createState() => _SettingsState();
+}
+
+class _SettingsState extends State<Settings> {
+  bool isAgree = false;
+  double percent = 0.0;
+
+  // final List<Color> _colors = [
+  //   AppColors.gradientColorSplash,
+  //   AppColors.gradientColor2Splash
+  // ];
+
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.white,
+    return Scaffold(
+      resizeToAvoidBottomInset: false,
+      body: Container(
+        height: double.infinity,
+        width: double.infinity,
+        decoration: BoxDecoration(
+          color: AppColors.primaryColor.withOpacity(0.40),
+          // gradient: LinearGradient(
+          //   colors: _colors,
+          //   stops: _stops,
+          //
+          //
+          // ),
+        ),
+        child: Container(
+          child: Expanded(
+
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(
+                  height: context.heightPx * 70,
+                ),
+                Row(
+                  children: [
+                    InkWell(
+                      onTap: () {
+                        Navigator.pop(context);
+                      },
+                      child: Container(
+                        margin: EdgeInsets.only(left: context.heightPx * 49),
+                        child: SvgPicture.asset(Assets.icons.iconBackarrow),
+                      ),
+                    ),
+                    Container(
+                      margin: EdgeInsets.only(left: 12.0),
+                      child: Text(
+                        settings,
+                        style: const FontData().montFont20TextStyle,
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: context.heightPx * 37,
+                ),
+                Container(
+                  height:context.widthPx*100,
+                  width:context.widthPx*400,
+                  padding: StaticPadding.paddingH30(context),
+                  margin: StaticPadding.paddingH30(context),
+                  decoration: BoxDecoration(
+                    color:  AppColors.themeColor,
+                    borderRadius: BorderRadius.circular(10.0),
+                    gradient: LinearGradient(
+                      colors: [
+                        AppColors.whiteColor.withOpacity(0.20),
+                        AppColors.whiteColor.withOpacity(0.60),
+
+                      ],
+                    ),
+
+                  ),
+                  child: Row(
+
+                    children: [
+                      SvgPicture.asset(Assets.icons.iconPasscode),
+                      SizedBox(width: context.widthPx *6,),
+
+                      Text(
+                        'Passcode',
+                        style: FontData().montFont50012GreenTextStyle,
+                      ),
+                      SizedBox(width: context.widthPx *226,),
+                      Image.asset(Assets.icons.iconToggle.path),
+
+                    ],
+                  ),
+                ),
+
+              ],
+            ),
+          ),
+        ),
+      ),
     );
   }
 }
