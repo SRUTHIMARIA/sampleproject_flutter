@@ -15,12 +15,18 @@ class $AssetsIconsGen {
   /// File path: assets/icons/backarrow.svg
   String get backarrow => 'assets/icons/backarrow.svg';
 
+  /// File path: assets/icons/icon_aspirations.svg
+  String get iconAspirations => 'assets/icons/icon_aspirations.svg';
+
   /// File path: assets/icons/icon_back.png
   AssetGenImage get iconBack =>
       const AssetGenImage('assets/icons/icon_back.png');
 
   /// File path: assets/icons/icon_backarrow.svg
   String get iconBackarrow => 'assets/icons/icon_backarrow.svg';
+
+  /// File path: assets/icons/icon_calender.svg
+  String get iconCalender => 'assets/icons/icon_calender.svg';
 
   /// File path: assets/icons/icon_chat.svg
   String get iconChat => 'assets/icons/icon_chat.svg';
@@ -29,25 +35,27 @@ class $AssetsIconsGen {
   String get iconDrawer => 'assets/icons/icon_drawer.svg';
 
   /// File path: assets/icons/icon_forward.png
-  AssetGenImage get iconForwardPng =>
+  AssetGenImage get iconForward =>
       const AssetGenImage('assets/icons/icon_forward.png');
-
-  /// File path: assets/icons/icon_forward.svg
-  String get iconForwardSvg => 'assets/icons/icon_forward.svg';
 
   /// File path: assets/icons/icon_notification.svg
   String get iconNotification => 'assets/icons/icon_notification.svg';
 
+  /// File path: assets/icons/icon_values.svg
+  String get iconValues => 'assets/icons/icon_values.svg';
+
   /// List of all assets
   List<dynamic> get values => [
         backarrow,
+        iconAspirations,
         iconBack,
         iconBackarrow,
+        iconCalender,
         iconChat,
         iconDrawer,
-        iconForwardPng,
-        iconForwardSvg,
-        iconNotification
+        iconForward,
+        iconNotification,
+        iconValues
       ];
 }
 
@@ -84,6 +92,10 @@ class $AssetsImagesGen {
   /// File path: assets/images/image_physio.svg
   String get imagePhysioSvg => 'assets/images/image_physio.svg';
 
+  /// File path: assets/images/image_picker.png
+  AssetGenImage get imagePicker =>
+      const AssetGenImage('assets/images/image_picker.png');
+
   /// File path: assets/images/image_slider1.png
   AssetGenImage get imageSlider1 =>
       const AssetGenImage('assets/images/image_slider1.png');
@@ -103,6 +115,10 @@ class $AssetsImagesGen {
   /// File path: assets/images/image_uploadphoto.png
   AssetGenImage get imageUploadphoto =>
       const AssetGenImage('assets/images/image_uploadphoto.png');
+
+  /// File path: assets/images/image_user.png
+  AssetGenImage get imageUser =>
+      const AssetGenImage('assets/images/image_user.png');
 
   /// File path: assets/images/image_user_review.png
   AssetGenImage get imageUserReview =>
@@ -177,11 +193,13 @@ class $AssetsImagesGen {
         imageLogin,
         imagePhysioPng,
         imagePhysioSvg,
+        imagePicker,
         imageSlider1,
         imageSlider2,
         imageSlider3,
         imageSuccess,
         imageUploadphoto,
+        imageUser,
         imageUserReview,
         imageWhoamI,
         oldPng,
