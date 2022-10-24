@@ -29,6 +29,9 @@ class AppColors {
   static const Color slidercolor=Color(0xFF00AAE0);
   static const Color popTextGrey=Color(0xff81919D);
   static const Color grey=Color(0xff7C8F9B);
+  static const Color lightGreen=Color(0xff4DA07D);
+  static const Color orange=Color(0xffD99C00);
+  static const Color redColor=Color(0xffD96C6C);
 
 
 
