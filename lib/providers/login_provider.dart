@@ -4,6 +4,7 @@ import 'package:flutter_template/models/register_model/register_user.dart';
 import 'package:flutter_template/models/register_model/success_model.dart';
 import 'package:flutter_template/network/api_client.dart';
 import 'package:flutter_template/services/navigation/routes.dart';
+import 'package:flutter_template/ui/homepage/homepage.dart';
 import 'package:flutter_template/utils/constants/strings.dart';
 import 'package:flutter_template/widgets/common/custom_toast.dart';
 import 'package:logger/logger.dart';
@@ -133,7 +134,7 @@ class LoginProvider extends ChangeNotifier{
         setIsLoading(false);
 
         const ToastAtTop().showToast(loggedin);
-        const Routes().replace(context, const LoginScreen());
+        const Routes().replace(context,  HomePage());
         // context.router.replaceAll([
         //   const Home(),
         // ]);

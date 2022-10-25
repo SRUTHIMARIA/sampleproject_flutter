@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_template/gen/assets.gen.dart';
 import 'package:flutter_template/providers/login_provider.dart';
-import 'package:flutter_template/ui/register_screen/resgister_screen.dart';
+import 'package:flutter_template/ui/register_screen/register_screen.dart';
 import 'package:flutter_template/utils/constants/fontdata.dart';
 import 'package:flutter_template/utils/constants/strings.dart';
 import 'package:flutter_template/utils/extensions/context_extensions.dart';
@@ -156,12 +156,11 @@ class _LoginScreenState extends State<LoginScreen> {
             SizedBox(height:context.heightPx *16),
 
             GestureDetector(
-              onTap: () {
-                Provider.of<LoginProvider>(context, listen: false).signIn(
-                    txtUserNameController.text.toString(),
-                    txtUserPwdController.text.toString());
-                // Navigator.push(context, MaterialPageRoute(builder: (context)=>RegisterScreen()));
-              },
+              onTap: () =>
+          Provider.of<LoginProvider>(context, listen: false)
+                    .signInToApp(context, txtUserNameController.text.toString(),
+                  txtUserPwdController.text.toString(),),
+
 
               child: Container(
                 height: context.heightPx * 42,
