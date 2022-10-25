@@ -1,3 +1,7 @@
+//api header
+const String baseURL='https://athlete.devateam.com/api';
+
+
 //login
 const String welcome = "Welcome back!";
 const String logintoContinue="Login to continue";
@@ -178,6 +182,32 @@ const String absolutely="Absolutely...";
 
 const String profile = "Profile";
 const String settings = "Settings";
+
+
+//error handling strings
+
+const String error = 'Error';
+const String errorMessage = 'Something went wrong. Please try again later';
+const String errorMessage1 = 'Please complete the form';
+const String errorMessage2 = 'Passwords not matching';
+const String errorMessage3 = 'Invalid email or password';
+const String errorMessage4 = 'Please enter a valid email id';
+const String errorMessage5 = 'Please enter the credentials';
+const String errorMessage6 = 'Please enter the email id';
+const String errorMessage7 = 'Please enter valid OTP';
+const String errorMessage8 = 'Invalid OTP';
+const String errorMessage9 = 'Something went wrong. Please try again later';
+const String errorMessage10 = 'Password must be minimum 8 characters';
+const String noRequests = 'There is no trip requests';
+const String ok = 'OK';
+
+const String success = 'OTP sent';
+const String loggedin = 'Logged in successfully';
+const String signInSuccess = 'Sign In in successfully';
+
+const String accepted = 'Ride accepted successfully';
+const String verified = 'OTP verified successfully';
+const String reset = 'Password reset successfully';
 
 
 
