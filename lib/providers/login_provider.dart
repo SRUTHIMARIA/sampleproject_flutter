@@ -9,6 +9,7 @@ import 'package:flutter_template/widgets/common/custom_toast.dart';
 import 'package:logger/logger.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../models/login_model/login_user_model.dart';
 import '../ui/login_screen/login_screen.dart';
 
 class LoginProvider extends ChangeNotifier{
@@ -81,6 +82,49 @@ class LoginProvider extends ChangeNotifier{
         last_name: last_name,
       );
       client.register(registerUser).then((it) async {
+        setToken(it.token!);
+        SharedPreferences sharedPreferences = await _prefs;
+        sharedPreferences.setBool('isLoggedIn', true);
+        sharedPreferences.setString('token', it.token!);
+        debugPrint('***********************$it');
+        setIsLoading(false);
+
+        const ToastAtTop().showToast(loggedin);
+        const Routes().replace(context, const LoginScreen());
+        // context.router.replaceAll([
+        //   const Home(),
+        // ]);
+      }).catchError((Object obj) {
+        debugPrint('!!!!!!!!!!!!!$obj');
+        setIsLoading(false);
+        setError(true);
+        const ToastAtTop().showToast(errorMessage3);
+        switch (obj.runtimeType) {
+          case DioError:
+            final res = (obj as DioError).response;
+            debugPrint('Got error : ${res?.statusCode} -> ${res?.statusMessage}');
+            break;
+          default:
+            break;
+        }
+      });
+    }
+  }
+  Future signInToApp(
+      BuildContext context, String email, String password) async {
+    if (email.trim().isEmpty || password.trim().isEmpty) {
+      const ToastAtTop().showToast(errorMessage5);
+      setError(true);
+    } else {
+      setIsLoading(true);
+      setError(false);
+      final client =
+      ApiClient(Dio(BaseOptions(contentType: 'application/json')));
+      LoginUser loginUser = LoginUser(
+        email: email,
+        password: password,
+      );
+      client.loginPage(loginUser).then((it) async {
         setToken(it.token!);
         SharedPreferences sharedPreferences = await _prefs;
         sharedPreferences.setBool('isLoggedIn', true);
