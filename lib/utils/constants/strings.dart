@@ -60,6 +60,17 @@ const String disagree="No, I disagree..";
 const String absolutely="Absolutely...";
 
 
+const String profile = "Profile";
+const String settings = "Settings";
+
+
+
+
+
+
+
+
+
 
 
 
