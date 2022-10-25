@@ -36,6 +36,10 @@ class AppColors {
   static const Color lightGreen=Color(0xff4DA07D);
   static const Color orange=Color(0xffD99C00);
   static const Color redColor=Color(0xffD96C6C);
+  static const Color buttonGradient1=Color(0xffF2FAFB);
+  static const Color buttonGradient2=Color(0xff10CDE1);
+
+
 
 
 

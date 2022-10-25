@@ -189,6 +189,10 @@ class $AssetsImagesGen {
   AssetGenImage get imageAddphoto =>
       const AssetGenImage('assets/images/image_addphoto.png');
 
+  /// File path: assets/images/image_aspiration.png
+  AssetGenImage get imageAspiration =>
+      const AssetGenImage('assets/images/image_aspiration.png');
+
   /// File path: assets/images/image_athelete.png
   AssetGenImage get imageAthelete =>
       const AssetGenImage('assets/images/image_athelete.png');
@@ -207,6 +211,10 @@ class $AssetsImagesGen {
   /// File path: assets/images/image_picker.png
   AssetGenImage get imagePicker =>
       const AssetGenImage('assets/images/image_picker.png');
+
+  /// File path: assets/images/image_skillplan.png
+  AssetGenImage get imageSkillplan =>
+      const AssetGenImage('assets/images/image_skillplan.png');
 
   /// File path: assets/images/image_slider1.png
   AssetGenImage get imageSlider1 =>
@@ -314,11 +322,13 @@ class $AssetsImagesGen {
         iconWeekly,
         iconWhoamI,
         imageAddphoto,
+        imageAspiration,
         imageAthelete,
         imageLogin,
         imagePhysioPng,
         imagePhysioSvg,
         imagePicker,
+        imageSkillplan,
         imageSlider1,
         imageSlider2,
         imageSlider3,
