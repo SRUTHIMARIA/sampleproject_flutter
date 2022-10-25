@@ -43,6 +43,9 @@ class $AssetsIconsGen {
   /// File path: assets/icons/icon_drawer.svg
   String get iconDrawer => 'assets/icons/icon_drawer.svg';
 
+  /// File path: assets/icons/icon_email.svg
+  String get iconEmail => 'assets/icons/icon_email.svg';
+
   /// File path: assets/icons/icon_forward.png
   AssetGenImage get iconForward =>
       const AssetGenImage('assets/icons/icon_forward.png');
@@ -62,6 +65,9 @@ class $AssetsIconsGen {
   /// File path: assets/icons/icon_passcode.svg
   String get iconPasscode => 'assets/icons/icon_passcode.svg';
 
+  /// File path: assets/icons/icon_password.svg
+  String get iconPassword => 'assets/icons/icon_password.svg';
+
   /// File path: assets/icons/icon_physicalgoal.svg
   String get iconPhysicalgoal => 'assets/icons/icon_physicalgoal.svg';
 
@@ -80,6 +86,9 @@ class $AssetsIconsGen {
   /// File path: assets/icons/icon_toggle.png
   AssetGenImage get iconToggle =>
       const AssetGenImage('assets/icons/icon_toggle.png');
+
+  /// File path: assets/icons/icon_username.svg
+  String get iconUsername => 'assets/icons/icon_username.svg';
 
   /// File path: assets/icons/icon_values.svg
   String get iconValues => 'assets/icons/icon_values.svg';
@@ -102,18 +111,21 @@ class $AssetsIconsGen {
         iconCurrent,
         iconDaily,
         iconDrawer,
+        iconEmail,
         iconForward,
         iconMindset,
         iconMonthly,
         iconNotes,
         iconNotification,
         iconPasscode,
+        iconPassword,
         iconPhysicalgoal,
         iconReview,
         iconSelfanaysis,
         iconSelfevaluation,
         iconSkill,
         iconToggle,
+        iconUsername,
         iconValues,
         iconWeekly,
         iconWhoamI
@@ -122,6 +134,10 @@ class $AssetsIconsGen {
 
 class $AssetsImagesGen {
   const $AssetsImagesGen();
+
+  /// File path: assets/images/athelete_splash.png
+  AssetGenImage get atheleteSplash =>
+      const AssetGenImage('assets/images/athelete_splash.png');
 
   /// File path: assets/images/children.svg
   String get children => 'assets/images/children.svg';
@@ -247,6 +263,7 @@ class $AssetsImagesGen {
 
   /// List of all assets
   List<dynamic> get values => [
+        atheleteSplash,
         children,
         iconAspiration,
         iconCurrent,
