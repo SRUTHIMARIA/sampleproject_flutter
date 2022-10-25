@@ -157,7 +157,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
             GestureDetector(
               onTap: () =>
-          Provider.of<LoginProvider>(context, listen: false)
+                     Provider.of<LoginProvider>(context, listen: false)
                     .signInToApp(context, txtUserNameController.text.toString(),
                   txtUserPwdController.text.toString(),),
 

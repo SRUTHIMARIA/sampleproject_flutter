@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_template/gen/assets.gen.dart';
+import 'package:flutter_template/providers/login_provider.dart';
 import 'package:flutter_template/ui/login_screen/login_screen.dart';
 import 'package:flutter_template/ui/register_screen/register_activation_link.dart';
 import 'package:flutter_template/utils/constants/fontdata.dart';
 import 'package:flutter_template/utils/constants/strings.dart';
 import 'package:flutter_template/utils/extensions/context_extensions.dart';
 import 'package:flutter_template/utils/static/static_padding.dart';
+import 'package:provider/provider.dart';
 
 import '../../utils/theme/app_colors.dart';
 
@@ -269,12 +271,19 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   height: context.heightPx * 16,
                 ),
                 GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const RegisterActivationLink()));
-                  },
+                  onTap: () =>
+                      Provider.of<LoginProvider>(context, listen: false)
+                          .signUpToApp(
+                              context,
+                              txtEmailController.text.toString(),
+                              txtUserPwdController.text.toString(),
+                              txtFirstNameController.text.toString(),
+                              txtLastNameController.text.toString()),
+                  // Navigator.push(
+                  //     context,
+                  //     MaterialPageRoute(
+                  //         builder: (context) => const RegisterActivationLink()));
+
                   child: Container(
                     height: context.heightPx * 42,
                     width: context.widthPx * 276,
