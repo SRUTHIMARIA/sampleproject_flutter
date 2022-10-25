@@ -33,6 +33,17 @@ const String passwordChanged="Your password has been\n changed successfully";
 const String backToLogin="Back to login";
 const String authSucess="Activation link sent successfully.";
 
+//student details
+const String sports_type = "Sports Type";
+const String selectany="Select any one";
+const String ageGroup="Age Group";
+const String understandPeersonality="To understand you personally";
+
+const String selectsportsType="Add your sports type";
+const String age="Age";
+const String joinAssist="Why did you join ASSIST?";
+
+
 
 //parent details,medical details
 

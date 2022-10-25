@@ -139,8 +139,12 @@ class $AssetsImagesGen {
   AssetGenImage get atheleteSplash =>
       const AssetGenImage('assets/images/athelete_splash.png');
 
+  /// File path: assets/images/children.png
+  AssetGenImage get childrenPng =>
+      const AssetGenImage('assets/images/children.png');
+
   /// File path: assets/images/children.svg
-  String get children => 'assets/images/children.svg';
+  String get childrenSvg => 'assets/images/children.svg';
 
   /// File path: assets/images/icon_aspiration.svg
   String get iconAspiration => 'assets/images/icon_aspiration.svg';
@@ -257,14 +261,45 @@ class $AssetsImagesGen {
   /// File path: assets/images/sports_netball.svg
   String get sportsNetball => 'assets/images/sports_netball.svg';
 
+  /// File path: assets/images/sports_ruby.svg
+  String get sportsRuby => 'assets/images/sports_ruby.svg';
+
+  /// File path: assets/images/sports_ruby_league.svg
+  String get sportsRubyLeague => 'assets/images/sports_ruby_league.svg';
+
+  /// File path: assets/images/sports_running.svg
+  String get sportsRunning => 'assets/images/sports_running.svg';
+
+  /// File path: assets/images/sports_soccer.svg
+  String get sportsSoccer => 'assets/images/sports_soccer.svg';
+
+  /// File path: assets/images/sports_swimming.svg
+  String get sportsSwimming => 'assets/images/sports_swimming.svg';
+
+  /// File path: assets/images/sports_tennis.svg
+  String get sportsTennis => 'assets/images/sports_tennis.svg';
+
+  /// File path: assets/images/sports_touchball.svg
+  String get sportsTouchball => 'assets/images/sports_touchball.svg';
+
+  /// File path: assets/images/teen.png
+  AssetGenImage get teenPng => const AssetGenImage('assets/images/teen.png');
+
+  /// File path: assets/images/teen.svg
+  String get teenSvg => 'assets/images/teen.svg';
+
   /// File path: assets/images/uploaded_image.png
   AssetGenImage get uploadedImage =>
       const AssetGenImage('assets/images/uploaded_image.png');
 
+  /// File path: assets/images/young.png
+  AssetGenImage get young => const AssetGenImage('assets/images/young.png');
+
   /// List of all assets
   List<dynamic> get values => [
         atheleteSplash,
-        children,
+        childrenPng,
+        childrenSvg,
         iconAspiration,
         iconCurrent,
         iconDaily,
@@ -299,7 +334,17 @@ class $AssetsImagesGen {
         sportsCricket,
         sportsGynastic,
         sportsNetball,
-        uploadedImage
+        sportsRuby,
+        sportsRubyLeague,
+        sportsRunning,
+        sportsSoccer,
+        sportsSwimming,
+        sportsTennis,
+        sportsTouchball,
+        teenPng,
+        teenSvg,
+        uploadedImage,
+        young
       ];
 }
 
