@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_template/ui/splash_screen/splash_screen.dart';
+import 'package:flutter_template/ui/scheduling_self_analysis/daily_reflection.dart';
+import 'package:flutter_template/ui/scheduling_self_analysis/my_current_mindset.dart';
+import 'package:flutter_template/ui/scheduling_self_analysis/self_analyisis_notes.dart';
 
 import 'package:responsive_framework/responsive_framework.dart';
 
@@ -81,7 +83,7 @@ class MyApp extends StatelessWidget {
         //   create: (_) => MapsProvider(),
         //   child: const HomeScreen(),
         // ),
-       home: const SplashScreen(),
+       home:  SelfAnalysisNotes(),
 
       );
   }
