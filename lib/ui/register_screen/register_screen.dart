@@ -271,14 +271,16 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   height: context.heightPx * 16,
                 ),
                 GestureDetector(
-                  onTap: () =>
-                      Provider.of<LoginProvider>(context, listen: false)
-                          .signUpToApp(
-                              context,
-                              txtEmailController.text.toString(),
-                              txtUserPwdController.text.toString(),
-                              txtFirstNameController.text.toString(),
-                              txtLastNameController.text.toString()),
+                  onTap: () {
+                    Provider.of<LoginProvider>(context, listen: false)
+                        .signUpToApp(
+                        context,
+                        txtEmailController.text.toString(),
+                        txtUserPwdController.text.toString(),
+                        txtFirstNameController.text.toString(),
+                        txtLastNameController.text.toString());
+                  },
+
                   // Navigator.push(
                   //     context,
                   //     MaterialPageRoute(

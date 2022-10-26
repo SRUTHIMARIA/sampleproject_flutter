@@ -10,7 +10,7 @@ class ToastAtTop {
     Fluttertoast.showToast(
       msg: message,
       toastLength: Toast.LENGTH_SHORT,
-      gravity: ToastGravity.TOP,
+      gravity: ToastGravity.BOTTOM,
       timeInSecForIosWeb: 1,
       backgroundColor:  AppColors.themeColor,
       textColor: AppColors.whiteColor,

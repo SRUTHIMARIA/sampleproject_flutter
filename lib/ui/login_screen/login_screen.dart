@@ -156,10 +156,12 @@ class _LoginScreenState extends State<LoginScreen> {
             SizedBox(height:context.heightPx *16),
 
             GestureDetector(
-              onTap: () =>
-                     Provider.of<LoginProvider>(context, listen: false)
+              onTap: () {
+                Provider.of<LoginProvider>(context, listen: false)
                     .signInToApp(context, txtUserNameController.text.toString(),
-                  txtUserPwdController.text.toString(),),
+                  txtUserPwdController.text.toString(),);
+              },
+
 
 
               child: Container(

@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_template/models/register_model/register_user.dart';
 import 'package:flutter_template/models/register_model/success_model.dart';
@@ -16,14 +17,15 @@ import '../ui/login_screen/login_screen.dart';
 
 class LoginProvider extends ChangeNotifier{
 
-  String email = '';
-  String pwd = '';
+  var email = '';
+  var password = '';
   var token = '';
   var isLoggedIn = false;
   var isLoading = false;
   bool error = false;
   String errorMessage = '';
   final logger = Logger();
+  int key=0;
 
   SuccessUser _successUser = SuccessUser();
 
@@ -59,12 +61,17 @@ class LoginProvider extends ChangeNotifier{
     debugPrint('token************$token');
     token = accessToken;
   }
-
-  void signIn(String emailTxt, String pwdTxt){
-    email = emailTxt;
-    pwd = pwdTxt;
-    notifyListeners();
+  void setKey(int code){
+    key = code;
   }
+
+  //
+  // void signIn(String emailTxt, String pwdTxt){
+  //   email = emailTxt;
+  //   password = pwdTxt;
+  //   notifyListeners();
+  // }
+  //
 
 
   Future signUpToApp(
@@ -86,12 +93,12 @@ class LoginProvider extends ChangeNotifier{
       client.register(registerUser).then((it) async {
         setToken(it.token!);
         SharedPreferences sharedPreferences = await _prefs;
-        sharedPreferences.setBool('isLoggedIn', true);
+        sharedPreferences.setBool('isSignUp', true);
         sharedPreferences.setString('token', it.token!);
         debugPrint('***********************$it');
         setIsLoading(false);
 
-        const ToastAtTop().showToast(loggedin);
+        const ToastAtTop().showToast(signInSuccess);
         const Routes().replace(context, RegisterActivationLink());
         // context.router.replaceAll([
         //   const Home(),
@@ -122,9 +129,13 @@ class LoginProvider extends ChangeNotifier{
       setError(false);
       final client =
       ApiClient(Dio(BaseOptions(contentType: 'application/json')));
+      String? firebaseToken = await FirebaseMessaging.instance.getToken();
+     debugPrint("FCM Registration Token: " + token);
+
       LoginUser loginUser = LoginUser(
         email: email,
         password: password,
+        device_token: firebaseToken,
       );
       client.loginPage(loginUser).then((it) async {
         setToken(it.token!);
