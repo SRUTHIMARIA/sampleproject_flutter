@@ -1,5 +1,5 @@
 import 'package:flutter_template/providers/drawer_provider.dart';
-import 'package:flutter_template/providers/login_provider.dart';
+import 'package:flutter_template/providers/login/login_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:provider/single_child_widget.dart';
 

@@ -4,8 +4,8 @@ import 'dart:developer';
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter_template/providers/login/login_provider.dart';
 
-import '../providers/login_provider.dart';
 
 class ApiHelper {
   String url;

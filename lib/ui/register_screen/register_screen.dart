@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_template/gen/assets.gen.dart';
-import 'package:flutter_template/providers/login_provider.dart';
+import 'package:flutter_template/providers/login/login_provider.dart';
 import 'package:flutter_template/ui/login_screen/login_screen.dart';
-import 'package:flutter_template/ui/register_screen/register_activation_link.dart';
 import 'package:flutter_template/utils/constants/fontdata.dart';
 import 'package:flutter_template/utils/constants/strings.dart';
 import 'package:flutter_template/utils/extensions/context_extensions.dart';

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_template/gen/assets.gen.dart';
-import 'package:flutter_template/providers/login_provider.dart';
+import 'package:flutter_template/providers/login/login_provider.dart';
 import 'package:flutter_template/ui/register_screen/register_screen.dart';
 import 'package:flutter_template/utils/constants/fontdata.dart';
 import 'package:flutter_template/utils/constants/strings.dart';
@@ -21,6 +21,7 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   var txtUserNameController = TextEditingController();
   var txtUserPwdController = TextEditingController();
+  String? token;
 
   final List<Color> _colors = [
     AppColors.gradientColorSplash,
@@ -156,10 +157,10 @@ class _LoginScreenState extends State<LoginScreen> {
             SizedBox(height:context.heightPx *16),
 
             GestureDetector(
-              onTap: () {
-                Provider.of<LoginProvider>(context, listen: false)
+              onTap: () async{
+             await Provider.of<LoginProvider>(context, listen: false)
                     .signInToApp(context, txtUserNameController.text.toString(),
-                  txtUserPwdController.text.toString(),);
+                  txtUserPwdController.text.toString(),token.toString());
               },
 
 

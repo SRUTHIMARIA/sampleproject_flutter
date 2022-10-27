@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_template/models/login_model/login_user_model.dart';
 import 'package:flutter_template/models/register_model/register_user.dart';
 import 'package:flutter_template/models/register_model/success_model.dart';
 import 'package:flutter_template/network/api_client.dart';
@@ -12,8 +13,7 @@ import 'package:flutter_template/widgets/common/custom_toast.dart';
 import 'package:logger/logger.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../models/login_model/login_user_model.dart';
-import '../ui/login_screen/login_screen.dart';
+
 
 class LoginProvider extends ChangeNotifier{
 
@@ -120,7 +120,7 @@ class LoginProvider extends ChangeNotifier{
     }
   }
   Future signInToApp(
-      BuildContext context, String email, String password) async {
+      BuildContext context, String email, String password,String firebaseToken) async {
     if (email.trim().isEmpty || password.trim().isEmpty) {
       const ToastAtTop().showToast(errorMessage5);
       setError(true);

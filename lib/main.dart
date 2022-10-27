@@ -10,7 +10,8 @@ import 'package:responsive_framework/responsive_framework.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-   Firebase.initializeApp();
+  await Firebase.initializeApp();
+
   runApp(
     MultiProvider(
       providers: providers,
