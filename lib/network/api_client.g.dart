@@ -21,10 +21,14 @@ class _ApiClient implements ApiClient {
   String? baseUrl;
 
   @override
-  Future<SuccessUser> register(registerUser) async {
+  Future<SuccessUser> register(
+    acceptData,
+    registerUser,
+  ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{};
+    final _headers = <String, dynamic>{r'Accept': acceptData};
+    _headers.removeWhere((k, v) => v == null);
     final _data = <String, dynamic>{};
     _data.addAll(registerUser.toJson());
     final _result = await _dio
@@ -69,14 +73,14 @@ class _ApiClient implements ApiClient {
   }
 
   @override
-  Future<SuccessUser> requestOtp(forgotPasswordModel) async {
+  Future<SuccessModel> requestOtp(forgotPasswordModel) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(forgotPasswordModel.toJson());
     final _result = await _dio
-        .fetch<Map<String, dynamic>>(_setStreamType<SuccessUser>(Options(
+        .fetch<Map<String, dynamic>>(_setStreamType<SuccessModel>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
@@ -88,19 +92,19 @@ class _ApiClient implements ApiClient {
               data: _data,
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = SuccessUser.fromJson(_result.data!);
+    final value = SuccessModel.fromJson(_result.data!);
     return value;
   }
 
   @override
-  Future<SuccessUser> verifyOtp(otpModel) async {
+  Future<SuccessModel> verifyOtp(otpModel) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(otpModel.toJson());
     final _result = await _dio
-        .fetch<Map<String, dynamic>>(_setStreamType<SuccessUser>(Options(
+        .fetch<Map<String, dynamic>>(_setStreamType<SuccessModel>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
@@ -112,19 +116,19 @@ class _ApiClient implements ApiClient {
               data: _data,
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = SuccessUser.fromJson(_result.data!);
+    final value = SuccessModel.fromJson(_result.data!);
     return value;
   }
 
   @override
-  Future<SuccessUser> resetPassword(newPasswordModel) async {
+  Future<SuccessModel> resetPassword(newPasswordModel) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(newPasswordModel.toJson());
     final _result = await _dio
-        .fetch<Map<String, dynamic>>(_setStreamType<SuccessUser>(Options(
+        .fetch<Map<String, dynamic>>(_setStreamType<SuccessModel>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
@@ -136,7 +140,7 @@ class _ApiClient implements ApiClient {
               data: _data,
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = SuccessUser.fromJson(_result.data!);
+    final value = SuccessModel.fromJson(_result.data!);
     return value;
   }
 
