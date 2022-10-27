@@ -14,6 +14,8 @@ class SuccessUser {
         message = json['message'],
         token = json['token'];
 
+
+
   Map<String, dynamic> toJson() => {
     'success' : success,
     'message' : message,

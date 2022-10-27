@@ -1,5 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_template/providers/authentication_provider.dart';
 import 'package:flutter_template/ui/login_screen/login_screen.dart';
 import 'package:flutter_template/ui/scheduling_self_analysis/self_analyisis_notes.dart';
 import 'package:flutter_template/providers/providers.dart';
@@ -8,13 +10,22 @@ import 'package:provider/provider.dart';
 
 import 'package:responsive_framework/responsive_framework.dart';
 
-Future<void> main() async {
+
+// Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+//   print(message.from);
+  //await Firebase.initializeApp();
+// }
+
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+   Firebase.initializeApp();
+  // FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+  await AuthenticationProvider.retrieveAuthUser();
+
 
   runApp(
     MultiProvider(
-      providers: providers,
+      providers: ProviderRegister.providers,
       child: MyApp(),
     ),
   );

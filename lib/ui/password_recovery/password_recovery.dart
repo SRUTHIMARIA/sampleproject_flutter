@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_template/gen/assets.gen.dart';
+import 'package:flutter_template/providers/forgotpassword/forgotpasswd_provider.dart';
 import 'package:flutter_template/ui/password_recovery/authentication_code_screen.dart';
 import 'package:flutter_template/ui/register_screen/register_screen.dart';
 import 'package:flutter_template/utils/constants/fontdata.dart';
 import 'package:flutter_template/utils/constants/strings.dart';
 import 'package:flutter_template/utils/extensions/context_extensions.dart';
 import 'package:flutter_template/utils/static/static_padding.dart';
+import 'package:provider/provider.dart';
 
+import '../../providers/login/login_provider.dart';
 import '../../utils/theme/app_colors.dart';
 
 class PasswordRecovery extends StatefulWidget {
@@ -18,6 +21,8 @@ class PasswordRecovery extends StatefulWidget {
 }
 
 class _PasswordRecoveryState extends State<PasswordRecovery> {
+  final emailController = TextEditingController();
+
   final List<Color> _colors = [
     AppColors.gradientColorSplash,
     AppColors.gradientColor2Splash
@@ -82,6 +87,7 @@ class _PasswordRecoveryState extends State<PasswordRecovery> {
                 borderRadius: BorderRadius.circular(6.0),
               ),
               child: TextFormField(
+                controller: emailController,
                 style: FontData().montFont500TextStyle,
 
                 decoration: InputDecoration(
@@ -109,9 +115,12 @@ class _PasswordRecoveryState extends State<PasswordRecovery> {
             SizedBox(height:context.heightPx *27),
 
             GestureDetector(
-              onTap: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context)=>AuthenticationCodeScreen()));
-              },
+              onTap: () =>
+              // onTap: () {
+              //
+                    handlePressed(context),
+              //   // Navigator.push(context, MaterialPageRoute(builder: (context)=>AuthenticationCodeScreen()));
+              // },
 
               child: Container(
                 height: context.heightPx * 42,
@@ -139,5 +148,9 @@ class _PasswordRecoveryState extends State<PasswordRecovery> {
         ),
       ),
     );
+  }
+  void handlePressed(BuildContext context) {
+    Provider.of<ForgotPasswordProvider>(context, listen: false).forgotPassword(context, emailController.text);
+
   }
 }
