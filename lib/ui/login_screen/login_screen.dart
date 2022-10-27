@@ -1,7 +1,9 @@
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_template/gen/assets.gen.dart';
 import 'package:flutter_template/providers/login/login_provider.dart';
+import 'package:flutter_template/ui/password_recovery/password_recovery.dart';
 import 'package:flutter_template/ui/register_screen/register_screen.dart';
 import 'package:flutter_template/utils/constants/fontdata.dart';
 import 'package:flutter_template/utils/constants/strings.dart';
@@ -23,6 +25,26 @@ class _LoginScreenState extends State<LoginScreen> {
   var txtUserPwdController = TextEditingController();
   String? token;
 
+  @override
+  void initState() {
+    // Provider.of<LoginProvider>(context, listen: false).setLoginError(false);
+   getDeviceToken();
+    super.initState();
+
+  }
+  getDeviceToken()async{
+    token = await FirebaseMessaging.instance.getToken();
+    print('DEVICE TOKEN IS ------> $token!');
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    // userEmailemailController.dispose();
+    // passwordController.dispose();
+  }
+
+
   final List<Color> _colors = [
     AppColors.gradientColorSplash,
     AppColors.gradientColor2Splash
@@ -31,7 +53,10 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return Consumer<LoginProvider>(
+        builder: (context,provider,child) {
+
+      return Scaffold(
       resizeToAvoidBottomInset: false,
       body: Container(
         height: double.infinity,
@@ -83,6 +108,14 @@ class _LoginScreenState extends State<LoginScreen> {
               margin: EdgeInsets.symmetric(horizontal: 56),
               decoration: BoxDecoration(
                 color: AppColors.textFieldBgColor,
+                border: Border.all(
+                  // color: CustomColors().white,
+                  color: Provider.of<LoginProvider>(context, listen: true).loginError
+                      ? AppColors.redColor
+                      :  AppColors.themeColor,
+                  width: 2,
+                ),
+
                 borderRadius: BorderRadius.circular(6.0),
               ),
               child: TextFormField(
@@ -116,11 +149,26 @@ class _LoginScreenState extends State<LoginScreen> {
               margin: EdgeInsets.symmetric(horizontal: 56),
               decoration: BoxDecoration(
                 color: AppColors.textFieldBgColor,
+                border: Border.all(
+                  // color: CustomColors().white,
+                  color: Provider.of<LoginProvider>(context, listen: true).loginError
+                      ? AppColors.redColor
+                      :  AppColors.whiteColor,
+                  width: 2,
+                ),
                 borderRadius: BorderRadius.circular(6.0),
               ),
               child: TextFormField(
                 controller: txtUserPwdController,
                 style: FontData().montFont500TextStyle,
+                onChanged: (val)
+                {
+                  setState(()  {
+                    provider.setLoginError(false);
+                  });
+
+                },
+
 
                 decoration: InputDecoration(
                   focusColor: Colors.white,
@@ -136,6 +184,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
                   hintText: password,
 
+
                   //make hint text
                   hintStyle:  FontData().montFont500TextStyle,
 
@@ -145,23 +194,30 @@ class _LoginScreenState extends State<LoginScreen> {
             SizedBox(height:context.heightPx *16),
 
 
-            Align(
-              alignment: Alignment.centerRight,
-              child: Padding(
-                padding: StaticPadding.paddingH60(context),
-                child: Text(
-                  forgotPassword,
-                  style: const FontData().montFont50012TextStyle,
-                ),),
+            InkWell(
+              onTap: (){
+                Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>PasswordRecovery()));
+              },
+              child: Align(
+                alignment: Alignment.centerRight,
+                child: Padding(
+                  padding: StaticPadding.paddingH60(context),
+                  child: Text(
+                    forgotPassword,
+                    style: const FontData().montFont50012TextStyle,
+                  ),),
+              ),
             ),
             SizedBox(height:context.heightPx *16),
 
             GestureDetector(
-              onTap: () async{
-             await Provider.of<LoginProvider>(context, listen: false)
-                    .signInToApp(context, txtUserNameController.text.toString(),
-                  txtUserPwdController.text.toString(),token.toString());
-              },
+              onTap: () =>
+                Provider.of<LoginProvider>(context, listen: false)
+                    .signInToApp(context, txtUserPwdController.text.toString(),
+                  txtUserPwdController.text.toString(),
+                 token ??'',
+                ),
+              // },
 
 
 
@@ -209,6 +265,7 @@ class _LoginScreenState extends State<LoginScreen> {
           ],
         ),
       ),
-    );
+    ); },);
+        }
   }
-}
+

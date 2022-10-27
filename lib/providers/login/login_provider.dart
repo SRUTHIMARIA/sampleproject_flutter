@@ -1,17 +1,22 @@
+
+
 import 'package:dio/dio.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_template/models/login_model/login_user_model.dart';
 import 'package:flutter_template/models/register_model/register_user.dart';
-import 'package:flutter_template/models/register_model/success_model.dart';
+import 'package:flutter_template/models/register_model/success_user_model.dart';
 import 'package:flutter_template/network/api_client.dart';
 import 'package:flutter_template/services/navigation/routes.dart';
 import 'package:flutter_template/ui/homepage/homepage.dart';
-import 'package:flutter_template/ui/register_screen/register_activation_link.dart';
 import 'package:flutter_template/utils/constants/strings.dart';
 import 'package:flutter_template/widgets/common/custom_toast.dart';
 import 'package:logger/logger.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import '../../local_data/helpers/secure_storage_helper.dart';
+import '../../utils/static/keys.dart';
 
 
 
@@ -20,7 +25,9 @@ class LoginProvider extends ChangeNotifier{
   var email = '';
   var password = '';
   var token = '';
+  var username = '';
   var isLoggedIn = false;
+  bool loginError = false;
   var isLoading = false;
   bool error = false;
   String errorMessage = '';
@@ -46,6 +53,12 @@ class LoginProvider extends ChangeNotifier{
     error = setError;
     notifyListeners();
   }
+
+  void setLoginError(bool setError) {
+    loginError = setError;
+    notifyListeners();
+  }
+
 
   void setEmail(String mail) {
     email = mail;
@@ -73,92 +86,50 @@ class LoginProvider extends ChangeNotifier{
   // }
   //
 
-
-  Future signUpToApp(
-      BuildContext context, String email, String password,String first_name,String last_name) async {
-    if (email.trim().isEmpty || password.trim().isEmpty) {
-      const ToastAtTop().showToast(errorMessage5);
-      setError(true);
-    } else {
-      setIsLoading(true);
-      setError(false);
-      final client =
-      ApiClient(Dio(BaseOptions(contentType: 'application/json')));
-      RegisterUser registerUser = RegisterUser(
-        email: email,
-        password: password,
-        first_name: first_name,
-        last_name: last_name,
-      );
-      client.register(registerUser).then((it) async {
-        setToken(it.token!);
-        SharedPreferences sharedPreferences = await _prefs;
-        sharedPreferences.setBool('isSignUp', true);
-        sharedPreferences.setString('token', it.token!);
-        debugPrint('***********************$it');
-        setIsLoading(false);
-
-        const ToastAtTop().showToast(signInSuccess);
-        const Routes().replace(context, RegisterActivationLink());
-        // context.router.replaceAll([
-        //   const Home(),
-        // ]);
-      }).catchError((Object obj) {
-        debugPrint('!!!!!!!!!!!!!$obj');
-        setIsLoading(false);
-        setError(true);
-        const ToastAtTop().showToast(errorMessage3);
-        switch (obj.runtimeType) {
-          case DioError:
-            final res = (obj as DioError).response;
-            debugPrint('Got error : ${res?.statusCode} -> ${res?.statusMessage}');
-            break;
-          default:
-            break;
-        }
-      });
-    }
-  }
   Future signInToApp(
-      BuildContext context, String email, String password,String firebaseToken) async {
+      BuildContext context, String email, String password,String device_token) async {
+    print('***********************Login');
     if (email.trim().isEmpty || password.trim().isEmpty) {
       const ToastAtTop().showToast(errorMessage5);
-      setError(true);
+      setLoginError(true);
     } else {
       setIsLoading(true);
-      setError(false);
+      setLoginError(false);
       final client =
       ApiClient(Dio(BaseOptions(contentType: 'application/json')));
-      String? firebaseToken = await FirebaseMessaging.instance.getToken();
-     debugPrint("FCM Registration Token: " + token);
-
       LoginUser loginUser = LoginUser(
         email: email,
         password: password,
-        device_token: firebaseToken,
+       device_token: device_token,
       );
       client.loginPage(loginUser).then((it) async {
-        setToken(it.token!);
+
+        setIsLoading(false);
+       setToken(it.token!);
+       // await SecureStorageHelper.saveString(key: StaticKeys.tokenLocation, dataToStore: it.token!);
         SharedPreferences sharedPreferences = await _prefs;
         sharedPreferences.setBool('isLoggedIn', true);
         sharedPreferences.setString('token', it.token!);
-        debugPrint('***********************$it');
+        print('***********************${it.token}');
         setIsLoading(false);
+       Provider.of<LoginProvider>(context, listen: false).saveUserDetails(authToken: token, userName: username);
 
         const ToastAtTop().showToast(loggedin);
-        const Routes().replace(context,  HomePage());
+        const Routes().replace(context,HomePage());
         // context.router.replaceAll([
         //   const Home(),
         // ]);
       }).catchError((Object obj) {
-        debugPrint('!!!!!!!!!!!!!$obj');
+        print('!!!!!!!!!!!!!$obj');
         setIsLoading(false);
-        setError(true);
-        const ToastAtTop().showToast(errorMessage3);
+        setLoginError(true);
+        //setError(true);
+        // const ToastAtTop().showToast(errorMessage3);
         switch (obj.runtimeType) {
           case DioError:
             final res = (obj as DioError).response;
-            debugPrint('Got error : ${res?.statusCode} -> ${res?.statusMessage}');
+            print('Got error : ${res?.statusCode} -> ${res?.data}');
+            const ToastAtTop().showToast('${res?.data['message']}');
             break;
           default:
             break;
@@ -166,4 +137,91 @@ class LoginProvider extends ChangeNotifier{
       });
     }
   }
+
+  Future<void> saveUserDetails({required String authToken, required String userName}) async {
+    await Future.wait([
+      SecureStorageHelper.saveString(key: StaticKeys.tokenLocation, dataToStore: authToken),
+      SecureStorageHelper.saveString(key: StaticKeys.userNameLocation, dataToStore: userName),
+    ]);
+    token = authToken;
+    username = userName;
+    notifyListeners();
+  }
+
+  // Future getUserDetailData() async {
+  //   final client =
+  //   ApiClient(Dio(BaseOptions(contentType: 'application/json',)));
+  //
+  //
+  //   client.getUserDetails('Bearer $token','application/json').then((it) async {
+  //
+  //     await SecureStorageHelper.saveString(key: StaticKeys.userNameLocation, dataToStore: it.data?.firstName ??'');
+  //     await SecureStorageHelper.saveString(key: StaticKeys.userEmailLocation, dataToStore: it.data?.email ??'');
+  //
+  //     print('My email---------->>>>>${it.data?.firstName}');
+  //
+  //   }).catchError((Object obj) {
+  //     const ToastAtTop().showToast('Something went Wrong');
+  //     switch (obj.runtimeType) {
+  //       case DioError:
+  //         final res = (obj as DioError).response;
+  //         print('Got error : ${res?.statusCode} -> ${res?.statusMessage}');
+  //         break;
+  //       default:
+  //         break;
+  //     }
+  //   });
+  //
+  // }
+
+
+
+//
+  // Future signInToApp(
+  //     BuildContext context, String email, String password,String firebaseToken) async {
+  //   if (email.trim().isEmpty || password.trim().isEmpty) {
+  //     const ToastAtTop().showToast(errorMessage5);
+  //     setError(true);
+  //   } else {
+  //     setIsLoading(true);
+  //     setError(false);
+  //     final client =
+  //     ApiClient(Dio(BaseOptions(contentType: 'application/json')));
+  //     String? firebaseToken = await FirebaseMessaging.instance.getToken();
+  //    debugPrint("FCM Registration Token: " + token);
+  //
+  //     LoginUser loginUser = LoginUser(
+  //       email: email,
+  //       password: password,
+  //       device_token: firebaseToken,
+  //     );
+  //     client.loginPage(loginUser).then((it) async {
+  //       setToken(it.token!);
+  //       SharedPreferences sharedPreferences = await _prefs;
+  //       sharedPreferences.setBool('isLoggedIn', true);
+  //       sharedPreferences.setString('token', it.token!);
+  //       debugPrint('***********************$it');
+  //       setIsLoading(false);
+  //
+  //       const ToastAtTop().showToast(loggedin);
+  //       const Routes().replace(context,  HomePage());
+  //       // context.router.replaceAll([
+  //       //   const Home(),
+  //       // ]);
+  //     }).catchError((Object obj) {
+  //       debugPrint('!!!!!!!!!!!!!$obj');
+  //       setIsLoading(false);
+  //       setError(true);
+  //       const ToastAtTop().showToast(errorMessage3);
+  //       switch (obj.runtimeType) {
+  //         case DioError:
+  //           final res = (obj as DioError).response;
+  //           debugPrint('Got error : ${res?.statusCode} -> ${res?.statusMessage}');
+  //           break;
+  //         default:
+  //           break;
+  //       }
+  //     });
+  //   }
+  // }
 }
