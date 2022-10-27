@@ -19,6 +19,8 @@ class AuthenticationCodeScreen extends StatefulWidget {
 }
 
 class _AuthenticationCodeScreenState extends State<AuthenticationCodeScreen> {
+  final otpController = TextEditingController();
+
   final List<Color> _colors = [
     AppColors.gradientColorSplash,
     AppColors.gradientColor2Splash

@@ -1,5 +1,4 @@
-// import '../services/navigation/router.gr.dart';
-//
+// import 'package:flutter_template/services/navigation/router.dart';
 // class Globals {
 //   static final appRouter = AppRouter();
 // }

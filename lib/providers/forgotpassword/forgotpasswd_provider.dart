@@ -1,21 +1,21 @@
 import 'package:dio/dio.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_template/models/login_model/login_user_model.dart';
-import 'package:flutter_template/models/register_model/register_user.dart';
-import 'package:flutter_template/models/register_model/success_model.dart';
+import 'package:flutter_template/models/forgot_password_model/forgotpasswd_model.dart';
+
 import 'package:flutter_template/network/api_client.dart';
 import 'package:flutter_template/services/navigation/routes.dart';
-import 'package:flutter_template/ui/homepage/homepage.dart';
-import 'package:flutter_template/ui/register_screen/register_activation_link.dart';
+
 import 'package:flutter_template/utils/constants/strings.dart';
 import 'package:flutter_template/widgets/common/custom_toast.dart';
 import 'package:logger/logger.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../ui/password_recovery/authentication_code_screen.dart';
+import 'package:flutter_template/models/common_model/success_model.dart';
 
 
-class LoginProvider extends ChangeNotifier{
+
+class ForgotPasswordProvider extends ChangeNotifier{
 
   var email = '';
   var token = '';
@@ -26,7 +26,6 @@ class LoginProvider extends ChangeNotifier{
   final logger = Logger();
   int key=0;
 
-  SuccessUser _successUser = SuccessUser();
 
 
   final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
@@ -72,45 +71,31 @@ class LoginProvider extends ChangeNotifier{
   // }
   //
 
-
-  Future signUpToApp(
-      BuildContext context, String email, String password,String first_name,String last_name) async {
-    if (email.trim().isEmpty || password.trim().isEmpty) {
-      const ToastAtTop().showToast(errorMessage5);
-      setError(true);
+  Future forgotPassword(BuildContext context, String email) async {
+    if (email.trim().isEmpty) {
+      const ToastAtTop().showToast(errorMessage6);
     } else {
       setIsLoading(true);
-      setError(false);
-      final client =
-      ApiClient(Dio(BaseOptions(contentType: 'application/json')));
-      RegisterUser registerUser = RegisterUser(
-        email: email,
-        password: password,
-        first_name: first_name,
-        last_name: last_name,
+      final client = ApiClient(
+        Dio(BaseOptions(contentType: 'application/json')),
       );
-      client.register(registerUser).then((it) async {
-        setToken(it.token!);
-        SharedPreferences sharedPreferences = await _prefs;
-        sharedPreferences.setBool('isSignUp', true);
-        sharedPreferences.setString('token', it.token!);
-        debugPrint('***********************$it');
+      ForgotPasswordModel forgotPasswordModel = ForgotPasswordModel(email: email);
+      client.requestOtp(forgotPasswordModel).then((it) async {
+        var yy = it.key;
+        print('%%%%%%%%%%%%%%%keyy ${it.key}');
+        setKey(it.key!);
         setIsLoading(false);
-
-        const ToastAtTop().showToast(signInSuccess);
-        const Routes().replace(context, RegisterActivationLink());
-        // context.router.replaceAll([
-        //   const Home(),
-        // ]);
+        setEmail(email);
+        const ToastAtTop().showToast(success);
+        // const Routes().goToNext(context, const OTPScreen());
+        //const Routes().goToNext(context, const TestScreen());
+        const Routes().pushReplacement(context, const AuthenticationCodeScreen());
       }).catchError((Object obj) {
-        debugPrint('!!!!!!!!!!!!!$obj');
+        const ToastAtTop().showToast(errorMessage4);
         setIsLoading(false);
-        setError(true);
-        const ToastAtTop().showToast(errorMessage3);
         switch (obj.runtimeType) {
           case DioError:
             final res = (obj as DioError).response;
-            debugPrint('Got error : ${res?.statusCode} -> ${res?.statusMessage}');
             break;
           default:
             break;
@@ -118,51 +103,37 @@ class LoginProvider extends ChangeNotifier{
       });
     }
   }
-  Future signInToApp(
-      BuildContext context, String email, String password,String firebaseToken) async {
-    if (email.trim().isEmpty || password.trim().isEmpty) {
-      const ToastAtTop().showToast(errorMessage5);
-      setError(true);
-    } else {
-      setIsLoading(true);
-      setError(false);
-      final client =
-      ApiClient(Dio(BaseOptions(contentType: 'application/json')));
-      String? firebaseToken = await FirebaseMessaging.instance.getToken();
-      debugPrint("FCM Registration Token: " + token);
 
-      LoginUser loginUser = LoginUser(
-        email: email,
-        password: password,
-        device_token: firebaseToken,
-      );
-      client.loginPage(loginUser).then((it) async {
-        setToken(it.token!);
-        SharedPreferences sharedPreferences = await _prefs;
-        sharedPreferences.setBool('isLoggedIn', true);
-        sharedPreferences.setString('token', it.token!);
-        debugPrint('***********************$it');
-        setIsLoading(false);
 
-        const ToastAtTop().showToast(loggedin);
-        const Routes().replace(context,  HomePage());
-        // context.router.replaceAll([
-        //   const Home(),
-        // ]);
-      }).catchError((Object obj) {
-        debugPrint('!!!!!!!!!!!!!$obj');
-        setIsLoading(false);
-        setError(true);
-        const ToastAtTop().showToast(errorMessage3);
-        switch (obj.runtimeType) {
-          case DioError:
-            final res = (obj as DioError).response;
-            debugPrint('Got error : ${res?.statusCode} -> ${res?.statusMessage}');
-            break;
-          default:
-            break;
-        }
-      });
-    }
-  }
+  // Future forgotPassword(BuildContext context, String email) async {
+  //   if (email.trim().isEmpty) {
+  //     const ToastAtTop().showToast(errorMessage6);
+  //   } else {
+  //     setIsLoading(true);
+  //     final client = ApiClient(
+  //       Dio(BaseOptions(contentType: 'application/json')),
+  //     );
+  //     ForgotPasswordModel forgotPasswordModel = ForgotPasswordModel(email: email);
+  //     client.requestOtp(forgotPasswordModel).then((it) async {
+  //
+  //       var yy = it.key;
+  //       debugPrint('%%%%%%%%%%%%%%%keyy ${it.key}');
+  //       setKey(it.key!);
+  //       setIsLoading(false);
+  //       setEmail(email);
+  //       const ToastAtTop().showToast(success);
+  //       const Routes().pushReplacement(context, const AuthenticationCodeScreen());
+  //     }).catchError((Object obj) {
+  //       const ToastAtTop().showToast(errorMessage4);
+  //       setIsLoading(false);
+  //       switch (obj.runtimeType) {
+  //         case DioError:
+  //           final res = (obj as DioError).response;
+  //           break;
+  //         default:
+  //           break;
+  //       }
+  //     });
+  //   }
+  // }
 }
