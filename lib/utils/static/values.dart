@@ -1,4 +1,5 @@
 class StaticValues {
+  static String commonErrorMessage='Something went wrong.';
   static int fullNameCharLimit = 100;
   static int emailCharLimit = 70;
   static int passwordCharLimit = 20;

@@ -38,6 +38,8 @@ dependencies:
   fluttertoast: ^8.0.9
   firebase_messaging: ^14.0.0
   firebase_core: ^2.1.0
+  email_validator: ^2.1.16
+  ndialog: ^4.1.0
 
 
 dev_dependencies:

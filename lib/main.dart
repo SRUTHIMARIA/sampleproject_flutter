@@ -18,7 +18,7 @@ import 'package:responsive_framework/responsive_framework.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-   Firebase.initializeApp();
+  Firebase.initializeApp();
   // FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
   await AuthenticationProvider.retrieveAuthUser();
 
