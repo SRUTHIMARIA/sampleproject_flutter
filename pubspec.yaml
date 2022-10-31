@@ -30,6 +30,8 @@ dependencies:
   intl:
   flutter_time_picker_spinner: ^2.0.0
   date_picker_timeline: ^1.2.3
+  hive: ^2.0.5
+  hive_flutter:
 
 
 dev_dependencies:
@@ -42,6 +44,7 @@ dev_dependencies:
   auto_route_generator: ^4.0.0
   build_runner: ^2.2.0
   flutter_gen_runner:
+  hive_generator: ^1.1.2
 
 
 

@@ -10,12 +10,14 @@ import 'package:flutter_template/ui/profile/profile.dart';
 import 'package:flutter_template/ui/profile/profile_update.dart';
 import 'package:flutter_template/ui/settings/settings.dart';
 import 'package:flutter_template/ui/student_basic_profile/sports_type_screen.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:provider/provider.dart';
 
 import 'package:responsive_framework/responsive_framework.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+ await Hive.initFlutter();
   runApp(MyApp());
 }
 
