@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_template/utils/app_preference/app_preference.dart';
 import 'package:flutter_template/utils/static/static_string_keys.dart';
 
-import '../../models/common_model/athentication_response_model.dart';
+import '../../models/common_model/authentication_response_model.dart';
 
 
 
