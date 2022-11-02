@@ -44,7 +44,7 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   void initState() {
     super.initState();
-    userDataBox = Hive.box('peopleBox');
+    userDataBox = Hive.box('userDetailBox');
     // getDeviceToken();
     // createBox();
     // getData();
