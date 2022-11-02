@@ -5,7 +5,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:flutter_template/models/weekly_plan_model.dart';
 import 'package:flutter_template/providers/drawer_provider.dart';
 import 'package:flutter_template/ui/homepage/app_drawer.dart';
-import 'package:flutter_template/utils/constants/fontdata.dart';
+import 'package:flutter_template/utils/constants/font_data.dart';
 import 'package:flutter_template/utils/extensions/context_extensions.dart';
 import 'package:flutter_template/utils/theme/app_colors.dart';
 import 'package:provider/provider.dart';
@@ -13,7 +13,7 @@ import 'package:syncfusion_flutter_calendar/calendar.dart';
 import 'package:intl/intl.dart';
 
 import '../../gen/assets.gen.dart';
-import '../../utils/constants/fontdata.dart';
+import '../../utils/constants/font_data.dart';
 
 class HomePage extends StatefulWidget {
   @override

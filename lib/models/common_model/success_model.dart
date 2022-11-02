@@ -3,11 +3,11 @@ import 'package:json_annotation/json_annotation.dart';
 
 @JsonSerializable()
 class SuccessModel {
-  int? status;
-  String? message;
-  int? key;
+  int status;
+  String message;
+  int key;
 
-  SuccessModel({ this.status, this.message, this.key});
+  SuccessModel({ required this.status, required this.message, required this.key});
 
   SuccessModel.fromJson(Map<String, dynamic> json)
       : status = json['status'],

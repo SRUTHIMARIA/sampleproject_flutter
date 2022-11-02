@@ -3,22 +3,25 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_template/gen/assets.gen.dart';
-import 'package:flutter_template/models/common_model/athentication_response_model.dart';
+import 'package:flutter_template/models/common_model/authentication_response_model.dart';
 import 'package:flutter_template/models/common_model/success_model.dart';
 import 'package:flutter_template/models/login_model/login_user_model.dart';
+import 'package:flutter_template/models/register_model/success_user_model.dart';
+import 'package:flutter_template/models/user_detail/user_detail_model_for_hive.dart';
 import 'package:flutter_template/providers/authentication_provider.dart';
 import 'package:flutter_template/providers/login/login_provider.dart';
 import 'package:flutter_template/services/api/login_service/login_service.dart';
+import 'package:flutter_template/ui/homepage/homepage.dart';
 import 'package:flutter_template/ui/password_recovery/password_recovery.dart';
 import 'package:flutter_template/ui/register_screen/register_screen.dart';
-import 'package:flutter_template/utils/constants/fontdata.dart';
-import 'package:flutter_template/utils/constants/strings.dart';
+import 'package:flutter_template/utils/constants/font_data.dart';
 import 'package:flutter_template/utils/constants/strings.dart';
 import 'package:flutter_template/utils/extensions/context_extensions.dart';
 import 'package:flutter_template/utils/static/enums.dart';
 import 'package:flutter_template/utils/static/static_padding.dart';
 import 'package:flutter_template/widgets/alert_dialog/future_handling_alert.dart';
 import 'package:flutter_template/widgets/snackbar/text_snackbar.dart';
+import 'package:hive/hive.dart';
 import 'package:provider/provider.dart';
 
 import '../../utils/theme/app_colors.dart';
@@ -33,14 +36,42 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   var txtUserNameController = TextEditingController();
   var txtUserPwdController = TextEditingController();
-  //String? token;
-  Future<void> loginuser() async {
+  bool isLogin = false;
+
+  Box? userDataBox;
+  // String? token;
+  // //
+  @override
+  void initState() {
+    super.initState();
+    userDataBox = Hive.box('peopleBox');
+    // getDeviceToken();
+    // createBox();
+    // getData();
+  }
+
+
+  //
+  // void createBox() async {
+  //   userDataBox = await Hive.openBox('userdata');
+  //   getData();
+  // }
+  //
+  // void getData() async {
+  //   if (userDataBox!.get('email') != null) {
+  //     txtUserNameController.text = userDataBox!.get('email');
+  //   }
+  //   if (userDataBox!.get('password') != null) {
+  //     txtUserPwdController.text = userDataBox!.get('password');
+  //   }
+  // }
+
+  Future<void> loginUser() async {
     String email = txtUserNameController.text.trim();
     String password = txtUserPwdController.text.trim();
-    String validationMessage;
+    String? validationMessage;
     String statusMessage;
-    bool showValidationError=false;
-
+    bool showValidationError = false;
 
     AuthenticationProvider authProvider = context.read<AuthenticationProvider>();
 
@@ -65,71 +96,71 @@ class _LoginScreenState extends State<LoginScreen> {
       return;
     }
 
-
-
     ///validations successful. proceed to login
     LoginUser? loginUser;
-    SuccessModel? model;
+    SuccessUser? model;
     AuthenticationResponseModel? authenticationResponseModel;
     handleFutureWithAlert(
-      getErrorMessage: () => validationMessage,
+      getErrorMessage: () => validationMessage!,
       function: () async {
-        String? firebaseToken = await FirebaseMessaging.instance.getToken();
-        if (firebaseToken == null) {
-          validationMessage = 'Failed to get device id';
+        String? firebaseToken;
+        try{
+         firebaseToken=  await FirebaseMessaging.instance.getToken();
+         print(firebaseToken);
 
-          return ApiStatus.error;
         }
+        catch(e){
+          if (firebaseToken == null) {
+            validationMessage = 'Failed to get device id';
+
+            return ApiStatus.error;
+          }
+
+        }
+
         model = await LoginService.login(
-          LoginUser(email: email, password: password, device_token: firebaseToken),
+          LoginUser(email: email, password: password, device_token: firebaseToken!),
         );
+        print(model);
 
         // model = await LoginService.loginUser(
         //   LoginModel(email: email, password: password, firebaseToken: firebaseToken),
         // );
 
-        if (model!.message != null) return ApiStatus.success;
+        if (model!.success==200) return ApiStatus.success;
 
-        validationMessage = model!.status as String;
+        validationMessage = model!.message;
         setState(() => showValidationError = true);
 
         return ApiStatus.none;
       },
       onSuccess: () async {
-        if (model == null) return;
-        await authProvider.saveUserDetails(authToken: authenticationResponseModel!.payload.token, userName: authenticationResponseModel.payload.fullName);
+
+        await authProvider.saveUserDetails(
+            authToken: authenticationResponseModel!.payload.token,
+            userName: authenticationResponseModel.payload.fullName,);
+        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>HomePage()));
+
+
         AppSnackBar.showSnackBarWithText(context: context, text: 'Login Successful.');
+        print('Login');
       },
     );
   }
 
-  // @override
-  // void initState() {
-  //   // Provider.of<LoginProvider>(context, listen: false).setLoginError(false);
-  //   getDeviceToken();
-  //   super.initState();
-  // }
   //
   // getDeviceToken() async {
   //   token = await FirebaseMessaging.instance.getToken();
   //   print('DEVICE TOKEN IS ------> $token!');
   // }
 
-  @override
-  void dispose() {
-    super.dispose();
-    // userEmailemailController.dispose();
-    // passwordController.dispose();
-  }
-
-  final List<Color> _colors = [
-    AppColors.gradientColorSplash,
-    AppColors.gradientColor2Splash
-  ];
+  final List<Color> _colors = [AppColors.gradientColorSplash, AppColors.gradientColor2Splash];
   final List<double> _stops = [0.0, 0.7];
 
   @override
   Widget build(BuildContext context) {
+    final loginProvider = Provider.of<LoginProvider>(context);
+
     return Consumer<LoginProvider>(
       builder: (context, provider, child) {
         return Scaffold(
@@ -139,12 +170,6 @@ class _LoginScreenState extends State<LoginScreen> {
             width: double.infinity,
             decoration: BoxDecoration(
               color: AppColors.primaryColor.withOpacity(0.40),
-              // gradient: LinearGradient(
-              //   colors: _colors,
-              //   stops: _stops,
-              //
-              //
-              // ),
             ),
             child: Column(
               children: [
@@ -154,47 +179,44 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 Align(
                   alignment: Alignment.centerLeft,
-                  child: Padding(
-                      padding: StaticPadding.paddingH50(context),
-                      child: Container(
-                        margin: EdgeInsets.only(left: 12.0),
-                        child: Text(
-                          welcome,
-                          style: const FontData().montFont22TextStyle,
-                        ),
-                      )),
+                  child: Container(
+                    padding: StaticPadding.paddingH50(context),
+                    margin: const EdgeInsets.only(left: 12.0),
+                    child: Text(
+                      welcome,
+                      style: const FontData().montFont22TextStyle,
+                    ),
+                  ),
                 ),
                 Align(
                   alignment: Alignment.centerLeft,
-                  child: Padding(
+                  child: Container(
                     padding: StaticPadding.paddingH50(context),
-                    child: Container(
-                      margin: EdgeInsets.only(left: 12.0),
-                      child: Text(
-                        logintoContinue,
-                        style: const FontData().montFont14TextStyle,
-                      ),
+
+                    margin: const EdgeInsets.only(left: 12.0),
+                    child: Text(
+                      logintoContinue,
+                      style: const FontData().montFont14TextStyle,
                     ),
                   ),
                 ),
                 SizedBox(height: context.heightPx * 16),
                 Container(
-                  margin: EdgeInsets.symmetric(horizontal: 56),
+                  margin: const EdgeInsets.symmetric(horizontal: 56),
                   decoration: BoxDecoration(
                     color: AppColors.textFieldBgColor,
                     border: Border.all(
                       // color: CustomColors().white,
-                      color: Provider.of<LoginProvider>(context, listen: true)
-                              .loginError
+                      color: Provider.of<LoginProvider>(context, listen: true).loginError
                           ? AppColors.redColor
                           : AppColors.themeColor,
                       width: 2,
                     ),
-                    borderRadius: BorderRadius.circular(6.0),
+                    borderRadius: const BorderRadius.all(Radius.circular(6.0)),
                   ),
                   child: TextFormField(
                     controller: txtUserNameController,
-                    style: FontData().montFont500TextStyle,
+                    style: const FontData().montFont500TextStyle,
                     decoration: InputDecoration(
                       focusColor: Colors.white,
                       enabledBorder: InputBorder.none,
@@ -205,8 +227,8 @@ class _LoginScreenState extends State<LoginScreen> {
                         color: AppColors.textGrey,
                       ),
 
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(6.0),
+                      border: const OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(6.0)),
                       ),
 
                       fillColor: Colors.grey,
@@ -214,33 +236,27 @@ class _LoginScreenState extends State<LoginScreen> {
                       hintText: username,
 
                       //make hint text
-                      hintStyle: FontData().montFont500TextStyle,
+                      hintStyle: const FontData().montFont500TextStyle,
                     ),
                   ),
                 ),
                 SizedBox(height: context.heightPx * 20),
                 Container(
-                  margin: EdgeInsets.symmetric(horizontal: 56),
+                  margin: const EdgeInsets.symmetric(horizontal: 56),
                   decoration: BoxDecoration(
                     color: AppColors.textFieldBgColor,
                     border: Border.all(
                       // color: CustomColors().white,
-                      color: Provider.of<LoginProvider>(context, listen: true)
-                              .loginError
+                      color: Provider.of<LoginProvider>(context, listen: true).loginError
                           ? AppColors.redColor
                           : AppColors.whiteColor,
                       width: 2,
                     ),
-                    borderRadius: BorderRadius.circular(6.0),
+                    borderRadius: const BorderRadius.all(Radius.circular(6.0)),
                   ),
                   child: TextFormField(
                     controller: txtUserPwdController,
-                    style: FontData().montFont500TextStyle,
-                    onChanged: (val) {
-                      setState(() {
-                        provider.setLoginError(false);
-                      });
-                    },
+                    style: const FontData().montFont500TextStyle,
                     decoration: InputDecoration(
                       focusColor: Colors.white,
                       enabledBorder: InputBorder.none,
@@ -251,8 +267,8 @@ class _LoginScreenState extends State<LoginScreen> {
                         color: AppColors.textGrey,
                       ),
 
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(6.0),
+                      border: const OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(6.0)),
                       ),
 
                       fillColor: Colors.grey,
@@ -260,18 +276,14 @@ class _LoginScreenState extends State<LoginScreen> {
                       hintText: password,
 
                       //make hint text
-                      hintStyle: FontData().montFont500TextStyle,
+                      hintStyle: const FontData().montFont500TextStyle,
                     ),
                   ),
                 ),
                 SizedBox(height: context.heightPx * 16),
                 InkWell(
-                  onTap: () {
-                    Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => PasswordRecovery()));
-                  },
+                  onTap: () => Navigator.pushReplacement(
+                      context, MaterialPageRoute(builder: (context) => const PasswordRecovery())),
                   child: Align(
                     alignment: Alignment.centerRight,
                     child: Padding(
@@ -285,17 +297,22 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 SizedBox(height: context.heightPx * 16),
                 GestureDetector(
-                  onTap: () =>  loginuser(),
-                  //     Provider.of<LoginProvider>(context, listen: false)
-                  //         .signInToApp(
-                  //   context,
-                  //   txtUserPwdController.text.toString(),
-                  //   txtUserPwdController.text.toString(),
-                  //   token ?? '',
-                  // ),
-                  // },
+                  onTap: () =>
+                  // loginProvider.login(txtUserNameController.text.toString(), txtUserPwdController.text.toString(), token??''),
+                      loginUser(),
 
-                  child: Container(
+                   // loginUserDetails();
+
+                    //   Provider.of<LoginProvider>(context, listen: false)
+                    //       .signInToApp(
+                    // context,
+                    // txtUserPwdController.text.toString(),
+                    // txtUserPwdController.text.toString(),
+                    // token ?? ''),
+
+
+
+                  child: SizedBox(
                     height: context.heightPx * 42,
                     width: context.widthPx * 270,
                     child: Container(
@@ -323,17 +340,11 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                     SizedBox(width: context.widthPx * 4),
                     GestureDetector(
-                      onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => RegisterScreen()));
-                      },
-                      child: Container(
-                        child: Text(
-                          register,
-                          style: const FontData().montFont70012TextStyle,
-                        ),
+                      onTap: () =>
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => const RegisterScreen())),
+                      child: Text(
+                        register,
+                        style: const FontData().montFont70012TextStyle,
                       ),
                     ),
                   ],
@@ -344,6 +355,12 @@ class _LoginScreenState extends State<LoginScreen> {
         );
       },
     );
-
   }
+
+// void loginUserDetails() {
+//   if (isLogin) {
+//     userDataBox!.put('email', txtUserNameController.text);
+//     userDataBox!.put('password', txtUserPwdController.text);
+//   }
+// }
 }

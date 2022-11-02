@@ -2,15 +2,15 @@ import 'package:json_annotation/json_annotation.dart';
 
 @JsonSerializable()
 class LoginUser {
-  String? email;
-  String? password;
- String? device_token;
+  String email;
+  String password;
+ String device_token;
 
 
   LoginUser({
-    this.email,
-    this.password,
-   this.device_token,
+    required this.email,
+    required this.password,
+   required this.device_token,
 
   });
 

@@ -27,7 +27,7 @@ class OtpProvider extends ChangeNotifier{
   final logger = Logger();
   int key=0;
 
-  SuccessUser _successUser = SuccessUser();
+  // SuccessUser _successUser = SuccessUser();
 
 
   final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();

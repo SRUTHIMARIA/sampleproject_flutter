@@ -3,11 +3,12 @@ import 'package:json_annotation/json_annotation.dart';
 
 @JsonSerializable()
 class SuccessUser {
-  bool? success;
-  String? message;
-  String? token;
+  bool success;
+  String message;
+  String token;
 
-  SuccessUser({ this.success, this.message, this.token});
+  SuccessUser({ required this.success, required this.message, required this.token});
+
 
   SuccessUser.fromJson(Map<String, dynamic> json)
       : success = json['success'],

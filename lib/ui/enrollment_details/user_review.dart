@@ -8,7 +8,7 @@ import 'package:flutter_template/utils/constants/strings.dart';
 import 'package:flutter_template/utils/extensions/context_extensions.dart';
 import 'package:flutter_template/utils/theme/app_colors.dart';
 
-import '../../utils/constants/fontdata.dart';
+import '../../utils/constants/font_data.dart';
 
 
 class UserReview extends StatefulWidget {

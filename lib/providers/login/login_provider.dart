@@ -1,5 +1,6 @@
 
 
+// import 'package:dio/dio.dart';
 import 'package:dio/dio.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
@@ -17,6 +18,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../local_data/helpers/secure_storage_helper.dart';
 import '../../utils/static/keys.dart';
+import 'package:http/http.dart';
 
 
 
@@ -34,7 +36,14 @@ class LoginProvider extends ChangeNotifier{
   final logger = Logger();
   int key=0;
 
-  SuccessUser _successUser = SuccessUser();
+  bool _loading=false;
+  bool get loading=>_loading;
+  setLoading(bool value){
+    _loading=value;
+    notifyListeners();
+  }
+
+  // SuccessUser _successUser = SuccessUser();
 
 
   final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
@@ -78,13 +87,45 @@ class LoginProvider extends ChangeNotifier{
     key = code;
   }
 
-  //
-  // void signIn(String emailTxt, String pwdTxt){
-  //   email = emailTxt;
-  //   password = pwdTxt;
-  //   notifyListeners();
-  // }
-  //
+
+  void signIn(String emailTxt, String pwdTxt){
+    email = emailTxt;
+    password = pwdTxt;
+    notifyListeners();
+  }
+
+
+// void login(String email,String password,String device_token)async {
+//     setLoading(true);
+//   try{
+//     Response response=await post(Uri.parse('https://athlete.devateam.com/api/login'),
+//         headers: {
+//           // 'Content-Type': 'application/json',
+//           'Authorization': 'Bearer ' + device_token,
+//           'Accept': 'application/json',
+//
+//          },
+//       body:{
+//         'email' :email,
+//         'password': password,
+//         'device_token':device_token,
+//       },
+//     );
+//     if(response.statusCode==200){
+//       print("Successful");
+//       setLoading(false);
+//
+//     }else{
+//       setLoading(false);
+//       print("failed");
+//     }
+//   }catch(e){
+//     setLoading(false);
+//     print(e.toString());
+//
+//   }
+// }
+
 
   Future signInToApp(
       BuildContext context, String email, String password,String device_token) async {
