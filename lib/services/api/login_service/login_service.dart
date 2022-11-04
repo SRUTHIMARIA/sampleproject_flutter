@@ -9,8 +9,12 @@ import '../../../models/common_model/success_model.dart';
 
 class LoginService {
   static Future<SuccessUser> login(LoginUser loginUser) async {
+    print(loginUser);
     return await ApiHelper(url: AtheleteAssist.login, body: loginUser.toJson())
-        .post((p0) => SuccessUser.fromJson(p0));
+        .post((p0) =>
+        SuccessUser.fromJson(p0)
+
+    );
   }
   // static loginUser(BuildContext context, LoginUser loginUser) {
   //   ApiHelper apiManager = ApiHelper(

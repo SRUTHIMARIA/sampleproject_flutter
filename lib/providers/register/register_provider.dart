@@ -81,6 +81,7 @@ class RegisterProvider extends ChangeNotifier{
       String email,
       String password,
     ) async{
+    debugPrint('Register');
     if (firstname.trim().isEmpty ||
         lastname.trim().isEmpty ||
         email.trim().isEmpty ||
@@ -92,11 +93,13 @@ class RegisterProvider extends ChangeNotifier{
       print('$firstname');
       print('$lastname');
       print('$email');
-      print('$password');
-      setIsLoading(true);
+      print('$password');      setIsLoading(true);
       setError(false);
       final client =
-      ApiClient(Dio(BaseOptions(contentType: 'application/json')));
+      ApiClient(Dio(BaseOptions(
+
+           contentType: 'application/json'
+      )));
       RegisterUser registerUser = RegisterUser(
         email: email,
         password: password,

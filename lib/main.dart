@@ -4,6 +4,7 @@ import 'package:flutter_template/providers/authentication_provider.dart';
 import 'package:flutter_template/ui/login_screen/login_screen.dart';
 import 'package:flutter_template/ui/scheduling_self_analysis/self_analyisis_notes.dart';
 import 'package:flutter_template/providers/providers.dart';
+import 'package:flutter_template/ui/student_basic_profile/sports_type_screen.dart';
 import 'package:flutter_template/utils/globals.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 

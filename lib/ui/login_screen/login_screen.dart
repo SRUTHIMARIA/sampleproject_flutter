@@ -38,17 +38,17 @@ class _LoginScreenState extends State<LoginScreen> {
   var txtUserPwdController = TextEditingController();
   bool isLogin = false;
 
-  Box? userDataBox;
-  // String? token;
-  // //
-  @override
-  void initState() {
-    super.initState();
-    userDataBox = Hive.box('userDetailBox');
-    // getDeviceToken();
-    // createBox();
-    // getData();
-  }
+  // Box? userDataBox;
+  // // String? token;
+  // // //
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   userDataBox = Hive.box('userDetailBox');
+  //   // getDeviceToken();
+  //   // createBox();
+  //   // getData();
+  // }
 
 
   //
