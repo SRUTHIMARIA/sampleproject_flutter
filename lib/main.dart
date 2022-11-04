@@ -1,14 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_template/ui/scheduling_self_analysis/daily_reflection.dart';
-import 'package:flutter_template/ui/scheduling_self_analysis/my_current_mindset.dart';
+
 import 'package:flutter_template/ui/scheduling_self_analysis/self_analyisis_notes.dart';
-import 'package:flutter_template/providers/drawer_provider.dart';
-import 'package:flutter_template/providers/providers.dart';
-import 'package:flutter_template/ui/homepage/homepage.dart';
-import 'package:flutter_template/ui/homepage/main_screen.dart';
-import 'package:flutter_template/ui/profile/profile.dart';
-import 'package:flutter_template/ui/profile/profile_update.dart';
-import 'package:flutter_template/ui/settings/settings.dart';
+
 import 'package:flutter_template/ui/student_basic_profile/sports_type_screen.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:provider/provider.dart';
