@@ -7,6 +7,7 @@ import 'package:flutter_template/utils/theme/app_colors.dart';
 
 import '../../gen/assets.gen.dart';
 import '../../utils/static/static_padding.dart';
+import '../parent_details/parent_details_primary.dart';
 
 class WhyJoinScreen extends StatefulWidget {
   @override
@@ -115,7 +116,7 @@ class _WhyJoinScreenState extends State<WhyJoinScreen> {
 
             GestureDetector(
               onTap: () {
-                // Navigator.push(context, MaterialPageRoute(builder: (context)=>RegisterScreen()));
+                Navigator.push(context, MaterialPageRoute(builder: (context)=>ParentDetailPrimary()));
               },
               child: Container(
                 margin: EdgeInsets.only(left: context.heightPx *52),
