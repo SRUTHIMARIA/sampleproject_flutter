@@ -14,7 +14,7 @@ class WeeklyPlanModel {
   });
 }
 
-List<WeeklyPlanModel> weeklyPlan = [
+final List<WeeklyPlanModel> weeklyPlan = [
   WeeklyPlanModel(
       time: '8.00 AM',
       title: 'Amet minim',
@@ -67,7 +67,7 @@ class HomeSliderModel {
   });
 }
 
-List<HomeSliderModel> sliderModel = [
+final List<HomeSliderModel> sliderModel = [
   HomeSliderModel(
     image: 'assets/images/image_slider1.png',
   ),

@@ -1,9 +1,7 @@
 import 'dart:ui';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:flutter_rounded_date_picker/flutter_rounded_date_picker.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_template/gen/assets.gen.dart';
 
@@ -40,7 +38,7 @@ class _PhysicalAndMindsetState extends State<PhysicalAndMindset> {
 
 
   Widget buildTextField(
-      {String? hint, required TextEditingController controller}) {
+      {String? hint, required TextEditingController controller,}) {
     return TextField(
       controller: controller,
       textCapitalization: TextCapitalization.words,
@@ -48,15 +46,11 @@ class _PhysicalAndMindsetState extends State<PhysicalAndMindset> {
         labelText: hint ?? '',
         focusedBorder: OutlineInputBorder(
           borderSide: const BorderSide(color: AppColors.themeColor, width: 1.5),
-          borderRadius: BorderRadius.circular(
-            10.0,
-          ),
+          borderRadius: const BorderRadius.all(Radius.circular(10.0)),
         ),
         enabledBorder: OutlineInputBorder(
           borderSide: const BorderSide(color: AppColors.themeColor, width: 1.5),
-          borderRadius: BorderRadius.circular(
-            10.0,
-          ),
+          borderRadius: const BorderRadius.all(Radius.circular(10.0)),
         ),
       ),
     );
@@ -89,9 +83,9 @@ class _PhysicalAndMindsetState extends State<PhysicalAndMindset> {
                 Row(
                   children: [
                     InkWell(
-                      onTap: () {
-                        Navigator.pop(context);
-                      },
+                      onTap: () =>
+                        Navigator.pop(context),
+
                       child: Container(
                         margin: EdgeInsets.only(left: context.heightPx * 49),
                         child: SvgPicture.asset(Assets.icons.iconBackarrow),
@@ -124,7 +118,7 @@ class _PhysicalAndMindsetState extends State<PhysicalAndMindset> {
                   margin: EdgeInsets.symmetric(horizontal: 56),
                   decoration: BoxDecoration(
                     color: AppColors.textFieldBgColor,
-                    borderRadius: BorderRadius.circular(10.0),
+                    borderRadius: const BorderRadius.all(Radius.circular(10.0)),
                   ),
                   child: TextFormField(
                     style: FontData().montFont50012GreyColorTextStyle,
@@ -135,7 +129,7 @@ class _PhysicalAndMindsetState extends State<PhysicalAndMindset> {
                           EdgeInsets.only(left: context.heightPx * 16),
 
                       border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10.0),
+                        borderRadius: const BorderRadius.all(Radius.circular(10.0)),
                       ),
 
                       fillColor: AppColors.textFieldBgColor,
@@ -412,7 +406,7 @@ class _PhysicalAndMindsetState extends State<PhysicalAndMindset> {
   }
 
   void viewChanged(ViewChangedDetails viewChangedDetails) {
-    SchedulerBinding.instance!.addPostFrameCallback((Duration duration) {
+    SchedulerBinding.instance.addPostFrameCallback((Duration duration) {
       setState(() {
         _month = DateFormat('MMMM')
             .format(viewChangedDetails

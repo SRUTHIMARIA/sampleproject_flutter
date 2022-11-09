@@ -12,7 +12,7 @@ class ParentDetailProvider extends ChangeNotifier {
     http.Response? response = (await parentDetailData(parentResponseModel!));
     if (response!.statusCode == 200) {
       isBack = true;
-      print(response!.body);
+      print(response.body);
 
     }
     loading = false;

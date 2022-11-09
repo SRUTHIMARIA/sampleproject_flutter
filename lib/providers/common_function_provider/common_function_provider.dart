@@ -7,10 +7,10 @@ import '../../models/common_model/authentication_response_model.dart';
 
 
 class CommonFunctionsProvider extends ChangeNotifier {
-  static String token = "";
-  static String userName = "";
+  static String token = '';
+  static String userName = '';
   static int quickBloxId = 0;
-  static final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
+  static GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
   void onAuthenticationSuccess(BuildContext context, AuthenticationResponseModel model) async {
     await StaticAppPreferences.saveString(key: StaticKeys.tokenLocation, dataToStore: model.payload.token);
