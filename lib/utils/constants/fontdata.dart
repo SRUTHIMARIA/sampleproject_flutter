@@ -37,6 +37,14 @@ class FontData {
     color:  AppColors.lightGreyColor,
 
   );
+
+  TextStyle get montFont13BlackTextStyle => mtTextStyle.copyWith(
+    fontSize: fontMontserratSmall3,
+    fontFamily: 'Mont',
+    fontWeight: FontWeight.w500,
+    color:  AppColors.blackColor,
+
+  );
   TextStyle get montFont500TextStyle => mtTextStyle.copyWith(
     fontSize: fontMontserratMedium1,
     fontFamily: 'Mont',
@@ -88,6 +96,13 @@ class FontData {
   );
   TextStyle get montFont50012BlackTextStyle => mtTextStyle.copyWith(
     fontSize: fontMontserratSmall2,
+    fontFamily: 'Mont',
+    fontWeight: FontWeight.w500,
+    color:  AppColors.blackColor,
+
+  );
+  TextStyle get montFont50014BlackTextStyle => mtTextStyle.copyWith(
+    fontSize: fontMontserratMedium1,
     fontFamily: 'Mont',
     fontWeight: FontWeight.w500,
     color:  AppColors.blackColor,

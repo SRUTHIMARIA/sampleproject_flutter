@@ -32,6 +32,8 @@ class AppColors {
   static const Color lightGreen=Color(0xff4DA07D);
   static const Color orange=Color(0xffD99C00);
   static const Color redColor=Color(0xffD96C6C);
+  static const Color glassStroke=Color(0xffEBFDFF);
+
 
 
 

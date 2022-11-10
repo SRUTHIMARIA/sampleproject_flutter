@@ -5,6 +5,7 @@ import 'package:flutter_template/ui/homepage/homepage.dart';
 import 'package:flutter_template/ui/homepage/main_screen.dart';
 import 'package:flutter_template/ui/profile/profile.dart';
 import 'package:flutter_template/ui/profile/profile_update.dart';
+import 'package:flutter_template/ui/reports/reports.dart';
 import 'package:flutter_template/ui/settings/settings.dart';
 import 'package:provider/provider.dart';
 
@@ -37,7 +38,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: Settings(),
+      home: Reports(),
       // home: ChangeNotifierProvider(
       //   create: (context) => DrawerScreenProvider(),
       //   child:  HomePage(),
