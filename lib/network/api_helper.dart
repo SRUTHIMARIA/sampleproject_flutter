@@ -45,8 +45,7 @@ class ApiHelper {
     return {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
-    //   if (AuthenticationProvider.isLoggedIn) 'Authorization': 'Bearer ${AuthenticationProvider().}',
-    // };
+
 
       if (LoginProvider().isLoggedIn) 'Authorization': 'Bearer ${LoginProvider().token}',
     };

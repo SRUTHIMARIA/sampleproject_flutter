@@ -56,3 +56,4 @@ class StaticAppPreferences {
     await _prefs!.clear();
   }
 }
+

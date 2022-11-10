@@ -38,3 +38,4 @@ class _Payload {
     quickBloxId: json["quick_blox_user_id"] ?? 0,
   );
 }
+

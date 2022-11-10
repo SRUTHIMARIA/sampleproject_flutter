@@ -11,6 +11,9 @@ import 'package:provider/provider.dart';
 import 'package:provider/single_child_widget.dart';
 
 import 'authentication_provider.dart';
+import 'common_function_provider/common_function_provider.dart';
+
+
 
 class ProviderRegister {
   static final List<SingleChildWidget> providers = [
@@ -23,12 +26,6 @@ class ProviderRegister {
     ChangeNotifierProvider<OtpProvider>(create: (_) => OtpProvider(),),
     ChangeNotifierProvider<ResetpasswordProvider>(create: (_) => ResetpasswordProvider(),),
     ChangeNotifierProvider<DrawerScreenProvider>(create: (_) => DrawerScreenProvider(),),
-  ];
+     ChangeNotifierProvider<ParentDetailProvider>(create: (_) => ParentDetailProvider(),),
 
-// static clearProviders() {
-//   BuildContext context = Globals.appRouter.navigatorKey.currentContext!;
-//
-//   ///ToDo:add methods in providers to clear them and call them here (useful in logout etc.)
-//   context.read<AuthenticationProvider>().clearProvider();
-// }
-}
+  ];

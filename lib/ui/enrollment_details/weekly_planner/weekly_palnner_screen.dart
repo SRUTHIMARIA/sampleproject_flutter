@@ -205,7 +205,7 @@ class _WeeklyPlannerState extends State<WeeklyPlanner> {
   // }
 
   void viewChanged(ViewChangedDetails viewChangedDetails) {
-    SchedulerBinding.instance!.addPostFrameCallback((Duration duration) {
+    SchedulerBinding.instance.addPostFrameCallback((Duration duration) {
       setState(() {
         _month = DateFormat('MMMM')
             .format(viewChangedDetails

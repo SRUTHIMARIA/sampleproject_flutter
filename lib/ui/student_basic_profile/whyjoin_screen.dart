@@ -7,6 +7,7 @@ import 'package:flutter_template/utils/theme/app_colors.dart';
 
 import '../../gen/assets.gen.dart';
 import '../../utils/static/static_padding.dart';
+import '../parent_details/parent_details_primary.dart';
 
 class WhyJoinScreen extends StatefulWidget {
   @override
@@ -14,16 +15,10 @@ class WhyJoinScreen extends StatefulWidget {
 }
 
 class _WhyJoinScreenState extends State<WhyJoinScreen> {
-  int _selectedItemIndex = 0;
   bool closeTopContainer = false;
   double topContainer = 0;
   ScrollController controller = ScrollController();
 
-  final List<Color> _colors = [
-    AppColors.gradientColorSplash.withOpacity(0.48),
-    AppColors.bgPrimarySplash
-  ];
-  final List<double> _stops = [0.0, 0.0];
 
   @override
   Widget build(BuildContext context) {
@@ -32,14 +27,13 @@ class _WhyJoinScreenState extends State<WhyJoinScreen> {
           gradient: LinearGradient(
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
-              colors: [
+              colors:  [
             AppColors.gradientColorSplash,
-            AppColors.bgPrimarySplash
-          ])),
+            AppColors.bgPrimarySplash,
+          ],),),
       child: Scaffold(
         resizeToAvoidBottomInset: false,
-        // By defaut, Scaffold background is white
-        // Set its value to transparent
+
         backgroundColor: Colors.transparent,
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -66,14 +60,13 @@ class _WhyJoinScreenState extends State<WhyJoinScreen> {
             ),
             Align(
               alignment: Alignment.centerLeft,
-              child: Padding(
+              child: Container(
                 padding: StaticPadding.paddingH50(context),
-                child: Container(
-                  margin: EdgeInsets.only(left: 12.0),
-                  child: Text(
-                    joinAssist,
-                    style: const FontData().montFont14TextStyle,
-                  ),
+
+                margin: EdgeInsets.only(left: 12.0),
+                child: Text(
+                  joinAssist,
+                  style: const FontData().montFont14TextStyle,
                 ),
               ),
             ),
@@ -85,7 +78,7 @@ class _WhyJoinScreenState extends State<WhyJoinScreen> {
               margin: EdgeInsets.symmetric(horizontal: 56),
               decoration: BoxDecoration(
                 color: AppColors.textFieldBgColor,
-                borderRadius: BorderRadius.circular(6.0),
+                borderRadius: const BorderRadius.all(Radius.circular(6.0)),
               ),
               child: TextFormField(
                 keyboardType: TextInputType.multiline,
@@ -98,7 +91,7 @@ class _WhyJoinScreenState extends State<WhyJoinScreen> {
                   focusedBorder: InputBorder.none,
 
                   border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(6.0),
+                    borderRadius: const BorderRadius.all(Radius.circular(6.0)),
                   ),
 
                   fillColor: AppColors.textFieldBgColor,
@@ -114,9 +107,9 @@ class _WhyJoinScreenState extends State<WhyJoinScreen> {
             ),
 
             GestureDetector(
-              onTap: () {
-                // Navigator.push(context, MaterialPageRoute(builder: (context)=>RegisterScreen()));
-              },
+              onTap: () =>
+                Navigator.push(context, MaterialPageRoute(builder: (context)=>ParentDetailPrimary())),
+
               child: Container(
                 margin: EdgeInsets.only(left: context.heightPx *52),
                 height: context.heightPx * 36,

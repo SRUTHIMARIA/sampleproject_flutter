@@ -1,4 +1,3 @@
-import 'package:flutter_template/gen/assets.gen.dart';
 
 class CategoryModel {
   String category;
@@ -12,7 +11,7 @@ class CategoryModel {
   });
 }
 
-List<CategoryModel> categoryDetails = [
+final List<CategoryModel> categoryDetails = [
 
   CategoryModel(
     category: 'Who am I',
