@@ -15,6 +15,8 @@ const String getStarted='Get Started';
 const String firstname='First Name';
 const String secondname='Second Name';
 const String email='Email';
+const String pass='Password';
+
 const String forgotPassword='Forgot Password?';
 const String Iagree='* I agree to the terms of services and privacy policy';
 const String register='REGISTER';

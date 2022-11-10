@@ -1,5 +1,3 @@
-import 'package:flutter/cupertino.dart';
-import 'package:flutter_template/providers/common_function_provider/common_funtion_provider.dart';
 import 'package:flutter_template/providers/drawer_provider.dart';
 import 'package:flutter_template/providers/forgotpassword/forgotpasswd_provider.dart';
 import 'package:flutter_template/providers/login/login_provider.dart';
@@ -26,6 +24,7 @@ class ProviderRegister {
     ChangeNotifierProvider<OtpProvider>(create: (_) => OtpProvider(),),
     ChangeNotifierProvider<ResetpasswordProvider>(create: (_) => ResetpasswordProvider(),),
     ChangeNotifierProvider<DrawerScreenProvider>(create: (_) => DrawerScreenProvider(),),
-     ChangeNotifierProvider<ParentDetailProvider>(create: (_) => ParentDetailProvider(),),
+    //ChangeNotifierProvider<ParentDetailProvider>(create: (_) => ParentDetailProvider(),),
 
   ];
+}

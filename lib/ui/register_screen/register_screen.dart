@@ -246,7 +246,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           borderRadius: BorderRadius.all(Radius.circular(6.0)),
                         ),
 
-                        fillColor: Colors.grey,
+
 
                         hintText: password,
 

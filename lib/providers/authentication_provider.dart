@@ -46,4 +46,3 @@ class AuthenticationProvider extends ChangeNotifier {
     _token = '';
   }
 }
-}

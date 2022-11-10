@@ -276,7 +276,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
                       fillColor: Colors.grey,
 
-                      hintText: password,
+                      hintText: pass,
 
                       //make hint text
                       hintStyle: const FontData().montFont500TextStyle,

@@ -2,7 +2,6 @@
 
 // import 'package:dio/dio.dart';
 import 'package:dio/dio.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_template/models/login_model/login_user_model.dart';
 import 'package:flutter_template/models/register_model/register_user.dart';

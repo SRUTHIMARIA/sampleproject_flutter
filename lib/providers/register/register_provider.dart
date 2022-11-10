@@ -16,7 +16,6 @@ import '../../utils/globals.dart';
 
 
 class RegisterProvider extends ChangeNotifier{
-
   var email = '';
   var password = '';
   var first_name = '';
@@ -108,10 +107,10 @@ class RegisterProvider extends ChangeNotifier{
       );
       client.register(registerUser).then((it) async {
 
-        setToken(it.token!);
+        setToken(it.message);
         SharedPreferences sharedPreferences = await _prefs;
         sharedPreferences.setBool('isSignUp', true);
-        sharedPreferences.setString('token', it.token!);
+        sharedPreferences.setString('token', it.message);
         setIsLoading(false);
 
         const ToastAtTop().showToast(signupSuccess);
