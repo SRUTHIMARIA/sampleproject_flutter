@@ -9,6 +9,8 @@ linter:
     prefer_expression_function_bodies: false
     prefer_final_in_for_each: true
     prefer_if_elements_to_conditional_expressions: true
+    prefer-single-widget-per-file:
+    ignore-private-widgets: true
 analyzer:
   exclude:
     - '**/*.g.dart'
@@ -20,8 +22,9 @@ analyzer:
 dart_code_metrics:
   metrics:
     cyclomatic-complexity: 20
-    number-of-parameters: 4
+    number-of-parameters: 6
     maximum-nesting-level: 5
+    source-lines-of-code: 150
     technical-debt:
       ignore-cost: 320
       ignore-for-file-cost: 396

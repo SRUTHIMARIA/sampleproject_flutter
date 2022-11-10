@@ -13,6 +13,7 @@ import 'package:logger/logger.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../ui/password_recovery/authentication_code_screen.dart';
+import '../../utils/globals.dart';
 
 
 
@@ -26,6 +27,7 @@ class OtpProvider extends ChangeNotifier{
   String errorMessage = '';
   final logger = Logger();
   int key=0;
+  String otp='';
 
   // SuccessUser _successUser = SuccessUser();
 
@@ -65,6 +67,10 @@ class OtpProvider extends ChangeNotifier{
     key = code;
   }
 
+  void setOTP(String code) {
+    otp = code;
+  }
+
   //
   // void signIn(String emailTxt, String pwdTxt){
   //   email = emailTxt;
@@ -73,36 +79,58 @@ class OtpProvider extends ChangeNotifier{
   // }
   //
 
-
-  Future otpverify(BuildContext context, int otp) async {
-    if (email.trim().isEmpty) {
-      const ToastAtTop().showToast(errorMessage6);
-    } else {
+  Future verifyOTP() async{
+    if(otp.trim().isEmpty || otp.trim().length!=4) {
+      const ToastAtTop().showToast(errorMessage7);
+    }else {
       setIsLoading(true);
-      final client = ApiClient(
-        Dio(BaseOptions(contentType: 'application/json')),
-      );
-      debugPrint('%%%%%%%%%%%%%%%keyy $key $otp');
-      OtpModel otpModel = OtpModel(otp: otp, key: key);
-      client.verifyOtp(otpModel).then((it) async {
-        var yy = it.key;
-        debugPrint('%%%%%%%%%%%%%%%keyy ${it.key}');
-        setKey(it.key!);
+      final client = ApiClient( Dio(BaseOptions(contentType: 'application/json')),);
+      OtpModel model = OtpModel(otp: otp, key: key);
+
+      client.verifyOtp(model).then((it) async {
         setIsLoading(false);
-        setEmail(email);
-        const ToastAtTop().showToast(success);
-        const Routes().pushReplacement(context, const NewPasswordScreen());
+        const ToastAtTop().showToast(verified);
+        setError(false);
+        setErrorMessage('');
+        const Routes().pushReplacement(Globals.navigatorKey.currentContext!, const NewPasswordScreen());
       }).catchError((Object obj) {
-        const ToastAtTop().showToast(errorMessage4);
         setIsLoading(false);
-        switch (obj.runtimeType) {
-          case DioError:
-            final res = (obj as DioError).response;
-            break;
-          default:
-            break;
-        }
+        const ToastAtTop().showToast(errorMessage8);
+
       });
     }
   }
+
+  //
+  // Future otpverify(BuildContext context, int otp) async {
+  //   if (email.trim().isEmpty) {
+  //     const ToastAtTop().showToast(errorMessage6);
+  //   } else {
+  //     setIsLoading(true);
+  //     final client = ApiClient(
+  //       Dio(BaseOptions(contentType: 'application/json')),
+  //     );
+  //     debugPrint('%%%%%%%%%%%%%%%keyy $key $otp');
+  //     OtpModel otpModel = OtpModel(otp: otp, key: key);
+  //     client.verifyOtp(otpModel).then((it) async {
+  //       var yy = it.key;
+  //       debugPrint('%%%%%%%%%%%%%%%keyy ${it.key}');
+  //       setKey(it.key!);
+  //       setIsLoading(false);
+  //       setEmail(email);
+  //       const ToastAtTop().showToast(success);
+  //       const Routes().pushReplacement(context, const NewPasswordScreen());
+  //     }).catchError((Object obj) {
+  //       const ToastAtTop().showToast(errorMessage4);
+  //       setIsLoading(false);
+  //       switch (obj.runtimeType) {
+  //         case DioError:
+  //           final res = (obj as DioError).response;
+  //           break;
+  //         default:
+  //           break;
+  //       }
+  //     });
+  //   }
+  // }
 }

@@ -11,6 +11,7 @@ import 'package:flutter_template/models/user_detail/user_detail_model_for_hive.d
 import 'package:flutter_template/providers/authentication_provider.dart';
 import 'package:flutter_template/providers/login/login_provider.dart';
 import 'package:flutter_template/services/api/login_service/login_service.dart';
+import 'package:flutter_template/services/navigation/routes.dart';
 import 'package:flutter_template/ui/homepage/homepage.dart';
 import 'package:flutter_template/ui/password_recovery/password_recovery.dart';
 import 'package:flutter_template/ui/register_screen/register_screen.dart';
@@ -25,6 +26,7 @@ import 'package:hive/hive.dart';
 import 'package:provider/provider.dart';
 
 import '../../utils/theme/app_colors.dart';
+import '../password_recovery/authentication_code_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -37,6 +39,7 @@ class _LoginScreenState extends State<LoginScreen> {
   var txtUserNameController = TextEditingController();
   var txtUserPwdController = TextEditingController();
   bool isLogin = false;
+  bool _isObscure1=false;
 
   // Box? userDataBox;
   // // String? token;
@@ -297,9 +300,9 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 SizedBox(height: context.heightPx * 16),
                 GestureDetector(
-                  onTap: () =>
+                  onTap: () => handlePressed(),
                   // loginProvider.login(txtUserNameController.text.toString(), txtUserPwdController.text.toString(), token??''),
-                      loginUser(),
+                  //     loginUser(),
 
                    // loginUserDetails();
 
@@ -355,6 +358,30 @@ class _LoginScreenState extends State<LoginScreen> {
         );
       },
     );
+  }
+
+  void handlePressed() {
+    Provider.of<LoginProvider>(context, listen: false).signInToApp(txtUserNameController.text, txtUserPwdController.text);
+    clearControllers();
+  }
+
+  void forgotPasswordPressed() {
+    clearControllers();
+    Provider.of<LoginProvider>(context, listen: false).setLoginError(false);
+    Provider.of<LoginProvider>(context, listen: false).setErrorMessage('');
+    const Routes().goTo(context, const AuthenticationCodeScreen());
+  }
+
+  void clearControllers() {
+    FocusScope.of(context).unfocus();
+    // emailController.text = '';
+    // passwordController.text = '';
+  }
+
+  void setObscure1() {
+    setState(() {
+      _isObscure1 = !_isObscure1;
+    });
   }
 
 // void loginUserDetails() {

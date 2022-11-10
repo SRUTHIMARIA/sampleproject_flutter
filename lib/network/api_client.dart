@@ -17,11 +17,10 @@ part 'api_client.g.dart';
 abstract class ApiClient {
   factory ApiClient(Dio dio, {String baseUrl}) = _ApiClient;
   //
-  // @Header('Accept:application/json')
-  @POST('/register')
+  @Header('Accept:application/json')
+    @POST('/register')
   Future<SuccessUser> register(
-  @Header('Accept') String acceptData,
-    @Body() RegisterUser registerUser,
+      @Body() RegisterUser registerUser,
   );
   @POST('/login')
   Future<SuccessUser> loginPage(

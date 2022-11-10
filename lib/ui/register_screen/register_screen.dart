@@ -3,6 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_template/gen/assets.gen.dart';
 import 'package:flutter_template/providers/login/login_provider.dart';
 import 'package:flutter_template/providers/register/register_provider.dart';
+import 'package:flutter_template/services/navigation/routes.dart';
 import 'package:flutter_template/ui/login_screen/login_screen.dart';
 import 'package:flutter_template/utils/constants/font_data.dart';
 import 'package:flutter_template/utils/constants/strings.dart';
@@ -11,7 +12,6 @@ import 'package:flutter_template/utils/static/static_padding.dart';
 import 'package:provider/provider.dart';
 
 import '../../utils/theme/app_colors.dart';
-import '../../widgets/validation/signup_validation.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({Key? key}) : super(key: key);
@@ -27,39 +27,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
   var txtFirstNameController = TextEditingController();
   var txtLastNameController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
-  String _userEmail = '';
-  String _password = '';
-  String _userFirstName = '';
-  String _userLastName = '';
-
-
-  // This function is triggered when the user press the "Sign Up" button
-  void _trySubmitForm() {
-    final bool? isValid = _formKey.currentState?.validate();
-    if (isValid == true) {
-      debugPrint('Everything looks good!');
-      debugPrint(_userEmail);
-      debugPrint(_userFirstName);
-      debugPrint(_password);
-      debugPrint(_userLastName);
-
-      /*
-      Continute proccessing the provided information with your own logic
-      such us sending HTTP requests, savaing to SQLite database, etc.
-      */
-    }
-  }
-
-
-  final List<Color> _colors = [
-    AppColors.gradientColorSplash,
-    AppColors.gradientColor2Splash
-  ];
-  final List<double> _stops = [0.0, 0.7];
+  String userEmail = '';
+  String password = '';
+  String userFirstName = '';
+  String userLastName = '';
+  bool _isObscure1 = false;
 
   @override
   Widget build(BuildContext context) {
-    final validationService = Provider.of<SignupValidation>(context);
     return Form(
       key: _formKey,
       child: Scaffold(
@@ -117,9 +92,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         // Return null if the entered username is valid
                         return null;
                       },
-                      onChanged: (value) => _userFirstName = value,
-
-
+                      onChanged: (value) => userFirstName = value,
                       decoration: InputDecoration(
                         focusColor: Colors.white,
                         enabledBorder: InputBorder.none,
@@ -134,8 +107,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           borderRadius: BorderRadius.circular(6.0),
                         ),
 
-
-
                         hintText: firstname,
 
                         //make hint text
@@ -146,8 +117,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   SizedBox(
                     height: context.heightPx * 20,
                   ),
-
-
                   Container(
                     margin: const EdgeInsets.symmetric(horizontal: 56),
                     decoration: BoxDecoration(
@@ -157,7 +126,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     child: TextFormField(
                       controller: txtLastNameController,
                       style: const FontData().montFont500TextStyle,
-                     // obscureText: _isHidden,
+                      // obscureText: _isHidden,
                       validator: (value) {
                         if (value == null || value.trim().isEmpty) {
                           return 'This field is required';
@@ -168,8 +137,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         // Return null if the entered username is valid
                         return null;
                       },
-                      onChanged: (value) => _userLastName = value,
-
+                      onChanged: (value) => userLastName = value,
 
                       decoration: InputDecoration(
                         focusColor: Colors.white,
@@ -217,8 +185,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         // Return null if the entered email is valid
                         return null;
                       },
-                      onChanged: (value) => _userEmail = value,
-
+                      onChanged: (value) => userEmail = value,
                       decoration: InputDecoration(
                         focusColor: Colors.white,
                         enabledBorder: InputBorder.none,
@@ -264,8 +231,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         // Return null if the entered password is valid
                         return null;
                       },
-                      onChanged: (value) => _password = value,
-
+                      onChanged: (value) => password = value,
                       decoration: InputDecoration(
                         focusColor: Colors.white,
                         enabledBorder: InputBorder.none,
@@ -330,11 +296,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               child: Checkbox(
                                 value: this.isAgree,
                                 checkColor: AppColors.themeColor,
-                                onChanged: (bool? value) {
-                                  setState(() {
-                                    this.isAgree = value!;
-                                  });
-                                },
+                                onChanged: (bool? value) => setState(() {
+                                  this.isAgree = value!;
+                                }),
                               ),
                             ),
                           ),
@@ -353,23 +317,17 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     height: context.heightPx * 16,
                   ),
                   GestureDetector(
-                    onTap: () {
-                      _trySubmitForm();
-                      Provider.of<RegisterProvider>(context, listen: false).signUpToApp(
-                        context,
-                        txtFirstNameController.text.toString(),
-                        txtLastNameController.text.toString(),
-                        txtEmailController.text.toString(),
-                        txtUserPwdController.text.toString(),
-                      );
-                    },
-
-
-
-
-
-
-
+                    onTap: () => handlePressed(),
+                    // {
+                    //   _trySubmitForm();
+                    //   Provider.of<RegisterProvider>(context, listen: false).signUpToApp(
+                    //     context,
+                    //     txtFirstNameController.text.toString(),
+                    //     txtLastNameController.text.toString(),
+                    //     txtEmailController.text.toString(),
+                    //     txtUserPwdController.text.toString(),
+                    //   );
+                    // },
 
                     // Navigator.push(
                     //     context,
@@ -404,12 +362,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       ),
                       SizedBox(width: context.widthPx * 4),
                       GestureDetector(
-                        onTap: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => const LoginScreen()));
-                        },
+                        onTap: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const LoginScreen(),
+                          ),
+                        ),
                         child: Container(
                           child: Text(
                             signin,
@@ -426,5 +384,34 @@ class _RegisterScreenState extends State<RegisterScreen> {
         ),
       ),
     );
+  }
+
+  void handlePressed() {
+    Provider.of<RegisterProvider>(context, listen: false).signUpToApp(
+      txtFirstNameController.text.toString(),
+      txtLastNameController.text.toString(),
+      txtEmailController.text.toString(),
+      txtUserPwdController.text.toString(),
+    );
+    clearControllers();
+  }
+
+  void forgotPasswordPressed() {
+    clearControllers();
+    Provider.of<LoginProvider>(context, listen: false).setSignUpError(false);
+    Provider.of<LoginProvider>(context, listen: false).setErrorMessage('');
+    const Routes().goTo(context, const LoginScreen());
+  }
+
+  void clearControllers() {
+    FocusScope.of(context).unfocus();
+    // emailController.text = '';
+    // passwordController.text = '';
+  }
+
+  void setObscure1() {
+    setState(() {
+      _isObscure1 = !_isObscure1;
+    });
   }
 }

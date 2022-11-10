@@ -3,7 +3,7 @@ import 'package:json_annotation/json_annotation.dart';
 @JsonSerializable()
 class OtpModel {
   int? key;
-  int? otp;
+  String? otp;
 
   OtpModel({
     this.key,

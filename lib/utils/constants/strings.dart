@@ -205,6 +205,9 @@ const String success = 'OTP sent';
 const String loggedin = 'Logged in successfully';
 const String signInSuccess = 'Sign In in successfully';
 const String registerSuccess = 'Register successfully';
+const String signupSuccess = 'Signup successfully';
+const String verified = 'OTP verified successfully';
+const String reset = 'Password reset successfully';
 
 
 

@@ -21,14 +21,10 @@ class _ApiClient implements ApiClient {
   String? baseUrl;
 
   @override
-  Future<SuccessUser> register(
-    acceptData,
-    registerUser,
-  ) async {
+  Future<SuccessUser> register(registerUser) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{r'Accept': acceptData};
-    _headers.removeWhere((k, v) => v == null);
+    final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(registerUser.toJson());
     final _result = await _dio

@@ -6,9 +6,11 @@ import 'package:flutter_template/models/new_password_model/new_password_model.da
 import 'package:flutter_template/models/register_model/success_user_model.dart';
 import 'package:flutter_template/network/api_client.dart';
 import 'package:flutter_template/services/navigation/routes.dart';
+import 'package:flutter_template/ui/login_screen/login_screen.dart';
 import 'package:flutter_template/ui/password_recovery/password_activation_link.dart';
 
 import 'package:flutter_template/utils/constants/strings.dart';
+import 'package:flutter_template/utils/globals.dart';
 import 'package:flutter_template/widgets/common/custom_toast.dart';
 import 'package:logger/logger.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -73,36 +75,65 @@ class ResetpasswordProvider extends ChangeNotifier{
   //   notifyListeners();
   // }
   //
+  Future changePassword( String newPassword, String password_confirmation) async{
 
-
-  Future resetPassword(BuildContext context, String password,String password_confirmation) async {
-    if (email.trim().isEmpty) {
-      const ToastAtTop().showToast(errorMessage6);
-    } else {
+    if(newPassword.trim().isEmpty || password_confirmation.trim().isEmpty ) {
+      setErrorMessage(errorMessage1);
+      setError(true);
+    } else if(password_confirmation!=newPassword){
+      setErrorMessage(errorMessage2);
+      setError(true);
+    } else if(password_confirmation.length<8){
+      setErrorMessage(errorMessage10);
+      setError(true);
+    }else {
       setIsLoading(true);
       final client = ApiClient(
-        Dio(BaseOptions(contentType: 'application/json')),
-      );
+        Dio(BaseOptions(contentType: 'application/json')),);
       NewPasswordModel newPasswordModel = NewPasswordModel(password: password,password_confirmation: password_confirmation);
       client.resetPassword(newPasswordModel).then((it) async {
-        // var yy = it.key;
-        // debugPrint('%%%%%%%%%%%%%%%keyy ${it.key}');
-        // setKey(it.key!);
+
         setIsLoading(false);
-        setEmail(email);
-        const ToastAtTop().showToast(success);
-        const Routes().pushReplacement(context, const PasswordActivationLink());
+        setError(false);
+        const ToastAtTop().showToast(reset);
+        const Routes().replace(Globals.navigatorKey.currentContext!, const PasswordActivationLink());
+
       }).catchError((Object obj) {
-        const ToastAtTop().showToast(errorMessage4);
+
         setIsLoading(false);
-        switch (obj.runtimeType) {
-          case DioError:
-            final res = (obj as DioError).response;
-            break;
-          default:
-            break;
-        }
+        const ToastAtTop().showToast(errorMessage9);
       });
     }
   }
+
+  // Future resetPassword(BuildContext context, String password,String password_confirmation) async {
+  //   if (email.trim().isEmpty) {
+  //     const ToastAtTop().showToast(errorMessage6);
+  //   } else {
+  //     setIsLoading(true);
+  //     final client = ApiClient(
+  //       Dio(BaseOptions(contentType: 'application/json')),
+  //     );
+  //     NewPasswordModel newPasswordModel = NewPasswordModel(password: password,password_confirmation: password_confirmation);
+  //     client.resetPassword(newPasswordModel).then((it) async {
+  //       // var yy = it.key;
+  //       // debugPrint('%%%%%%%%%%%%%%%keyy ${it.key}');
+  //       // setKey(it.key!);
+  //       setIsLoading(false);
+  //       setEmail(email);
+  //       const ToastAtTop().showToast(success);
+  //       const Routes().pushReplacement(context, const PasswordActivationLink());
+  //     }).catchError((Object obj) {
+  //       const ToastAtTop().showToast(errorMessage4);
+  //       setIsLoading(false);
+  //       switch (obj.runtimeType) {
+  //         case DioError:
+  //           final res = (obj as DioError).response;
+  //           break;
+  //         default:
+  //           break;
+  //       }
+  //     });
+  //   }
+  // }
 }

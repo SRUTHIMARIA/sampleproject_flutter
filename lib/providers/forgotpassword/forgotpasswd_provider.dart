@@ -6,6 +6,7 @@ import 'package:flutter_template/network/api_client.dart';
 import 'package:flutter_template/services/navigation/routes.dart';
 
 import 'package:flutter_template/utils/constants/strings.dart';
+import 'package:flutter_template/utils/globals.dart';
 import 'package:flutter_template/widgets/common/custom_toast.dart';
 import 'package:logger/logger.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -71,38 +72,62 @@ class ForgotPasswordProvider extends ChangeNotifier{
   // }
   //
 
-  Future forgotPassword(BuildContext context, String email) async {
-    if (email.trim().isEmpty) {
+
+  Future forgotPassword( String email) async{
+    if(email.trim().isEmpty) {
       const ToastAtTop().showToast(errorMessage6);
     } else {
       setIsLoading(true);
       final client = ApiClient(
-        Dio(BaseOptions(contentType: 'application/json')),
-      );
-      ForgotPasswordModel forgotPasswordModel = ForgotPasswordModel(email: email);
+        Dio(BaseOptions(contentType: 'application/json')),);
+      ForgotPasswordModel forgotPasswordModel = ForgotPasswordModel(email: email,);
       client.requestOtp(forgotPasswordModel).then((it) async {
-        var yy = it.key;
-        print('%%%%%%%%%%%%%%%keyy ${it.key}');
         setKey(it.key!);
         setIsLoading(false);
         setEmail(email);
         const ToastAtTop().showToast(success);
-        // const Routes().goToNext(context, const OTPScreen());
-        //const Routes().goToNext(context, const TestScreen());
-        const Routes().pushReplacement(context, const AuthenticationCodeScreen());
+        const Routes().pushReplacement(Globals.navigatorKey.currentContext!,  AuthenticationCodeScreen());
       }).catchError((Object obj) {
-        const ToastAtTop().showToast(errorMessage4);
         setIsLoading(false);
-        switch (obj.runtimeType) {
-          case DioError:
-            final res = (obj as DioError).response;
-            break;
-          default:
-            break;
-        }
+        setIsLoading(false);
+        const ToastAtTop().showToast(errorMessage9);
+
       });
     }
   }
+
+  // Future forgotPassword(BuildContext context, String email) async {
+  //   if (email.trim().isEmpty) {
+  //     const ToastAtTop().showToast(errorMessage6);
+  //   } else {
+  //     setIsLoading(true);
+  //     final client = ApiClient(
+  //       Dio(BaseOptions(contentType: 'application/json')),
+  //     );
+  //     ForgotPasswordModel forgotPasswordModel = ForgotPasswordModel(email: email);
+  //     client.requestOtp(forgotPasswordModel).then((it) async {
+  //       var yy = it.key;
+  //       print('%%%%%%%%%%%%%%%keyy ${it.key}');
+  //       setKey(it.key!);
+  //       setIsLoading(false);
+  //       setEmail(email);
+  //       const ToastAtTop().showToast(success);
+  //       // const Routes().goToNext(context, const OTPScreen());
+  //       //const Routes().goToNext(context, const TestScreen());
+  //       const Routes().pushReplacement(context, const AuthenticationCodeScreen());
+  //     }).catchError((Object obj) {
+  //       const ToastAtTop().showToast(errorMessage4);
+  //       setIsLoading(false);
+  //       switch (obj.runtimeType) {
+  //         case DioError:
+  //           final res = (obj as DioError).response;
+  //           break;
+  //         default:
+  //           break;
+  //       }
+  //     });
+  //   }
+  // }
 
 
   // Future forgotPassword(BuildContext context, String email) async {

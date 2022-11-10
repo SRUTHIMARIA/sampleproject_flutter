@@ -7,6 +7,7 @@ import 'package:flutter_template/ui/register_screen/register_screen.dart';
 import 'package:flutter_template/utils/constants/font_data.dart';
 import 'package:flutter_template/utils/constants/strings.dart';
 import 'package:flutter_template/utils/extensions/context_extensions.dart';
+import 'package:flutter_template/utils/globals.dart';
 import 'package:flutter_template/utils/static/static_padding.dart';
 import 'package:provider/provider.dart';
 
@@ -118,7 +119,7 @@ class _PasswordRecoveryState extends State<PasswordRecovery> {
               onTap: () =>
               // onTap: () {
               //
-                    handlePressed(context),
+                    handlePressed(),
               //   // Navigator.push(context, MaterialPageRoute(builder: (context)=>AuthenticationCodeScreen()));
               // },
 
@@ -149,8 +150,8 @@ class _PasswordRecoveryState extends State<PasswordRecovery> {
       ),
     );
   }
-  void handlePressed(BuildContext context) {
-    Provider.of<ForgotPasswordProvider>(context, listen: false).forgotPassword(context, emailController.text);
+  void handlePressed() {
+    Provider.of<ForgotPasswordProvider>(Globals.navigatorKey.currentContext!, listen: false).forgotPassword( emailController.text);
 
   }
 }

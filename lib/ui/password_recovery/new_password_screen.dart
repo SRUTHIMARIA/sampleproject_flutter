@@ -1,12 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_template/gen/assets.gen.dart';
+import 'package:flutter_template/providers/forgotpassword/forgotpasswd_provider.dart';
+import 'package:flutter_template/providers/login/login_provider.dart';
+import 'package:flutter_template/providers/otp/otp_provider.dart';
+import 'package:flutter_template/providers/resetpasswd/resetpasswod_provider.dart';
 import 'package:flutter_template/ui/register_screen/register_screen.dart';
 import 'package:flutter_template/utils/constants/font_data.dart';
 import 'package:flutter_template/utils/constants/strings.dart';
 import 'package:flutter_template/utils/extensions/context_extensions.dart';
+import 'package:flutter_template/utils/globals.dart';
 import 'package:flutter_template/utils/static/static_padding.dart';
 import 'package:flutter_template/widgets/text_form/text_form_widget.dart';
+import 'package:provider/provider.dart';
 
 import '../../utils/static/values.dart';
 import '../../utils/theme/app_colors.dart';
@@ -19,6 +25,10 @@ class NewPasswordScreen extends StatefulWidget {
 }
 
 class _NewPasswordScreenState extends State<NewPasswordScreen> {
+  final newPasswordController = TextEditingController();
+
+  final conPasswordController = TextEditingController();
+
   final List<Color> _colors = [
     AppColors.gradientColorSplash,
     AppColors.gradientColor2Splash
@@ -80,6 +90,7 @@ class _NewPasswordScreenState extends State<NewPasswordScreen> {
                 borderRadius: BorderRadius.circular(6.0),
               ),
               child: TextFormField(
+                controller: newPasswordController,
                 style: FontData().montFont500TextStyle,
                 decoration: InputDecoration(
                   focusColor: Colors.white,
@@ -106,6 +117,7 @@ class _NewPasswordScreenState extends State<NewPasswordScreen> {
                 borderRadius: BorderRadius.circular(6.0),
               ),
               child: TextFormField(
+                controller: conPasswordController,
                 style: FontData().montFont500TextStyle,
                 decoration: InputDecoration(
                   focusColor: Colors.white,
@@ -126,11 +138,9 @@ class _NewPasswordScreenState extends State<NewPasswordScreen> {
             ),
             SizedBox(height: context.heightPx * 27),
             GestureDetector(
-              onTap: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => RegisterScreen()));
-              },
-              child: Container(
+              onTap: () =>  Provider.of<ResetpasswordProvider>(context, listen: false).changePassword(newPasswordController.text, conPasswordController.text),
+
+      child: Container(
                 height: context.heightPx * 42,
                 width: context.widthPx * 276,
                 child: Container(
@@ -153,4 +163,6 @@ class _NewPasswordScreenState extends State<NewPasswordScreen> {
       ),
     );
   }
+
+
 }

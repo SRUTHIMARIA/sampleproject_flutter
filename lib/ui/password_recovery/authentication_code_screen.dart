@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_template/gen/assets.gen.dart';
-import 'package:flutter_template/ui/password_recovery/new_password_screen.dart';
-import 'package:flutter_template/ui/register_screen/register_screen.dart';
+import 'package:flutter_template/providers/forgotpassword/forgotpasswd_provider.dart';
+import 'package:flutter_template/providers/otp/otp_provider.dart';
+
 import 'package:flutter_template/utils/constants/font_data.dart';
 import 'package:flutter_template/utils/constants/strings.dart';
 import 'package:flutter_template/utils/extensions/context_extensions.dart';
+import 'package:flutter_template/utils/globals.dart';
 import 'package:flutter_template/utils/static/static_padding.dart';
+import 'package:provider/provider.dart';
 
 import '../../utils/theme/app_colors.dart';
 
@@ -95,6 +97,9 @@ class _AuthenticationCodeScreenState extends State<AuthenticationCodeScreen> {
               disabledBorderColor: Colors.transparent,
               cursorColor: AppColors.textFieldBgColor,
               borderWidth: 0.0,
+              onSubmit: (String verificationCode) =>
+                  Provider.of<OtpProvider>(context, listen: false).setOTP(verificationCode), // end onSubmit
+
 
               // textStyle: const FontData().otpTextStyle,
 
@@ -107,11 +112,10 @@ class _AuthenticationCodeScreenState extends State<AuthenticationCodeScreen> {
             SizedBox(height:context.heightPx *27),
 
             GestureDetector(
-              onTap: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context)=>NewPasswordScreen()));
-              },
+              onTap: () => handlePressed(),
 
-              child: Container(
+
+                child: Container(
                 height: context.heightPx * 42,
                 width: context.widthPx * 276,
                 child: Container(
@@ -137,5 +141,14 @@ class _AuthenticationCodeScreenState extends State<AuthenticationCodeScreen> {
         ),
       ),
     );
+  }
+  void handlePressed() {
+    Provider.of<OtpProvider>(Globals.navigatorKey.currentContext!, listen: false).verifyOTP();
+
+  }
+
+  void handleResendPressed( String email) {
+    Provider.of<ForgotPasswordProvider>(Globals.navigatorKey.currentContext!, listen: false).forgotPassword( email);
+
   }
 }

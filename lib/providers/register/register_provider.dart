@@ -11,6 +11,7 @@ import 'package:logger/logger.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../services/navigation/routes.dart';
+import '../../utils/globals.dart';
 
 
 
@@ -27,6 +28,8 @@ class RegisterProvider extends ChangeNotifier{
   String errorMessage = '';
   final logger = Logger();
   int key=0;
+  bool errorLogin = false;
+
 
   // SuccessUser _successUser = SuccessUser();
 
@@ -66,70 +69,121 @@ class RegisterProvider extends ChangeNotifier{
     key = code;
   }
 
-  //
-  // void signIn(String emailTxt, String pwdTxt){
-  //   email = emailTxt;
-  //   password = pwdTxt;
-  //   notifyListeners();
-  // }
-  //
 
-  Future signUpToApp(
-      BuildContext context,
-      String firstname,
-      String lastname,
-      String email,
-      String password,
-    ) async{
-    debugPrint('Register');
-    if (firstname.trim().isEmpty ||
-        lastname.trim().isEmpty ||
+  void setLoginError(bool setError) {
+    errorLogin = setError;
+    notifyListeners();
+  }
+
+  void setSigUpError(bool setError) {
+    errorLogin = setError;
+    notifyListeners();
+  }
+  Future<void> resetAllKey() async {
+    setToken('');
+    SharedPreferences sharedPreferences = await _prefs;
+    sharedPreferences.remove('isLoggedIn');
+    sharedPreferences.remove('token');
+    setIsLoading(false);
+  }
+
+
+  Future signUpToApp(String firstName, String lastName, String email,String password,) async{
+    if (firstName.trim().isEmpty ||
+        lastName.trim().isEmpty ||
         email.trim().isEmpty ||
-        password.trim().isEmpty
-      ) {
+        password.trim().isEmpty) {
       const ToastAtTop().showToast(errorMessage5);
-      setError(true);
+      setSigUpError(true);
     } else {
-      print('$firstname');
-      print('$lastname');
-      print('$email');
-      print('$password');      setIsLoading(true);
-      setError(false);
+      setIsLoading(true);
+      setSigUpError(false);
       final client =
-      ApiClient(Dio(BaseOptions(
-
-           contentType: 'application/json'
-      )));
+      ApiClient(Dio(BaseOptions(contentType: 'application/json')));
       RegisterUser registerUser = RegisterUser(
+        first_name: firstName,
+        last_name: lastName,
         email: email,
         password: password,
-        first_name: firstname,
-        last_name: lastname,);
-      client.register('application/json',registerUser).then((it) async {
+      );
+      client.register(registerUser).then((it) async {
+
+        setToken(it.token!);
+        SharedPreferences sharedPreferences = await _prefs;
+        sharedPreferences.setBool('isSignUp', true);
+        sharedPreferences.setString('token', it.token!);
         setIsLoading(false);
-        const ToastAtTop().showToast(registerSuccess);
-        const Routes().replace(context, LoginScreen());
-        //const Routes().replace(context, GroupMemberShipScreen());
-        // context.router.replaceAll([
-        //   const Home(),
-        // ]);
+
+        const ToastAtTop().showToast(signupSuccess);
+        const Routes().replace(Globals.navigatorKey.currentContext!, const LoginScreen());
+
+
       }).catchError((Object obj) {
-        print('!!!!!!!!!!!!!$obj');
         setIsLoading(false);
-        setError(true);
+        setLoginError(true);
+        debugPrint('********** signup $obj');
+
         const ToastAtTop().showToast(errorMessage3);
-        switch (obj.runtimeType) {
-          case DioError:
-            final res = (obj as DioError).response;
-            const ToastAtTop().showToast('${res?.data['message']}');
-            print('Got error : ${res?.statusCode} -> ${res?.data['message']}');
-            break;
-          default:
-            break;
-        }
       });
     }
   }
+
+  // Future signUpToApp(
+  //     BuildContext context,
+  //     String firstname,
+  //     String lastname,
+  //     String email,
+  //     String password,
+  //   ) async{
+  //   debugPrint('Register');
+  //   if (firstname.trim().isEmpty ||
+  //       lastname.trim().isEmpty ||
+  //       email.trim().isEmpty ||
+  //       password.trim().isEmpty
+  //     ) {
+  //     const ToastAtTop().showToast(errorMessage5);
+  //     setError(true);
+  //   } else {
+  //     print('$firstname');
+  //     print('$lastname');
+  //     print('$email');
+  //     print('$password');      setIsLoading(true);
+  //     setError(false);
+  //     final client =
+  //     ApiClient(Dio(BaseOptions(
+  //
+  //          contentType: 'application/json'
+  //     )));
+  //     RegisterUser registerUser = RegisterUser(
+  //       email: email,
+  //       password: password,
+  //       first_name: firstname,
+  //       last_name: lastname,);
+  //     client.register('application/json',registerUser).then((it) async {
+  //       setIsLoading(false);
+  //       const ToastAtTop().showToast(registerSuccess);
+  //       const Routes().replace(context, LoginScreen());
+  //       //const Routes().replace(context, GroupMemberShipScreen());
+  //       // context.router.replaceAll([
+  //       //   const Home(),
+  //       // ]);
+  //     }).catchError((Object obj) {
+  //       print('!!!!!!!!!!!!!$obj');
+  //       setIsLoading(false);
+  //       setError(true);
+  //       const ToastAtTop().showToast(errorMessage3);
+  //       switch (obj.runtimeType) {
+  //         case DioError:
+  //           final res = (obj as DioError).response;
+  //           const ToastAtTop().showToast('${res?.data['message']}');
+  //           print('Got error : ${res?.statusCode} -> ${res?.data['message']}');
+  //           break;
+  //         default:
+  //           break;
+  //       }
+  //     });
+  //   }
+  // }
 
 
 }

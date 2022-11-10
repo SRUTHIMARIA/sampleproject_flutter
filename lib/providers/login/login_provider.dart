@@ -11,6 +11,7 @@ import 'package:flutter_template/network/api_client.dart';
 import 'package:flutter_template/services/navigation/routes.dart';
 import 'package:flutter_template/ui/homepage/homepage.dart';
 import 'package:flutter_template/utils/constants/strings.dart';
+import 'package:flutter_template/utils/globals.dart';
 import 'package:flutter_template/widgets/common/custom_toast.dart';
 import 'package:logger/logger.dart';
 import 'package:provider/provider.dart';
@@ -35,6 +36,10 @@ class LoginProvider extends ChangeNotifier{
   String errorMessage = '';
   final logger = Logger();
   int key=0;
+  bool signUpError = false;
+  String deviceToken = '';
+
+
 
   bool _loading=false;
   bool get loading=>_loading;
@@ -67,6 +72,11 @@ class LoginProvider extends ChangeNotifier{
     loginError = setError;
     notifyListeners();
   }
+  void setSignUpError(bool setError) {
+    signUpError = setError;
+    notifyListeners();
+  }
+
 
 
   void setEmail(String mail) {
@@ -127,67 +137,104 @@ class LoginProvider extends ChangeNotifier{
 // }
 
 
-  Future signInToApp(
-      BuildContext context, String email, String password,String device_token) async {
-    print('***********************Login');
-    if (email.trim().isEmpty || password.trim().isEmpty) {
+  Future signInToApp(String email, String password) async{
+    if(email.trim().isEmpty || password.trim().isEmpty) {
       const ToastAtTop().showToast(errorMessage5);
       setLoginError(true);
     } else {
       setIsLoading(true);
       setLoginError(false);
-      final client =
-      ApiClient(Dio(BaseOptions(contentType: 'application/json')));
+      final client = ApiClient(Dio(BaseOptions(contentType: 'application/json')));
       LoginUser loginUser = LoginUser(
-        email: email,
-        password: password,
-       device_token: device_token,
-      );
+        email: email, password: password, device_token: deviceToken,);
       client.loginPage(loginUser).then((it) async {
 
-        setIsLoading(false);
-       setToken(it.token!);
-       // await SecureStorageHelper.saveString(key: StaticKeys.tokenLocation, dataToStore: it.token!);
+        setToken(it.token!);
         SharedPreferences sharedPreferences = await _prefs;
         sharedPreferences.setBool('isLoggedIn', true);
         sharedPreferences.setString('token', it.token!);
-        print('***********************${it.token}');
         setIsLoading(false);
-       Provider.of<LoginProvider>(context, listen: false).saveUserDetails(authToken: token, userName: username);
 
         const ToastAtTop().showToast(loggedin);
-        const Routes().replace(context,HomePage());
+        const Routes().replace(Globals.navigatorKey.currentContext!,  HomePage());
         // context.router.replaceAll([
         //   const Home(),
         // ]);
+
       }).catchError((Object obj) {
-        print('!!!!!!!!!!!!!$obj');
         setIsLoading(false);
         setLoginError(true);
-        //setError(true);
-        // const ToastAtTop().showToast(errorMessage3);
-        switch (obj.runtimeType) {
-          case DioError:
-            final res = (obj as DioError).response;
-            print('Got error : ${res?.statusCode} -> ${res?.data}');
-            const ToastAtTop().showToast('${res?.data['message']}');
-            break;
-          default:
-            break;
-        }
+        debugPrint('********** login $obj');
+
+        const ToastAtTop().showToast(errorMessage3);
+
       });
     }
   }
 
-  Future<void> saveUserDetails({required String authToken, required String userName}) async {
-    await Future.wait([
-      SecureStorageHelper.saveString(key: StaticKeys.tokenLocation, dataToStore: authToken),
-      SecureStorageHelper.saveString(key: StaticKeys.userNameLocation, dataToStore: userName),
-    ]);
-    token = authToken;
-    username = userName;
-    notifyListeners();
-  }
+
+  //
+  // Future signInToApp(
+  //     BuildContext context, String email, String password,String device_token) async {
+  //   print('***********************Login');
+  //   if (email.trim().isEmpty || password.trim().isEmpty) {
+  //     const ToastAtTop().showToast(errorMessage5);
+  //     setLoginError(true);
+  //   } else {
+  //     setIsLoading(true);
+  //     setLoginError(false);
+  //     final client =
+  //     ApiClient(Dio(BaseOptions(contentType: 'application/json')));
+  //     LoginUser loginUser = LoginUser(
+  //       email: email,
+  //       password: password,
+  //      device_token: device_token,
+  //     );
+  //     client.loginPage(loginUser).then((it) async {
+  //
+  //       setIsLoading(false);
+  //      setToken(it.token!);
+  //      // await SecureStorageHelper.saveString(key: StaticKeys.tokenLocation, dataToStore: it.token!);
+  //       SharedPreferences sharedPreferences = await _prefs;
+  //       sharedPreferences.setBool('isLoggedIn', true);
+  //       sharedPreferences.setString('token', it.token!);
+  //       print('***********************${it.token}');
+  //       setIsLoading(false);
+  //      Provider.of<LoginProvider>(context, listen: false).saveUserDetails(authToken: token, userName: username);
+  //
+  //       const ToastAtTop().showToast(loggedin);
+  //       const Routes().replace(context,HomePage());
+  //       // context.router.replaceAll([
+  //       //   const Home(),
+  //       // ]);
+  //     }).catchError((Object obj) {
+  //       print('!!!!!!!!!!!!!$obj');
+  //       setIsLoading(false);
+  //       setLoginError(true);
+  //       //setError(true);
+  //       // const ToastAtTop().showToast(errorMessage3);
+  //       switch (obj.runtimeType) {
+  //         case DioError:
+  //           final res = (obj as DioError).response;
+  //           print('Got error : ${res?.statusCode} -> ${res?.data}');
+  //           const ToastAtTop().showToast('${res?.data['message']}');
+  //           break;
+  //         default:
+  //           break;
+  //       }
+  //     });
+  //   }
+  // }
+  //
+  // Future<void> saveUserDetails({required String authToken, required String userName}) async {
+  //   await Future.wait([
+  //     SecureStorageHelper.saveString(key: StaticKeys.tokenLocation, dataToStore: authToken),
+  //     SecureStorageHelper.saveString(key: StaticKeys.userNameLocation, dataToStore: userName),
+  //   ]);
+  //   token = authToken;
+  //   username = userName;
+  //   notifyListeners();
+  // }
 
   // Future getUserDetailData() async {
   //   final client =
