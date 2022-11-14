@@ -26,6 +26,12 @@
       "languageVersion": "2.14"
     },
     {
+      "name": "animated_widgets",
+      "rootUri": "file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/animated_widgets-1.1.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "ansicolor",
       "rootUri": "file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/ansicolor-2.0.1",
       "packageUri": "lib/",
@@ -1010,7 +1016,7 @@
       "languageVersion": "2.17"
     }
   ],
-  "generated": "2022-11-10T07:05:07.303277Z",
+  "generated": "2022-11-14T10:36:20.502288Z",
   "generator": "pub",
   "generatorVersion": "2.18.1"
 }
