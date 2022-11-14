@@ -15,6 +15,12 @@ class AppColors {
   static const Color textFieldBgColor = Color(0xFFCAEBEF);
   static const Color slidercolor=Color(0xFF00AAE0);
   static const Color popTextGrey=Color(0xff81919D);
+  static const Color offWhite=Color(0xffD7F1F4);
+  static const Color darkGreen=Color(0xff006F7B);
+
+  static const Color grey=Color(0xff7C8F9B);
+  static const Color buttonGradient1=Color(0xffF2FAFB);
+  static const Color buttonGradient2=Color(0xff10CDE1);
 
 
 

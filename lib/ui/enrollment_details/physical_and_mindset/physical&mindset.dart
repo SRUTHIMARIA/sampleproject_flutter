@@ -1,6 +1,5 @@
 import 'dart:ui';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_rounded_date_picker/flutter_rounded_date_picker.dart';
@@ -98,7 +97,7 @@ class _PhysicalAndMindsetState extends State<PhysicalAndMindset> {
                       ),
                     ),
                     Container(
-                      margin: EdgeInsets.only(left: 12.0),
+                      margin: const EdgeInsets.only(left: 12.0),
                       child: Text(
                         physicalAndMindset,
                         style: const FontData().montFont20TextStyle,
@@ -111,7 +110,7 @@ class _PhysicalAndMindsetState extends State<PhysicalAndMindset> {
                 ),
                 Container(
                   padding: StaticPadding.paddingH50(context),
-                  margin: EdgeInsets.only(left: 12.0),
+                  margin: const EdgeInsets.only(left: 12.0),
                   child: Text(
                     physicalGoal,
                     style: const FontData().montFont60014TextStyle,
@@ -121,13 +120,13 @@ class _PhysicalAndMindsetState extends State<PhysicalAndMindset> {
                   height: context.heightPx * 6,
                 ),
                 Container(
-                  margin: EdgeInsets.symmetric(horizontal: 56),
+                  margin: const EdgeInsets.symmetric(horizontal: 56),
                   decoration: BoxDecoration(
                     color: AppColors.textFieldBgColor,
                     borderRadius: BorderRadius.circular(10.0),
                   ),
                   child: TextFormField(
-                    style: FontData().montFont50012GreyColorTextStyle,
+                    style: const FontData().montFont50012GreyColorTextStyle,
                     decoration: InputDecoration(
                       focusColor: Colors.white,
                       enabledBorder: InputBorder.none,
@@ -143,7 +142,7 @@ class _PhysicalAndMindsetState extends State<PhysicalAndMindset> {
                       hintText: goal,
 
                       //make hint text
-                      hintStyle: FontData().montFont50012GreyColorTextStyle,
+                      hintStyle: const FontData().montFont50012GreyColorTextStyle,
                     ),
                   ),
                 ),
@@ -152,7 +151,7 @@ class _PhysicalAndMindsetState extends State<PhysicalAndMindset> {
                 ),
                 Container(
                   height: context.heightPx * 120,
-                  margin: EdgeInsets.symmetric(horizontal: 56),
+                  margin: const EdgeInsets.symmetric(horizontal: 56),
                   decoration: BoxDecoration(
                     color: AppColors.textFieldBgColor,
                     borderRadius: BorderRadius.circular(10.0),
@@ -162,7 +161,7 @@ class _PhysicalAndMindsetState extends State<PhysicalAndMindset> {
                     minLines: 1,
                     //Normal textInputField will be displayed
                     maxLines: 5,
-                    style: FontData().montFont50012GreyColorTextStyle,
+                    style: const FontData().montFont50012GreyColorTextStyle,
                     decoration: InputDecoration(
                       focusColor: Colors.white,
                       enabledBorder: InputBorder.none,
@@ -179,7 +178,7 @@ class _PhysicalAndMindsetState extends State<PhysicalAndMindset> {
                       hintText: important,
 
                       //make hint text
-                      hintStyle: FontData().montFont50012GreyColorTextStyle,
+                      hintStyle: const FontData().montFont50012GreyColorTextStyle,
                     ),
                   ),
                 ),
@@ -188,25 +187,25 @@ class _PhysicalAndMindsetState extends State<PhysicalAndMindset> {
                 ),
                 Container(
                   height: context.heightPx * 120,
-                  margin: EdgeInsets.symmetric(horizontal: 56),
-                  decoration: BoxDecoration(
+                  margin: const EdgeInsets.symmetric(horizontal: 56),
+                  decoration: const BoxDecoration(
                     color: AppColors.textFieldBgColor,
-                    borderRadius: BorderRadius.circular(10.0),
+                    borderRadius: BorderRadius.all(Radius.circular(10.0)),
                   ),
                   child: TextFormField(
                     keyboardType: TextInputType.multiline,
                     minLines: 1,
                     //Normal textInputField will be displayed
                     maxLines: 5,
-                    style: FontData().montFont50012GreyColorTextStyle,
+                    style: const FontData().montFont50012GreyColorTextStyle,
                     decoration: InputDecoration(
                       focusColor: Colors.white,
                       enabledBorder: InputBorder.none,
                       contentPadding:
                           EdgeInsets.only(left: context.heightPx * 16),
 
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10.0),
+                      border: const OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(10.0)),
                       ),
                       focusedBorder: InputBorder.none,
 
@@ -215,7 +214,7 @@ class _PhysicalAndMindsetState extends State<PhysicalAndMindset> {
                       hintText: aboutIt,
 
                       //make hint text
-                      hintStyle: FontData().montFont50012GreyColorTextStyle,
+                      hintStyle: const FontData().montFont50012GreyColorTextStyle,
                     ),
                   ),
                 ),
@@ -223,13 +222,13 @@ class _PhysicalAndMindsetState extends State<PhysicalAndMindset> {
                   height: context.heightPx * 26,
                 ),
                 Container(
-                  margin: EdgeInsets.symmetric(horizontal: 56),
+                  margin: const EdgeInsets.symmetric(horizontal: 56),
                   decoration: BoxDecoration(
                     color: AppColors.textFieldBgColor,
                     borderRadius: BorderRadius.circular(10.0),
                   ),
                   child: TextFormField(
-                    style: FontData().montFont50012GreyColorTextStyle,
+                    style: const FontData().montFont50012GreyColorTextStyle,
                     decoration: InputDecoration(
                       focusColor: Colors.white,
                       enabledBorder: InputBorder.none,
@@ -242,15 +241,13 @@ class _PhysicalAndMindsetState extends State<PhysicalAndMindset> {
                       hintText: whenwill,
                       hintStyle: const FontData().montFont50012GreyColorTextStyle,
                       suffixIcon: InkWell(
-                          onTap: () async{
+                          onTap: () {
                             SfCalendar(
-
-
                               backgroundColor: AppColors.textFieldBgColor,
                               view: CalendarView.month,
                               // dataSource: getCalendarDataSource(),
                               onViewChanged: viewChanged,
-                              headerStyle:CalendarHeaderStyle(textStyle: FontData().montFont60014TextStyle),
+                              headerStyle:CalendarHeaderStyle(textStyle: const FontData().montFont60014TextStyle),
                               headerDateFormat: DateFormat.WEEKDAY,
                             );
                             // DateTime? pickedDate = await showRoundedDatePicker(
@@ -320,11 +317,11 @@ class _PhysicalAndMindsetState extends State<PhysicalAndMindset> {
                             // } else {}
                             // timepicker();
                           },
-                          child: Icon(
+                          child: const Icon(
                             Icons.add,
                             color: AppColors.darkGreen,
                             size: 16,
-                          )),
+                          ),),
                     ),
                   ),
                 ),
@@ -333,7 +330,7 @@ class _PhysicalAndMindsetState extends State<PhysicalAndMindset> {
                   height: context.heightPx * 16,
                 ),
                Container(
-                  margin: EdgeInsets.symmetric(horizontal: 56),
+                  margin: const EdgeInsets.symmetric(horizontal: 56),
                   decoration: BoxDecoration(
                     color: AppColors.textFieldBgColor,
                     borderRadius: BorderRadius.circular(10.0),
@@ -343,13 +340,13 @@ class _PhysicalAndMindsetState extends State<PhysicalAndMindset> {
                   ),
                 ),
                 Container(
-                  margin: EdgeInsets.symmetric(horizontal: 56),
+                  margin: const EdgeInsets.symmetric(horizontal: 56),
                   decoration: BoxDecoration(
                     color: AppColors.textFieldBgColor,
                     borderRadius: BorderRadius.circular(10.0),
                   ),
                   child: TextFormField(
-                    style: FontData().montFont50012GreyColorTextStyle,
+                    style: const FontData().montFont50012GreyColorTextStyle,
                     decoration: InputDecoration(
                       focusColor: Colors.white,
                       enabledBorder: InputBorder.none,
@@ -365,7 +362,7 @@ class _PhysicalAndMindsetState extends State<PhysicalAndMindset> {
                       hintText: wherewill,
 
                       //make hint text
-                      hintStyle: FontData().montFont50012GreyColorTextStyle,
+                      hintStyle: const FontData().montFont50012GreyColorTextStyle,
                     ),
                   ),
                 ),
@@ -377,7 +374,7 @@ class _PhysicalAndMindsetState extends State<PhysicalAndMindset> {
                     Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => PhysicalAndMindset()));
+                            builder: (context) => const PhysicalAndMindset()));
                   },
                   child: Align(
                     alignment: Alignment.center,
@@ -429,11 +426,11 @@ class _PhysicalAndMindsetState extends State<PhysicalAndMindset> {
   Widget timepicker() {
     return  TimePickerSpinner(
       is24HourMode: false,
-      normalTextStyle: TextStyle(
+      normalTextStyle: const TextStyle(
           fontSize: 24,
           color: Colors.deepOrange
       ),
-      highlightedTextStyle: TextStyle(
+      highlightedTextStyle: const TextStyle(
           fontSize: 24,
           color: Colors.yellow
       ),

@@ -13,6 +13,8 @@ import '../../../gen/assets.gen.dart';
 import '../../../utils/theme/app_colors.dart';
 
 class WeeklyPlanner extends StatefulWidget {
+  const WeeklyPlanner({super.key});
+
   @override
   _WeeklyPlannerState createState() => _WeeklyPlannerState();
 }
@@ -22,6 +24,7 @@ class _WeeklyPlannerState extends State<WeeklyPlanner> {
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
         resizeToAvoidBottomInset: false,
         body: Container(
@@ -39,9 +42,8 @@ class _WeeklyPlannerState extends State<WeeklyPlanner> {
                 Row(
                   children: [
                     InkWell(
-                      onTap: () {
-                        Navigator.pop(context);
-                      },
+                      onTap: () =>
+                        Navigator.pop(context),
                       child: Container(
                         margin: EdgeInsets.only(left: context.heightPx * 32),
                         child: SvgPicture.asset(Assets.icons.iconBackarrow),
@@ -76,8 +78,6 @@ class _WeeklyPlannerState extends State<WeeklyPlanner> {
                        borderRadius: BorderRadius.circular(16.0),
                      ),
                      child: SfCalendar(
-
-
                        backgroundColor: AppColors.textFieldBgColor,
                        view: CalendarView.month,
                       // dataSource: getCalendarDataSource(),
@@ -155,7 +155,7 @@ class _WeeklyPlannerState extends State<WeeklyPlanner> {
                                   ),
                                   SizedBox(height: context.heightPx *10,),
                                 ],
-                              )
+                              ),
 
 
                             )
@@ -165,13 +165,13 @@ class _WeeklyPlannerState extends State<WeeklyPlanner> {
 
                     );
 
-                  }
+                  },
                   ),
                 ),
               ],
             ),
           ),
-        ));
+        ),);
   }
 
   // _DataSource getCalendarDataSource() {

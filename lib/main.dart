@@ -57,7 +57,7 @@ class MyApp extends StatelessWidget {
       //   create: (context) => SignupValidation(),
       MaterialApp(
         debugShowCheckedModeBanner: false,
-        title: 'Athelete Assist',
+        title: 'Athlete Assist',
         theme: ThemeData(
           primarySwatch: Colors.blue,
 
@@ -67,7 +67,7 @@ class MyApp extends StatelessWidget {
         //   create: (_) => MapsProvider(),
         //   child: const HomeScreen(),
         // ),
-        home: PhysicalAndMindset(),
+        home: const WeeklyPlanner(),
 
       );
   }
