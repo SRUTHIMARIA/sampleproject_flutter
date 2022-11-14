@@ -7,6 +7,7 @@ class HiveHelper {
       return box.values.toList();
     } catch (e) {
       debugPrint(e.toString());
+
       return [];
     }
   }
@@ -48,6 +49,7 @@ class HiveHelper {
       return await Hive.openBox(boxName);
     } catch (e) {
       debugPrint(e.toString());
+
       return null;
     }
   }

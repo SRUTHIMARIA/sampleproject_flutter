@@ -17,7 +17,7 @@ class SportsSelection extends StatefulWidget {
 class _SportsSelectionState extends State<SportsSelection> {
   final List<Color> _colors = [
     AppColors.gradientColorSplash.withOpacity(0.48),
-    AppColors.bgPrimarySplash
+    AppColors.bgPrimarySplash,
   ];
   final List<double> _stops = [0.0, 0.0];
 
@@ -30,7 +30,7 @@ class _SportsSelectionState extends State<SportsSelection> {
             gradient: LinearGradient(
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
-                colors: [AppColors.gradientColorSplash, AppColors.bgPrimarySplash])),
+                colors: [AppColors.gradientColorSplash, AppColors.bgPrimarySplash],),),
         child: Scaffold(
           // By defaut, Scaffold background is white
           // Set its value to transparent
@@ -43,32 +43,33 @@ class _SportsSelectionState extends State<SportsSelection> {
               ),
               Align(
                 alignment: Alignment.centerLeft,
-                child: Padding(
+                child:
+                Container(
+                      padding: StaticPadding.paddingH50(context),
 
-                    padding: StaticPadding.paddingH50(context),
-                    child: Container(
                       margin: EdgeInsets.only(left: 12.0),
                       child: Text(
                         sports_type,
                         style:  FontData().montFont20TextStyle,
                       ),
-                    )),
-              ),
+                    ),),
+
               SizedBox(
                 height: context.heightPx * 6,
               ),
               Align(
                 alignment: Alignment.centerLeft,
-                child: Padding(
-                  padding: StaticPadding.paddingH50(context),
+
                   child: Container(
+                    padding: StaticPadding.paddingH50(context),
+
                     margin: EdgeInsets.only(left: 12.0),
                     child: Text(
                       selectsportsType,
                       style: const FontData().montFont14TextStyle,
                     ),
                   ),),
-              ),
+
               SizedBox(
                 height: context.heightPx * 22,
               ),
@@ -80,7 +81,7 @@ class _SportsSelectionState extends State<SportsSelection> {
                 margin: EdgeInsets.symmetric(horizontal: 56),
                 decoration: BoxDecoration(
                   color: AppColors.textFieldBgColor,
-                  borderRadius: BorderRadius.circular(6.0),
+                  borderRadius: const BorderRadius.all(Radius.circular(6.0)),
                 ),
                 child: TextFormField(
                   style: FontData().montFont500TextStyle,
@@ -91,7 +92,7 @@ class _SportsSelectionState extends State<SportsSelection> {
 
 
                     border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(6.0),
+                      borderRadius: const BorderRadius.all(Radius.circular(6.0)),
                     ),
 
                     fillColor:  AppColors.textFieldBgColor,

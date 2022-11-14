@@ -1,3 +1,4 @@
+import 'package:animated_widgets/widgets/translation_animated.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_template/gen/assets.gen.dart';
 import 'package:flutter_template/ui/student_basic_profile/age_group_selection.dart';
@@ -9,8 +10,6 @@ import 'package:flutter_template/utils/static/static_padding.dart';
 
 import 'package:flutter_template/utils/theme/app_colors.dart';
 
-
-
 class SportsTypeScreen extends StatefulWidget {
   const SportsTypeScreen({Key? key}) : super(key: key);
 
@@ -21,18 +20,13 @@ class SportsTypeScreen extends StatefulWidget {
 class _SportsTypeScreenState extends State<SportsTypeScreen> {
   int? selectedCategory;
 
-  final List<Color> _colors = [
-    AppColors.gradientColorSplash.withOpacity(0.48),
-    AppColors.bgPrimarySplash
-  ];
-  final List<double> _stops = [0.0, 0.0];
+  final List<Color> _colors = [AppColors.gradientColorSplash.withOpacity(0.48), AppColors.bgPrimarySplash];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: SingleChildScrollView(
-
         child: Container(
           // height: double.infinity,
           // width: double.infinity,
@@ -40,52 +34,49 @@ class _SportsTypeScreenState extends State<SportsTypeScreen> {
             color: AppColors.primaryColor,
             gradient: LinearGradient(
               colors: _colors,
-            //   begin: Alignment.topRight, stops: [
-            //   2.8,
-            //   1.0,
-            // ],
-
-
+              //   begin: Alignment.topRight, stops: [
+              //   2.8,
+              //   1.0,
+              // ],
             ),
           ),
-          child:
-          Column(
+          child: Column(
             children: [
               SizedBox(
                 height: context.heightPx * 64,
               ),
               Align(
                 alignment: Alignment.centerLeft,
-                child: Padding(
 
-                    padding: StaticPadding.paddingH50(context),
                     child: Container(
+                      padding: StaticPadding.paddingH50(context),
+
                       margin: EdgeInsets.only(left: 12.0),
                       child: Text(
                         sports_type,
-                        style:  FontData().montFont20TextStyle,
+                        style: FontData().montFont20TextStyle,
                       ),
-                    )),
-              ),
+                    ),),
+
               SizedBox(
                 height: context.heightPx * 6,
               ),
               Align(
                 alignment: Alignment.centerLeft,
-                child: Padding(
-                  padding: StaticPadding.paddingH50(context),
-                  child: Container(
+                child: Container(
+                    padding: StaticPadding.paddingH50(context),
+
                     margin: EdgeInsets.only(left: 12.0),
                     child: Text(
                       selectany,
                       style: const FontData().montFont14TextStyle,
                     ),
-                  ),),
-              ),
+                  ),
+                ),
+
               SizedBox(
                 height: context.heightPx * 22,
               ),
-
               Container(
                 child: Column(
                   children: [
@@ -94,123 +85,99 @@ class _SportsTypeScreenState extends State<SportsTypeScreen> {
                       children: [
                         SportsTypeWidget(
                           nextLine: false,
-                          label:  'BASKET BALL',
+                          label: 'BASKET BALL',
                           image: Assets.images.sportsBatminton,
-                          onPress: () {
+                          onPress: () =>
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) =>  AgeGroupSelection(
-
-                                ),
+                                builder: (context) => AgeGroupSelection(),
                               ),
-                            );
-                          },
+                            ),
                         ),
-
                         SizedBox(width: context.widthPx * 20),
                         SportsTypeWidget(
                           nextLine: false,
-                          label:  'AFL',
+                          label: 'AFL',
                           image: Assets.images.sportsAfl,
-                          onPress: () {
+                          onPress: () =>
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) =>  AgeGroupSelection(
-
-                                ),
+                                builder: (context) => AgeGroupSelection(),
                               ),
-                            );
-                          },
-                        ),
+                            ),
 
+                        ),
                       ],
                     ),
                   ],
                 ),
               ),
-
-          SizedBox(
-            height: context.heightPx * 20,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-          SportsTypeWidget(
-            nextLine: false,
-            label:  'SOCCER',
-            image: Assets.images.sportsSoccer,
-            onPress: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) =>  AgeGroupSelection(
-
-                  ),
-                ),
-              );
-            },
-          ),
-
-          SizedBox(width: context.widthPx * 20),
-          SportsTypeWidget(
-            nextLine: false,
-            label:  'CRICKET',
-            image: Assets.images.sportsCricket,
-            onPress: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) =>  AgeGroupSelection(
-
-                  ),
-                ),
-              );
-            },
-          ),
-
-            ],
-          ),
-          SizedBox(
-            height: context.heightPx * 20,
-          ),
+              SizedBox(
+                height: context.heightPx * 20,
+              ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   SportsTypeWidget(
                     nextLine: false,
-                    label:  'TENNIS',
+                    label: 'SOCCER',
+                    image: Assets.images.sportsSoccer,
+                    onPress: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => AgeGroupSelection(),
+                      ),
+                    ),
+                  ),
+                  SizedBox(width: context.widthPx * 20),
+                  SportsTypeWidget(
+                    nextLine: false,
+                    label: 'CRICKET',
+                    image: Assets.images.sportsCricket,
+                    onPress: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => AgeGroupSelection(),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(
+                height: context.heightPx * 20,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  SportsTypeWidget(
+                    nextLine: false,
+                    label: 'TENNIS',
                     image: Assets.images.sportsTennis,
-                    onPress: () {
+                    onPress: () =>
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) =>  AgeGroupSelection(
-
-                          ),
+                          builder: (context) => AgeGroupSelection(),
                         ),
-                      );
-                    },
-                  ),
+                      ),
 
+                  ),
                   SizedBox(width: context.widthPx * 20),
                   SportsTypeWidget(
                     nextLine: false,
-                    label:  'RUGBY UNION',
+                    label: 'RUGBY UNION',
                     image: Assets.images.sportsRuby,
-                    onPress: () {
+                    onPress: () =>
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) =>  AgeGroupSelection(
-
-                          ),
+                          builder: (context) => AgeGroupSelection(),
                         ),
-                      );
-                    },
-                  ),
+                      ),
 
+                  ),
                 ],
               ),
               SizedBox(
@@ -221,37 +188,31 @@ class _SportsTypeScreenState extends State<SportsTypeScreen> {
                 children: [
                   SportsTypeWidget(
                     nextLine: false,
-                    label:  'RUGBY LEAGUE',
+                    label: 'RUGBY LEAGUE',
                     image: Assets.images.sportsRubyLeague,
-                    onPress: () {
+                    onPress: () =>
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) =>  AgeGroupSelection(
-
-                          ),
+                          builder: (context) => AgeGroupSelection(),
                         ),
-                      );
-                    },
-                  ),
+                      ),
 
+                  ),
                   SizedBox(width: context.widthPx * 20),
                   SportsTypeWidget(
                     nextLine: false,
-                    label:  'SWIMMING',
+                    label: 'SWIMMING',
                     image: Assets.images.sportsSwimming,
-                    onPress: () {
+                    onPress: () =>
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) =>  AgeGroupSelection(
-
-                          ),
+                          builder: (context) => AgeGroupSelection(),
                         ),
-                      );
-                    },
-                  ),
+                      ),
 
+                  ),
                 ],
               ),
               SizedBox(
@@ -262,37 +223,30 @@ class _SportsTypeScreenState extends State<SportsTypeScreen> {
                 children: [
                   SportsTypeWidget(
                     nextLine: false,
-                    label:  'GYMNASTICS',
+                    label: 'GYMNASTICS',
                     image: Assets.images.sportsGynastic,
-                    onPress: () {
+                    onPress: () =>
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) =>  AgeGroupSelection(
-
-                          ),
+                          builder: (context) => AgeGroupSelection(),
                         ),
-                      );
-                    },
-                  ),
+                      ),
 
+                  ),
                   SizedBox(width: context.widthPx * 20),
                   SportsTypeWidget(
                     nextLine: false,
-                    label:  'RUNNING',
+                    label: 'RUNNING',
                     image: Assets.images.sportsRunning,
-                    onPress: () {
+                    onPress: () =>
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) =>  AgeGroupSelection(
-
-                          ),
+                          builder: (context) => AgeGroupSelection(),
                         ),
-                      );
-                    },
+                      ),
                   ),
-
                 ],
               ),
               SizedBox(
@@ -303,42 +257,63 @@ class _SportsTypeScreenState extends State<SportsTypeScreen> {
                 children: [
                   SportsTypeWidget(
                     nextLine: false,
-                    label:  'NETBALL',
+                    label: 'NETBALL',
                     image: Assets.images.sportsNetball,
-                    onPress: () {
+                    onPress: () =>
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) =>  AgeGroupSelection(
-
-                          ),
+                          builder: (context) => AgeGroupSelection(),
                         ),
-                      );
-                    },
+                      ),
                   ),
-
                   SizedBox(width: context.widthPx * 20),
                   SportsTypeWidget(
                     nextLine: false,
-                    label:  'TOUCH FOOTBALL',
+                    label: 'TOUCH FOOTBALL',
                     image: Assets.images.sportsTouchball,
-                    onPress: () {
+                    onPress: () =>
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) =>  AgeGroupSelection(
-
-                          ),
+                          builder: (context) => AgeGroupSelection(),
                         ),
-                      );
-                    },
+                      ),
                   ),
-
                 ],
               ),
 
+              Stack(
+                children: [
 
+                  TranslationAnimatedWidget.tween(
+                    // enabled: _display,
+                    translationDisabled: const Offset(200, 0),
+                    translationEnabled: const Offset(0, 0),
+                    child: TranslationAnimatedWidget.tween(
+                      // opacityEnabled: 1, //define start value
+                      // opacityDisabled: 0, //and end value
+                      duration: const Duration(milliseconds: 5),
 
+                      translationDisabled: const Offset(100, 100),
+                      translationEnabled: const Offset(0, 0),
+                      // enabled: _display,
+                      curve: Curves.ease,
+                      //bind with the boolean
+                      child: Container(
+
+                        decoration: const BoxDecoration(
+                          borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                        ),
+                        child: InkWell(
+                          onTap: ()=> Navigator.push(context, MaterialPageRoute(builder: (context)=>AgeGroupSelection())),
+
+                          child: Image.asset(Assets.icons.iconForward.path),),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ],
           ),
         ),

@@ -1,11 +1,10 @@
 
 
-// import 'package:dio/dio.dart';
+
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_template/models/login_model/login_user_model.dart';
-import 'package:flutter_template/models/register_model/register_user.dart';
-import 'package:flutter_template/models/register_model/success_user_model.dart';
+
 import 'package:flutter_template/network/api_client.dart';
 import 'package:flutter_template/services/navigation/routes.dart';
 import 'package:flutter_template/ui/homepage/homepage.dart';
@@ -13,12 +12,8 @@ import 'package:flutter_template/utils/constants/strings.dart';
 import 'package:flutter_template/utils/globals.dart';
 import 'package:flutter_template/widgets/common/custom_toast.dart';
 import 'package:logger/logger.dart';
-import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../../local_data/helpers/secure_storage_helper.dart';
-import '../../utils/static/keys.dart';
-import 'package:http/http.dart';
 
 
 

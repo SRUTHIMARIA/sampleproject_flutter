@@ -41,9 +41,12 @@ class _WhyJoinScreenState extends State<WhyJoinScreen> {
             SizedBox(
               height: context.heightPx * 63,
             ),
-            Container(
-              margin: EdgeInsets.only(left: context.heightPx * 49),
-              child: SvgPicture.asset(Assets.icons.backarrow),
+            InkWell(
+              onTap: () =>Navigator.pop(context),
+              child: Container(
+                margin: EdgeInsets.only(left: context.heightPx * 49),
+                child: SvgPicture.asset(Assets.icons.backarrow),
+              ),
             ),
             SizedBox(
               height: context.heightPx * 20,

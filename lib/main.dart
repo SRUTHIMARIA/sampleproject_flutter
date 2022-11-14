@@ -6,6 +6,7 @@ import 'package:flutter_template/ui/scheduling_self_analysis/self_analyisis_note
 import 'package:flutter_template/providers/authentication_provider.dart';
 import 'package:flutter_template/providers/providers.dart';
 import 'package:flutter_template/ui/splash_screen/splash_screen.dart';
+import 'package:flutter_template/ui/student_basic_profile/sports_selection.dart';
 import 'package:flutter_template/ui/student_basic_profile/sports_type_screen.dart';
 import 'package:flutter_template/utils/globals.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -59,12 +60,12 @@ class MyApp extends StatelessWidget {
                 ResponsiveBreakpoint.autoScale(1000, name: TABLET),
                 ResponsiveBreakpoint.resize(1000, name: DESKTOP),
               ],
-              background: Container(color: const Color(0xFFF5F5F5))),
-      title: 'Athelete Assist',
+              background: Container(color: const Color(0xFFF5F5F5)),),
+      title: 'Athlete Assist',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const SplashScreen(),
+      home: const SportsTypeScreen(),
       // home: ChangeNotifierProvider(
       //   create: (context) => DrawerScreenProvider(),
       //   child:  HomePage(),

@@ -1,12 +1,9 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_template/models/forgot_password_model/forgotpasswd_model.dart';
 import 'package:flutter_template/models/new_password_model/new_password_model.dart';
 
-import 'package:flutter_template/models/register_model/success_user_model.dart';
 import 'package:flutter_template/network/api_client.dart';
 import 'package:flutter_template/services/navigation/routes.dart';
-import 'package:flutter_template/ui/login_screen/login_screen.dart';
 import 'package:flutter_template/ui/password_recovery/password_activation_link.dart';
 
 import 'package:flutter_template/utils/constants/strings.dart';
@@ -15,7 +12,6 @@ import 'package:flutter_template/widgets/common/custom_toast.dart';
 import 'package:logger/logger.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../../ui/password_recovery/authentication_code_screen.dart';
 
 
 
