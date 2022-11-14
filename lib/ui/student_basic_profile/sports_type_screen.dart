@@ -1,6 +1,7 @@
 import 'package:animated_widgets/widgets/translation_animated.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_template/gen/assets.gen.dart';
+import 'package:flutter_template/models/sports_type_model/sports_category_model.dart';
 import 'package:flutter_template/ui/student_basic_profile/age_group_selection.dart';
 import 'package:flutter_template/ui/student_basic_profile/sports_type_widgets/sports_type_widgets.dart';
 import 'package:flutter_template/utils/constants/font_data.dart';
@@ -20,7 +21,18 @@ class SportsTypeScreen extends StatefulWidget {
 class _SportsTypeScreenState extends State<SportsTypeScreen> {
   int? selectedCategory;
 
+
   final List<Color> _colors = [AppColors.gradientColorSplash.withOpacity(0.48), AppColors.bgPrimarySplash];
+
+  int isSelected = -1; // changed bool to int and set value to -1 on first time if you don't select anything otherwise set 0 to set first one as selected.
+
+
+  _isSelected(int index) {
+    //pass the selected index to here and set to 'isSelected'
+    setState(() {
+      isSelected = index;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -48,15 +60,15 @@ class _SportsTypeScreenState extends State<SportsTypeScreen> {
               Align(
                 alignment: Alignment.centerLeft,
 
-                    child: Container(
-                      padding: StaticPadding.paddingH50(context),
+                child: Container(
+                  padding: StaticPadding.paddingH50(context),
 
-                      margin: EdgeInsets.only(left: 12.0),
-                      child: Text(
-                        sports_type,
-                        style: FontData().montFont20TextStyle,
-                      ),
-                    ),),
+                  margin: EdgeInsets.only(left: 12.0),
+                  child: Text(
+                    sports_type,
+                    style: FontData().montFont20TextStyle,
+                  ),
+                ),),
 
               SizedBox(
                 height: context.heightPx * 6,
@@ -64,21 +76,49 @@ class _SportsTypeScreenState extends State<SportsTypeScreen> {
               Align(
                 alignment: Alignment.centerLeft,
                 child: Container(
-                    padding: StaticPadding.paddingH50(context),
+                  padding: StaticPadding.paddingH50(context),
 
-                    margin: EdgeInsets.only(left: 12.0),
-                    child: Text(
-                      selectany,
-                      style: const FontData().montFont14TextStyle,
-                    ),
+                  margin: EdgeInsets.only(left: 12.0),
+                  child: Text(
+                    selectany,
+                    style: const FontData().montFont14TextStyle,
                   ),
                 ),
+              ),
 
               SizedBox(
                 height: context.heightPx * 22,
               ),
+
+
+              //
+              //  GridView.builder(
+              //    itemCount: SportsCategoryModel.,
+              //       shrinkWrap: true,
+              //       crossAxisCount: 2,
+              //       childAspectRatio: 2.0,
+              //       children: List.generate(12, (index) =>
+              //          SportsTypeWidget(
+              //                         nextLine: false,
+              //                         label: 'AFL',
+              //                         image: Assets.images.sportsAfl,
+              //                         onPress: () =>
+              //                           Navigator.push(
+              //                             context,
+              //                             MaterialPageRoute(
+              //                               builder: (context) => AgeGroupSelection(),
+              //                             ),
+              //                           ),
+              //
+              //                       ),
+              //       ),
+              //
+              //
+              // ),
+
               Container(
-                child: Column(
+                child:
+                Column(
                   children: [
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -283,6 +323,11 @@ class _SportsTypeScreenState extends State<SportsTypeScreen> {
                 ],
               ),
 
+              SizedBox(
+                height: context.heightPx * 22,
+              ),
+
+
               Stack(
                 children: [
 
@@ -306,7 +351,8 @@ class _SportsTypeScreenState extends State<SportsTypeScreen> {
                           borderRadius: BorderRadius.all(Radius.circular(20.0)),
                         ),
                         child: InkWell(
-                          onTap: ()=> Navigator.push(context, MaterialPageRoute(builder: (context)=>AgeGroupSelection())),
+                          onTap: () =>
+                              Navigator.push(context, MaterialPageRoute(builder: (context) => AgeGroupSelection())),
 
                           child: Image.asset(Assets.icons.iconForward.path),),
                       ),
@@ -314,6 +360,10 @@ class _SportsTypeScreenState extends State<SportsTypeScreen> {
                   ),
                 ],
               ),
+              SizedBox(
+                height: context.heightPx * 22,
+              ),
+
             ],
           ),
         ),
