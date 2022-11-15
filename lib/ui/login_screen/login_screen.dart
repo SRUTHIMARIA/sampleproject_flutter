@@ -286,7 +286,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 SizedBox(height: context.heightPx * 16),
                 InkWell(
                   onTap: () => Navigator.pushReplacement(
-                      context, MaterialPageRoute(builder: (context) => const PasswordRecovery())),
+                      context, MaterialPageRoute(builder: (context) => const PasswordRecovery()),),
                   child: Align(
                     alignment: Alignment.centerRight,
                     child: Padding(
@@ -300,7 +300,9 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 SizedBox(height: context.heightPx * 16),
                 GestureDetector(
-                  onTap: () => handlePressed(),
+                  onTap: () => loginUser(),
+
+                  // handlePressed(),
                   // loginProvider.login(txtUserNameController.text.toString(), txtUserPwdController.text.toString(), token??''),
                   //     loginUser(),
 
