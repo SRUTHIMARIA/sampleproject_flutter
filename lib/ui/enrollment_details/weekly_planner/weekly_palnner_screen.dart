@@ -33,143 +33,134 @@ class _WeeklyPlannerState extends State<WeeklyPlanner> {
           decoration: BoxDecoration(
             color: AppColors.primaryColor.withOpacity(0.40),
           ),
-          child: Container(
-            child: Column(
-              children: [
-                SizedBox(
-                  height: context.heightPx * 70,
-                ),
-                Row(
-                  children: [
-                    InkWell(
-                      onTap: () =>
-                        Navigator.pop(context),
-                      child: Container(
-                        margin: EdgeInsets.only(left: context.heightPx * 32),
-                        child: SvgPicture.asset(Assets.icons.iconBackarrow),
-                      ),
+          child: Column(
+            children: [
+              SizedBox(
+                height: context.heightPx * 70,
+              ),
+              Row(
+                children: [
+                  InkWell(
+                    onTap: () =>
+                      Navigator.pop(context),
+                    child: Container(
+                      margin: EdgeInsets.only(left: context.heightPx * 32),
+                      child: SvgPicture.asset(Assets.icons.iconBackarrow),
                     ),
+                  ),
 
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Container(
-                      child: Text('$_month',style: FontData().montFont60018TextStyle,),
-                    ),
-                    Container(
-                      child: Text('$_year',style: FontData().montFont60018TextStyle,),
-                    ),
-                  ],
-                ),
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text('$_month',style: const FontData().montFont60018TextStyle,),
+                  Text('$_year',style: const FontData().montFont60018TextStyle,),
+                ],
+              ),
 
-               ClipRRect(
-                 borderRadius: BorderRadius.circular(16.0),
+             ClipRRect(
+               borderRadius: const BorderRadius.all(Radius.circular(16.0)),
+               child: Container(
+
+                 decoration: const BoxDecoration(
+                   borderRadius: BorderRadius.all(Radius.circular(16.0)),
+                 ),
+                 margin: const EdgeInsets.all(25.0),
                  child: Container(
-
-                   decoration: BoxDecoration(
-                     borderRadius: BorderRadius.circular(16.0),
+                   height: 200,
+                   decoration: const BoxDecoration(
+                     borderRadius: BorderRadius.all(Radius.circular(16.0)),
                    ),
-                   margin: EdgeInsets.all(25.0),
-                   child: Container(
-                     height: 200,
-                     decoration: BoxDecoration(
-                       borderRadius: BorderRadius.circular(16.0),
-                     ),
-                     child: SfCalendar(
-                       backgroundColor: AppColors.textFieldBgColor,
-                       view: CalendarView.month,
-                      // dataSource: getCalendarDataSource(),
-                       onViewChanged: viewChanged,
-                       headerStyle:CalendarHeaderStyle(textStyle: FontData().montFont60014TextStyle),
-                       headerDateFormat: DateFormat.WEEKDAY,
-                     ),
+                   child: SfCalendar(
+                     backgroundColor: AppColors.textFieldBgColor,
+                     view: CalendarView.month,
+                    // dataSource: getCalendarDataSource(),
+                     onViewChanged: viewChanged,
+                     headerStyle:CalendarHeaderStyle(textStyle: const FontData().montFont60014TextStyle),
+                     headerDateFormat: DateFormat.WEEKDAY,
                    ),
                  ),
                ),
+             ),
 
 
-                Expanded(
-                  child: ListView.builder(
-                    itemExtent: 80,
-                      scrollDirection: Axis.vertical,
-                      shrinkWrap: true,
-                    itemCount: weeklyPlan.length,
-                    itemBuilder:(context,index){
-                    return Container(
-                      child: Container(
-                        padding: StaticPadding.paddingH30(context),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
+              Expanded(
+                child: ListView.builder(
+                  itemExtent: 80,
+                    scrollDirection: Axis.vertical,
+                    shrinkWrap: true,
+                  itemCount: weeklyPlan.length,
+                  itemBuilder:(context,index){
+                  return Container(
+                    padding: StaticPadding.paddingH30(context),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
 
-                            Text(
-                              weeklyPlan[index].time,
-                              style: FontData().montFont50012GreyLightTextStyle,
-                            ),
-                            SizedBox(width: context.widthPx *24,),
-                            Container(
-                              height: 67,
-                                width: context.widthPx *220,
-                                margin: EdgeInsets.only(right:30),
-                                padding: EdgeInsets.only(left: 10),
+                        Text(
+                          weeklyPlan[index].time,
+                          style: const FontData().montFont50012GreyLightTextStyle,
+                        ),
+                        SizedBox(width: context.widthPx *24,),
+                        Container(
+                          height: 67,
+                            width: context.widthPx *220,
+                            margin: const EdgeInsets.only(right:30),
+                            padding: const EdgeInsets.only(left: 10),
 
 
-                                decoration: BoxDecoration(
-                                color: AppColors.themeColor,
-                                  borderRadius: BorderRadius.circular(12.0)
+                            decoration: const BoxDecoration(
+                            color: AppColors.themeColor,
+                              borderRadius: BorderRadius.all(Radius.circular(12.0)),
+                          ),
+                          child:Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              SizedBox(height: context.heightPx *8,),
+                              Text(
+                                weeklyPlan[index].title,
+                                style: const FontData().montFont60012offwhiteTextStyle,
                               ),
-                              child:Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisAlignment: MainAxisAlignment.start,
+                              Text(
+                                weeklyPlan[index].des,
+                                style: const FontData().montFont40010offwhiteTextStyle,
+                              ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
-                                  SizedBox(height: context.heightPx *8,),
                                   Text(
-                                    weeklyPlan[index].title,
-                                    style: FontData().montFont60012offwhiteTextStyle,
+                                    weeklyPlan[index].category,
+                                    style: const FontData().montFont60010offwhiteTextStyle,
                                   ),
-                                  Text(
-                                    weeklyPlan[index].des,
-                                    style: FontData().montFont40010offwhiteTextStyle,
-                                  ),
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Text(
-                                        weeklyPlan[index].category,
-                                        style: FontData().montFont60010offwhiteTextStyle,
-                                      ),
-                                      Container(
-                                        margin: EdgeInsets.only(right:10),
+                                  Container(
+                                    margin: const EdgeInsets.only(right:10),
 
-                                        child: Text(
-                                          weeklyPlan[index].timeduration,
-                                          style: FontData().montFont4008offwhiteTextStyle,
-                                        ),
-                                      ),
+                                    child: Text(
+                                      weeklyPlan[index].timeduration,
+                                      style: const FontData().montFont4008offwhiteTextStyle,
+                                    ),
+                                  ),
 
 
-                                    ],
-                                  ),
-                                  SizedBox(height: context.heightPx *10,),
                                 ],
                               ),
+                              SizedBox(height: context.heightPx *10,),
+                            ],
+                          ),
 
 
-                            )
-                          ],
                         ),
-                      ),
+                      ],
+                    ),
+                  );
 
-                    );
-
-                  },
-                  ),
+                },
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),);
   }
@@ -200,7 +191,7 @@ class _WeeklyPlannerState extends State<WeeklyPlanner> {
   //     subject: 'Retrospective',
   //     color: Colors.purple,
   //   ));
-  //
+  //1111
   //   return _DataSource(appointments);
   // }
 
