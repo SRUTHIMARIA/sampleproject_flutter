@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_template/providers/drawer_provider.dart';
 import 'package:flutter_template/providers/providers.dart';
+import 'package:flutter_template/ui/homepage/chat_screen.dart';
 import 'package:flutter_template/ui/homepage/homepage.dart';
 import 'package:flutter_template/ui/homepage/main_screen.dart';
 import 'package:flutter_template/ui/profile/profile.dart';
@@ -28,17 +29,17 @@ class MyApp extends StatelessWidget {
           minWidth: 480,
           defaultScale: true,
           breakpoints: [
-            ResponsiveBreakpoint.resize(480, name: MOBILE),
-            ResponsiveBreakpoint.autoScale(800, name: TABLET),
-            ResponsiveBreakpoint.autoScale(1000, name: TABLET),
-            ResponsiveBreakpoint.resize(1000, name: DESKTOP),
+            const ResponsiveBreakpoint.resize(480, name: MOBILE),
+            const ResponsiveBreakpoint.autoScale(800, name: TABLET),
+            const ResponsiveBreakpoint.autoScale(1000, name: TABLET),
+            const ResponsiveBreakpoint.resize(1000, name: DESKTOP),
           ],
-          background: Container(color: Color(0xFFF5F5F5))),
-      title: 'Athelete Assist',
+          background: Container(color: const Color(0xFFF5F5F5)),),
+      title: 'Athlete Assist',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: Reports(),
+      home: ChatScreen(),
       // home: ChangeNotifierProvider(
       //   create: (context) => DrawerScreenProvider(),
       //   child:  HomePage(),

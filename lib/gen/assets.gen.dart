@@ -21,6 +21,9 @@ class $AssetsIconsGen {
   /// File path: assets/icons/icon_aspirations.svg
   String get iconAspirations => 'assets/icons/icon_aspirations.svg';
 
+  /// File path: assets/icons/icon_attachment.svg
+  String get iconAttachment => 'assets/icons/icon_attachment.svg';
+
   /// File path: assets/icons/icon_back.png
   AssetGenImage get iconBack =>
       const AssetGenImage('assets/icons/icon_back.png');
@@ -74,6 +77,9 @@ class $AssetsIconsGen {
   /// File path: assets/icons/icon_selfevaluation.svg
   String get iconSelfevaluation => 'assets/icons/icon_selfevaluation.svg';
 
+  /// File path: assets/icons/icon_send.svg
+  String get iconSend => 'assets/icons/icon_send.svg';
+
   /// File path: assets/icons/icon_skill.svg
   String get iconSkill => 'assets/icons/icon_skill.svg';
 
@@ -95,6 +101,7 @@ class $AssetsIconsGen {
         backarrow,
         iconAspiration,
         iconAspirations,
+        iconAttachment,
         iconBack,
         iconBackarrow,
         iconCalender,
@@ -112,6 +119,7 @@ class $AssetsIconsGen {
         iconReview,
         iconSelfanaysis,
         iconSelfevaluation,
+        iconSend,
         iconSkill,
         iconToggle,
         iconValues,
@@ -122,6 +130,10 @@ class $AssetsIconsGen {
 
 class $AssetsImagesGen {
   const $AssetsImagesGen();
+
+  /// File path: assets/images/athelete_splash.png
+  AssetGenImage get atheleteSplash =>
+      const AssetGenImage('assets/images/athelete_splash.png');
 
   /// File path: assets/images/children.svg
   String get children => 'assets/images/children.svg';
@@ -247,6 +259,7 @@ class $AssetsImagesGen {
 
   /// List of all assets
   List<dynamic> get values => [
+        atheleteSplash,
         children,
         iconAspiration,
         iconCurrent,
