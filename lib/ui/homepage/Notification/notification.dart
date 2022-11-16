@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:flutter_template/gen/assets.gen.dart';
-import '../../models/NotificationModel/notification_model.dart';
+import '../../../models/NotificationModel/notification_model.dart';
 import 'package:flutter_template/ui/homepage/homepage.dart';
 import 'package:flutter_template/utils/constants/fontdata.dart';
 import 'package:flutter_template/utils/constants/strings.dart';
@@ -11,17 +11,18 @@ import 'package:flutter_template/utils/constants/strings.dart';
 import 'package:flutter_template/utils/extensions/context_extensions.dart';
 import 'package:flutter_template/utils/theme/app_colors.dart';
 
+import '../../../models/WeeklyPlanModel/weekly_plan_model.dart';
 
-class Feedbacks extends StatefulWidget {
+class NotificationScreen extends StatefulWidget {
 
 
 
 
   @override
-  _FeedbacksState createState() => _FeedbacksState();
+  _NotificationScreenState createState() => _NotificationScreenState();
 }
 
-class _FeedbacksState extends State<Feedbacks> {
+class _NotificationScreenState extends State<NotificationScreen> {
 
   @override
   Widget build(BuildContext context) {
@@ -57,7 +58,7 @@ class _FeedbacksState extends State<Feedbacks> {
                   ),
                   Container(
                     margin: EdgeInsets.only(left: context.heightPx * 20),
-                    child: Text(feedback,style: const FontData().montFont70020TextStyle,),
+                    child: Text(notification,style: const FontData().montFont70020TextStyle,),
                   ),
                 ],
               ),

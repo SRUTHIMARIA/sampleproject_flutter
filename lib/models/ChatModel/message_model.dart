@@ -1,8 +1,8 @@
-import 'package:flutter_template/models/user_model.dart';
+import 'user_model.dart';
 
 class Message {
   final User sender;
-  final String time; // Would usually be type DateTime or Firebase Timestamp in production apps
+  final String time;
   final String text;
   final bool unread;
 
@@ -15,7 +15,7 @@ class Message {
 }
 
 // EXAMPLE CHATS ON HOME SCREEN
-List<Message> chats = [
+final List<Message> chats = [
   Message(
     sender: ironMan,
     time: '8:00 PM',
@@ -67,7 +67,7 @@ List<Message> chats = [
 ];
 
 // EXAMPLE MESSAGES IN CHAT SCREEN
-List<Message> messages = [
+final List<Message> messages = [
   Message(
     sender: ironMan,
     time: '2:00 PM',
