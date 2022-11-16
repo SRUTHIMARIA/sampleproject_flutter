@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:flutter_template/gen/assets.gen.dart';
-import '../../models/NotificationModel/notification_model.dart';
+import '../../models/FeedbackModel/feedbackmodel.dart';
 import 'package:flutter_template/ui/homepage/homepage.dart';
 import 'package:flutter_template/utils/constants/fontdata.dart';
 import 'package:flutter_template/utils/constants/strings.dart';
@@ -22,6 +22,24 @@ class Feedbacks extends StatefulWidget {
 }
 
 class _FeedbacksState extends State<Feedbacks> {
+
+  UniqueKey? keyTile;
+  bool isExpanded = false;
+
+  void expandTile() {
+    setState(() {
+      isExpanded = true;
+      keyTile = UniqueKey();
+    });
+  }
+
+  void shrinkTile() {
+    setState(() {
+      isExpanded = false;
+      keyTile = UniqueKey();
+    });
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -65,18 +83,9 @@ class _FeedbacksState extends State<Feedbacks> {
               SizedBox(
                 height: context.heightPx * 30,
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Container(
-                    margin: EdgeInsets.only(left: context.heightPx * 30),
-                    child: Text(today,style: const FontData().montFont60012DarkTextStyle,),
-                  ),
-                  Container(
-                    margin: EdgeInsets.only(right: context.heightPx * 27),
-                    child: Text(markAsRead,style: const FontData().montFont50010GreenTextStyle,),
-                  ),
-                ],
+              Container(
+                margin: EdgeInsets.only(left: context.heightPx * 30),
+                child: Text(today,style: const FontData().montFont60012DarkTextStyle,),
               ),
 
 
@@ -85,7 +94,7 @@ class _FeedbacksState extends State<Feedbacks> {
                 child: ListView.builder(
                   scrollDirection: Axis.vertical,
                   shrinkWrap: true,
-                  itemCount: notifications.length,
+                  itemCount: feedbacks.length,
                   itemBuilder: (context, index) {
                     return Container(
                       margin: const EdgeInsets.symmetric(
@@ -125,7 +134,7 @@ class _FeedbacksState extends State<Feedbacks> {
                               MainAxisAlignment.spaceBetween,
                               children: [
                                 Text(
-                                  notifications[index].session,
+                                  feedbacks[index].session,
                                   style: const FontData()
                                       .montFont50013LightTextStyle,
                                 ),
@@ -133,7 +142,7 @@ class _FeedbacksState extends State<Feedbacks> {
                                   margin:
                                   const EdgeInsets.only(right: 10),
                                   child: Text(
-                                    notifications[index].time,
+                                    feedbacks[index].time,
                                     style: const FontData()
                                         .montFont40010LightGreyTextStyle,
                                   ),
@@ -144,7 +153,7 @@ class _FeedbacksState extends State<Feedbacks> {
                               height: context.heightPx * 10,
                             ),
                             Text(
-                              notifications[index].message,
+                              feedbacks[index].message,
                               style: const FontData()
                                   .montFont50012LightGreyTextStyle,
                             ),
@@ -153,6 +162,8 @@ class _FeedbacksState extends State<Feedbacks> {
                     );
                   },),
               ),
+
+
 
               SizedBox(
                 height: context.heightPx * 10,
@@ -167,7 +178,7 @@ class _FeedbacksState extends State<Feedbacks> {
                 child: ListView.builder(
                   scrollDirection: Axis.vertical,
                   shrinkWrap: true,
-                  itemCount: notificationmodel.length,
+                  itemCount: feedbackModel.length,
                   itemBuilder: (context, index) {
                     return Container(
                       margin: const EdgeInsets.symmetric(
@@ -185,8 +196,8 @@ class _FeedbacksState extends State<Feedbacks> {
                           color: AppColors.primaryColor.withOpacity(0.10),
                           border:  Border(
                             left: BorderSide(color:(index % 2 == 0)?
-                            AppColors.purpleColor:AppColors.pinkColor,
-                              width: (index%2==1)?4:8,strokeAlign: StrokeAlign.inside,),
+                            AppColors.lightBlue:AppColors.purpleColor,
+                              width: 4,strokeAlign: StrokeAlign.inside,),
                           ),
                           // borderRadius: BorderRadius.circular(10.0),
                           // borderRadius:
@@ -207,7 +218,7 @@ class _FeedbacksState extends State<Feedbacks> {
                               MainAxisAlignment.spaceBetween,
                               children: [
                                 Text(
-                                  notificationmodel[index].session,
+                                  feedbackModel[index].session,
                                   style: const FontData()
                                       .montFont50013LightTextStyle,
                                 ),
@@ -215,7 +226,7 @@ class _FeedbacksState extends State<Feedbacks> {
                                   margin:
                                   const EdgeInsets.only(right: 10),
                                   child: Text(
-                                    notificationmodel[index].time,
+                                    feedbackModel[index].time,
                                     style: const FontData()
                                         .montFont40010LightGreyTextStyle,
                                   ),
@@ -226,7 +237,7 @@ class _FeedbacksState extends State<Feedbacks> {
                               height: context.heightPx * 10,
                             ),
                             Text(
-                              notificationmodel[index].message,
+                              feedbackModel[index].message,
                               style: const FontData()
                                   .montFont50012LightGreyTextStyle,
                             ),
@@ -244,7 +255,7 @@ class _FeedbacksState extends State<Feedbacks> {
                 child: ListView.builder(
                   scrollDirection: Axis.vertical,
                   shrinkWrap: true,
-                  itemCount: notificationmodel.length,
+                  itemCount: feedbackLastDays.length,
                   itemBuilder: (context, index) {
                     return Container(
                       margin: const EdgeInsets.symmetric(
@@ -284,7 +295,7 @@ class _FeedbacksState extends State<Feedbacks> {
                               MainAxisAlignment.spaceBetween,
                               children: [
                                 Text(
-                                  notificationmodel[index].session,
+                                  feedbackLastDays[index].session,
                                   style: const FontData()
                                       .montFont50013LightTextStyle,
                                 ),
@@ -292,7 +303,7 @@ class _FeedbacksState extends State<Feedbacks> {
                                   margin:
                                   const EdgeInsets.only(right: 10),
                                   child: Text(
-                                    notificationmodel[index].time,
+                                    feedbackLastDays[index].time,
                                     style: const FontData()
                                         .montFont40010LightGreyTextStyle,
                                   ),
@@ -303,7 +314,7 @@ class _FeedbacksState extends State<Feedbacks> {
                               height: context.heightPx * 10,
                             ),
                             Text(
-                              notificationmodel[index].message,
+                              feedbackLastDays[index].message,
                               style: const FontData()
                                   .montFont50012LightGreyTextStyle,
                             ),
@@ -319,4 +330,5 @@ class _FeedbacksState extends State<Feedbacks> {
         ),
       ),);
   }
+
 }

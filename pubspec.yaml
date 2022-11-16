@@ -26,6 +26,9 @@ dependencies:
   flutter_otp_text_field: ^1.1.1
   syncfusion_flutter_calendar: ^20.1.58
   percent_indicator: ^4.0.0
+  another_flushbar: ^1.10.29
+
+
 
 
 dev_dependencies:
