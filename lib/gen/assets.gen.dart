@@ -189,6 +189,9 @@ class $AssetsImagesGen {
   AssetGenImage get imageLogin =>
       const AssetGenImage('assets/images/image_login.png');
 
+  /// File path: assets/images/image_payment_popup.svg
+  String get imagePaymentPopup => 'assets/images/image_payment_popup.svg';
+
   /// File path: assets/images/image_physio.png
   AssetGenImage get imagePhysioPng =>
       const AssetGenImage('assets/images/image_physio.png');
@@ -277,6 +280,7 @@ class $AssetsImagesGen {
         imageAddphoto,
         imageAthelete,
         imageLogin,
+        imagePaymentPopup,
         imagePhysioPng,
         imagePhysioSvg,
         imagePicker,

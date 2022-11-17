@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_template/ui/feedback/feedback.dart';
 import 'package:flutter_template/ui/homepage/Chat/chat_screen.dart';
+import 'package:flutter_template/ui/subscriptions/payment_success.dart';
+import 'package:flutter_template/ui/subscriptions/subscription_details.dart';
+import 'package:flutter_template/ui/subscriptions/subscription_detailtwo.dart';
 import 'package:flutter_template/ui/subscriptions/subscriptions.dart';
 
 
@@ -34,7 +37,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const Subscriptions(),
+      home: const SubscriptionDetailTwo(),
       // home: ChangeNotifierProvider(
       //   create: (context) => DrawerScreenProvider(),
       //   child:  HomePage(),

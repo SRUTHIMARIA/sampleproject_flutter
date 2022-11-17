@@ -39,6 +39,9 @@ class AppColors {
   static const Color pinkColor=Color(0xffF178B6);
   static const Color lightBlue=Color(0xff10CDE1);
   static const Color lightGrey=Color(0xff666B7A);
+  static const Color darkgreyColor =Color(0xff595959);
+  static const Color buttonGradient1=Color(0xffF2FAFB);
+  static const Color buttonGradient2=Color(0xff10CDE1);
 
 
 
