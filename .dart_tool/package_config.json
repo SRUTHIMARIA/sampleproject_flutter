@@ -524,6 +524,12 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "intl",
+      "rootUri": "file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/intl-0.17.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "io",
       "rootUri": "file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/io-1.0.3",
       "packageUri": "lib/",
@@ -885,6 +891,24 @@
     },
     {
       "name": "syncfusion_flutter_calendar",
+      "rootUri": "file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/syncfusion_flutter_calendar-20.3.50",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "syncfusion_flutter_core",
+      "rootUri": "file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/syncfusion_flutter_core-20.3.50",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "syncfusion_flutter_datepicker",
+      "rootUri": "file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/syncfusion_flutter_datepicker-20.3.50",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "syncfusion_flutter_calendar",
       "rootUri": "file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/syncfusion_flutter_calendar-20.3.52",
       "packageUri": "lib/",
       "languageVersion": "2.12"
@@ -1016,6 +1040,7 @@
       "languageVersion": "2.17"
     }
   ],
+  "generated": "2022-11-16T08:13:07.787180Z",
   "generated": "2022-11-17T04:36:52.772740Z",
   "generator": "pub",
   "generatorVersion": "2.18.1"

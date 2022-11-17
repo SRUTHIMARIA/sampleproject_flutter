@@ -40,6 +40,13 @@ class AppColors {
   static const Color buttonGradient2=Color(0xff10CDE1);
 
 
+  static const Color glassStroke=Color(0xffEBFDFF);
+  static const Color dark=Color(0xff1B1B1B);
+  static const Color darkColor=Color(0xff303030);
+  static const Color purpleColor=Color(0xffA5A6F6);
+  static const Color pinkColor=Color(0xffF178B6);
+  static const Color lightBlue=Color(0xff10CDE1);
+  static const Color lightGrey=Color(0xff666B7A);
 
 
 

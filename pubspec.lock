@@ -28,6 +28,14 @@ packages:
       name: analyzer_plugin
       url: "https://pub.dartlang.org"
     source: hosted
+    version: "0.9.0"
+  another_flushbar:
+    dependency: "direct main"
+    description:
+      name: another_flushbar
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.12.29"
     version: "0.10.0"
   animated_widgets:
     dependency: "direct main"

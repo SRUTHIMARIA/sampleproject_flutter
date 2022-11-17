@@ -10,7 +10,7 @@ import 'package:flutter_template/utils/constants/font_data.dart';
 import 'package:flutter_template/utils/extensions/context_extensions.dart';
 import 'package:flutter_template/utils/static/static_padding.dart';
 
-import '../../models/weekly_plan_model.dart';
+import '../../models/WeeklyPlanModel/weekly_plan_model.dart';
 import '../../utils/constants/strings.dart';
 import '../../utils/theme/app_colors.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
