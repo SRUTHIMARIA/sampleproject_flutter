@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_template/ui/feedback/feedback.dart';
+import 'package:flutter_template/ui/homepage/Chat/chat_screen.dart';
+import 'package:flutter_template/ui/subscriptions/subscriptions.dart';
 
 
 
@@ -32,7 +34,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: Feedbacks(),
+      home: const Subscriptions(),
       // home: ChangeNotifierProvider(
       //   create: (context) => DrawerScreenProvider(),
       //   child:  HomePage(),

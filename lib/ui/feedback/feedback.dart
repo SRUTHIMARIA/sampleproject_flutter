@@ -23,22 +23,7 @@ class Feedbacks extends StatefulWidget {
 
 class _FeedbacksState extends State<Feedbacks> {
 
-  UniqueKey? keyTile;
-  bool isExpanded = false;
 
-  void expandTile() {
-    setState(() {
-      isExpanded = true;
-      keyTile = UniqueKey();
-    });
-  }
-
-  void shrinkTile() {
-    setState(() {
-      isExpanded = false;
-      keyTile = UniqueKey();
-    });
-  }
 
 
   @override

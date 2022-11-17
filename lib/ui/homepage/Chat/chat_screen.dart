@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_template/gen/assets.gen.dart';
@@ -21,37 +22,49 @@ class _ChatScreenState extends State<ChatScreen> {
     return isMe
         ? Column(children: <Widget>[
             Container(
-                alignment: Alignment.topRight,
-                child: Container(
-                    constraints: BoxConstraints(maxWidth: MediaQuery.of(context).size.width * 0.80),
-                    padding: const EdgeInsets.all(10),
-                    margin: const EdgeInsets.symmetric(vertical: 10),
-                    decoration: BoxDecoration(
-                        color: AppColors.themeColor,
-                        borderRadius: const BorderRadius.all(Radius.circular(15)),
-                        boxShadow: [BoxShadow(color: Colors.grey.withOpacity(0.5), spreadRadius: 2, blurRadius: 5)],),
-                    child: Text(message.text, style: const FontData().montFont500WhiteTextStyle),),),
-            if (!isSameUser) Row(mainAxisAlignment: MainAxisAlignment.end, children: <Widget>[
-                    Text(message.time, style: const FontData().montFont40012greyTextStyle),
-                    const SizedBox(width: 10),
-                  ]) else Container(child: null),
+              alignment: Alignment.topRight,
+              child: Container(
+                constraints: BoxConstraints(maxWidth: MediaQuery.of(context).size.width * 0.80),
+                padding: const EdgeInsets.all(10),
+                margin: const EdgeInsets.symmetric(vertical: 10),
+                decoration: BoxDecoration(
+                  color: AppColors.themeColor,
+                  borderRadius: const BorderRadius.all(Radius.circular(15)),
+                  boxShadow: [BoxShadow(color: Colors.grey.withOpacity(0.5), spreadRadius: 2, blurRadius: 5)],
+                ),
+                child: Text(message.text, style: const FontData().montFont500WhiteTextStyle),
+              ),
+            ),
+            if (!isSameUser)
+              Row(mainAxisAlignment: MainAxisAlignment.end, children: <Widget>[
+                Text(message.time, style: const FontData().montFont40012greyTextStyle),
+                const SizedBox(width: 10),
+              ])
+            else
+              Container(child: null),
           ])
         : Column(children: <Widget>[
             Container(
-                alignment: Alignment.topLeft,
-                child: Container(
-                    constraints: BoxConstraints(maxWidth: MediaQuery.of(context).size.width * 0.80),
-                    padding: const EdgeInsets.all(10),
-                    margin: const EdgeInsets.symmetric(vertical: 10),
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: const BorderRadius.all(Radius.circular(15)),
-                        boxShadow: [BoxShadow(color: Colors.grey.withOpacity(0.5), spreadRadius: 2, blurRadius: 5)],),
-                    child: Text(message.text, style: const FontData().montFont500TextStyle),),),
-            if (!isSameUser) Row(children: <Widget>[
-                    const SizedBox(width: 10),
-                    Text(message.time, style: const FontData().montFont40012greyTextStyle),
-                  ]) else Container(child: null),
+              alignment: Alignment.topLeft,
+              child: Container(
+                constraints: BoxConstraints(maxWidth: MediaQuery.of(context).size.width * 0.80),
+                padding: const EdgeInsets.all(10),
+                margin: const EdgeInsets.symmetric(vertical: 10),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: const BorderRadius.only(topLeft:Radius.circular(12),topRight: Radius.circular(18.0),bottomLeft: Radius.circular(18.0),bottomRight: Radius.circular(18.0)),
+                  boxShadow: [BoxShadow(color: Colors.grey.withOpacity(0.5), spreadRadius: 2, blurRadius: 5)],
+                ),
+                child: Text(message.text, style: const FontData().montFont500TextStyle),
+              ),
+            ),
+            if (!isSameUser)
+              Row(children: <Widget>[
+                const SizedBox(width: 10),
+                Text(message.time, style: const FontData().montFont40012greyTextStyle),
+              ])
+            else
+              Container(child: null),
           ]);
   }
 
@@ -118,7 +131,7 @@ class _ChatScreenState extends State<ChatScreen> {
             Row(
               children: [
                 InkWell(
-                  onTap: () => Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>HomePage())),
+                  onTap: () => Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomePage())),
                   child: Container(
                     margin: EdgeInsets.only(left: context.heightPx * 32),
                     child: SvgPicture.asset(Assets.icons.iconBackarrow),
