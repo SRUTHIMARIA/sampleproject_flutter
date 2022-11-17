@@ -43,6 +43,9 @@ class $AssetsIconsGen {
   /// File path: assets/icons/icon_daily.svg
   String get iconDaily => 'assets/icons/icon_daily.svg';
 
+  /// File path: assets/icons/icon_delete.svg
+  String get iconDelete => 'assets/icons/icon_delete.svg';
+
   /// File path: assets/icons/icon_drawer.svg
   String get iconDrawer => 'assets/icons/icon_drawer.svg';
 
@@ -108,6 +111,7 @@ class $AssetsIconsGen {
         iconChat,
         iconCurrent,
         iconDaily,
+        iconDelete,
         iconDrawer,
         iconForward,
         iconMindset,

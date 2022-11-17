@@ -117,7 +117,7 @@ class _SubscriptionDetailState extends State<SubscriptionDetail> {
                     ],
                   ),
                   SizedBox(
-                    height: context.heightPx * 20,
+                    height: context.heightPx * 540,
                   ),
 
                   GestureDetector(
