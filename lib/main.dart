@@ -1,14 +1,50 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_template/ui/settings/passcode.dart';
-import 'package:flutter_template/ui/settings/settings.dart';
-import 'package:flutter_template/ui/subscriptions/subscription_details.dart';
-import 'package:flutter_template/ui/subscriptions/subscription_detailtwo.dart';
+import 'package:flutter_template/firebase_options.dart';
+import 'package:flutter_template/providers/providers.dart';
+import 'package:flutter_template/ui/homepage/Chat/chat_session.dart';
+import 'package:flutter_template/utils/globals.dart';
+import 'package:provider/provider.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
-Future<void> main() async {
+// Future main() async{
+//   WidgetsFlutterBinding.ensureInitialized();
+//   await Firebase.initializeApp();
+//   runApp(MyApp());
+// }
+
+
+void main()  async{
   WidgetsFlutterBinding.ensureInitialized();
-  runApp(MyApp());
+ await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  runApp(MultiProvider(
+    providers: providers,
+    child: MyApp(),
+  ),
+  );
+
 }
+
+//
+// Future main() async{
+//   // runApp(const MyApp());
+//   WidgetsFlutterBinding.ensureInitialized();
+//
+//
+//    await Firebase.initializeApp();
+//
+//
+//
+//   // await LocalNoticeService().setup();
+//
+//   // FirebaseMessaging.onMessage.listen(_firebaseMessagingBackgroundHandler);
+//
+//   runApp(
+//      MyApp());
+//
+//
+// }
+
 
 class MyApp extends StatelessWidget {
   MyApp({Key? key}) : super(key: key);
@@ -17,6 +53,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
+      navigatorKey: Globals.navigatorKey,
+
       builder: (context, child) => ResponsiveWrapper.builder(
         child,
         maxWidth: 1200,
@@ -34,7 +72,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: SubscriptionDetailTwo(),
+      home: ChatSession(),
       // home: ChangeNotifierProvider(
       //   create: (context) => DrawerScreenProvider(),
       //   child:  HomePage(),
