@@ -43,22 +43,10 @@ void main()  async{
   // FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
   await AuthenticationProvider.retrieveAuthUser();
 
-  runApp(
-    MultiProvider(
-      providers: ProviderRegister.providers,
-      child: MyApp(),
-    ),
-  );
   // MyApp());
   await Hive.initFlutter();
   await AuthenticationProvider.retrieveAuthUser();
 
-  runApp(
-    MultiProvider(
-      providers: ProviderRegister.providers,
-      child: MyApp(),
-    ),
-  );
   // MyApp());
 }
 
@@ -85,7 +73,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const Subscriptions(),
+      home: const SplashScreen(),
       // home: ChangeNotifierProvider(
       //   create: (context) => DrawerScreenProvider(),
       //   child:  HomePage(),

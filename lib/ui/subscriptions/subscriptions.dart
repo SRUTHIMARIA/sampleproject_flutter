@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_template/gen/assets.gen.dart';
 import 'package:flutter_template/ui/subscriptions/payment_success.dart';
-import 'package:flutter_template/utils/constants/fontdata.dart';
+import 'package:flutter_template/utils/constants/font_data.dart';
 import 'package:flutter_template/utils/extensions/context_extensions.dart';
 import 'package:flutter_template/utils/theme/app_colors.dart';
 

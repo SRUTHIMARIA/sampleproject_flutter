@@ -5,11 +5,12 @@ import 'package:flutter_svg/svg.dart';
 import 'package:flutter_template/gen/assets.gen.dart';
 import '../../models/FeedbackModel/feedbackmodel.dart';
 import 'package:flutter_template/ui/homepage/homepage.dart';
-import 'package:flutter_template/utils/constants/fontdata.dart';
 import 'package:flutter_template/utils/constants/strings.dart';
 
 import 'package:flutter_template/utils/extensions/context_extensions.dart';
 import 'package:flutter_template/utils/theme/app_colors.dart';
+
+import '../../utils/constants/font_data.dart';
 
 
 class Feedbacks extends StatefulWidget {

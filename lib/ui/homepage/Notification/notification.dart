@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:flutter_template/gen/assets.gen.dart';
+import 'package:flutter_template/utils/constants/font_data.dart';
 import '../../../models/NotificationModel/notification_model.dart';
 import 'package:flutter_template/ui/homepage/homepage.dart';
-import 'package:flutter_template/utils/constants/fontdata.dart';
 import 'package:flutter_template/utils/constants/strings.dart';
 
 import 'package:flutter_template/utils/extensions/context_extensions.dart';

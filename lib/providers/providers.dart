@@ -25,20 +25,22 @@ final List<SingleChildWidget> providers = [
     create: (_) => ThemeProvider(),
   ),
 
+ChangeNotifierProvider<CommonFunctionsProvider>(create: (_) => CommonFunctionsProvider(),),
+ChangeNotifierProvider<AuthenticationProvider>(create: (_) => AuthenticationProvider(),),
+ChangeNotifierProvider<RegisterProvider>(create: (_) => RegisterProvider(),),
+ChangeNotifierProvider<SignupValidation>(create: (_) => SignupValidation(),),
+ChangeNotifierProvider<LoginProvider>(create: (_) => LoginProvider(),),
+ChangeNotifierProvider<ForgotPasswordProvider>(create: (_) => ForgotPasswordProvider(),),
+ChangeNotifierProvider<OtpProvider>(create: (_) => OtpProvider(),),
+ChangeNotifierProvider<ResetpasswordProvider>(create: (_) => ResetpasswordProvider(),),
+ChangeNotifierProvider<DrawerScreenProvider>(create: (_) => DrawerScreenProvider(),),
 
-
-class ProviderRegister {
-  static final List<SingleChildWidget> providers = [
-    ChangeNotifierProvider<CommonFunctionsProvider>(create: (_) => CommonFunctionsProvider(),),
-    ChangeNotifierProvider<AuthenticationProvider>(create: (_) => AuthenticationProvider(),),
-    ChangeNotifierProvider<RegisterProvider>(create: (_) => RegisterProvider(),),
-    ChangeNotifierProvider<SignupValidation>(create: (_) => SignupValidation(),),
-    ChangeNotifierProvider<LoginProvider>(create: (_) => LoginProvider(),),
-    ChangeNotifierProvider<ForgotPasswordProvider>(create: (_) => ForgotPasswordProvider(),),
-    ChangeNotifierProvider<OtpProvider>(create: (_) => OtpProvider(),),
-    ChangeNotifierProvider<ResetpasswordProvider>(create: (_) => ResetpasswordProvider(),),
-    ChangeNotifierProvider<DrawerScreenProvider>(create: (_) => DrawerScreenProvider(),),
-    //ChangeNotifierProvider<ParentDetailProvider>(create: (_) => ParentDetailProvider(),),
-
-  ];
-}
+];
+//
+// class ProviderRegister {
+//   static final List<SingleChildWidget> providers = [
+//
+//     //ChangeNotifierProvider<ParentDetailProvider>(create: (_) => ParentDetailProvider(),),
+//
+//   ];
+// }

@@ -151,10 +151,6 @@ class $AssetsImagesGen {
   AssetGenImage get atheleteSplash =>
       const AssetGenImage('assets/images/athelete_splash.png');
 
-  /// File path: assets/images/athelete_splash.png
-  AssetGenImage get atheleteSplash =>
-      const AssetGenImage('assets/images/athelete_splash.png');
-
   /// File path: assets/images/children.png
   AssetGenImage get childrenPng =>
       const AssetGenImage('assets/images/children.png');
@@ -327,8 +323,6 @@ class $AssetsImagesGen {
         atheleteSplash,
         childrenPng,
         childrenSvg,
-        atheleteSplash,
-        children,
         iconAspiration,
         iconCurrent,
         iconDaily,

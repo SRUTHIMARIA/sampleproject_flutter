@@ -6,7 +6,6 @@ import 'package:flutter_svg/svg.dart';
 import 'package:flutter_template/providers/chat_provider/chat_provider.dart';
 import 'package:flutter_template/providers/theme_provider.dart';
 import 'package:flutter_template/ui/homepage/homepage.dart';
-import 'package:flutter_template/utils/constants/fontdata.dart';
 import 'package:flutter_template/utils/extensions/context_extensions.dart';
 import 'package:flutter_template/utils/theme/app_colors.dart';
 import 'package:flutter_template/widgets/listitems/listitems.dart';
@@ -14,6 +13,7 @@ import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 import '../../../gen/assets.gen.dart';
+import '../../../utils/constants/font_data.dart';
 
 final firestore = FirebaseFirestore.instance;
 
