@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_template/gen/assets.gen.dart';
+import 'package:flutter_template/ui/subscriptions/payment_success.dart';
 import 'package:flutter_template/utils/constants/fontdata.dart';
 import 'package:flutter_template/utils/extensions/context_extensions.dart';
 import 'package:flutter_template/utils/theme/app_colors.dart';
@@ -106,13 +107,13 @@ class _SubscriptionsState extends State<Subscriptions> {
                             Row(
                               children: [
                                 const Text(
-                                  " • ",
+                                  ' • ',
                                   style: TextStyle(color: AppColors.whiteColor),
                                 ),
                                 Text(subscriptionModel[index].planDetails1,
                                     style: const TextStyle(
                                       color: AppColors.whiteColor,
-                                    )),
+                                    ),),
                               ],
                             ),
                             SizedBox(
@@ -121,18 +122,19 @@ class _SubscriptionsState extends State<Subscriptions> {
                             Row(
                               children: [
                                 const Text(
-                                  " • ",
+                                  ' • ',
                                   style: TextStyle(color: AppColors.whiteColor),
                                 ),
                                 Text(subscriptionModel[index].planDetails2,
                                     style: const TextStyle(
                                       color: AppColors.whiteColor,
-                                    )),
+                                    ),),
                               ],
                             ),
                             SizedBox(
                               height: context.heightPx * 20,
                             ),
+
                           ],
                         ),
                       ],
@@ -140,6 +142,31 @@ class _SubscriptionsState extends State<Subscriptions> {
                   );
                 },
               ),
+            ),
+            GestureDetector(
+              onTap: () =>
+                Navigator.push(context, MaterialPageRoute(builder: (context)=>const PaymentSuccess())),
+
+              child: Container(
+                height: context.heightPx * 42,
+                width: context.widthPx * 270,
+                child: Container(
+                  decoration: const BoxDecoration(
+                    color: AppColors.themeColor,
+                    borderRadius: BorderRadius.all(Radius.circular(8.0)),),
+                  child: Center(
+                    child: Text(
+                      'Proceed to Payment',
+                      // _display ? "hide logo" : "display logo",
+                      style: const FontData().montFont70016TextStyle,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+
+            SizedBox(
+              height: context.heightPx * 30,
             ),
           ],
         ),

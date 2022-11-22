@@ -1,3 +1,4 @@
+import 'package:flutter_template/providers/chat_provider/chat_provider.dart';
 import 'package:flutter_template/providers/drawer_provider.dart';
 import 'package:flutter_template/providers/forgotpassword/forgotpasswd_provider.dart';
 import 'package:flutter_template/providers/login/login_provider.dart';
@@ -5,11 +6,24 @@ import 'package:flutter_template/providers/otp/otp_provider.dart';
 import 'package:flutter_template/providers/register/register_provider.dart';
 import 'package:flutter_template/providers/resetpasswd/resetpasswod_provider.dart';
 import 'package:flutter_template/widgets/validation/signup_validation.dart';
+import 'package:flutter_template/providers/theme_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:provider/single_child_widget.dart';
 
 import 'authentication_provider.dart';
 import 'common_function_provider/common_function_provider.dart';
+
+
+final List<SingleChildWidget> providers = [
+  ChangeNotifierProvider<DrawerScreenProvider>(
+    create: (_) => DrawerScreenProvider(),
+  ),
+  ChangeNotifierProvider<ChatProvider>(
+    create: (_) => ChatProvider(),
+  ),
+  ChangeNotifierProvider<ThemeProvider>(
+    create: (_) => ThemeProvider(),
+  ),
 
 
 

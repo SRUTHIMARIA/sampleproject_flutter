@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "837866680523",
+    "project_id": "athleteassist-d4be9",
+    "storage_bucket": "athleteassist-d4be9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:837866680523:android:656491c9c6e602454f2b4e",
+        "android_client_info": {
+          "package_name": "com.example.flutter_template"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "837866680523-6lld7dqam5am7o92ph8tv5drn0v3pv7b.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDgCPEdNTLze5ilWBkveGd6dJYpH4ppa3A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "837866680523-6lld7dqam5am7o92ph8tv5drn0v3pv7b.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

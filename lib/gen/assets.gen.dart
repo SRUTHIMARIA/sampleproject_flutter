@@ -43,6 +43,9 @@ class $AssetsIconsGen {
   /// File path: assets/icons/icon_daily.svg
   String get iconDaily => 'assets/icons/icon_daily.svg';
 
+  /// File path: assets/icons/icon_delete.svg
+  String get iconDelete => 'assets/icons/icon_delete.svg';
+
   /// File path: assets/icons/icon_drawer.svg
   String get iconDrawer => 'assets/icons/icon_drawer.svg';
 
@@ -117,6 +120,7 @@ class $AssetsIconsGen {
         iconChat,
         iconCurrent,
         iconDaily,
+        iconDelete,
         iconDrawer,
         iconEmail,
         iconForward,
@@ -212,6 +216,9 @@ class $AssetsImagesGen {
   /// File path: assets/images/image_login.png
   AssetGenImage get imageLogin =>
       const AssetGenImage('assets/images/image_login.png');
+
+  /// File path: assets/images/image_payment_popup.svg
+  String get imagePaymentPopup => 'assets/images/image_payment_popup.svg';
 
   /// File path: assets/images/image_physio.png
   AssetGenImage get imagePhysioPng =>
@@ -339,6 +346,7 @@ class $AssetsImagesGen {
         imageAspiration,
         imageAthelete,
         imageLogin,
+        imagePaymentPopup,
         imagePhysioPng,
         imagePhysioSvg,
         imagePicker,
