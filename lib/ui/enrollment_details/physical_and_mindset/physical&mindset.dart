@@ -2,7 +2,6 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:flutter_rounded_date_picker/flutter_rounded_date_picker.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_template/gen/assets.gen.dart';
 
@@ -26,10 +25,9 @@ class PhysicalAndMindset extends StatefulWidget {
 class _PhysicalAndMindsetState extends State<PhysicalAndMindset> {
   bool _display = true;
   TextEditingController dateInput = TextEditingController();
-  String pickedDate="";
+  String pickedDate = "";
   DateTime _dateTime = DateTime.now();
   String? _month, _year;
-
 
   @override
   void initState() {
@@ -37,9 +35,7 @@ class _PhysicalAndMindsetState extends State<PhysicalAndMindset> {
     super.initState();
   }
 
-
-  Widget buildTextField(
-      {String? hint, required TextEditingController controller}) {
+  Widget buildTextField({String? hint, required TextEditingController controller}) {
     return TextField(
       controller: controller,
       textCapitalization: TextCapitalization.words,
@@ -130,8 +126,7 @@ class _PhysicalAndMindsetState extends State<PhysicalAndMindset> {
                     decoration: InputDecoration(
                       focusColor: Colors.white,
                       enabledBorder: InputBorder.none,
-                      contentPadding:
-                          EdgeInsets.only(left: context.heightPx * 16),
+                      contentPadding: EdgeInsets.only(left: context.heightPx * 16),
 
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10.0),
@@ -165,8 +160,7 @@ class _PhysicalAndMindsetState extends State<PhysicalAndMindset> {
                     decoration: InputDecoration(
                       focusColor: Colors.white,
                       enabledBorder: InputBorder.none,
-                      contentPadding:
-                          EdgeInsets.only(left: context.heightPx * 16),
+                      contentPadding: EdgeInsets.only(left: context.heightPx * 16),
 
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10.0),
@@ -201,8 +195,7 @@ class _PhysicalAndMindsetState extends State<PhysicalAndMindset> {
                     decoration: InputDecoration(
                       focusColor: Colors.white,
                       enabledBorder: InputBorder.none,
-                      contentPadding:
-                          EdgeInsets.only(left: context.heightPx * 16),
+                      contentPadding: EdgeInsets.only(left: context.heightPx * 16),
 
                       border: const OutlineInputBorder(
                         borderRadius: BorderRadius.all(Radius.circular(10.0)),
@@ -232,8 +225,7 @@ class _PhysicalAndMindsetState extends State<PhysicalAndMindset> {
                     decoration: InputDecoration(
                       focusColor: Colors.white,
                       enabledBorder: InputBorder.none,
-                      contentPadding:
-                          EdgeInsets.only(left: context.heightPx * 16, top: 18),
+                      contentPadding: EdgeInsets.only(left: context.heightPx * 16, top: 18),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10.0),
                       ),
@@ -241,103 +233,101 @@ class _PhysicalAndMindsetState extends State<PhysicalAndMindset> {
                       hintText: whenwill,
                       hintStyle: const FontData().montFont50012GreyColorTextStyle,
                       suffixIcon: InkWell(
-                          onTap: () {
-                            SfCalendar(
-                              backgroundColor: AppColors.textFieldBgColor,
-                              view: CalendarView.month,
-                              // dataSource: getCalendarDataSource(),
-                              onViewChanged: viewChanged,
-                              headerStyle:CalendarHeaderStyle(textStyle: const FontData().montFont60014TextStyle),
-                              headerDateFormat: DateFormat.WEEKDAY,
-                            );
-                            // DateTime? pickedDate = await showRoundedDatePicker(
-                            //     context: context,
-                            //     borderRadius: 12,
-                            //     theme: ThemeData(primaryColor: AppColors.textFieldBgColor),
-                            //     styleDatePicker: MaterialRoundedDatePickerStyle(
-                            //       textStyleDayButton: FontData().montFont60014TextStyle,
-                            //       //
-                            //       // textStyleYearButton: TextStyle(
-                            //       //   fontSize: 52,
-                            //       //   color: Colors.white,
-                            //       // ),
-                            //       textStyleDayHeader: FontData().montFont50012BlackTextStyle,
-                            //       textStyleCurrentDayOnCalendar:
-                            //       TextStyle(fontSize: 32, color: Colors.black, fontWeight: FontWeight.bold),
-                            //       textStyleDayOnCalendar: FontData().montFont50012GreyTextStyle,
-                            //       textStyleDayOnCalendarSelected:
-                            //       FontData().montFont50012WhiteTextStyle,
-                            //       textStyleDayOnCalendarDisabled:FontData().montFont50012GreyTextStyle,
-                            //       textStyleMonthYearHeader:
-                            //     FontData().montFont60012TextStyle,
-                            //       paddingDatePicker: EdgeInsets.all(0),
-                            //       paddingMonthHeader: EdgeInsets.all(32),
-                            //       paddingActionBar: EdgeInsets.all(16),
-                            //       paddingDateYearHeader: EdgeInsets.all(32),
-                            //       sizeArrow:30,
-                            //       colorArrowNext: AppColors.popTextGrey,
-                            //       colorArrowPrevious:  AppColors.popTextGrey,
-                            //       marginLeftArrowPrevious: 16,
-                            //       marginTopArrowPrevious: 16,
-                            //       marginTopArrowNext: 16,
-                            //       marginRightArrowNext: 32,
-                            //
-                            //       textStyleButtonAction:FontData().montFont70014TextStyle,
-                            //       textStyleButtonPositive:
-                            //       FontData().montFont70014TextStyle,
-                            //       textStyleButtonNegative: FontData().montFont70014TextStyle,
-                            //       decorationDateSelected: BoxDecoration(color: AppColors.darkGreen, shape: BoxShape.circle),
-                            //       backgroundPicker: AppColors.textFieldBgColor,
-                            //       backgroundActionBar: AppColors.textFieldBgColor,
-                            //       backgroundHeaderMonth: AppColors.textFieldBgColor,
-                            //     ),
-                            //
-                            //     styleYearPicker: MaterialRoundedYearPickerStyle(
-                            //       textStyleYear: TextStyle(fontSize: 40, color: Colors.white),
-                            //       textStyleYearSelected:
-                            //       TextStyle(fontSize: 56, color: AppColors.blackColor, fontWeight: FontWeight.bold),
-                            //       heightYearRow: 100,
-                            //       backgroundPicker:AppColors.textFieldBgColor,
-                            //     ),
-                            //     initialDate: DateTime.now(),
-                            //     firstDate: DateTime(2000),
-                            //     lastDate: DateTime(2100));
-                            //
-                            // if (pickedDate != null) {
-                            //   print(
-                            //       pickedDate); //pickedDate output format => 2021-03-10 00:00:00.000
-                            //   String formattedDate =
-                            //       DateFormat('yyyy-MM-dd').format(pickedDate);
-                            //   print(
-                            //       formattedDate); //formatted date output using intl package =>  2021-03-16
-                            //   setState(() {
-                            //     dateInput.text =
-                            //         formattedDate; //set output date to TextField value.
-                            //   });
-                            // } else {}
-                            // timepicker();
-                          },
-                          child: const Icon(
-                            Icons.add,
-                            color: AppColors.darkGreen,
-                            size: 16,
-                          ),),
+                        onTap: () {
+                          SfCalendar(
+                            backgroundColor: AppColors.textFieldBgColor,
+                            view: CalendarView.month,
+                            // dataSource: getCalendarDataSource(),
+                            onViewChanged: viewChanged,
+                            headerStyle: CalendarHeaderStyle(textStyle: const FontData().montFont60014TextStyle),
+                            headerDateFormat: DateFormat.WEEKDAY,
+                          );
+                          // DateTime? pickedDate = await showRoundedDatePicker(
+                          //     context: context,
+                          //     borderRadius: 12,
+                          //     theme: ThemeData(primaryColor: AppColors.textFieldBgColor),
+                          //     styleDatePicker: MaterialRoundedDatePickerStyle(
+                          //       textStyleDayButton: FontData().montFont60014TextStyle,
+                          //       //
+                          //       // textStyleYearButton: TextStyle(
+                          //       //   fontSize: 52,
+                          //       //   color: Colors.white,
+                          //       // ),
+                          //       textStyleDayHeader: FontData().montFont50012BlackTextStyle,
+                          //       textStyleCurrentDayOnCalendar:
+                          //       TextStyle(fontSize: 32, color: Colors.black, fontWeight: FontWeight.bold),
+                          //       textStyleDayOnCalendar: FontData().montFont50012GreyTextStyle,
+                          //       textStyleDayOnCalendarSelected:
+                          //       FontData().montFont50012WhiteTextStyle,
+                          //       textStyleDayOnCalendarDisabled:FontData().montFont50012GreyTextStyle,
+                          //       textStyleMonthYearHeader:
+                          //     FontData().montFont60012TextStyle,
+                          //       paddingDatePicker: EdgeInsets.all(0),
+                          //       paddingMonthHeader: EdgeInsets.all(32),
+                          //       paddingActionBar: EdgeInsets.all(16),
+                          //       paddingDateYearHeader: EdgeInsets.all(32),
+                          //       sizeArrow:30,
+                          //       colorArrowNext: AppColors.popTextGrey,
+                          //       colorArrowPrevious:  AppColors.popTextGrey,
+                          //       marginLeftArrowPrevious: 16,
+                          //       marginTopArrowPrevious: 16,
+                          //       marginTopArrowNext: 16,
+                          //       marginRightArrowNext: 32,
+                          //
+                          //       textStyleButtonAction:FontData().montFont70014TextStyle,
+                          //       textStyleButtonPositive:
+                          //       FontData().montFont70014TextStyle,
+                          //       textStyleButtonNegative: FontData().montFont70014TextStyle,
+                          //       decorationDateSelected: BoxDecoration(color: AppColors.darkGreen, shape: BoxShape.circle),
+                          //       backgroundPicker: AppColors.textFieldBgColor,
+                          //       backgroundActionBar: AppColors.textFieldBgColor,
+                          //       backgroundHeaderMonth: AppColors.textFieldBgColor,
+                          //     ),
+                          //
+                          //     styleYearPicker: MaterialRoundedYearPickerStyle(
+                          //       textStyleYear: TextStyle(fontSize: 40, color: Colors.white),
+                          //       textStyleYearSelected:
+                          //       TextStyle(fontSize: 56, color: AppColors.blackColor, fontWeight: FontWeight.bold),
+                          //       heightYearRow: 100,
+                          //       backgroundPicker:AppColors.textFieldBgColor,
+                          //     ),
+                          //     initialDate: DateTime.now(),
+                          //     firstDate: DateTime(2000),
+                          //     lastDate: DateTime(2100));
+                          //
+                          // if (pickedDate != null) {
+                          //   print(
+                          //       pickedDate); //pickedDate output format => 2021-03-10 00:00:00.000
+                          //   String formattedDate =
+                          //       DateFormat('yyyy-MM-dd').format(pickedDate);
+                          //   print(
+                          //       formattedDate); //formatted date output using intl package =>  2021-03-16
+                          //   setState(() {
+                          //     dateInput.text =
+                          //         formattedDate; //set output date to TextField value.
+                          //   });
+                          // } else {}
+                          // timepicker();
+                        },
+                        child: const Icon(
+                          Icons.add,
+                          color: AppColors.darkGreen,
+                          size: 16,
+                        ),
+                      ),
                     ),
                   ),
                 ),
-
                 SizedBox(
                   height: context.heightPx * 16,
                 ),
-               Container(
+                Container(
                   margin: const EdgeInsets.symmetric(horizontal: 56),
                   decoration: BoxDecoration(
                     color: AppColors.textFieldBgColor,
                     borderRadius: BorderRadius.circular(10.0),
                   ),
-                  child: Text(pickedDate.toString()
-
-                  ),
+                  child: Text(pickedDate.toString()),
                 ),
                 Container(
                   margin: const EdgeInsets.symmetric(horizontal: 56),
@@ -350,8 +340,7 @@ class _PhysicalAndMindsetState extends State<PhysicalAndMindset> {
                     decoration: InputDecoration(
                       focusColor: Colors.white,
                       enabledBorder: InputBorder.none,
-                      contentPadding:
-                          EdgeInsets.only(left: context.heightPx * 16),
+                      contentPadding: EdgeInsets.only(left: context.heightPx * 16),
 
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10.0),
@@ -372,9 +361,7 @@ class _PhysicalAndMindsetState extends State<PhysicalAndMindset> {
                 InkWell(
                   onTap: () {
                     Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const PhysicalAndMindset()));
+                        context, MaterialPageRoute(builder: (context) => const PhysicalAndMindset()));
                   },
                   child: Align(
                     alignment: Alignment.center,
@@ -412,28 +399,20 @@ class _PhysicalAndMindsetState extends State<PhysicalAndMindset> {
     SchedulerBinding.instance!.addPostFrameCallback((Duration duration) {
       setState(() {
         _month = DateFormat('MMMM')
-            .format(viewChangedDetails
-            .visibleDates[viewChangedDetails.visibleDates.length ~/ 2])
+            .format(viewChangedDetails.visibleDates[viewChangedDetails.visibleDates.length ~/ 2])
             .toString();
         _year = DateFormat('yyyy')
-            .format(viewChangedDetails
-            .visibleDates[viewChangedDetails.visibleDates.length ~/ 2])
+            .format(viewChangedDetails.visibleDates[viewChangedDetails.visibleDates.length ~/ 2])
             .toString();
       });
     });
   }
 
   Widget timepicker() {
-    return  TimePickerSpinner(
+    return TimePickerSpinner(
       is24HourMode: false,
-      normalTextStyle: const TextStyle(
-          fontSize: 24,
-          color: Colors.deepOrange
-      ),
-      highlightedTextStyle: const TextStyle(
-          fontSize: 24,
-          color: Colors.yellow
-      ),
+      normalTextStyle: const TextStyle(fontSize: 24, color: Colors.deepOrange),
+      highlightedTextStyle: const TextStyle(fontSize: 24, color: Colors.yellow),
       spacing: 50,
       itemHeight: 80,
       isForce2Digits: true,
@@ -445,4 +424,3 @@ class _PhysicalAndMindsetState extends State<PhysicalAndMindset> {
     );
   }
 }
-
