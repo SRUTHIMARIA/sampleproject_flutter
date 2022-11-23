@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_template/firebase_options.dart';
 import 'package:flutter_template/providers/providers.dart';
 import 'package:flutter_template/ui/homepage/Chat/chat_session.dart';
+import 'package:flutter_template/ui/homepage/homepage.dart';
 import 'package:flutter_template/utils/globals.dart';
 import 'package:provider/provider.dart';
 import 'package:responsive_framework/responsive_framework.dart';
@@ -72,7 +73,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: ChatSession(),
+      home: HomePage(),
       // home: ChangeNotifierProvider(
       //   create: (context) => DrawerScreenProvider(),
       //   child:  HomePage(),

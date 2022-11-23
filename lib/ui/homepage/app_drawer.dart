@@ -29,20 +29,41 @@ class AppDrawer extends StatelessWidget {
           DrawerTile(
               title: 'Home',
               icon: Icons.home_filled,
-              onTap: () {
+              onTap: () =>
                 Provider.of<DrawerScreenProvider>(context, listen: false)
-                    .changeCurrentScreen(CustomScreensEnum.homeScreen);
-              }),
+                    .changeCurrentScreen(CustomScreensEnum.homeScreen,),),
           DrawerTile(
-              title: 'My Account',
+              title: 'Profile',
               icon: Icons.account_circle,
-              onTap: () {
-                // Provider.of<DrawerScreenProvider>(context, listen: false)
-                //     .changeCurrentScreen(CustomScreensEnum.profileScreen);
-              }),
+              onTap: () =>
+                Provider.of<DrawerScreenProvider>(context, listen: false)
+                    .changeCurrentScreen(CustomScreensEnum.profileScreen,)),
           DrawerTile(
-              title: 'My Purchases', icon: Icons.history_rounded, onTap: () {}),
-          DrawerTile(title: 'Sign Out', icon: Icons.logout, onTap: () {})
+              title: 'Settings',
+              icon: Icons.account_circle,
+              onTap: () =>
+                Provider.of<DrawerScreenProvider>(context, listen: false)
+                    .changeCurrentScreen(CustomScreensEnum.settingScreen)),
+          DrawerTile(
+              title: 'Reports',
+              icon: Icons.account_circle,
+              onTap: () =>
+                Provider.of<DrawerScreenProvider>(context, listen: false)
+                    .changeCurrentScreen(CustomScreensEnum.reportScreen)),
+          DrawerTile(
+              title: 'Feedback',
+              icon: Icons.account_circle,
+              onTap: () =>
+                Provider.of<DrawerScreenProvider>(context, listen: false)
+                    .changeCurrentScreen(CustomScreensEnum.feedbackScreen,),),
+          DrawerTile(
+              title: 'Subscription',
+              icon: Icons.account_circle,
+              onTap: () =>
+                Provider.of<DrawerScreenProvider>(context, listen: false)
+                    .changeCurrentScreen(CustomScreensEnum.subscriptionScreen,),),
+
+          DrawerTile(title: 'Sign Out', icon: Icons.logout, onTap: () {}),
         ],
       ),
     );

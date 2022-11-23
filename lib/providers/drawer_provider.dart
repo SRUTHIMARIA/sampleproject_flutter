@@ -23,19 +23,19 @@ class DrawerScreenProvider extends ChangeNotifier {
         currentScreen = HomePage();
         break;
       case CustomScreensEnum.profileScreen:
-        currentScreen = Profile();
+        currentScreen = const Profile();
         break;
       case CustomScreensEnum.settingScreen:
-        currentScreen = Settings();
+        currentScreen = const Settings();
         break;
       case CustomScreensEnum.reportScreen:
-        currentScreen = Reports();
+        currentScreen = const Reports();
         break;
       case CustomScreensEnum.feedbackScreen:
         currentScreen = Feedbacks();
         break;
       case CustomScreensEnum.subscriptionScreen:
-        currentScreen = Subscriptions();
+        currentScreen = const Subscriptions();
         break;
       default:
         currentScreen = HomePage();

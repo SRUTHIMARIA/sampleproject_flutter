@@ -2,13 +2,19 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_svg/svg.dart';
-import '../../models/NotificationModel/notification_model.dart';
+import 'package:flutter_template/providers/drawer_provider.dart';
+import 'package:flutter_template/ui/feedback/feedback.dart';
+import 'package:flutter_template/ui/homepage/app_drawer.dart';
+import 'package:flutter_template/ui/profile/profile.dart';
+import 'package:flutter_template/ui/reports/reports.dart';
+import 'package:flutter_template/ui/settings/settings.dart';
+import 'package:flutter_template/ui/subscriptions/subscriptions.dart';
+import 'package:flutter_template/widgets/drawer/common_drawer.dart';
+import 'package:provider/provider.dart';
 import '../../models/WeeklyPlanModel/weekly_plan_model.dart';
 import 'package:flutter_template/ui/homepage/Chat/chat_screen.dart';
 import 'package:flutter_template/ui/homepage/Notification/notification.dart';
-import 'package:flutter_template/ui/homepage/app_drawer.dart';
 import 'package:flutter_template/utils/constants/fontdata.dart';
-import 'package:flutter_template/utils/constants/strings.dart';
 import 'package:flutter_template/utils/extensions/context_extensions.dart';
 import 'package:flutter_template/utils/theme/app_colors.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
@@ -29,7 +35,152 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      drawer: const AppDrawer(),
+      appBar: AppBar(
+        backgroundColor: AppColors.primaryColor.withOpacity(0.40),elevation: 0.0,
+        actions: [
+          InkWell(
+            onTap: () =>
+                Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>const ChatScreen())),
+
+            child: Container(
+              margin: EdgeInsets.only(left: context.heightPx * 200),
+              child: SvgPicture.asset(Assets.icons.iconChat),
+            ),
+          ),
+          InkWell(
+            onTap: () =>
+                Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=> NotificationScreen())),
+
+            child: Container(
+              margin: EdgeInsets.only(left: context.heightPx * 40,right: context.heightPx *40,),
+              child: SvgPicture.asset(Assets.icons.iconNotification),
+            ),
+          ),
+
+        ],
+      ),
+      drawer: Drawer(
+        backgroundColor: AppColors.primaryColor.withOpacity(0.30),
+        child: Column(
+          children: [
+             const DrawerHeader(),
+            // _drawerHeader(),
+            SizedBox(
+              height: context.heightPx * 50,
+            ),
+            InkWell(
+              onTap: () =>
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) =>  HomePage(),),),
+              child: ListTile(
+                title: Text(
+                  'Home',
+                  style: TextStyle(
+                    fontSize: context.heightPx * 16,
+                    color: AppColors.grey,
+                    fontWeight: FontWeight.w400,
+                    fontFamily: 'OpenSans',),
+                ),
+              ),
+            ),
+            InkWell(
+              onTap: () =>
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) =>  Profile(),),),
+
+              child: ListTile(
+                title: Text(
+                  'Profile',
+                  style: TextStyle(
+                    fontSize: context.heightPx * 16,
+                    color: AppColors.grey,
+                    fontWeight: FontWeight.w400,
+                    fontFamily: 'OpenSans',),
+                ),
+              ),
+            ),
+            InkWell(
+              onTap: () =>
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const Settings(),),),
+
+              child: ListTile(
+                title: Text(
+                  'Settings',
+                  style: TextStyle(
+                    fontSize: context.heightPx * 16,
+                    color: AppColors.grey,
+                    fontWeight: FontWeight.w400,
+                    fontFamily: 'OpenSans',),
+                ),
+              ),
+            ),
+
+            InkWell(
+              onTap: () =>
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const Reports(),),),
+
+              child: ListTile(
+                title: Text(
+                  'Reports',
+                  style: TextStyle(
+                    fontSize: context.heightPx * 16,
+                    color: AppColors.grey,
+                    fontWeight: FontWeight.w400,
+                    fontFamily: 'OpenSans',),
+                ),
+              ),
+            ),
+            InkWell(
+              onTap: () =>
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) =>  Feedbacks(),),),
+
+              child: ListTile(
+                title: Text(
+                  'Feedback',
+                  style: TextStyle(
+                    fontSize: context.heightPx * 16,
+                    color: AppColors.grey,
+                    fontWeight: FontWeight.w400,
+                    fontFamily: 'OpenSans',),
+                ),
+              ),
+            ),
+            InkWell(
+              onTap: () =>
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const Subscriptions(),),),
+
+              child: ListTile(
+                title: Text(
+                  'Subscription',
+                  style: TextStyle(
+                    fontSize: context.heightPx * 16,
+                    color: AppColors.grey,
+                    fontWeight: FontWeight.w400,
+                    fontFamily: 'OpenSans',),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+
+    // drawer:  MyDrawer(),
       body: Container(
         height: double.infinity,
         width: double.infinity,
@@ -45,36 +196,20 @@ class _HomePageState extends State<HomePage> {
               Row(
 
                 children: [
-                  InkWell(
-                    onTap: () {
-                      // context.watch<DrawerScreenProvider>().currentScreen;
-                    },
-                    child: Container(
-                      margin: EdgeInsets.only(left: context.heightPx * 32),
-                      child: SvgPicture.asset(Assets.icons.iconDrawer),
-                    ),
-                  ),
+                  // InkWell(
+                  //   onTap: () {
+                  //   Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>MyDrawer()));
+                  //     // context.watch<DrawerScreenProvider>().currentScreen;
+                  //   },
+                  //   child: Container(
+                  //     margin: EdgeInsets.only(left: context.heightPx * 32),
+                  //     child: SvgPicture.asset(Assets.icons.iconDrawer),
+                  //   ),
+                  // ),
                   SizedBox(
                     width: context.widthPx * 160,
                   ),
-                  InkWell(
-                    onTap: () =>
-                      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>const ChatScreen())),
 
-                    child: Container(
-                      margin: EdgeInsets.only(left: context.heightPx * 170),
-                      child: SvgPicture.asset(Assets.icons.iconChat),
-                    ),
-                  ),
-                  InkWell(
-                    onTap: () =>
-                      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=> NotificationScreen())),
-
-                    child: Container(
-                      margin: EdgeInsets.only(left: context.heightPx * 20),
-                      child: SvgPicture.asset(Assets.icons.iconNotification),
-                    ),
-                  ),
                 ],
               ),
               Expanded(
@@ -265,6 +400,62 @@ class _HomePageState extends State<HomePage> {
     });
   }
 }
+
+class DrawerHeader extends StatelessWidget {
+  const DrawerHeader({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      height: context.heightPx * 150,
+      padding: const EdgeInsets.only(top: 20.0),
+      child: Row(
+        children: [
+          const CircleAvatar(
+            backgroundImage: AssetImage('assets/images/image_user.png'),
+            radius: 40.0,),
+          const SizedBox(width: 20),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(height: context.heightPx * 50),
+              Text(
+                'Robert Fox',
+                style: TextStyle(
+                  fontSize: context.heightPx * 18,
+                  color: AppColors.darkGreen,
+                  fontWeight: FontWeight.w700,
+                  fontFamily: 'OpenSans',),
+              ),
+              const SizedBox(height: 4),
+              Row(
+                children: [
+                  Text(
+                    '5.0',
+                    style: TextStyle(
+                      fontSize: context.heightPx * 14,
+                      color: AppColors.whiteColor,
+                      fontWeight: FontWeight.w400,
+                      fontFamily: 'OpenSans',),
+                  ),
+                  SizedBox(width: context.heightPx * 2),
+                  Icon(
+                    Icons.star,
+                    color: AppColors.redColor,
+                    size: context.heightPx * 14,
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
+}
+
 
 class _DataSource extends CalendarDataSource {
   _DataSource(List<Appointment> source) {
