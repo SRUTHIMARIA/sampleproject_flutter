@@ -99,7 +99,8 @@ class DrawerHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return
+      Container(
       color: AppColors.grey,
       width: double.infinity,
       height: context.heightPx * 150,
