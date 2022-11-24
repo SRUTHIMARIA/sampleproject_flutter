@@ -8,7 +8,7 @@ class AppSnackBar {
         Duration? duration,
         Color? backgroundColor,
         SnackBarBehavior? behavior,
-        Color? textColor}) {
+        Color? textColor,}) {
     duration ??= const Duration(milliseconds: 2100);
     backgroundColor ??= AppColors.themeColor;
     textColor ??= AppColors.whiteColor;
@@ -20,6 +20,6 @@ class AppSnackBar {
         ),
         backgroundColor: backgroundColor,
         duration: duration,
-        behavior: behavior ?? SnackBarBehavior.floating));
+        behavior: behavior ?? SnackBarBehavior.floating,));
   }
 }

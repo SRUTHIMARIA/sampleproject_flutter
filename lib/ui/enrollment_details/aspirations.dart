@@ -52,9 +52,8 @@ class _AspirationsState extends State<Aspirations> {
                 Row(
                   children: [
                     InkWell(
-                      onTap: (){
-                        Navigator.pop(context);
-                      },
+                      onTap: ()=>
+                        Navigator.pop(context),
                       child: Container(
                         margin: EdgeInsets.only(left: context.heightPx * 49),
                         child: SvgPicture.asset(Assets.icons.iconBackarrow),
@@ -77,7 +76,7 @@ class _AspirationsState extends State<Aspirations> {
                   margin: EdgeInsets.symmetric(horizontal: 56),
                   decoration: BoxDecoration(
                     color: AppColors.textFieldBgColor,
-                    borderRadius: BorderRadius.circular(10.0),
+                    borderRadius: const BorderRadius.all(Radius.circular(10.0)),
                   ),
                   child: TextFormField(
                     style: FontData().montFont500TextStyle,
@@ -88,7 +87,7 @@ class _AspirationsState extends State<Aspirations> {
                       EdgeInsets.only(left: context.heightPx * 16),
 
                       border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10.0),
+                        borderRadius: const BorderRadius.all(Radius.circular(10.0)),
                       ),
 
                       fillColor: Colors.grey,
@@ -108,7 +107,7 @@ class _AspirationsState extends State<Aspirations> {
                   margin: EdgeInsets.symmetric(horizontal: 56),
                   decoration: BoxDecoration(
                     color: AppColors.textFieldBgColor,
-                    borderRadius: BorderRadius.circular(10.0),
+                    borderRadius: const BorderRadius.all(Radius.circular(10.0)),
                   ),
                   child: TextFormField(
                     style: FontData().montFont500TextStyle,
@@ -119,7 +118,7 @@ class _AspirationsState extends State<Aspirations> {
                       EdgeInsets.only(left: context.heightPx * 16),
 
                       border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10.0),
+                        borderRadius: const BorderRadius.all(Radius.circular(10.0)),
                       ),
 
                       fillColor: Colors.grey,
@@ -143,9 +142,8 @@ class _AspirationsState extends State<Aspirations> {
                 ),
 
                 InkWell(
-                  onTap: (){
-                    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>SelfEvaluationQuiz()));
-                  },
+                  onTap: () =>
+                    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>SelfEvaluationQuiz())),
                   child: Align(
                     alignment: Alignment.center,
                     child: Container(

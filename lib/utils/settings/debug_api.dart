@@ -2,7 +2,7 @@
 // import '../static/enums.dart';
 
 Future<void> debugApi(
-    {required String? error, required String url, required String method, required String sentData}) async {
+    {required String? error, required String url, required String method, required String sentData,}) async {
   return;
   // String body = _getBody(response: error, method: method, sentData: sentData, url: url);
 

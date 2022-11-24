@@ -13,7 +13,7 @@ class SignupValidation with ChangeNotifier {
   ValidationItem get lastName => _lastName;
   ValidationItem get email=>_email;
   bool get isValid {
-    if (_lastName.value != null && _firstName.value != null &&_email.value!=null){
+    if (_email.value!=null){
       return true;
     } else {
       return false;
@@ -22,20 +22,12 @@ class SignupValidation with ChangeNotifier {
 
   //Setters
   void changeFirstName(String value){
-    if (value.length >= 3){
-      _firstName=ValidationItem(value,'');
-    } else {
-      _firstName=ValidationItem('', "Must be at least 3 characters");
-    }
+    _firstName = value.length >= 3 ? ValidationItem(value, '') : ValidationItem('', "Must be at least 3 characters");
     notifyListeners();
   }
 
   void changeLastName(String value){
-    if (value.length >= 3){
-      _lastName=ValidationItem(value,'');
-    } else {
-      _lastName=ValidationItem('', "Must be at least 3 characters");
-    }
+    _lastName = value.length >= 3 ? ValidationItem(value, '') : ValidationItem('', "Must be at least 3 characters");
     notifyListeners();
   }
 
@@ -51,15 +43,8 @@ class SignupValidation with ChangeNotifier {
   String? validatePassword(String value) {
     RegExp regex =
     RegExp(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$');
-    if (value.isEmpty) {
-      return 'Please enter password';
-    } else {
-      if (!regex.hasMatch(value)) {
-        return 'Enter valid password';
-      } else {
-        return null;
-      }
-    }
+
+    return value.isEmpty ? 'Please enter password' : !regex.hasMatch(value) ? 'Enter valid password' : null;
   }
 
 

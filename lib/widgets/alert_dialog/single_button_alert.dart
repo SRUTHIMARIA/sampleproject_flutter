@@ -41,7 +41,7 @@ class AlertDialogWithOkButton extends StatelessWidget {
             child: MaterialButton(
               minWidth: context.widthPx * 50,
               height: context.heightPx * 30,
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
+              shape: RoundedRectangleBorder(borderRadius: const BorderRadius.all(Radius.circular(5.0))),
               color: AppColors.themeColor,
               onPressed: () {
                 if (onOk != null) {
@@ -56,7 +56,7 @@ class AlertDialogWithOkButton extends StatelessWidget {
               ),
             ),
           ),
-        )
+        ),
       ],
     );
   }

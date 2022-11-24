@@ -12,11 +12,11 @@ class CustomAlertWidget {
       : _dialog = CustomProgressDialog(context,
       loadingWidget: SizedBox(
           height: context.percentHeight * 75,
-          child: ClipRRect(borderRadius: BorderRadius.circular(15), child: widget)),
+          child: ClipRRect(borderRadius: const BorderRadius.all(Radius.circular(15)), child: widget),),
       dismissable: dismissible,
       dialogTransitionType: DialogTransitionType.TopToBottom,
       transitionDuration: const Duration(milliseconds: 200),
-      onDismiss: onDismiss);
+      onDismiss: onDismiss,);
 
   final CustomProgressDialog? _dialog;
 

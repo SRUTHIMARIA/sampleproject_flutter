@@ -24,7 +24,7 @@ class AlertDialogWithTwoButtons {
       required this.onFirstButtonClick,
       this.firstButtonText = "Ok",
       this.secondButtonText = "Cancel",
-      this.onSecondButtonClick}) {
+      this.onSecondButtonClick,}) {
     if (secondButtonText == "Cancel") {
       secondButtonText = ('Cancel');
     }
@@ -59,14 +59,15 @@ class AlertDialogWithTwoButtons {
               _button(
                   onTap: () => onSecondButtonClick ?? context.pop,
                   label: secondButtonText,
-                  secondaryButtonColor: AppColors.redColor),
+                  secondaryButtonColor: AppColors.redColor,),
               const Spacer(),
               _button(onTap: () => onFirstButtonClick, label: firstButtonText),
             ],
           ),
-        )
+        ),
       ],
     );
+
     return await dialog!.show(context);
   }
 
@@ -82,7 +83,7 @@ class AlertDialogWithTwoButtons {
       child: Container(
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(context.textPx * 8),
-            color: secondaryButtonColor ?? AppColors.themeColor),
+            color: secondaryButtonColor ?? AppColors.themeColor,),
         height: context.heightPx * 50,
         width: context.widthPx * 120,
         margin: EdgeInsets.symmetric(horizontal: context.widthPx * 10, vertical: context.textPx * 10),
