@@ -4,10 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_template/gen/assets.gen.dart';
 import 'package:flutter_template/models/common_model/authentication_response_model.dart';
-import 'package:flutter_template/models/common_model/success_model.dart';
 import 'package:flutter_template/models/login_model/login_user_model.dart';
 import 'package:flutter_template/models/register_model/success_user_model.dart';
-import 'package:flutter_template/models/user_detail/user_detail_model_for_hive.dart';
 import 'package:flutter_template/providers/authentication_provider.dart';
 import 'package:flutter_template/providers/login/login_provider.dart';
 import 'package:flutter_template/services/api/login_service/login_service.dart';
@@ -36,6 +34,7 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+
   var txtUserNameController = TextEditingController();
   var txtUserPwdController = TextEditingController();
   bool isLogin = false;
