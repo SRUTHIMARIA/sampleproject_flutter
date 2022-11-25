@@ -6,6 +6,6 @@ import 'package:flutter_template/services/api/endpoints/endpoints.dart';
 class LoginService {
   static Future<SuccessModel> sportsList(SportsTypeModel sportsTypeModel) async {
     return await ApiHelper(url: AthleteAssist.getSportsList, body: sportsTypeModel.toJson())
-        .post((p0) => SuccessModel.fromJson(p0));
+        .post((p0) => SportsTypeModel.fromJson(p0));
   }
 }
