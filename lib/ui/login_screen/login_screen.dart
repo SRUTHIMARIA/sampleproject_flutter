@@ -190,13 +190,12 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
                 SizedBox(width:context.widthPx *4),
               GestureDetector(
-                onTap: (){
-                  Navigator.push(context, MaterialPageRoute(builder: (context)=>RegisterScreen()));
-                },
+                onTap: ()=>
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=>RegisterScreen())),
                 child: Container(
                   child: Text(
                    register,
-                    style: const FontData().montFont70012TextStyle ,
+                    style:  FontData().montFont70012TextStyle,
                   ),
                 ),
               ),
