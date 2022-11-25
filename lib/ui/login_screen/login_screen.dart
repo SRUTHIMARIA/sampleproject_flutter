@@ -4,10 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_template/gen/assets.gen.dart';
 import 'package:flutter_template/models/common_model/authentication_response_model.dart';
-import 'package:flutter_template/models/common_model/success_model.dart';
 import 'package:flutter_template/models/login_model/login_user_model.dart';
 import 'package:flutter_template/models/register_model/success_user_model.dart';
-import 'package:flutter_template/models/user_detail/user_detail_model_for_hive.dart';
 import 'package:flutter_template/providers/authentication_provider.dart';
 import 'package:flutter_template/providers/login/login_provider.dart';
 import 'package:flutter_template/services/api/login_service/login_service.dart';
@@ -22,7 +20,6 @@ import 'package:flutter_template/utils/static/enums.dart';
 import 'package:flutter_template/utils/static/static_padding.dart';
 import 'package:flutter_template/widgets/alert_dialog/future_handling_alert.dart';
 import 'package:flutter_template/widgets/snackbar/text_snackbar.dart';
-import 'package:hive/hive.dart';
 import 'package:provider/provider.dart';
 
 import '../../utils/theme/app_colors.dart';
@@ -36,6 +33,7 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+
   var txtUserNameController = TextEditingController();
   var txtUserPwdController = TextEditingController();
   bool isLogin = false;
@@ -157,15 +155,14 @@ class _LoginScreenState extends State<LoginScreen> {
   //   print('DEVICE TOKEN IS ------> $token!');
   // }
 
-  final List<Color> _colors = [AppColors.gradientColorSplash, AppColors.gradientColor2Splash];
-  final List<double> _stops = [0.0, 0.7];
+
 
   @override
   Widget build(BuildContext context) {
-    final loginProvider = Provider.of<LoginProvider>(context);
 
     return Consumer<LoginProvider>(
       builder: (context, provider, child) {
+
         return Scaffold(
           resizeToAvoidBottomInset: false,
           body: Container(
@@ -196,10 +193,10 @@ class _LoginScreenState extends State<LoginScreen> {
                   child: Container(
                     padding: StaticPadding.paddingH50(context),
 
-                    margin: const EdgeInsets.only(left: 12.0),
+                    margin:  EdgeInsets.only(left: 12.0),
                     child: Text(
                       logintoContinue,
-                      style: const FontData().montFont14TextStyle,
+                      style:  FontData().montFont14TextStyle,
                     ),
                   ),
                 ),
@@ -286,7 +283,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 SizedBox(height: context.heightPx * 16),
                 InkWell(
                   onTap: () => Navigator.pushReplacement(
-                      context, MaterialPageRoute(builder: (context) => const PasswordRecovery())),
+                      context, MaterialPageRoute(builder: (context) => const PasswordRecovery()),),
                   child: Align(
                     alignment: Alignment.centerRight,
                     child: Padding(

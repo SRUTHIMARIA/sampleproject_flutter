@@ -48,31 +48,36 @@ Future<ApiStatus> handleFutureWithAlert({
       onError();
     }
     if (showAlert) {
-      showDialog(context: Globals.context(), builder:(context){
-        return AlertDialog(
-          title: const Text('Login Success'),
-          content: const Text('You are logged in Successfully'),
-          actions: [
-            TextButton(
-              child: const Text('Ok'),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            ),
-          ],
-        );
+      showSingleButtonAlert(
+        title: 'Error',
+        body: getErrorMessage(),
+        onPress: onAlertDismiss,
+        barrierColor: Colors.transparent,
+      );
+      // showDialog(context: Globals.context(), builder:(context){
+      //   return AlertDialog(
+      //     title: const Text('Login Success'),
+      //     content: const Text('You are logged in Successfully'),
+      //     actions: [
+      //       TextButton(
+      //         child: const Text('Ok'),
+      //         onPressed: () {
+      //           Navigator.of(context).pop();
+      //         },
+      //       ),
+      //     ],
+      //   );
+      //
+      // }
 
-      } );
-      // showSingleButtonAlert(
-      //   title: 'Error',
-      //   body: getErrorMessage(),
-      //   onPress: onAlertDismiss,
-      //   barrierColor: Colors.transparent,
-      // );
+
     }
   }
 
   return apiStatus;
+}
+
+void showSingleButtonAlert({required String title, required String body, Function()? onPress, required Color barrierColor}) {
 }
 
 
