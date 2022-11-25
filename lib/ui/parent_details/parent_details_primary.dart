@@ -37,17 +37,16 @@ class _ParentDetailPrimaryState extends State<ParentDetailPrimary> {
     ParentResponseModel parentResponseModel =
         ParentResponseModel(name: name, phone: phone, dob: dob, email: email, relationship: relationship);
     var provider = Provider.of<ParentDetailProvider>(context, listen: false);
-    await provider.postData(parentResponseModel);
-    if (provider.isBack) {
+     provider.postData(parentResponseModel);
+
       Navigator.push(
         context,
         MaterialPageRoute(builder: (context) => ParentDetailsSecondary()),
       );
-    }
+
   }
 
-  final List<Color> _colors = [AppColors.gradientColorSplash, AppColors.gradientColor2Splash];
-  final List<double> _stops = [0.0, 0.7];
+
 
   @override
   Widget build(BuildContext context) {
@@ -123,7 +122,7 @@ class _ParentDetailPrimaryState extends State<ParentDetailPrimary> {
                                   contentPadding: EdgeInsets.only(left: context.heightPx * 16),
 
                                   border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(6.0),
+                                    borderRadius: const BorderRadius.all(Radius.circular(6.0)),
                                   ),
 
                                   hintText: name,
@@ -140,7 +139,7 @@ class _ParentDetailPrimaryState extends State<ParentDetailPrimary> {
                               margin: EdgeInsets.symmetric(horizontal: 56),
                               decoration: BoxDecoration(
                                 color: AppColors.textFieldBgColor,
-                                borderRadius: BorderRadius.circular(6.0),
+                                borderRadius: const BorderRadius.all(Radius.circular(6.0)),
                               ),
                               child: TextFormField(
                                 controller: phoneController,
@@ -151,7 +150,7 @@ class _ParentDetailPrimaryState extends State<ParentDetailPrimary> {
                                   contentPadding: EdgeInsets.only(left: context.heightPx * 16),
 
                                   border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(6.0),
+                                    borderRadius: const BorderRadius.all(Radius.circular(6.0)),
                                   ),
 
                                   hintText: phoneno,
@@ -179,7 +178,7 @@ class _ParentDetailPrimaryState extends State<ParentDetailPrimary> {
                                   contentPadding: EdgeInsets.only(left: context.heightPx * 16),
 
                                   border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(6.0),
+                                    borderRadius: const BorderRadius.all(Radius.circular(6.0)),
                                   ),
 
                                   hintText: dob,
@@ -196,7 +195,7 @@ class _ParentDetailPrimaryState extends State<ParentDetailPrimary> {
                               margin: EdgeInsets.symmetric(horizontal: 56),
                               decoration: BoxDecoration(
                                 color: AppColors.textFieldBgColor,
-                                borderRadius: BorderRadius.circular(6.0),
+                                borderRadius: const BorderRadius.all(Radius.circular(6.0)),
                               ),
                               child: TextFormField(
                                 controller: emailController,
@@ -207,7 +206,7 @@ class _ParentDetailPrimaryState extends State<ParentDetailPrimary> {
                                   contentPadding: EdgeInsets.only(left: context.heightPx * 16),
 
                                   border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(6.0),
+                                    borderRadius: const BorderRadius.all(Radius.circular(6.0)),
                                   ),
 
                                   hintText: email,
@@ -224,7 +223,7 @@ class _ParentDetailPrimaryState extends State<ParentDetailPrimary> {
                               margin: EdgeInsets.symmetric(horizontal: 56),
                               decoration: BoxDecoration(
                                 color: AppColors.textFieldBgColor,
-                                borderRadius: BorderRadius.circular(6.0),
+                                borderRadius: const BorderRadius.all(Radius.circular(6.0)),
                               ),
                               child: TextFormField(
                                 controller: relationshipController,
@@ -250,9 +249,9 @@ class _ParentDetailPrimaryState extends State<ParentDetailPrimary> {
                             ),
                             GestureDetector(
                               onTap: () {
-                                _parentData();
-                                // Navigator.push(
-                                //     context, MaterialPageRoute(builder: (context) => ParentDetailsSecondary()));
+                                // _parentData();
+                                Navigator.push(
+                                    context, MaterialPageRoute(builder: (context) => ParentDetailsSecondary()));
                               },
                               child: Container(
                                 height: context.heightPx * 42,
@@ -275,6 +274,6 @@ class _ParentDetailPrimaryState extends State<ParentDetailPrimary> {
                           ],
                         ),
                       ),
-                    ));}));
+                    ),);},),);
   }
 }

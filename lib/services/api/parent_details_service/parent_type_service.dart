@@ -5,7 +5,7 @@ import 'package:flutter_template/services/api/endpoints/endpoints.dart';
 
 class ParentDetailService {
   static Future<ParentTypeModel> parenType(String type) async {
-    return await ApiHelper(url: AtheleteAssist.getParentProfileType(type)).get((p0) {
+    return await ApiHelper(url: AthleteAssist.getParentProfileType(type)).get((p0) {
       return ParentTypeModel.fromJson(p0);
     });
   }

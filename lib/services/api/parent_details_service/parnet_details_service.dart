@@ -14,11 +14,12 @@ Future<http.Response?> parentDetailData(ParentResponseModel parentResponseModel)
           "Authorization": 'Bearer ' + token!,
           "Accept": "application/json",
         },
-        body: jsonEncode(parentResponseModel.toJson())
+        body: jsonEncode(parentResponseModel.toJson(),),
 
     );
   } catch (e) {
     log(e.toString());
   }
+
   return response;
 }

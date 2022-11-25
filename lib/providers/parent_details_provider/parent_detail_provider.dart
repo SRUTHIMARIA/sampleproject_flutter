@@ -11,7 +11,7 @@ class ParentDetailProvider extends ChangeNotifier {
     notifyListeners();
     http.Response? response = (await parentDetailData(parentResponseModel!));
     if (response!.statusCode == 200) {
-      isBack = true;
+    //  isBack = true;
       print(response.body);
 
     }
