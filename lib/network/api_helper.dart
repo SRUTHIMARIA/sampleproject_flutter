@@ -63,6 +63,20 @@ class ApiHelper {
 
     return await _callApi(Dio(BaseOptions(headers: _getHeaders())).post(url, data: jsonEncode(body)), jsonToObjectFn);
   }
+  Future<dynamic> patch(Function(Map<String, dynamic>) jsonToObjectFn) async {
+    _method = 'PATCH';
+
+    return await _callApi(
+      Dio((BaseOptions(headers: _getHeaders()))).patch(url, data: jsonEncode(body)),
+      jsonToObjectFn,
+    );
+  }
+
+  Future<dynamic> delete(Function(Map<String, dynamic>) jsonToObjectFn) async {
+    _method = 'DELETE';
+
+    return await _callApi(Dio((BaseOptions(headers: _getHeaders()))).delete(url), jsonToObjectFn);
+  }
 
   Future<dynamic> _callApi(Future httpFuture, Function(Map<String, dynamic>) jsonToObjectFn) async {
     try {
