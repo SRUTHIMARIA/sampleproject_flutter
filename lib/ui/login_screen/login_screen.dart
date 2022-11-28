@@ -34,11 +34,10 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-
   var txtUserNameController = TextEditingController();
   var txtUserPwdController = TextEditingController();
   bool isLogin = false;
-  bool _isObscure1=false;
+  bool _isObscure1 = false;
 
   // Box? userDataBox;
   // // String? token;
@@ -51,7 +50,6 @@ class _LoginScreenState extends State<LoginScreen> {
   //   // createBox();
   //   // getData();
   // }
-
 
   //
   // void createBox() async {
@@ -106,18 +104,15 @@ class _LoginScreenState extends State<LoginScreen> {
       getErrorMessage: () => validationMessage!,
       function: () async {
         String? firebaseToken;
-        try{
-         firebaseToken=  await FirebaseMessaging.instance.getToken();
-         print(firebaseToken);
-
-        }
-        catch(e){
+        try {
+          firebaseToken = await FirebaseMessaging.instance.getToken();
+          print(firebaseToken);
+        } catch (e) {
           if (firebaseToken == null) {
             validationMessage = 'Failed to get device id';
 
             return ApiStatus.error;
           }
-
         }
 
         model = await LoginService.login(
@@ -129,7 +124,7 @@ class _LoginScreenState extends State<LoginScreen> {
         //   LoginModel(email: email, password: password, firebaseToken: firebaseToken),
         // );
 
-        if (model!.success==200) return ApiStatus.success;
+        if (model!.success == 200) return ApiStatus.success;
 
         validationMessage = model!.message;
         setState(() => showValidationError = true);
@@ -137,12 +132,11 @@ class _LoginScreenState extends State<LoginScreen> {
         return ApiStatus.none;
       },
       onSuccess: () async {
-
         await authProvider.saveUserDetails(
-            authToken: authenticationResponseModel!.payload.token,
-            userName: authenticationResponseModel.payload.fullName,);
-        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>HomePage()));
-
+          authToken: authenticationResponseModel!.payload.token,
+          userName: authenticationResponseModel.payload.fullName,
+        );
+        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomePage()));
 
         AppSnackBar.showSnackBarWithText(context: context, text: 'Login Successful.');
         print('Login');
@@ -194,7 +188,6 @@ class _LoginScreenState extends State<LoginScreen> {
                   alignment: Alignment.centerLeft,
                   child: Container(
                     padding: StaticPadding.paddingH50(context),
-
                     margin: const EdgeInsets.only(left: 12.0),
                     child: Text(
                       logintoContinue,
@@ -285,7 +278,9 @@ class _LoginScreenState extends State<LoginScreen> {
                 SizedBox(height: context.heightPx * 16),
                 InkWell(
                   onTap: () => Navigator.pushReplacement(
-                      context, MaterialPageRoute(builder: (context) => const PasswordRecovery()),),
+                    context,
+                    MaterialPageRoute(builder: (context) => const PasswordRecovery()),
+                  ),
                   child: Align(
                     alignment: Alignment.centerRight,
                     child: Padding(
@@ -305,16 +300,14 @@ class _LoginScreenState extends State<LoginScreen> {
                   // loginProvider.login(txtUserNameController.text.toString(), txtUserPwdController.text.toString(), token??''),
                   //     loginUser(),
 
-                   // loginUserDetails();
+                  // loginUserDetails();
 
-                    //   Provider.of<LoginProvider>(context, listen: false)
-                    //       .signInToApp(
-                    // context,
-                    // txtUserPwdController.text.toString(),
-                    // txtUserPwdController.text.toString(),
-                    // token ?? ''),
-
-
+                  //   Provider.of<LoginProvider>(context, listen: false)
+                  //       .signInToApp(
+                  // context,
+                  // txtUserPwdController.text.toString(),
+                  // txtUserPwdController.text.toString(),
+                  // token ?? ''),
 
                   child: SizedBox(
                     height: context.heightPx * 42,
@@ -362,7 +355,8 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   void handlePressed() {
-    Provider.of<LoginProvider>(context, listen: false).signInToApp(txtUserNameController.text, txtUserPwdController.text);
+    Provider.of<LoginProvider>(context, listen: false)
+        .signInToApp(txtUserNameController.text, txtUserPwdController.text);
     clearControllers();
   }
 

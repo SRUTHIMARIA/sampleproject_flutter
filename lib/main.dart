@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_template/firebase_options.dart';
 import 'package:flutter_template/providers/providers.dart';
 import 'package:flutter_template/ui/homepage/Chat/chat_session.dart';
+import 'package:flutter_template/ui/student_basic_profile/sports_type_screen.dart';
 import 'package:flutter_template/utils/globals.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_template/providers/authentication_provider.dart';

@@ -15,11 +15,7 @@ class SportsSelection extends StatefulWidget {
 }
 
 class _SportsSelectionState extends State<SportsSelection> {
-  final List<Color> _colors = [
-    AppColors.gradientColorSplash.withOpacity(0.48),
-    AppColors.bgPrimarySplash,
-  ];
-  final List<double> _stops = [0.0, 0.0];
+
 
   @override
   Widget build(BuildContext context) {
@@ -32,8 +28,6 @@ class _SportsSelectionState extends State<SportsSelection> {
                 end: Alignment.bottomRight,
                 colors: [AppColors.gradientColorSplash, AppColors.bgPrimarySplash],),),
         child: Scaffold(
-          // By defaut, Scaffold background is white
-          // Set its value to transparent
           backgroundColor: Colors.transparent,
           body:
           Column(
@@ -46,8 +40,7 @@ class _SportsSelectionState extends State<SportsSelection> {
                 child:
                 Container(
                       padding: StaticPadding.paddingH50(context),
-
-                      margin: EdgeInsets.only(left: 12.0),
+                  margin: EdgeInsets.only(left: 12.0),
                       child: Text(
                         sports_type,
                         style:  FontData().montFont20TextStyle,
@@ -109,24 +102,18 @@ class _SportsSelectionState extends State<SportsSelection> {
                 ),
               ),
               SizedBox(height:context.heightPx *20),
-              GestureDetector(
-                onTap: () {
-                  // Navigator.push(context, MaterialPageRoute(builder: (context)=>RegisterScreen()));
-                },
-
+              Container(
+                height: context.heightPx * 45,
+                width: context.widthPx * 276,
                 child: Container(
-                  height: context.heightPx * 45,
-                  width: context.widthPx * 276,
-                  child: Container(
-                    decoration: const BoxDecoration(
-                      color: AppColors.themeColor,
-                      borderRadius: BorderRadius.all(Radius.circular(8.0)),),
-                    child: Center(
-                      child: Text(
-                        submit,
-                        // _display ? "hide logo" : "display logo",
-                        style: const FontData().montFont70016TextStyle,
-                      ),
+                  decoration: const BoxDecoration(
+                    color: AppColors.themeColor,
+                    borderRadius: BorderRadius.all(Radius.circular(8.0)),),
+                  child: Center(
+                    child: Text(
+                      submit,
+                      // _display ? "hide logo" : "display logo",
+                      style: const FontData().montFont70016TextStyle,
                     ),
                   ),
                 ),
