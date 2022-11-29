@@ -1,18 +1,21 @@
-import 'package:json_annotation/json_annotation.dart';
+import 'dart:convert';
 
-@JsonSerializable()
-class ParentTypeModel{
-  String? type;
+ParentTypeModel parentTypeModelFromJson(String str) => ParentTypeModel.fromJson(json.decode(str));
 
+String parentTypeModelToJson(ParentTypeModel data) => json.encode(data.toJson());
 
-  ParentTypeModel({this.type});
+class ParentTypeModel {
+  ParentTypeModel({
+    required this.type,
+  });
 
-  ParentTypeModel.fromJson(Map<String, dynamic> json)
-      :type = json['type'];
+  String type;
+
+  factory ParentTypeModel.fromJson(Map<String, dynamic> json) => ParentTypeModel(
+        type: json['type'] ?? '',
+      );
 
   Map<String, dynamic> toJson() => {
-
-    'type' : type,
-
-  };
+        'type': type,
+      };
 }

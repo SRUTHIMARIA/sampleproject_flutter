@@ -10,6 +10,7 @@ import '../../utils/static/static_padding.dart';
 import '../parent_details/parent_details_primary.dart';
 
 class WhyJoinScreen extends StatefulWidget {
+
   @override
   State<WhyJoinScreen> createState() => _WhyJoinScreenState();
 }

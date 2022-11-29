@@ -1,25 +1,44 @@
-class MedicalResponseModel {
-  final String moreDetail;
-  final String detail;
-  final String protocol;
-  bool? saveNextPage;
-  String? type;
+// To parse this JSON data, do
+//
+//     final addOrUpdateMedicalResponseModel = addOrUpdateMedicalResponseModelFromJson(jsonString);
 
-  MedicalResponseModel({
+import 'package:meta/meta.dart';
+import 'dart:convert';
+
+AddOrUpdateMedicalResponseModel addOrUpdateMedicalResponseModelFromJson(String str) => AddOrUpdateMedicalResponseModel.fromJson(json.decode(str));
+
+String addOrUpdateMedicalResponseModelToJson(AddOrUpdateMedicalResponseModel data) => json.encode(data.toJson());
+
+class AddOrUpdateMedicalResponseModel {
+  AddOrUpdateMedicalResponseModel({
     required this.moreDetail,
+    required this.saveNextPage,
+    required this.type,
     required this.detail,
     required this.protocol,
-    this.saveNextPage,
-    this.type,
   });
 
-  factory MedicalResponseModel.fromJson(Map<String, dynamic> json) => MedicalResponseModel(
-    moreDetail: json["moreDetail"],
+  final String moreDetail;
+  final bool saveNextPage;
+  final String type;
+  final String detail;
+  final String protocol;
+
+  factory AddOrUpdateMedicalResponseModel.fromJson(Map<String, dynamic> json) => AddOrUpdateMedicalResponseModel(
+    moreDetail: json["more_detail"],
+    saveNextPage: json["saveNextPage"],
+    type: json["type"],
     detail: json["detail"],
     protocol: json["protocol"],
-    saveNextPage: json["saveNextPage"],
-    type:json["type"],
   );
+
+  Map<String, dynamic> toJson() => {
+    "more_detail": moreDetail,
+    "saveNextPage": saveNextPage,
+    "type": type,
+    "detail": detail,
+    "protocol": protocol,
+  };
 }
 
 
