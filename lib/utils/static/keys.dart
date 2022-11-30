@@ -2,6 +2,7 @@ class StaticKeys {
   static const String themeLocation = 'theme';
   static const String tokenLocation = 'authKey';
   static const String userNameLocation = 'userNameLocation';
+  static const String userIdLocation = 'userIdLocation';
   static const String userEmailLocation = 'userEmailLocation';
 
 }

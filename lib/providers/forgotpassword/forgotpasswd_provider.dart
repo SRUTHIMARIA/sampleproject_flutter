@@ -73,28 +73,28 @@ class ForgotPasswordProvider extends ChangeNotifier{
   //
 
 
-  Future forgotPassword( String email) async{
-    if(email.trim().isEmpty) {
-      const ToastAtTop().showToast(errorMessage6);
-    } else {
-      setIsLoading(true);
-      final client = ApiClient(
-        Dio(BaseOptions(contentType: 'application/json')),);
-      ForgotPasswordModel forgotPasswordModel = ForgotPasswordModel(email: email,);
-      client.requestOtp(forgotPasswordModel).then((it) async {
-        setKey(it.key!);
-        setIsLoading(false);
-        setEmail(email);
-        const ToastAtTop().showToast(success);
-        const Routes().pushReplacement(Globals.navigatorKey.currentContext!,  AuthenticationCodeScreen());
-      }).catchError((Object obj) {
-        setIsLoading(false);
-        setIsLoading(false);
-        const ToastAtTop().showToast(errorMessage9);
-
-      });
-    }
-  }
+  // Future forgotPassword( String email) async{
+  //   if(email.trim().isEmpty) {
+  //     const ToastAtTop().showToast(errorMessage6);
+  //   } else {
+  //     setIsLoading(true);
+  //     final client = ApiClient(
+  //       Dio(BaseOptions(contentType: 'application/json')),);
+  //     ForgotPasswordModel forgotPasswordModel = ForgotPasswordModel(email: email,);
+  //     client.requestOtp(forgotPasswordModel).then((it) async {
+  //       setKey(it.key!);
+  //       setIsLoading(false);
+  //       setEmail(email);
+  //       const ToastAtTop().showToast(success);
+  //       const Routes().pushReplacement(Globals.navigatorKey.currentContext!,  AuthenticationCodeScreen());
+  //     }).catchError((Object obj) {
+  //       setIsLoading(false);
+  //       setIsLoading(false);
+  //       const ToastAtTop().showToast(errorMessage9);
+  //
+  //     });
+  //   }
+  // }
 
   // Future forgotPassword(BuildContext context, String email) async {
   //   if (email.trim().isEmpty) {

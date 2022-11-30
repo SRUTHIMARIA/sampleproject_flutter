@@ -137,40 +137,40 @@ class LoginProvider extends ChangeNotifier{
 // }
 
 
-  Future signInToApp(String email, String password) async{
-    if(email.trim().isEmpty || password.trim().isEmpty) {
-      const ToastAtTop().showToast(errorMessage5);
-      setLoginError(true);
-    } else {
-      setIsLoading(true);
-      setLoginError(false);
-      final client = ApiClient(Dio(BaseOptions(contentType: 'application/json')));
-      LoginUser loginUser = LoginUser(
-        email: email, password: password, device_token: deviceToken,);
-      client.loginPage(loginUser).then((it) async {
-
-        setToken(it.token!);
-        SharedPreferences sharedPreferences = await _prefs;
-        sharedPreferences.setBool('isLoggedIn', true);
-        sharedPreferences.setString('token', it.token!);
-        setIsLoading(false);
-
-        const ToastAtTop().showToast(loggedin);
-        const Routes().replace(Globals.navigatorKey.currentContext!,  HomePage());
-        // context.router.replaceAll([
-        //   const Home(),
-        // ]);
-
-      }).catchError((Object obj) {
-        setIsLoading(false);
-        setLoginError(true);
-        debugPrint('********** login $obj');
-
-        const ToastAtTop().showToast(errorMessage3);
-
-      });
-    }
-  }
+  // Future signInToApp(String email, String password) async{
+  //   if(email.trim().isEmpty || password.trim().isEmpty) {
+  //     const ToastAtTop().showToast(errorMessage5);
+  //     setLoginError(true);
+  //   } else {
+  //     setIsLoading(true);
+  //     setLoginError(false);
+  //     final client = ApiClient(Dio(BaseOptions(contentType: 'application/json')));
+  //     LoginUser loginUser = LoginUser(
+  //       email: email, password: password, device_token: deviceToken,);
+  //     client.loginPage(loginUser).then((it) async {
+  //
+  //       setToken(it.token!);
+  //       SharedPreferences sharedPreferences = await _prefs;
+  //       sharedPreferences.setBool('isLoggedIn', true);
+  //       sharedPreferences.setString('token', it.token!);
+  //       setIsLoading(false);
+  //
+  //       const ToastAtTop().showToast(loggedin);
+  //       const Routes().replace(Globals.navigatorKey.currentContext!,  HomePage());
+  //       // context.router.replaceAll([
+  //       //   const Home(),
+  //       // ]);
+  //
+  //     }).catchError((Object obj) {
+  //       setIsLoading(false);
+  //       setLoginError(true);
+  //       debugPrint('********** login $obj');
+  //
+  //       const ToastAtTop().showToast(errorMessage3);
+  //
+  //     });
+  //   }
+  // }
 
 
   //

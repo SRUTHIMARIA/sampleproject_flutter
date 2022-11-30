@@ -88,45 +88,45 @@ class RegisterProvider extends ChangeNotifier{
   }
 
 
-  Future signUpToApp(String firstName, String lastName, String email,String password,) async{
-    if (firstName.trim().isEmpty ||
-        lastName.trim().isEmpty ||
-        email.trim().isEmpty ||
-        password.trim().isEmpty) {
-      const ToastAtTop().showToast(errorMessage5);
-      setSigUpError(true);
-    } else {
-      setIsLoading(true);
-      setSigUpError(false);
-      final client =
-      ApiClient(Dio(BaseOptions(contentType: 'application/json')));
-      RegisterUser registerUser = RegisterUser(
-        first_name: firstName,
-        last_name: lastName,
-        email: email,
-        password: password,
-      );
-      client.register(registerUser).then((it) async {
-
-        setToken(it.token!);
-        SharedPreferences sharedPreferences = await _prefs;
-        sharedPreferences.setBool('isSignUp', true);
-        sharedPreferences.setString('token', it.token!);
-        setIsLoading(false);
-
-        const ToastAtTop().showToast(signupSuccess);
-        const Routes().replace(Globals.navigatorKey.currentContext!, const LoginScreen());
-
-
-      }).catchError((Object obj) {
-        setIsLoading(false);
-        setLoginError(true);
-        debugPrint('********** signup $obj');
-
-        const ToastAtTop().showToast(errorMessage3);
-      });
-    }
-  }
+  // Future signUpToApp(String firstName, String lastName, String email,String password,) async{
+  //   if (firstName.trim().isEmpty ||
+  //       lastName.trim().isEmpty ||
+  //       email.trim().isEmpty ||
+  //       password.trim().isEmpty) {
+  //     const ToastAtTop().showToast(errorMessage5);
+  //     setSigUpError(true);
+  //   } else {
+  //     setIsLoading(true);
+  //     setSigUpError(false);
+  //     final client =
+  //     ApiClient(Dio(BaseOptions(contentType: 'application/json')));
+  //     RegisterUser registerUser = RegisterUser(
+  //       first_name: firstName,
+  //       last_name: lastName,
+  //       email: email,
+  //       password: password,
+  //     );
+  //     client.register(registerUser).then((it) async {
+  //
+  //       setToken(it.token!);
+  //       SharedPreferences sharedPreferences = await _prefs;
+  //       sharedPreferences.setBool('isSignUp', true);
+  //       sharedPreferences.setString('token', it.token!);
+  //       setIsLoading(false);
+  //
+  //       const ToastAtTop().showToast(signupSuccess);
+  //       const Routes().replace(Globals.navigatorKey.currentContext!, const LoginScreen());
+  //
+  //
+  //     }).catchError((Object obj) {
+  //       setIsLoading(false);
+  //       setLoginError(true);
+  //       debugPrint('********** signup $obj');
+  //
+  //       const ToastAtTop().showToast(errorMessage3);
+  //     });
+  //   }
+  // }
 
   // Future signUpToApp(
   //     BuildContext context,

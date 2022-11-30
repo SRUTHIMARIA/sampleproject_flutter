@@ -1,14 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_template/gen/assets.gen.dart';
+import 'package:flutter_template/models/common_model/api_error_response_model.dart';
+import 'package:flutter_template/models/register_model/register_user.dart';
 import 'package:flutter_template/providers/login/login_provider.dart';
 import 'package:flutter_template/providers/register/register_provider.dart';
+import 'package:flutter_template/services/api/register_service/register_service.dart';
 import 'package:flutter_template/services/navigation/routes.dart';
 import 'package:flutter_template/ui/login_screen/login_screen.dart';
 import 'package:flutter_template/utils/constants/font_data.dart';
 import 'package:flutter_template/utils/constants/strings.dart';
 import 'package:flutter_template/utils/extensions/context_extensions.dart';
+import 'package:flutter_template/utils/static/enums.dart';
 import 'package:flutter_template/utils/static/static_padding.dart';
+import 'package:flutter_template/widgets/alert_dialog/future_handling_alert.dart';
 import 'package:provider/provider.dart';
 
 import '../../utils/theme/app_colors.dart';
@@ -27,6 +32,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
   var txtFirstNameController = TextEditingController();
   var txtLastNameController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
+  String apiSuccess = '';
+
   String userEmail = '';
   String password = '';
   String userFirstName = '';
@@ -35,24 +42,24 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Form(
-      key: _formKey,
-      child: Scaffold(
-        resizeToAvoidBottomInset: false,
-        body: Container(
-          height: double.infinity,
-          width: double.infinity,
-          decoration: BoxDecoration(
-            color: AppColors.primaryColor.withOpacity(0.40),
-            // gradient: LinearGradient(
-            //   colors: _colors,
-            //   stops: _stops,
-            //
-            //
-            // ),
-          ),
-          child: SingleChildScrollView(
-            child: Container(
+    return Scaffold(
+      resizeToAvoidBottomInset: false,
+      body: Container(
+        height: double.infinity,
+        width: double.infinity,
+        decoration: BoxDecoration(
+          color: AppColors.primaryColor.withOpacity(0.40),
+          // gradient: LinearGradient(
+          //   colors: _colors,
+          //   stops: _stops,
+          //
+          //
+          // ),
+        ),
+        child: SingleChildScrollView(
+          child: Container(
+            child: Form(
+              key: _formKey,
               child: Column(
                 children: [
                   Image.asset(Assets.images.imageLogin.path),
@@ -77,7 +84,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     margin: const EdgeInsets.symmetric(horizontal: 56),
                     decoration: BoxDecoration(
                       color: AppColors.textFieldBgColor,
-                      borderRadius: BorderRadius.circular(6.0),
+                      borderRadius: const BorderRadius.all(Radius.circular(6.0)),
                     ),
                     child: TextFormField(
                       controller: txtFirstNameController,
@@ -104,7 +111,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         ),
 
                         border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(6.0),
+                          borderRadius: const BorderRadius.all(Radius.circular(6.0)),
                         ),
 
                         hintText: firstname,
@@ -121,7 +128,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     margin: const EdgeInsets.symmetric(horizontal: 56),
                     decoration: BoxDecoration(
                       color: AppColors.textFieldBgColor,
-                      borderRadius: BorderRadius.circular(6.0),
+                      borderRadius: const BorderRadius.all(Radius.circular(6.0)),
                     ),
                     child: TextFormField(
                       controller: txtLastNameController,
@@ -150,7 +157,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         ),
 
                         border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(6.0),
+                          borderRadius: const BorderRadius.all(Radius.circular(6.0)),
                         ),
 
                         fillColor: Colors.grey,
@@ -169,7 +176,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     margin: const EdgeInsets.symmetric(horizontal: 56),
                     decoration: BoxDecoration(
                       color: AppColors.textFieldBgColor,
-                      borderRadius: BorderRadius.circular(6.0),
+                      borderRadius: const BorderRadius.all(Radius.circular(6.0)),
                     ),
                     child: TextFormField(
                       controller: txtEmailController,
@@ -197,7 +204,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         ),
 
                         border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(6.0),
+                          borderRadius: const BorderRadius.all(Radius.circular(6.0)),
                         ),
 
                         fillColor: Colors.grey,
@@ -246,7 +253,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           borderRadius: BorderRadius.all(Radius.circular(6.0)),
                         ),
 
-                        fillColor: Colors.grey,
 
                         hintText: password,
 
@@ -317,7 +323,19 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     height: context.heightPx * 16,
                   ),
                   GestureDetector(
-                    onTap: () => handlePressed(),
+                    onTap: () async {
+                      // FocusManager.instance.primaryFocus?.unfocus();
+                      if (_formKey.currentState!.validate()) {
+                        RegisterModel registerModel = RegisterModel(
+                          email: txtEmailController.text,
+                          password: txtUserPwdController.text,
+                          first_name: txtFirstNameController.text,
+                          last_name: txtLastNameController.text,
+                        );
+                        await _register(registerModel);
+                      }
+                    },
+                    //  onTap: () => handlePressed(),
                     // {
                     //   _trySubmitForm();
                     //   Provider.of<RegisterProvider>(context, listen: false).signUpToApp(
@@ -386,15 +404,39 @@ class _RegisterScreenState extends State<RegisterScreen> {
     );
   }
 
-  void handlePressed() {
-    Provider.of<RegisterProvider>(context, listen: false).signUpToApp(
-      txtFirstNameController.text.toString(),
-      txtLastNameController.text.toString(),
-      txtEmailController.text.toString(),
-      txtUserPwdController.text.toString(),
+  Future<void> _register(RegisterModel registerModel) async {
+    String apiError = '';
+    handleFutureWithAlert(
+      context: context,
+      getErrorMessage: () {
+        return apiError;
+      },
+      function: () async {
+        ApiErrorResponseModel model = await RegisterService.registerInfo(registerModel);
+        debugPrint(model.status.toString());
+        if (model.status) {
+          apiSuccess = model.message;
+          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => LoginScreen()));
+
+          return ApiStatus.success;
+        } else {
+          apiError = model.message;
+
+          return ApiStatus.error;
+        }
+      },
     );
-    clearControllers();
   }
+
+  // void handlePressed() {
+  //   Provider.of<RegisterProvider>(context, listen: false).signUpToApp(
+  //     txtFirstNameController.text.toString(),
+  //     txtLastNameController.text.toString(),
+  //     txtEmailController.text.toString(),
+  //     txtUserPwdController.text.toString(),
+  //   );
+  //   clearControllers();
+  // }
 
   void forgotPasswordPressed() {
     clearControllers();

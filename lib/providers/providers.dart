@@ -14,7 +14,7 @@ import 'authentication_provider.dart';
 
 class ProviderRegister {
   static final List<SingleChildWidget> providers = [
-    ChangeNotifierProvider<CommonFunctionsProvider>(create: (_) => CommonFunctionsProvider(),),
+   // ChangeNotifierProvider<CommonFunctionsProvider>(create: (_) => CommonFunctionsProvider(),),
     ChangeNotifierProvider<AuthenticationProvider>(create: (_) => AuthenticationProvider(),),
     ChangeNotifierProvider<RegisterProvider>(create: (_) => RegisterProvider(),),
     ChangeNotifierProvider<SignupValidation>(create: (_) => SignupValidation(),),

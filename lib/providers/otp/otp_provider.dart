@@ -79,27 +79,27 @@ class OtpProvider extends ChangeNotifier{
   // }
   //
 
-  Future verifyOTP() async{
-    if(otp.trim().isEmpty || otp.trim().length!=4) {
-      const ToastAtTop().showToast(errorMessage7);
-    }else {
-      setIsLoading(true);
-      final client = ApiClient( Dio(BaseOptions(contentType: 'application/json')),);
-      OtpModel model = OtpModel(otp: otp, key: key);
-
-      client.verifyOtp(model).then((it) async {
-        setIsLoading(false);
-        const ToastAtTop().showToast(verified);
-        setError(false);
-        setErrorMessage('');
-        const Routes().pushReplacement(Globals.navigatorKey.currentContext!, const NewPasswordScreen());
-      }).catchError((Object obj) {
-        setIsLoading(false);
-        const ToastAtTop().showToast(errorMessage8);
-
-      });
-    }
-  }
+  // Future verifyOTP() async{
+  //   if(otp.trim().isEmpty || otp.trim().length!=4) {
+  //     const ToastAtTop().showToast(errorMessage7);
+  //   }else {
+  //     setIsLoading(true);
+  //     final client = ApiClient( Dio(BaseOptions(contentType: 'application/json')),);
+  //     OtpModel model = OtpModel(otp: otp, key: key);
+  //
+  //     client.verifyOtp(model).then((it) async {
+  //       setIsLoading(false);
+  //       const ToastAtTop().showToast(verified);
+  //       setError(false);
+  //       setErrorMessage('');
+  //       const Routes().pushReplacement(Globals.navigatorKey.currentContext!, const NewPasswordScreen());
+  //     }).catchError((Object obj) {
+  //       setIsLoading(false);
+  //       const ToastAtTop().showToast(errorMessage8);
+  //
+  //     });
+  //   }
+  // }
 
   //
   // Future otpverify(BuildContext context, int otp) async {

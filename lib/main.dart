@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_template/providers/authentication_provider.dart';
 import 'package:flutter_template/ui/login_screen/login_screen.dart';
+import 'package:flutter_template/ui/register_screen/register_screen.dart';
 import 'package:flutter_template/ui/scheduling_self_analysis/self_analyisis_notes.dart';
 import 'package:flutter_template/providers/providers.dart';
 import 'package:flutter_template/ui/student_basic_profile/sports_type_screen.dart';
@@ -14,7 +15,7 @@ import 'package:responsive_framework/responsive_framework.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
- Firebase.initializeApp();
+await Firebase.initializeApp();
   await Hive.initFlutter();
   // FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
   await AuthenticationProvider.retrieveAuthUser();
@@ -51,7 +52,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const LoginScreen(),
+      home: const RegisterScreen(),
       // home: ChangeNotifierProvider(
       //   create: (context) => DrawerScreenProvider(),
       //   child:  HomePage(),
