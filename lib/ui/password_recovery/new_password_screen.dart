@@ -1,21 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_template/gen/assets.gen.dart';
-import 'package:flutter_template/providers/forgotpassword/forgotpasswd_provider.dart';
-import 'package:flutter_template/providers/login/login_provider.dart';
-import 'package:flutter_template/providers/otp/otp_provider.dart';
-import 'package:flutter_template/providers/resetpasswd/resetpasswod_provider.dart';
+import 'package:flutter_template/models/common_model/api_error_response_model.dart';
+import 'package:flutter_template/models/new_password_model/new_password_model.dart';
+
+import 'package:flutter_template/services/api/new_password_service/new_password_service.dart';
+import 'package:flutter_template/ui/login_screen/login_screen.dart';
 import 'package:flutter_template/ui/register_screen/register_screen.dart';
 import 'package:flutter_template/utils/constants/font_data.dart';
 import 'package:flutter_template/utils/constants/strings.dart';
 import 'package:flutter_template/utils/extensions/context_extensions.dart';
 import 'package:flutter_template/utils/globals.dart';
+import 'package:flutter_template/utils/static/enums.dart';
 import 'package:flutter_template/utils/static/static_padding.dart';
-import 'package:flutter_template/widgets/text_form/text_form_widget.dart';
-import 'package:provider/provider.dart';
 
 import '../../utils/static/values.dart';
 import '../../utils/theme/app_colors.dart';
+import '../../widgets/alert_dialog/future_handling_alert.dart';
 
 class NewPasswordScreen extends StatefulWidget {
   const NewPasswordScreen({Key? key}) : super(key: key);
@@ -26,14 +27,11 @@ class NewPasswordScreen extends StatefulWidget {
 
 class _NewPasswordScreenState extends State<NewPasswordScreen> {
   final newPasswordController = TextEditingController();
-
   final conPasswordController = TextEditingController();
+  String apiSuccess = '';
+  String key = '';
 
-  final List<Color> _colors = [
-    AppColors.gradientColorSplash,
-    AppColors.gradientColor2Splash
-  ];
-  final List<double> _stops = [0.0, 0.7];
+  final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -51,29 +49,29 @@ class _NewPasswordScreenState extends State<NewPasswordScreen> {
           //
           // ),
         ),
-        child: Column(
-          children: [
-            Image.asset(Assets.images.imageLogin.path),
-            SizedBox(
-              height: context.heightPx * 145,
-            ),
-            Align(
-              alignment: Alignment.centerLeft,
-              child: Padding(
-                  padding: StaticPadding.paddingH50(context),
-                  child: Container(
-                    margin: EdgeInsets.only(left: 12.0),
-                    child: Text(
-                      passwordRecovery,
-                      style: const FontData().montFont22TextStyle,
-                    ),
-                  )),
-            ),
-            Align(
-              alignment: Alignment.centerLeft,
-              child: Padding(
-                padding: StaticPadding.paddingH50(context),
+        child: Form(
+          key: _formKey,
+          child: Column(
+            children: [
+              Image.asset(Assets.images.imageLogin.path),
+              SizedBox(
+                height: context.heightPx * 145,
+              ),
+              Align(
+                alignment: Alignment.centerLeft,
                 child: Container(
+                  padding: StaticPadding.paddingH50(context),
+                  margin: EdgeInsets.only(left: 12.0),
+                  child: Text(
+                    passwordRecovery,
+                    style: const FontData().montFont22TextStyle,
+                  ),
+                ),
+              ),
+              Align(
+                alignment: Alignment.centerLeft,
+                child: Container(
+                  padding: StaticPadding.paddingH50(context),
                   margin: EdgeInsets.only(left: 12.0),
                   child: Text(
                     createnewPassword,
@@ -81,86 +79,118 @@ class _NewPasswordScreenState extends State<NewPasswordScreen> {
                   ),
                 ),
               ),
-            ),
-            SizedBox(height: context.heightPx * 27),
-            Container(
-              margin: EdgeInsets.symmetric(horizontal: 56),
-              decoration: BoxDecoration(
-                color: AppColors.textFieldBgColor,
-                borderRadius: BorderRadius.circular(6.0),
-              ),
-              child: TextFormField(
-                controller: newPasswordController,
-                style: FontData().montFont500TextStyle,
-                decoration: InputDecoration(
-                  focusColor: Colors.white,
-                  enabledBorder: InputBorder.none,
-                  prefixIcon: SvgPicture.asset(
-                    Assets.icons.iconPassword,
-                    fit: BoxFit.scaleDown,
-                    color: AppColors.textGrey,
+              SizedBox(height: context.heightPx * 27),
+              Container(
+                margin: EdgeInsets.symmetric(horizontal: 56),
+                decoration: BoxDecoration(
+                  color: AppColors.textFieldBgColor,
+                  borderRadius: const BorderRadius.all(Radius.circular(6.0)),
+                ),
+                child: TextFormField(
+                  controller: newPasswordController,
+                  style: FontData().montFont500TextStyle,
+                  decoration: InputDecoration(
+                    focusColor: Colors.white,
+                    enabledBorder: InputBorder.none,
+                    prefixIcon: SvgPicture.asset(
+                      Assets.icons.iconPassword,
+                      fit: BoxFit.scaleDown,
+                      color: AppColors.textGrey,
+                    ),
+                    border: OutlineInputBorder(
+                      borderRadius: const BorderRadius.all(Radius.circular(6.0)),
+                    ),
+                    fillColor: Colors.grey,
+                    hintText: newpassword,
+                    hintStyle: FontData().montFont500TextStyle,
                   ),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(6.0),
-                  ),
-                  fillColor: Colors.grey,
-                  hintText: newpassword,
-                  hintStyle: FontData().montFont500TextStyle,
                 ),
               ),
-            ),
-            SizedBox(height: context.heightPx * 27),
-            Container(
-              margin: EdgeInsets.symmetric(horizontal: 56),
-              decoration: BoxDecoration(
-                color: AppColors.textFieldBgColor,
-                borderRadius: BorderRadius.circular(6.0),
-              ),
-              child: TextFormField(
-                controller: conPasswordController,
-                style: FontData().montFont500TextStyle,
-                decoration: InputDecoration(
-                  focusColor: Colors.white,
-                  enabledBorder: InputBorder.none,
-                  prefixIcon: SvgPicture.asset(
-                    Assets.icons.iconPassword,
-                    fit: BoxFit.scaleDown,
-                    color: AppColors.textGrey,
+              SizedBox(height: context.heightPx * 27),
+              Container(
+                margin: EdgeInsets.symmetric(horizontal: 56),
+                decoration: BoxDecoration(
+                  color: AppColors.textFieldBgColor,
+                  borderRadius: const BorderRadius.all(Radius.circular(6.0)),
+                ),
+                child: TextFormField(
+                  controller: conPasswordController,
+                  style: FontData().montFont500TextStyle,
+                  decoration: InputDecoration(
+                    focusColor: Colors.white,
+                    enabledBorder: InputBorder.none,
+                    prefixIcon: SvgPicture.asset(
+                      Assets.icons.iconPassword,
+                      fit: BoxFit.scaleDown,
+                      color: AppColors.textGrey,
+                    ),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(6.0),
+                    ),
+                    fillColor: Colors.grey,
+                    hintText: confirmPassword,
+                    hintStyle: FontData().montFont500TextStyle,
                   ),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(6.0),
-                  ),
-                  fillColor: Colors.grey,
-                  hintText: confirmPassword,
-                  hintStyle: FontData().montFont500TextStyle,
                 ),
               ),
-            ),
-            SizedBox(height: context.heightPx * 27),
-            GestureDetector(
-            //  onTap: () =>  Provider.of<ResetpasswordProvider>(context, listen: false).changePassword(newPasswordController.text, conPasswordController.text),
+              SizedBox(height: context.heightPx * 27),
+              GestureDetector(
+                onTap: () async {
+                  FocusManager.instance.primaryFocus?.unfocus();
+                  if (_formKey.currentState!.validate()) {
+                    NewPasswordModel newPasswordModel =
+                    NewPasswordModel(password: newPasswordController.text,passwordConfirmation: conPasswordController.text, key: key);
+                    await _newPassword(newPasswordModel);
+                  }
+                },
+              //  onTap: () =>  Provider.of<ResetpasswordProvider>(context, listen: false).changePassword(newPasswordController.text, conPasswordController.text),
 
       child: Container(
-                height: context.heightPx * 42,
-                width: context.widthPx * 276,
-                child: Container(
-                  decoration: const BoxDecoration(
-                    color: AppColors.themeColor,
-                    borderRadius: BorderRadius.all(Radius.circular(8.0)),
-                  ),
-                  child: Center(
-                    child: Text(
-                      save,
-                      style: const FontData().montFont70016TextStyle,
+                  height: context.heightPx * 42,
+                  width: context.widthPx * 276,
+                  child: Container(
+                    decoration: const BoxDecoration(
+                      color: AppColors.themeColor,
+                      borderRadius: BorderRadius.all(Radius.circular(8.0)),
+                    ),
+                    child: Center(
+                      child: Text(
+                        save,
+                        style: const FontData().montFont70016TextStyle,
+                      ),
                     ),
                   ),
                 ),
               ),
-            ),
-            SizedBox(height: context.heightPx * 16),
-          ],
+              SizedBox(height: context.heightPx * 16),
+            ],
+          ),
         ),
       ),
+    );
+  }
+
+  Future<void> _newPassword(NewPasswordModel newPasswordModel) async {
+    String apiError = '';
+    handleFutureWithAlert(
+      context: context,
+      getErrorMessage: () {
+        return apiError;
+      },
+      function: () async {
+        ApiErrorResponseModel model = await NewPasswordService.newPasswordInfo(newPasswordModel);
+        debugPrint(model.status.toString());
+        if (model.message=='success') {
+          apiSuccess = model.message;
+          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>LoginScreen()));
+
+          return ApiStatus.success;
+        } else {
+          apiError = model.message;
+
+          return ApiStatus.error;
+        }
+      },
     );
   }
 

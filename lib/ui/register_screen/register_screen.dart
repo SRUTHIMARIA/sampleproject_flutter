@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_template/gen/assets.gen.dart';
 import 'package:flutter_template/models/common_model/api_error_response_model.dart';
+import 'package:flutter_template/models/common_model/authentication_response_model.dart';
 import 'package:flutter_template/models/register_model/register_user.dart';
 import 'package:flutter_template/providers/login/login_provider.dart';
 import 'package:flutter_template/providers/register/register_provider.dart';
@@ -414,7 +415,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
       function: () async {
         ApiErrorResponseModel model = await RegisterService.registerInfo(registerModel);
         debugPrint(model.status.toString());
-        if (model.status) {
+        if (model.message=='success') {
           apiSuccess = model.message;
           Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => LoginScreen()));
 

@@ -5,12 +5,11 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_template/gen/assets.gen.dart';
 import 'package:flutter_template/models/common_model/authentication_response_model.dart';
 import 'package:flutter_template/models/login_model/login_user_model.dart';
-import 'package:flutter_template/models/register_model/success_user_model.dart';
 import 'package:flutter_template/providers/authentication_provider.dart';
 import 'package:flutter_template/providers/login/login_provider.dart';
 import 'package:flutter_template/services/api/login_service/login_service.dart';
-import 'package:flutter_template/services/navigation/routes.dart';
 import 'package:flutter_template/ui/homepage/homepage.dart';
+
 import 'package:flutter_template/ui/password_recovery/password_recovery.dart';
 import 'package:flutter_template/ui/register_screen/register_screen.dart';
 import 'package:flutter_template/ui/student_basic_profile/sports_type_screen.dart';
@@ -20,11 +19,9 @@ import 'package:flutter_template/utils/extensions/context_extensions.dart';
 import 'package:flutter_template/utils/static/enums.dart';
 import 'package:flutter_template/utils/static/static_padding.dart';
 import 'package:flutter_template/widgets/alert_dialog/future_handling_alert.dart';
-import 'package:flutter_template/widgets/snackbar/text_snackbar.dart';
 import 'package:provider/provider.dart';
 
 import '../../utils/theme/app_colors.dart';
-import '../password_recovery/authentication_code_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -159,8 +156,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<LoginProvider>(
-      builder: (context, provider, child) {
+
         return Scaffold(
           resizeToAvoidBottomInset: false,
           body: Container(
@@ -299,6 +295,8 @@ class _LoginScreenState extends State<LoginScreen> {
                   SizedBox(height: context.heightPx * 16),
                   GestureDetector(
                     onTap: () async {
+                      // Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomePage()));
+
                       messaging = FirebaseMessaging.instance;
                       String? fcmToken = await messaging.getToken();
                       debugPrint('Device token $fcmToken');
@@ -368,8 +366,8 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
           ),
         );
-      },
-    );
+
+
   }
 
   Future<void> _logIn(LoginModel loginModel) async {
@@ -383,17 +381,21 @@ class _LoginScreenState extends State<LoginScreen> {
       function: () async {
         LoginSuccessModel model = await LoginService.loginInfo(loginModel);
         // print(model.status);
-        if (model.status) {
+        if (model.message=='success') {
           apiSuccess = model.message;
-          // debugPrint('token:${model.token}');
-          debugPrint('signip id:.................${model.id}');
-          if (mounted) {
+
+          debugPrint('message:${model.message}');
+        //  debugPrint('Login :.................${model.id}');
+          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => SportsTypeScreen()));
+
+        if (mounted) {
             await context
                 .read<AuthenticationProvider>()
-                .saveUserDetails(authToken: model.token, userName: '', userId: model.id, onBoarding: '');
+                .saveUserDetails(authToken: model.token, userName: '', userId: model.id);
+
+
           }
 
-          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => SportsTypeScreen()));
 
           return ApiStatus.success;
         } else {
@@ -404,30 +406,31 @@ class _LoginScreenState extends State<LoginScreen> {
       },
     );
   }
+}
 
   // void handlePressed() {
   //   Provider.of<LoginProvider>(context, listen: false).signInToApp(txtUserNameController.text, txtUserPwdController.text);
   //   clearControllers();
   // }
 
-  void forgotPasswordPressed() {
-    clearControllers();
-    Provider.of<LoginProvider>(context, listen: false).setLoginError(false);
-    Provider.of<LoginProvider>(context, listen: false).setErrorMessage('');
-    const Routes().goTo(context, const AuthenticationCodeScreen());
-  }
-
-  void clearControllers() {
-    FocusScope.of(context).unfocus();
-    // emailController.text = '';
-    // passwordController.text = '';
-  }
-
-  void setObscure1() {
-    setState(() {
-      _isObscure1 = !_isObscure1;
-    });
-  }
+  // void forgotPasswordPressed() {
+  //   clearControllers();
+  //   Provider.of<LoginProvider>(context, listen: false).setLoginError(false);
+  //   Provider.of<LoginProvider>(context, listen: false).setErrorMessage('');
+  //   const Routes().goTo(context, const AuthenticationCodeScreen());
+  // }
+  //
+  // void clearControllers() {
+  //   FocusScope.of(context).unfocus();
+  //   // emailController.text = '';
+  //   // passwordController.text = '';
+  // }
+  //
+  // void setObscure1() {
+  //   setState(() {
+  //     _isObscure1 = !_isObscure1;
+  //   });
+  // }
 
 // void loginUserDetails() {
 //   if (isLogin) {
@@ -435,4 +438,4 @@ class _LoginScreenState extends State<LoginScreen> {
 //     userDataBox!.put('password', txtUserPwdController.text);
 //   }
 // }
-}
+
