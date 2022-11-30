@@ -4,6 +4,7 @@ import 'package:flutter_template/gen/assets.gen.dart';
 import 'package:flutter_template/models/common_model/api_error_response_model.dart';
 import 'package:flutter_template/models/medical_detail_model/add_medical_model.dart';
 import 'package:flutter_template/models/medical_detail_model/get_medical_details_model.dart';
+import 'package:flutter_template/models/medical_detail_model/save_permission_model.dart';
 import 'package:flutter_template/services/api/medical_details_service/medical_detail_service.dart';
 import 'package:flutter_template/ui/medical_details/athelete_medical_info_injuries.dart';
 
@@ -44,6 +45,7 @@ class _AtheleteMedicalInfoAllergiesState extends State<AtheleteMedicalInfoAllerg
 
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
       _medicalDetailsType(GetMedicalDetailsModel(params: 'allergy'));
+      _savePermissionDetails(SavePermissionResponseModel(permission_status: "yes", saveNextPage: true));
     });
   }
 
@@ -301,6 +303,31 @@ class _AtheleteMedicalInfoAllergiesState extends State<AtheleteMedicalInfoAllerg
       },
       function: () async {
         ApiErrorResponseModel model = await MedicalDetailService.medicalDetails(addOrUpdateMedicalResponseModel);
+        debugPrint(model.status.toString());
+        if (model.status) {
+          apiSuccess = model.message;
+          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => AtheleteMedicalInfoInjuries()));
+          // context.router.replaceAll([const ParentDetailsSecondary()]);
+
+          return ApiStatus.success;
+        } else {
+          apiError = model.message;
+
+          return ApiStatus.error;
+        }
+      },
+    );
+  }
+
+  Future<void> _savePermissionDetails(SavePermissionResponseModel savePermissionResponseModel) async {
+    String apiError = '';
+    handleFutureWithAlert(
+      context: context,
+      getErrorMessage: () {
+        return apiError;
+      },
+      function: () async {
+        ApiErrorResponseModel model = await MedicalDetailService.savePermissionInfo(savePermissionResponseModel);
         debugPrint(model.status.toString());
         if (model.status) {
           apiSuccess = model.message;

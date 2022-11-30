@@ -5,12 +5,12 @@
 import 'package:meta/meta.dart';
 import 'dart:convert';
 
-SaveDoctorPermissionResponseModel saveDoctorPermissionResponseModelFromJson(String str) => SaveDoctorPermissionResponseModel.fromJson(json.decode(str));
+SaveDoctorResponseModel saveDoctorResponseModelFromJson(String str) => SaveDoctorResponseModel.fromJson(json.decode(str));
 
-String saveDoctorPermissionResponseModelToJson(SaveDoctorPermissionResponseModel data) => json.encode(data.toJson());
+String saveDoctorResponseModelToJson(SaveDoctorResponseModel data) => json.encode(data.toJson());
 
-class SaveDoctorPermissionResponseModel {
-  SaveDoctorPermissionResponseModel({
+class SaveDoctorResponseModel {
+  SaveDoctorResponseModel({
     required this.name,
     required this.email,
     required this.phone,
@@ -19,12 +19,12 @@ class SaveDoctorPermissionResponseModel {
   });
 
   final String name;
-  final bool email;
+  final String email;
   final String phone;
-  final String saveNextPage;
-  final String skip;
+  final bool saveNextPage;
+  final bool skip;
 
-  factory SaveDoctorPermissionResponseModel.fromJson(Map<String, dynamic> json) => SaveDoctorPermissionResponseModel(
+  factory SaveDoctorResponseModel.fromJson(Map<String, dynamic> json) => SaveDoctorResponseModel(
     name: json["name"],
     email: json["email"],
     phone: json["phone"],
