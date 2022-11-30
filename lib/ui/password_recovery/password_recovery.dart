@@ -116,10 +116,10 @@ class _PasswordRecoveryState extends State<PasswordRecovery> {
             SizedBox(height:context.heightPx *27),
 
             GestureDetector(
-              onTap: () =>
+            //  onTap: () => handlePressed(),
               // onTap: () {
               //
-                    handlePressed(),
+
               //   // Navigator.push(context, MaterialPageRoute(builder: (context)=>AuthenticationCodeScreen()));
               // },
 
@@ -150,8 +150,8 @@ class _PasswordRecoveryState extends State<PasswordRecovery> {
       ),
     );
   }
-  void handlePressed() {
-    Provider.of<ForgotPasswordProvider>(Globals.navigatorKey.currentContext!, listen: false).forgotPassword( emailController.text);
-
-  }
+  // void handlePressed() {
+  //   Provider.of<ForgotPasswordProvider>(Globals.navigatorKey.currentContext!, listen: false).forgotPassword( emailController.text);
+  //
+  // }
 }

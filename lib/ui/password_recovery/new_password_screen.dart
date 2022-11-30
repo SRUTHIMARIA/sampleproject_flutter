@@ -138,7 +138,7 @@ class _NewPasswordScreenState extends State<NewPasswordScreen> {
             ),
             SizedBox(height: context.heightPx * 27),
             GestureDetector(
-              onTap: () =>  Provider.of<ResetpasswordProvider>(context, listen: false).changePassword(newPasswordController.text, conPasswordController.text),
+            //  onTap: () =>  Provider.of<ResetpasswordProvider>(context, listen: false).changePassword(newPasswordController.text, conPasswordController.text),
 
       child: Container(
                 height: context.heightPx * 42,

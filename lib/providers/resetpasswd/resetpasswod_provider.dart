@@ -71,36 +71,36 @@ class ResetpasswordProvider extends ChangeNotifier{
   //   notifyListeners();
   // }
   //
-  Future changePassword( String newPassword, String password_confirmation) async{
-
-    if(newPassword.trim().isEmpty || password_confirmation.trim().isEmpty ) {
-      setErrorMessage(errorMessage1);
-      setError(true);
-    } else if(password_confirmation!=newPassword){
-      setErrorMessage(errorMessage2);
-      setError(true);
-    } else if(password_confirmation.length<8){
-      setErrorMessage(errorMessage10);
-      setError(true);
-    }else {
-      setIsLoading(true);
-      final client = ApiClient(
-        Dio(BaseOptions(contentType: 'application/json')),);
-      NewPasswordModel newPasswordModel = NewPasswordModel(password: password,password_confirmation: password_confirmation);
-      client.resetPassword(newPasswordModel).then((it) async {
-
-        setIsLoading(false);
-        setError(false);
-        const ToastAtTop().showToast(reset);
-        const Routes().replace(Globals.navigatorKey.currentContext!, const PasswordActivationLink());
-
-      }).catchError((Object obj) {
-
-        setIsLoading(false);
-        const ToastAtTop().showToast(errorMessage9);
-      });
-    }
-  }
+  // Future changePassword( String newPassword, String password_confirmation) async{
+  //
+  //   if(newPassword.trim().isEmpty || password_confirmation.trim().isEmpty ) {
+  //     setErrorMessage(errorMessage1);
+  //     setError(true);
+  //   } else if(password_confirmation!=newPassword){
+  //     setErrorMessage(errorMessage2);
+  //     setError(true);
+  //   } else if(password_confirmation.length<8){
+  //     setErrorMessage(errorMessage10);
+  //     setError(true);
+  //   }else {
+  //     setIsLoading(true);
+  //     final client = ApiClient(
+  //       Dio(BaseOptions(contentType: 'application/json')),);
+  //     NewPasswordModel newPasswordModel = NewPasswordModel(password: password,password_confirmation: password_confirmation);
+  //     client.resetPassword(newPasswordModel).then((it) async {
+  //
+  //       setIsLoading(false);
+  //       setError(false);
+  //       const ToastAtTop().showToast(reset);
+  //       const Routes().replace(Globals.navigatorKey.currentContext!, const PasswordActivationLink());
+  //
+  //     }).catchError((Object obj) {
+  //
+  //       setIsLoading(false);
+  //       const ToastAtTop().showToast(errorMessage9);
+  //     });
+  //   }
+  // }
 
   // Future resetPassword(BuildContext context, String password,String password_confirmation) async {
   //   if (email.trim().isEmpty) {

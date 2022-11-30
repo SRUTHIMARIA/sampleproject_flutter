@@ -13,6 +13,7 @@ import 'package:flutter_template/services/navigation/routes.dart';
 import 'package:flutter_template/ui/homepage/homepage.dart';
 import 'package:flutter_template/ui/password_recovery/password_recovery.dart';
 import 'package:flutter_template/ui/register_screen/register_screen.dart';
+import 'package:flutter_template/ui/student_basic_profile/sports_type_screen.dart';
 import 'package:flutter_template/utils/constants/font_data.dart';
 import 'package:flutter_template/utils/constants/strings.dart';
 import 'package:flutter_template/utils/extensions/context_extensions.dart';
@@ -20,7 +21,6 @@ import 'package:flutter_template/utils/static/enums.dart';
 import 'package:flutter_template/utils/static/static_padding.dart';
 import 'package:flutter_template/widgets/alert_dialog/future_handling_alert.dart';
 import 'package:flutter_template/widgets/snackbar/text_snackbar.dart';
-import 'package:hive/hive.dart';
 import 'package:provider/provider.dart';
 
 import '../../utils/theme/app_colors.dart';
@@ -38,6 +38,9 @@ class _LoginScreenState extends State<LoginScreen> {
   var txtUserPwdController = TextEditingController();
   bool isLogin = false;
   bool _isObscure1 = false;
+  String apiSuccess = '';
+  late FirebaseMessaging messaging;
+  final _formKey = GlobalKey<FormState>();
 
   // Box? userDataBox;
   // // String? token;
@@ -66,83 +69,87 @@ class _LoginScreenState extends State<LoginScreen> {
   //   }
   // }
 
-  Future<void> loginUser() async {
-    String email = txtUserNameController.text.trim();
-    String password = txtUserPwdController.text.trim();
-    String? validationMessage;
-    String statusMessage;
-    bool showValidationError = false;
-
-    AuthenticationProvider authProvider = context.read<AuthenticationProvider>();
-
-    ///check validations
-
-    if (email.isEmpty) {
-      validationMessage = 'Email is required';
-    } else if (!EmailValidator.validate(email)) {
-      validationMessage = 'Invalid Email';
-    } else if (password.isEmpty) {
-      validationMessage = 'Password is required';
-    } else if (password.length < 6) {
-      validationMessage = 'Password must be at least 6 characters';
-    } else {
-      validationMessage = '';
-    }
-
-    ///validation failed
-    if (validationMessage.isNotEmpty) {
-      setState(() => showValidationError = true);
-
-      return;
-    }
-
-    ///validations successful. proceed to login
-    LoginUser? loginUser;
-    SuccessUser? model;
-    AuthenticationResponseModel? authenticationResponseModel;
-    handleFutureWithAlert(
-      getErrorMessage: () => validationMessage!,
-      function: () async {
-        String? firebaseToken;
-        try {
-          firebaseToken = await FirebaseMessaging.instance.getToken();
-          print(firebaseToken);
-        } catch (e) {
-          if (firebaseToken == null) {
-            validationMessage = 'Failed to get device id';
-
-            return ApiStatus.error;
-          }
-        }
-
-        model = await LoginService.login(
-          LoginUser(email: email, password: password, device_token: firebaseToken!),
-        );
-        print(model);
-
-        // model = await LoginService.loginUser(
-        //   LoginModel(email: email, password: password, firebaseToken: firebaseToken),
-        // );
-
-        if (model!.success == 200) return ApiStatus.success;
-
-        validationMessage = model!.message;
-        setState(() => showValidationError = true);
-
-        return ApiStatus.none;
-      },
-      onSuccess: () async {
-        await authProvider.saveUserDetails(
-          authToken: authenticationResponseModel!.payload.token,
-          userName: authenticationResponseModel.payload.fullName,
-        );
-        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomePage()));
-
-        AppSnackBar.showSnackBarWithText(context: context, text: 'Login Successful.');
-        print('Login');
-      },
-    );
-  }
+  // Future<void> loginUser() async {
+  //   String email = txtUserNameController.text.trim();
+  //   String password = txtUserPwdController.text.trim();
+  //   String? validationMessage;
+  //   String statusMessage;
+  //   bool showValidationError = false;
+  //
+  //   AuthenticationProvider authProvider = context.read<AuthenticationProvider>();
+  //
+  //   ///check validations
+  //
+  //   if (email.isEmpty) {
+  //     validationMessage = 'Email is required';
+  //   } else if (!EmailValidator.validate(email)) {
+  //     validationMessage = 'Invalid Email';
+  //   } else if (password.isEmpty) {
+  //     validationMessage = 'Password is required';
+  //   } else if (password.length < 6) {
+  //     validationMessage = 'Password must be at least 6 characters';
+  //   } else {
+  //     validationMessage = '';
+  //   }
+  //
+  //   ///validation failed
+  //   if (validationMessage.isNotEmpty) {
+  //     setState(() => showValidationError = true);
+  //
+  //     return;
+  //   }
+  //
+  //   ///validations successful. proceed to login
+  //   LoginUser? loginUser;
+  //   SuccessUser? model;
+  //   AuthenticationResponseModel? authenticationResponseModel;
+  //   handleFutureWithAlert(
+  //     getErrorMessage: () => validationMessage!,
+  //     function: () async {
+  //       String? firebaseToken;
+  //       try{
+  //        firebaseToken=  await FirebaseMessaging.instance.getToken();
+  //        print(firebaseToken);
+  //
+  //       }
+  //       catch(e){
+  //         if (firebaseToken == null) {
+  //           validationMessage = 'Failed to get device id';
+  //
+  //           return ApiStatus.error;
+  //         }
+  //
+  //       }
+  //
+  //       model = await LoginService.login(
+  //         LoginUser(email: email, password: password, device_token: firebaseToken!),
+  //       );
+  //       print(model);
+  //
+  //       // model = await LoginService.loginUser(
+  //       //   LoginModel(email: email, password: password, firebaseToken: firebaseToken),
+  //       // );
+  //
+  //       if (model!.success==200) return ApiStatus.success;
+  //
+  //       validationMessage = model!.message;
+  //       setState(() => showValidationError = true);
+  //
+  //       return ApiStatus.none;
+  //     },
+  //     onSuccess: () async {
+  //
+  //       await authProvider.saveUserDetails(
+  //           authToken: authenticationResponseModel!.payload.token,
+  //           userName: authenticationResponseModel.payload.fullName,);
+  //       Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>HomePage()));
+  //
+  //
+  //       AppSnackBar.showSnackBarWithText(context: context, text: 'Login Successful.');
+  //       print('Login');
+  //     },
+  //   );
+  // }
 
   //
   // getDeviceToken() async {
@@ -150,13 +157,8 @@ class _LoginScreenState extends State<LoginScreen> {
   //   print('DEVICE TOKEN IS ------> $token!');
   // }
 
-  final List<Color> _colors = [AppColors.gradientColorSplash, AppColors.gradientColor2Splash];
-  final List<double> _stops = [0.0, 0.7];
-
   @override
   Widget build(BuildContext context) {
-    final loginProvider = Provider.of<LoginProvider>(context);
-
     return Consumer<LoginProvider>(
       builder: (context, provider, child) {
         return Scaffold(
@@ -167,186 +169,202 @@ class _LoginScreenState extends State<LoginScreen> {
             decoration: BoxDecoration(
               color: AppColors.primaryColor.withOpacity(0.40),
             ),
-            child: Column(
-              children: [
-                Image.asset(Assets.images.imageLogin.path),
-                SizedBox(
-                  height: context.heightPx * 100,
-                ),
-                Align(
-                  alignment: Alignment.centerLeft,
-                  child: Container(
-                    padding: StaticPadding.paddingH50(context),
-                    margin: const EdgeInsets.only(left: 12.0),
-                    child: Text(
-                      welcome,
-                      style: const FontData().montFont22TextStyle,
-                    ),
+            child: Form(
+              key: _formKey,
+              child: Column(
+                children: [
+                  Image.asset(Assets.images.imageLogin.path),
+                  SizedBox(
+                    height: context.heightPx * 100,
                   ),
-                ),
-                Align(
-                  alignment: Alignment.centerLeft,
-                  child: Container(
-                    padding: StaticPadding.paddingH50(context),
-                    margin: const EdgeInsets.only(left: 12.0),
-                    child: Text(
-                      logintoContinue,
-                      style: const FontData().montFont14TextStyle,
-                    ),
-                  ),
-                ),
-                SizedBox(height: context.heightPx * 16),
-                Container(
-                  margin: const EdgeInsets.symmetric(horizontal: 56),
-                  decoration: BoxDecoration(
-                    color: AppColors.textFieldBgColor,
-                    border: Border.all(
-                      // color: CustomColors().white,
-                      color: Provider.of<LoginProvider>(context, listen: true).loginError
-                          ? AppColors.redColor
-                          : AppColors.themeColor,
-                      width: 2,
-                    ),
-                    borderRadius: const BorderRadius.all(Radius.circular(6.0)),
-                  ),
-                  child: TextFormField(
-                    controller: txtUserNameController,
-                    style: const FontData().montFont500TextStyle,
-                    decoration: InputDecoration(
-                      focusColor: Colors.white,
-                      enabledBorder: InputBorder.none,
-
-                      prefixIcon: SvgPicture.asset(
-                        Assets.icons.iconUsername,
-                        fit: BoxFit.scaleDown,
-                        color: AppColors.textGrey,
-                      ),
-
-                      border: const OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(6.0)),
-                      ),
-
-                      fillColor: Colors.grey,
-
-                      hintText: username,
-
-                      //make hint text
-                      hintStyle: const FontData().montFont500TextStyle,
-                    ),
-                  ),
-                ),
-                SizedBox(height: context.heightPx * 20),
-                Container(
-                  margin: const EdgeInsets.symmetric(horizontal: 56),
-                  decoration: BoxDecoration(
-                    color: AppColors.textFieldBgColor,
-                    border: Border.all(
-                      // color: CustomColors().white,
-                      color: Provider.of<LoginProvider>(context, listen: true).loginError
-                          ? AppColors.redColor
-                          : AppColors.whiteColor,
-                      width: 2,
-                    ),
-                    borderRadius: const BorderRadius.all(Radius.circular(6.0)),
-                  ),
-                  child: TextFormField(
-                    controller: txtUserPwdController,
-                    style: const FontData().montFont500TextStyle,
-                    decoration: InputDecoration(
-                      focusColor: Colors.white,
-                      enabledBorder: InputBorder.none,
-
-                      prefixIcon: SvgPicture.asset(
-                        Assets.icons.iconPassword,
-                        fit: BoxFit.scaleDown,
-                        color: AppColors.textGrey,
-                      ),
-
-                      border: const OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(6.0)),
-                      ),
-
-                      fillColor: Colors.grey,
-
-                      hintText: pass,
-
-                      //make hint text
-                      hintStyle: const FontData().montFont500TextStyle,
-                    ),
-                  ),
-                ),
-                SizedBox(height: context.heightPx * 16),
-                InkWell(
-                  onTap: () => Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(builder: (context) => const PasswordRecovery()),
-                  ),
-                  child: Align(
-                    alignment: Alignment.centerRight,
-                    child: Padding(
-                      padding: StaticPadding.paddingH60(context),
-                      child: Text(
-                        forgotPassword,
-                        style: const FontData().montFont50012TextStyle,
-                      ),
-                    ),
-                  ),
-                ),
-                SizedBox(height: context.heightPx * 16),
-                GestureDetector(
-                  onTap: () => loginUser(),
-
-                  // handlePressed(),
-                  // loginProvider.login(txtUserNameController.text.toString(), txtUserPwdController.text.toString(), token??''),
-                  //     loginUser(),
-
-                  // loginUserDetails();
-
-                  //   Provider.of<LoginProvider>(context, listen: false)
-                  //       .signInToApp(
-                  // context,
-                  // txtUserPwdController.text.toString(),
-                  // txtUserPwdController.text.toString(),
-                  // token ?? ''),
-
-                  child: SizedBox(
-                    height: context.heightPx * 42,
-                    width: context.widthPx * 270,
+                  Align(
+                    alignment: Alignment.centerLeft,
                     child: Container(
-                      decoration: const BoxDecoration(
-                        color: AppColors.themeColor,
-                        borderRadius: BorderRadius.all(Radius.circular(8.0)),
+                      padding: StaticPadding.paddingH50(context),
+                      margin: const EdgeInsets.only(left: 12.0),
+                      child: Text(
+                        welcome,
+                        style: const FontData().montFont22TextStyle,
                       ),
-                      child: Center(
+                    ),
+                  ),
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: Container(
+                      padding: StaticPadding.paddingH50(context),
+                      margin: EdgeInsets.only(left: 12.0),
+                      child: Text(
+                        logintoContinue,
+                        style: FontData().montFont14TextStyle,
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: context.heightPx * 16),
+                  Container(
+                    margin: const EdgeInsets.symmetric(horizontal: 56),
+                    decoration: BoxDecoration(
+                      color: AppColors.textFieldBgColor,
+                      border: Border.all(
+                        // color: CustomColors().white,
+                        color: Provider.of<LoginProvider>(context, listen: true).loginError
+                            ? AppColors.redColor
+                            : AppColors.themeColor,
+                        width: 2,
+                      ),
+                      borderRadius: const BorderRadius.all(Radius.circular(6.0)),
+                    ),
+                    child: TextFormField(
+                      controller: txtUserNameController,
+                      style: const FontData().montFont500TextStyle,
+                      decoration: InputDecoration(
+                        focusColor: Colors.white,
+                        enabledBorder: InputBorder.none,
+
+                        prefixIcon: SvgPicture.asset(
+                          Assets.icons.iconUsername,
+                          fit: BoxFit.scaleDown,
+                          color: AppColors.textGrey,
+                        ),
+
+                        border: const OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(6.0)),
+                        ),
+
+                        fillColor: Colors.grey,
+
+                        hintText: username,
+
+                        //make hint text
+                        hintStyle: const FontData().montFont500TextStyle,
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: context.heightPx * 20),
+                  Container(
+                    margin: const EdgeInsets.symmetric(horizontal: 56),
+                    decoration: BoxDecoration(
+                      color: AppColors.textFieldBgColor,
+                      border: Border.all(
+                        // color: CustomColors().white,
+                        color: Provider.of<LoginProvider>(context, listen: true).loginError
+                            ? AppColors.redColor
+                            : AppColors.whiteColor,
+                        width: 2,
+                      ),
+                      borderRadius: const BorderRadius.all(Radius.circular(6.0)),
+                    ),
+                    child: TextFormField(
+                      controller: txtUserPwdController,
+                      style: const FontData().montFont500TextStyle,
+                      decoration: InputDecoration(
+                        focusColor: Colors.white,
+                        enabledBorder: InputBorder.none,
+
+                        prefixIcon: SvgPicture.asset(
+                          Assets.icons.iconPassword,
+                          fit: BoxFit.scaleDown,
+                          color: AppColors.textGrey,
+                        ),
+
+                        border: const OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(6.0)),
+                        ),
+
+                        fillColor: Colors.grey,
+
+                        hintText: password,
+
+                        //make hint text
+                        hintStyle: const FontData().montFont500TextStyle,
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: context.heightPx * 16),
+                  InkWell(
+                    onTap: () => Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(builder: (context) => const PasswordRecovery()),
+                    ),
+                    child: Align(
+                      alignment: Alignment.centerRight,
+                      child: Padding(
+                        padding: StaticPadding.paddingH60(context),
                         child: Text(
-                          login,
-                          // _display ? "hide logo" : "display logo",
-                          style: const FontData().montFont70016TextStyle,
+                          forgotPassword,
+                          style: const FontData().montFont50012TextStyle,
                         ),
                       ),
                     ),
                   ),
-                ),
-                SizedBox(height: context.heightPx * 16),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      donthaveaccount,
-                      style: const FontData().montFont60012TextStyle,
-                    ),
-                    SizedBox(width: context.widthPx * 4),
-                    GestureDetector(
-                      onTap: () =>
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => const RegisterScreen())),
-                      child: Text(
-                        register,
-                        style: const FontData().montFont70012TextStyle,
+                  SizedBox(height: context.heightPx * 16),
+                  GestureDetector(
+                    onTap: () async {
+                      messaging = FirebaseMessaging.instance;
+                      String? fcmToken = await messaging.getToken();
+                      debugPrint('Device token $fcmToken');
+                      FocusManager.instance.primaryFocus?.unfocus();
+                      if (_formKey.currentState!.validate()) {
+                        LoginModel loginModel = LoginModel(
+                          email: txtUserNameController.text,
+                          password: txtUserPwdController.text,
+                          deviceToken: fcmToken!,
+                        );
+                        await _logIn(loginModel);
+                      }
+                    },
+                    //onTap: () => handlePressed(),
+                    // loginProvider.login(txtUserNameController.text.toString(), txtUserPwdController.text.toString(), token??''),
+                    //     loginUser(),
+
+                    // loginUserDetails();
+
+                    //   Provider.of<LoginProvider>(context, listen: false)
+                    //       .signInToApp(
+                    // context,
+                    // txtUserPwdController.text.toString(),
+                    // txtUserPwdController.text.toString(),
+                    // token ?? ''),
+
+                    child: SizedBox(
+                      height: context.heightPx * 42,
+                      width: context.widthPx * 270,
+                      child: Container(
+                        decoration: const BoxDecoration(
+                          color: AppColors.themeColor,
+                          borderRadius: BorderRadius.all(Radius.circular(8.0)),
+                        ),
+                        child: Center(
+                          child: Text(
+                            login,
+                            // _display ? "hide logo" : "display logo",
+                            style: const FontData().montFont70016TextStyle,
+                          ),
+                        ),
                       ),
                     ),
-                  ],
-                ),
-              ],
+                  ),
+                  SizedBox(height: context.heightPx * 16),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        donthaveaccount,
+                        style: const FontData().montFont60012TextStyle,
+                      ),
+                      SizedBox(width: context.widthPx * 4),
+                      GestureDetector(
+
+                        onTap: () =>
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => const RegisterScreen())),
+                        child: Text(
+                          register,
+                          style: const FontData().montFont70012TextStyle,
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             ),
           ),
         );
@@ -354,11 +372,43 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  void handlePressed() {
-    Provider.of<LoginProvider>(context, listen: false)
-        .signInToApp(txtUserNameController.text, txtUserPwdController.text);
-    clearControllers();
+  Future<void> _logIn(LoginModel loginModel) async {
+    String apiError = '';
+
+    handleFutureWithAlert(
+      context: context,
+      getErrorMessage: () {
+        return apiError;
+      },
+      function: () async {
+        LoginSuccessModel model = await LoginService.loginInfo(loginModel);
+        // print(model.status);
+        if (model.status) {
+          apiSuccess = model.message;
+          // debugPrint('token:${model.token}');
+          debugPrint('signip id:.................${model.id}');
+          if (mounted) {
+            await context
+                .read<AuthenticationProvider>()
+                .saveUserDetails(authToken: model.token, userName: '', userId: model.id, onBoarding: '');
+          }
+
+          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => SportsTypeScreen()));
+
+          return ApiStatus.success;
+        } else {
+          apiError = model.message;
+
+          return ApiStatus.error;
+        }
+      },
+    );
   }
+
+  // void handlePressed() {
+  //   Provider.of<LoginProvider>(context, listen: false).signInToApp(txtUserNameController.text, txtUserPwdController.text);
+  //   clearControllers();
+  // }
 
   void forgotPasswordPressed() {
     clearControllers();

@@ -112,7 +112,7 @@ class _AuthenticationCodeScreenState extends State<AuthenticationCodeScreen> {
             SizedBox(height:context.heightPx *27),
 
             GestureDetector(
-              onTap: () => handlePressed(),
+           //   onTap: () => handlePressed(),
 
 
                 child: Container(
@@ -142,13 +142,13 @@ class _AuthenticationCodeScreenState extends State<AuthenticationCodeScreen> {
       ),
     );
   }
-  void handlePressed() {
-    Provider.of<OtpProvider>(Globals.navigatorKey.currentContext!, listen: false).verifyOTP();
-
-  }
-
-  void handleResendPressed( String email) {
-    Provider.of<ForgotPasswordProvider>(Globals.navigatorKey.currentContext!, listen: false).forgotPassword( email);
-
-  }
+  // void handlePressed() {
+  //   Provider.of<OtpProvider>(Globals.navigatorKey.currentContext!, listen: false).verifyOTP();
+  //
+  // }
+  //
+  // void handleResendPressed( String email) {
+  //   Provider.of<ForgotPasswordProvider>(Globals.navigatorKey.currentContext!, listen: false).forgotPassword( email);
+  //
+  // }
 }
