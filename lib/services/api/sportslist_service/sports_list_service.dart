@@ -4,8 +4,8 @@ import 'package:flutter_template/network/api_helper.dart';
 import 'package:flutter_template/services/api/endpoints/endpoints.dart';
 
 class LoginService {
-  static Future<SuccessModel> sportslist(SportsTypeModel sportsTypeModel) async {
-    return await ApiHelper(url: AtheleteAssist.getSportsList, body: sportsTypeModel.toJson())
-        .post((p0) => SuccessModel.fromJson(p0));
+  static Future<SuccessModel> sportsList(SportsTypeModel sportsTypeModel) async {
+    return await ApiHelper(url: AthleteAssist.getSportsList, body: sportsTypeModel.toJson())
+        .post((p0) => SportsTypeModel.fromJson(p0));
   }
 }

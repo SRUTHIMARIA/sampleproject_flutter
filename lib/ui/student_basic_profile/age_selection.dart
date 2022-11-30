@@ -11,6 +11,7 @@ import '../../gen/assets.gen.dart';
 import '../../utils/static/static_padding.dart';
 
 class AgeSelectionScreen extends StatefulWidget {
+
   @override
   State<AgeSelectionScreen> createState() => _AgeSelectionScreenState();
 }
