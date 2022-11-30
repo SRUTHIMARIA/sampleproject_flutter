@@ -4,6 +4,7 @@ import 'package:flutter_template/firebase_options.dart';
 import 'package:flutter_template/providers/authentication_provider.dart';
 import 'package:flutter_template/ui/login_screen/login_screen.dart';
 import 'package:flutter_template/ui/password_recovery/authentication_code_screen.dart';
+import 'package:flutter_template/ui/password_recovery/new_password_screen.dart';
 import 'package:flutter_template/ui/register_screen/register_screen.dart';
 import 'package:flutter_template/ui/scheduling_self_analysis/self_analyisis_notes.dart';
 import 'package:flutter_template/providers/providers.dart';
@@ -54,7 +55,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const AuthenticationCodeScreen(),
+      home:  NewPasswordScreen(),
       // home: ChangeNotifierProvider(
       //   create: (context) => DrawerScreenProvider(),
       //   child:  HomePage(),

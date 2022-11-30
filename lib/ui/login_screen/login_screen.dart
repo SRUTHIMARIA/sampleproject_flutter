@@ -391,7 +391,7 @@ class _LoginScreenState extends State<LoginScreen> {
         if (mounted) {
             await context
                 .read<AuthenticationProvider>()
-                .saveUserDetails(authToken: model.token, userName: '', userId: model.id);
+                .saveUserDetails(authToken: model.token, userName: '', userId: model.id, onBoarding: '');
 
 
           }
