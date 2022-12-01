@@ -37,35 +37,16 @@ class _ParentDetailPrimaryState extends State<ParentDetailPrimary> {
   final _formKey = GlobalKey<FormState>();
 
 
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
-      _parentType(ParentTypeModel(type: 'Primary'));
-    });
-
-  }
-
-  //
-  // Future<void> _parentData() async {
-  //   String name = nameController.text.trim();
-  //   String phone = dobController.text.trim();
-  //   String dob = dobController.text.trim();
-  //
-  //   String email = emailController.text.trim();
-  //   String relationship = relationshipController.text.trim();
-  //   ParentResponseModel parentResponseModel =
-  //       ParentResponseModel(name: name, phone: phone, dob: dob, email: email, relationship: relationship);
-  //   var provider = Provider.of<ParentDetailProvider>(context, listen: false);
-  //    provider.postData(parentResponseModel);
-  //
-  //     Navigator.push(
-  //       context,
-  //       MaterialPageRoute(builder: (context) => ParentDetailsSecondary()),
-  //     );
+  // @override
+  // void initState() {
+  //   // TODO: implement initState
+  //   super.initState();
+  //   WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
+  //   await _parentType(ParentTypeModel(type: 'primary'));
+  //   });
   //
   // }
+
 
 
 
@@ -73,11 +54,7 @@ class _ParentDetailPrimaryState extends State<ParentDetailPrimary> {
   Widget build(BuildContext context) {
     return Scaffold(
         resizeToAvoidBottomInset: false,
-        body: Consumer<ParentDetailProvider>(
-        builder: (context, data, child) {
-          return data.loading
-          ? const Center(child: CircularProgressIndicator())
-      :Container(
+        body:Container(
             height: double.infinity,
             width: double.infinity,
             decoration: BoxDecoration(
@@ -310,7 +287,7 @@ class _ParentDetailPrimaryState extends State<ParentDetailPrimary> {
                           ),
                         ),
                       ),
-                    ),);},),);
+                    ),),);
   }
 
   Future<void> _parentDetailPrimary(ParentResponseModel parentResponseModel) async {
@@ -323,7 +300,7 @@ class _ParentDetailPrimaryState extends State<ParentDetailPrimary> {
       function: () async {
         ApiErrorResponseModel model = await ParentDetailService.parentDetails(parentResponseModel);
         debugPrint(model.status.toString());
-        if (model.status) {
+        if (model.message=="success") {
           apiSuccess = model.message;
           Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => ParentDetailsSecondary()));
          // context.router.replaceAll([const ParentDetailsSecondary()]);
@@ -338,27 +315,27 @@ class _ParentDetailPrimaryState extends State<ParentDetailPrimary> {
     );
   }
 
-  Future<void> _parentType(ParentTypeModel parentTypeModel) async {
-    String apiError = '';
-    handleFutureWithAlert(
-      context: context,
-      getErrorMessage: () {
-        return apiError;
-      },
-      function: () async {
-        ApiErrorResponseModel model = await ParentDetailService.parentType(parentTypeModel);
-        debugPrint(model.status.toString());
-        if (model.status) {
-          apiSuccess = model.message;
-          // context.router.replaceAll([const ParentDetailsSecondary()]);
-
-          return ApiStatus.success;
-        } else {
-          apiError = model.message;
-
-          return ApiStatus.error;
-        }
-      },
-    );
-  }
+  // Future<void> _parentType(ParentTypeModel parentTypeModel) async {
+  //   String apiError = '';
+  //   handleFutureWithAlert(
+  //     context: context,
+  //     getErrorMessage: () {
+  //       return apiError;
+  //     },
+  //     function: () async {
+  //       ApiErrorResponseModel model = await ParentDetailService.parentType(parentTypeModel);
+  //       debugPrint(model.status.toString());
+  //       if (model.status) {
+  //         apiSuccess = model.message;
+  //         // context.router.replaceAll([const ParentDetailsSecondary()]);
+  //
+  //         return ApiStatus.success;
+  //       } else {
+  //         apiError = model.message;
+  //
+  //         return ApiStatus.error;
+  //       }
+  //     },
+  //   );
+  // }
 }

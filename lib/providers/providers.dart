@@ -5,8 +5,10 @@ import 'package:flutter_template/providers/drawer_provider.dart';
 import 'package:flutter_template/providers/forgotpassword/forgotpasswd_provider.dart';
 import 'package:flutter_template/providers/login/login_provider.dart';
 import 'package:flutter_template/providers/otp/otp_provider.dart';
+import 'package:flutter_template/providers/parent_details_provider/parent_detail_provider.dart';
 import 'package:flutter_template/providers/register/register_provider.dart';
 import 'package:flutter_template/providers/resetpasswd/resetpasswod_provider.dart';
+import 'package:flutter_template/providers/sports_list_provider.dart';
 import 'package:flutter_template/widgets/validation/signup_validation.dart';
 import 'package:provider/provider.dart';
 import 'package:provider/single_child_widget.dart';
@@ -25,6 +27,10 @@ class ProviderRegister {
     ChangeNotifierProvider<ResetpasswordProvider>(create: (_) => ResetpasswordProvider(),),
     ChangeNotifierProvider<DrawerScreenProvider>(create: (_) => DrawerScreenProvider(),),
     ChangeNotifierProvider<ChatProvider>(create: (_) => ChatProvider(),),
+    ChangeNotifierProvider<ParentDetailProvider>(create: (_) => ParentDetailProvider(),),
+    ChangeNotifierProvider<SportsListProvider>(create: (_) => SportsListProvider(),),
+
+
 
   ];
 

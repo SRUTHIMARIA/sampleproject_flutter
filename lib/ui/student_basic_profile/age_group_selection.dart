@@ -1,14 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:flutter_template/gen/assets.gen.dart';
+import 'package:flutter_template/models/age_group_model/age_group_model.dart';
+import 'package:flutter_template/models/common_model/api_error_response_model.dart';
+import 'package:flutter_template/services/api/age_group_service/age_group_service.dart';
 import 'package:flutter_template/ui/student_basic_profile/age_selection.dart';
 import 'package:flutter_template/ui/student_basic_profile/age_selection_widget/age_selection_widget.dart';
-import 'package:flutter_template/utils/constants/fontdata.dart';
 import 'package:flutter_template/utils/constants/strings.dart';
 import 'package:flutter_template/utils/extensions/context_extensions.dart';
+import 'package:flutter_template/utils/static/enums.dart';
 import 'package:flutter_template/utils/static/static_padding.dart';
 
 import 'package:flutter_template/utils/theme/app_colors.dart';
+
+import '../../utils/constants/font_data.dart';
+import '../../widgets/alert_dialog/future_handling_alert.dart';
 
 class AgeGroupSelection extends StatefulWidget {
   const AgeGroupSelection({Key? key}) : super(key: key);
@@ -18,6 +24,9 @@ class AgeGroupSelection extends StatefulWidget {
 }
 
 class _AgeGroupSelectionState extends State<AgeGroupSelection> {
+  String apiSuccess = '';
+
+
 
 
   @override
@@ -86,6 +95,7 @@ class _AgeGroupSelectionState extends State<AgeGroupSelection> {
                           label: '5-14',
                           image: Assets.images.childrenPng.path,
                           onPress: () =>
+
                             Navigator.push(
                               context,
                               MaterialPageRoute(
@@ -152,6 +162,32 @@ class _AgeGroupSelectionState extends State<AgeGroupSelection> {
           ],
         ),
       ),
+    );
+  }
+
+  Future<void> _ageGroupList(AgeGroupModel ageGroupModel) async {
+    String apiError = '';
+    handleFutureWithAlert(
+      context: context,
+      getErrorMessage: () {
+        return apiError;
+      },
+      function: () async {
+        ApiErrorResponseModel model = await AgeGroupService.getAgeGroupList(ageGroupModel);
+        debugPrint(model.status.toString());
+        if (model.message=='success') {
+          apiSuccess = model.message;
+          debugPrint(model.message);
+          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>AgeSelectionScreen()));
+          // context.router.replaceAll([const ParentDetailsSecondary()]);
+
+          return ApiStatus.success;
+        } else {
+          apiError = model.message;
+
+          return ApiStatus.error;
+        }
+      },
     );
   }
 }

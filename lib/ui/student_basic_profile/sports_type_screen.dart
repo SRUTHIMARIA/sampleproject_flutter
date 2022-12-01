@@ -1,13 +1,22 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_template/gen/assets.gen.dart';
+import 'package:flutter_template/models/common_model/api_error_response_model.dart';
+import 'package:flutter_template/models/sports_list_model/sports_list_model.dart';
+import 'package:flutter_template/providers/sports_list_provider.dart';
+import 'package:flutter_template/services/api/sportslist_service/sports_list_service.dart';
 import 'package:flutter_template/ui/student_basic_profile/age_group_selection.dart';
 import 'package:flutter_template/ui/student_basic_profile/sports_type_widgets/sports_type_widgets.dart';
-import 'package:flutter_template/utils/constants/fontdata.dart';
+import 'package:flutter_template/utils/constants/font_data.dart';
 import 'package:flutter_template/utils/constants/strings.dart';
 import 'package:flutter_template/utils/extensions/context_extensions.dart';
+import 'package:flutter_template/utils/static/enums.dart';
 import 'package:flutter_template/utils/static/static_padding.dart';
 
 import 'package:flutter_template/utils/theme/app_colors.dart';
+import 'package:flutter_template/widgets/alert_dialog/future_handling_alert.dart';
+import 'package:provider/provider.dart';
 
 class SportsTypeScreen extends StatefulWidget {
   const SportsTypeScreen({Key? key}) : super(key: key);
@@ -18,11 +27,31 @@ class SportsTypeScreen extends StatefulWidget {
 
 class _SportsTypeScreenState extends State<SportsTypeScreen> {
   int? selectedCategory;
+  String apiSuccess = '';
+  String sportsName = '';
+  int sportsId = 0;
+  String sportsImage = '';
+  String productDescription = '';
+  bool selected=false;
+  SportsListModel? sportsListModel;
+  List<Datum> data =[];
+
+
 
   final List<Color> _colors = [
     AppColors.gradientColorSplash.withOpacity(0.48),
     AppColors.bgPrimarySplash,
   ];
+
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
+         // context.read<SportsListProvider>().getSportsListData();
+      await _sportsListDetails();
+    });
+  }
 
 
   @override
@@ -279,6 +308,32 @@ class _SportsTypeScreenState extends State<SportsTypeScreen> {
           ),
         ),
       ),
+    );
+  }
+
+  Future<void> _sportsListDetails() async {
+    String apiError = '';
+    handleFutureWithAlert(
+      context: context,
+      getErrorMessage: () {
+        return apiError;
+      },
+      function: () async {
+        SportsListModel model = await SportsListService.getSportsList();
+        debugPrint(model.status.toString());
+        if (model.message=='success') {
+          apiSuccess = model.message;
+          debugPrint(model.message);
+
+
+
+          return ApiStatus.success;
+        } else {
+          apiError = model.message;
+
+          return ApiStatus.error;
+        }
+      },
     );
   }
 }

@@ -38,16 +38,16 @@ class _AtheleteMedicalInfoAllergiesState extends State<AtheleteMedicalInfoAllerg
   final _formKey = GlobalKey<FormState>();
 
 
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-
-    WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
-      _medicalDetailsType(GetMedicalDetailsModel(params: 'allergy'));
-      _savePermissionDetails(SavePermissionResponseModel(permission_status: "yes", saveNextPage: true));
-    });
-  }
+  // @override
+  // void initState() {
+  //   // TODO: implement initState
+  //   super.initState();
+  //
+  //   WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
+  //     _medicalDetailsType(GetMedicalDetailsModel(params: 'allergy'));
+  //     _savePermissionDetails(SavePermissionResponseModel(permission_status: "yes", saveNextPage: true));
+  //   });
+  // }
 
 
   @override
@@ -259,7 +259,7 @@ class _AtheleteMedicalInfoAllergiesState extends State<AtheleteMedicalInfoAllerg
                             protocol: protocolController.text,
                             saveNextPage: true,
                             type: 'allergy',
-                            moreDetail:''
+                            moreDetail:'test'
                         );
                         await _updateMedicalDetails(addMedicalModel);
                       }
@@ -329,7 +329,9 @@ class _AtheleteMedicalInfoAllergiesState extends State<AtheleteMedicalInfoAllerg
       function: () async {
         ApiErrorResponseModel model = await MedicalDetailService.savePermissionInfo(savePermissionResponseModel);
         debugPrint(model.status.toString());
-        if (model.status) {
+        if (model.message=='success') {
+          debugPrint(model.message.toString());
+
           apiSuccess = model.message;
           Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => AtheleteMedicalInfoInjuries()));
           // context.router.replaceAll([const ParentDetailsSecondary()]);
