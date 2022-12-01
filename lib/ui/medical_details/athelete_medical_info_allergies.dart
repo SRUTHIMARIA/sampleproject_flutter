@@ -7,6 +7,8 @@ import 'package:flutter_template/models/medical_detail_model/get_medical_details
 import 'package:flutter_template/models/medical_detail_model/save_permission_model.dart';
 import 'package:flutter_template/services/api/medical_details_service/medical_detail_service.dart';
 import 'package:flutter_template/ui/medical_details/athelete_medical_info_injuries.dart';
+import 'package:flutter_template/ui/parent_details/parent_details_primary.dart';
+import 'package:flutter_template/ui/parent_details/parent_details_secondary.dart';
 
 import 'package:flutter_template/utils/constants/font_data.dart';
 import 'package:flutter_template/utils/constants/strings.dart';
@@ -77,9 +79,14 @@ class _AtheleteMedicalInfoAllergiesState extends State<AtheleteMedicalInfoAllerg
                   ),
                   Row(
                     children: [
-                      Container(
-                        margin: EdgeInsets.only(left: context.heightPx * 49),
-                        child: SvgPicture.asset(Assets.icons.iconBackarrow),
+                      InkWell(
+                        onTap: ()=>
+                          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>ParentDetailsSecondary())),
+
+                        child: Container(
+                          margin: EdgeInsets.only(left: context.heightPx * 49),
+                          child: SvgPicture.asset(Assets.icons.iconBackarrow),
+                        ),
                       ),
                       Container(
                         margin: EdgeInsets.only(left: 12.0),
@@ -304,7 +311,7 @@ class _AtheleteMedicalInfoAllergiesState extends State<AtheleteMedicalInfoAllerg
       function: () async {
         ApiErrorResponseModel model = await MedicalDetailService.medicalDetails(addOrUpdateMedicalResponseModel);
         debugPrint(model.status.toString());
-        if (model.status) {
+        if (model.message=='success') {
           apiSuccess = model.message;
           Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => AtheleteMedicalInfoInjuries()));
           // context.router.replaceAll([const ParentDetailsSecondary()]);
