@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_template/providers/chat_provider/chat_provider.dart';
+import 'package:flutter_template/providers/common_function_provider/common_function_provider.dart';
 import 'package:flutter_template/providers/common_function_provider/common_funtion_provider.dart';
 import 'package:flutter_template/providers/drawer_provider.dart';
 import 'package:flutter_template/providers/forgotpassword/forgotpasswd_provider.dart';
@@ -9,6 +10,7 @@ import 'package:flutter_template/providers/parent_details_provider/parent_detail
 import 'package:flutter_template/providers/register/register_provider.dart';
 import 'package:flutter_template/providers/resetpasswd/resetpasswod_provider.dart';
 import 'package:flutter_template/providers/sports_list_provider.dart';
+import 'package:flutter_template/utils/globals.dart';
 import 'package:flutter_template/widgets/validation/signup_validation.dart';
 import 'package:provider/provider.dart';
 import 'package:provider/single_child_widget.dart';
@@ -17,7 +19,7 @@ import 'authentication_provider.dart';
 
 class ProviderRegister {
   static final List<SingleChildWidget> providers = [
-    // ChangeNotifierProvider<CommonFunctionsProvider>(create: (_) => CommonFunctionsProvider(),),
+    ChangeNotifierProvider<CommonFunctionsProvider>(create: (_) => CommonFunctionsProvider(),),
     ChangeNotifierProvider<AuthenticationProvider>(create: (_) => AuthenticationProvider(),),
     ChangeNotifierProvider<RegisterProvider>(create: (_) => RegisterProvider(),),
     ChangeNotifierProvider<SignupValidation>(create: (_) => SignupValidation(),),
@@ -34,10 +36,10 @@ class ProviderRegister {
 
   ];
 
-// static clearProviders() {
-//   BuildContext context = Globals.appRouter.navigatorKey.currentContext!;
-//
-//   ///ToDo:add methods in providers to clear them and call them here (useful in logout etc.)
-//   context.read<AuthenticationProvider>().clearProvider();
-// }
+static clearProviders() {
+  BuildContext context = Globals.navigatorKey.currentContext!;
+
+  ///ToDo:add methods in providers to clear them and call them here (useful in logout etc.)
+  context.read<AuthenticationProvider>().clearProvider();
+}
 }

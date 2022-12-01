@@ -21,9 +21,9 @@ class SportsListModel {
   final List<Datum> data;
 
   factory SportsListModel.fromJson(Map<String, dynamic> json) => SportsListModel(
-    status: json["status"],
-    message: json["message"],
-    data: List<Datum>.from(json["data"].map((x) => Datum.fromJson(x))),
+    status: json["status"] ?? false,
+    message: json["message"] ?? '',
+    data: json["data"]==null? [] :List<Datum>.from(json["data"].map((x) => Datum.fromJson(x))),
   );
 
   Map<String, dynamic> toJson() => {
@@ -47,10 +47,10 @@ class Datum {
   final bool selected;
 
   factory Datum.fromJson(Map<String, dynamic> json) => Datum(
-    id: json["id"],
-    name: json["name"],
-    image: json["image"],
-    selected: json["selected"],
+    id: json["id"] ?? 0,
+    name: json["name"] ?? '',
+    image: json["image"] ?? '',
+    selected: json["selected"] ?? false,
   );
 
   Map<String, dynamic> toJson() => {

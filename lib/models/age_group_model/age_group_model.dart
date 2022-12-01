@@ -21,9 +21,9 @@ class AgeGroupModel {
   final List<Datum> data;
 
   factory AgeGroupModel.fromJson(Map<String, dynamic> json) => AgeGroupModel(
-    status: json["status"],
-    message: json["message"],
-    data: List<Datum>.from(json["data"].map((x) => Datum.fromJson(x))),
+    status: json["status"] ?? false,
+    message: json["message"] ?? '',
+    data: json["data"]==null? [] :List<Datum>.from(json["data"].map((x) => Datum.fromJson(x))),
   );
 
   Map<String, dynamic> toJson() => {

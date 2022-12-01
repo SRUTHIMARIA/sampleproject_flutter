@@ -2,25 +2,14 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_template/firebase_options.dart';
 import 'package:flutter_template/providers/authentication_provider.dart';
-import 'package:flutter_template/ui/login_screen/login_screen.dart';
-import 'package:flutter_template/ui/medical_details/athelete_medical_info_allergies.dart';
-import 'package:flutter_template/ui/medical_details/physio_info.dart';
-import 'package:flutter_template/ui/parent_details/parent_details_primary.dart';
-import 'package:flutter_template/ui/password_recovery/authentication_code_screen.dart';
-import 'package:flutter_template/ui/password_recovery/new_password_screen.dart';
-import 'package:flutter_template/ui/register_screen/register_screen.dart';
-import 'package:flutter_template/ui/scheduling_self_analysis/self_analyisis_notes.dart';
+import 'package:flutter_template/providers/common_function_provider/common_function_provider.dart';
 import 'package:flutter_template/providers/providers.dart';
-import 'package:flutter_template/ui/splash_screen/splash_screen.dart';
-import 'package:flutter_template/ui/student_basic_profile/age_group_selection.dart';
+import 'package:flutter_template/ui/login_screen/login_screen.dart';
 import 'package:flutter_template/ui/student_basic_profile/age_selection.dart';
 import 'package:flutter_template/utils/globals.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter_template/providers/providers.dart';
-
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:responsive_framework/responsive_framework.dart';
-
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -28,6 +17,7 @@ void main() async {
   await Hive.initFlutter();
   // FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
   await AuthenticationProvider.retrieveAuthUser();
+  await CommonFunctionsProvider.retrieveAuthenticationToken();
 
   runApp(
     MultiProvider(
@@ -56,227 +46,12 @@ class MyApp extends StatelessWidget {
             ResponsiveBreakpoint.autoScale(1000, name: TABLET),
             ResponsiveBreakpoint.resize(1000, name: DESKTOP),
           ],
-          background: Container(color: const Color(0xFFF5F5F5))),
-      title: 'Athelete Assist',
+          background: Container(color: const Color(0xFFF5F5F5)),),
+      title: 'Athlete Assist',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home:  AtheleteMedicalInfoAllergies(),
-      // home: ChangeNotifierProvider(
-      //   create: (context) => DrawerScreenProvider(),
-      //   child:  HomePage(),
+      home: AgeSelectionScreen(),
     );
-    return
-      // MaterialApp.router(
-      //   routerDelegate: _appRouter.delegate(),
-      //   routeInformationParser: _appRouter.defaultRouteParser(),
-      //   builder: (context, router) => router!,
-      // );
-
-      // ChangeNotifierProvider(
-      //   create: (context) => SignupValidation(),
-      MaterialApp(
-        debugShowCheckedModeBanner: false,
-        builder: (context, child) => ResponsiveWrapper.builder(child,
-            maxWidth: 1200,
-            minWidth: 480,
-            defaultScale: true,
-            breakpoints: [
-              ResponsiveBreakpoint.resize(480, name: MOBILE),
-              ResponsiveBreakpoint.autoScale(800, name: TABLET),
-              ResponsiveBreakpoint.autoScale(1000, name: TABLET),
-              ResponsiveBreakpoint.resize(1000, name: DESKTOP),
-            ],
-            background: Container(color: Color(0xFFF5F5F5))),
-
-        title: 'Athelete Assist',
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
-        ),
-        // home: ChangeNotifierProvider(
-        //   create: (_) => MapsProvider(),
-        //   child: const HomeScreen(),
-        // ),
-        home: SelfAnalysisNotes(),
-      );
   }
 }
-
-// void main() async {
-//   WidgetsFlutterBinding.ensureInitialized();
-//   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-//   runApp(MyApp(),
-//   );
-//
-//
-//   await Hive.initFlutter();
-//   // FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
-//   await AuthenticationProvider.retrieveAuthUser();
-//
-//
-//   // MyApp());
-// }
-//
-// class MyApp extends StatelessWidget {
-//   MyApp({Key? key}) : super(key: key);
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return MaterialApp(
-//       navigatorKey: Globals.navigatorKey,
-//       debugShowCheckedModeBanner: false,
-//       builder: (context, child) => ResponsiveWrapper.builder(child,
-//           maxWidth: 1200,
-//           minWidth: 480,
-//           defaultScale: true,
-//           breakpoints: [
-//             ResponsiveBreakpoint.resize(480, name: MOBILE),
-//             ResponsiveBreakpoint.autoScale(800, name: TABLET),
-//             ResponsiveBreakpoint.autoScale(1000, name: TABLET),
-//             ResponsiveBreakpoint.resize(1000, name: DESKTOP),
-//           ],
-//           background: Container(color: const Color(0xFFF5F5F5))),
-//       title: 'Athelete Assist',
-//       theme: ThemeData(
-//         primarySwatch: Colors.blue,
-//       ),
-//       home: const LoginScreen(),
-//       // home: ChangeNotifierProvider(
-//       //   create: (context) => DrawerScreenProvider(),
-//       //   child:  HomePage(),
-//     );
-//     return
-//       // MaterialApp.router(
-//       //   routerDelegate: _appRouter.delegate(),
-//       //   routeInformationParser: _appRouter.defaultRouteParser(),
-//       //   builder: (context, router) => router!,
-//       // );
-//
-//       // ChangeNotifierProvider(
-//       //   create: (context) => SignupValidation(),
-//       MaterialApp(
-//         debugShowCheckedModeBanner: false,
-//         builder: (context, child) => ResponsiveWrapper.builder(child,
-//             maxWidth: 1200,
-//             minWidth: 480,
-//             defaultScale: true,
-//             breakpoints: [
-//               ResponsiveBreakpoint.resize(480, name: MOBILE),
-//               ResponsiveBreakpoint.autoScale(800, name: TABLET),
-//               ResponsiveBreakpoint.autoScale(1000, name: TABLET),
-//               ResponsiveBreakpoint.resize(1000, name: DESKTOP),
-//             ],
-//             background: Container(color: Color(0xFFF5F5F5))),
-//
-//         title: 'Athelete Assist',
-//         theme: ThemeData(
-//           primarySwatch: Colors.blue,
-//         ),
-//         // home: ChangeNotifierProvider(
-//         //   create: (_) => MapsProvider(),
-//         //   child: const HomeScreen(),
-//         // ),
-//         home: SelfAnalysisNotes(),
-//       );
-//   }
-// }
-
-
-
-// import 'package:firebase_core/firebase_core.dart';
-// import 'package:flutter/material.dart';
-// import 'package:flutter_template/firebase_options.dart';
-// import 'package:flutter_template/providers/authentication_provider.dart';
-// import 'package:flutter_template/providers/providers.dart';
-//
-// import 'package:flutter_template/ui/login_screen/login_screen.dart';
-// import 'package:flutter_template/ui/register_screen/register_screen.dart';
-// import 'package:flutter_template/ui/scheduling_self_analysis/self_analyisis_notes.dart';
-// import 'package:flutter_template/providers/providers.dart';
-// import 'package:flutter_template/utils/globals.dart';
-// import 'package:provider/provider.dart';
-// import 'package:flutter_template/providers/authentication_provider.dart';
-// import 'package:flutter_template/ui/splash_screen/splash_screen.dart';
-// import 'package:hive_flutter/hive_flutter.dart';
-// import 'package:responsive_framework/responsive_framework.dart';
-//
-// void main() async {
-//   WidgetsFlutterBinding.ensureInitialized();
-//   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-//   runApp(
-//     MultiProvider(
-//       providers: providers,
-//       child: MyApp(),
-//     ),
-//   );
-//
-//   // Firebase.initializeApp();
-//   await Hive.initFlutter();
-//   // FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
-//   await AuthenticationProvider.retrieveAuthUser();
-//
-// }
-//
-// class MyApp extends StatelessWidget {
-//   MyApp({Key? key}) : super(key: key);
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return MaterialApp(
-//       navigatorKey: Globals.navigatorKey,
-//       debugShowCheckedModeBanner: false,
-//       builder: (context, child) => ResponsiveWrapper.builder(child,
-//           maxWidth: 1200,
-//           minWidth: 480,
-//           defaultScale: true,
-//           breakpoints: [
-//             ResponsiveBreakpoint.resize(480, name: MOBILE),
-//             ResponsiveBreakpoint.autoScale(800, name: TABLET),
-//             ResponsiveBreakpoint.autoScale(1000, name: TABLET),
-//             ResponsiveBreakpoint.resize(1000, name: DESKTOP),
-//           ],
-//           background: Container(color: const Color(0xFFF5F5F5))),
-//       title: 'Athelete Assist',
-//       theme: ThemeData(
-//         primarySwatch: Colors.blue,
-//       ),
-//       home: const LoginScreen(),
-//       // home: ChangeNotifierProvider(
-//       //   create: (context) => DrawerScreenProvider(),
-//       //   child:  HomePage(),
-//     );
-//     return
-//         // MaterialApp.router(
-//         //   routerDelegate: _appRouter.delegate(),
-//         //   routeInformationParser: _appRouter.defaultRouteParser(),
-//         //   builder: (context, router) => router!,
-//         // );
-//
-//         // ChangeNotifierProvider(
-//         //   create: (context) => SignupValidation(),
-//         MaterialApp(
-//       debugShowCheckedModeBanner: false,
-//       builder: (context, child) => ResponsiveWrapper.builder(child,
-//           maxWidth: 1200,
-//           minWidth: 480,
-//           defaultScale: true,
-//           breakpoints: [
-//             ResponsiveBreakpoint.resize(480, name: MOBILE),
-//             ResponsiveBreakpoint.autoScale(800, name: TABLET),
-//             ResponsiveBreakpoint.autoScale(1000, name: TABLET),
-//             ResponsiveBreakpoint.resize(1000, name: DESKTOP),
-//           ],
-//           background: Container(color: Color(0xFFF5F5F5))),
-//
-//       title: 'Athelete Assist',
-//       theme: ThemeData(
-//         primarySwatch: Colors.blue,
-//       ),
-//       // home: ChangeNotifierProvider(
-//       //   create: (_) => MapsProvider(),
-//       //   child: const HomeScreen(),
-//       // ),
-//       home: SelfAnalysisNotes(),
-//     );
-//   }
-// }

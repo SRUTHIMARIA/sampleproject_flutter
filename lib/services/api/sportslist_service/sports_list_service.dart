@@ -1,10 +1,9 @@
-import 'package:flutter_template/models/common_model/api_error_response_model.dart';
+import 'package:flutter_template/models/common_model/authentication_response_model.dart';
 import 'package:flutter_template/models/sports_list_model/sports_list_model.dart';
 import 'package:flutter_template/network/api_helper.dart';
 import 'package:flutter_template/services/endpoints/endpoints.dart';
 
 class SportsListService {
-
   static Future<SportsListModel> getSportsList() async {
     return await ApiHelper(url: AtheleteAssist.getSportsList).get((p0) => SportsListModel.fromJson(p0));
   }

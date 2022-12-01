@@ -25,8 +25,17 @@ class AgeGroupSelection extends StatefulWidget {
 
 class _AgeGroupSelectionState extends State<AgeGroupSelection> {
   String apiSuccess = '';
+  List<Datum> data=[];
 
 
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
+      // context.read<SportsListProvider>().getSportsListData();
+      await _ageGroupList();
+    });
+  }
 
 
   @override
@@ -165,7 +174,7 @@ class _AgeGroupSelectionState extends State<AgeGroupSelection> {
     );
   }
 
-  Future<void> _ageGroupList(AgeGroupModel ageGroupModel) async {
+  Future<void> _ageGroupList() async {
     String apiError = '';
     handleFutureWithAlert(
       context: context,
@@ -173,12 +182,13 @@ class _AgeGroupSelectionState extends State<AgeGroupSelection> {
         return apiError;
       },
       function: () async {
-        ApiErrorResponseModel model = await AgeGroupService.getAgeGroupList(ageGroupModel);
+        AgeGroupModel model = await AgeGroupService.getAgeGroupList();
         debugPrint(model.status.toString());
         if (model.message=='success') {
           apiSuccess = model.message;
           debugPrint(model.message);
           Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>AgeSelectionScreen()));
+
           // context.router.replaceAll([const ParentDetailsSecondary()]);
 
           return ApiStatus.success;

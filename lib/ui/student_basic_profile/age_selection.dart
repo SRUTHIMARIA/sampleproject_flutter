@@ -116,7 +116,9 @@ class _AgeSelectionScreenState extends State<AgeSelectionScreen> {
               child: InkWell(
                 onTap: () =>
                     Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => WhyJoinScreen())),
-                child: ListWheelScrollView.useDelegate(
+                child:
+
+                ListWheelScrollView.useDelegate(
                   itemExtent: 90,
                   onSelectedItemChanged: (index) => setState(() {
                     _selectedItemIndex = index;

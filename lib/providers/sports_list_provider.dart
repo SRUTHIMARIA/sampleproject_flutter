@@ -14,24 +14,24 @@ class SportsListProvider extends ChangeNotifier {
   List<Datum> data =[];
 
 
-  Future<ApiStatus> getSportsListData() async {
-    sportsListStatus = ApiStatus.loading;
-    notifyListeners();
-    sportsListModel = await SportsListService.getSportsList();
-    if (sportsListModel!.status) {
-      debugPrint('status......${sportsListModel!.status.toString()}');
-
-      sportsListStatus = ApiStatus.success;
-    } else {
-      sportsListStatus = ApiStatus.error;
-      apiErrors = sportsListModel!.status;
-      data =sportsListModel!.data;
-
-    }
-    notifyListeners();
-
-    return sportsListStatus;
-  }
+  // Future<ApiStatus> getSportsListData() async {
+  //   sportsListStatus = ApiStatus.loading;
+  //   notifyListeners();
+  //   sportsListModel = await SportsListService.getSportsList();
+  //   if (sportsListModel!.status) {
+  //     debugPrint('status......${sportsListModel!.status.toString()}');
+  //
+  //     sportsListStatus = ApiStatus.success;
+  //   } else {
+  //     sportsListStatus = ApiStatus.error;
+  //     apiErrors = sportsListModel!.status;
+  //     data =sportsListModel!.data;
+  //
+  //   }
+  //   notifyListeners();
+  //
+  //   return sportsListStatus;
+  // }
 
 
 

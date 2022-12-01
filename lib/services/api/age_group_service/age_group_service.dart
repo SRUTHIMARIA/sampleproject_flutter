@@ -4,8 +4,8 @@ import 'package:flutter_template/network/api_helper.dart';
 import 'package:flutter_template/services/endpoints/endpoints.dart';
 
 class AgeGroupService {
-  static Future<ApiErrorResponseModel> getAgeGroupList(AgeGroupModel ageGroupModel) async {
-    return await ApiHelper(url: AtheleteAssist.getSportsList).get((p0) => ApiErrorResponseModel.fromJson(p0));
+  static Future<AgeGroupModel> getAgeGroupList() async {
+    return await ApiHelper(url: AtheleteAssist.getAgeGroup).get((p0) => AgeGroupModel.fromJson(p0));
   }
 
 

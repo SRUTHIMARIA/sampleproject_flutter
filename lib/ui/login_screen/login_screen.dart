@@ -66,223 +66,235 @@ class _LoginScreenState extends State<LoginScreen> {
   //   }
   // }
 
-
-
   @override
   Widget build(BuildContext context) {
+    return Scaffold(
+      resizeToAvoidBottomInset: false,
+      body: Container(
+        height: double.infinity,
+        width: double.infinity,
+        decoration: BoxDecoration(
+          color: AppColors.primaryColor.withOpacity(0.40),
+        ),
+        child: Form(
+          key: _formKey,
+          child: Column(
+            children: [
+              Image.asset(Assets.images.imageLogin.path),
+              SizedBox(
+                height: context.heightPx * 100,
+              ),
+              Align(
+                alignment: Alignment.centerLeft,
+                child: Container(
+                  padding: StaticPadding.paddingH50(context),
+                  margin: const EdgeInsets.only(left: 12.0),
+                  child: Text(
+                    welcome,
+                    style: const FontData().montFont22TextStyle,
+                  ),
+                ),
+              ),
+              Align(
+                alignment: Alignment.centerLeft,
+                child: Container(
+                  padding: StaticPadding.paddingH50(context),
+                  margin: EdgeInsets.only(left: 12.0),
+                  child: Text(
+                    logintoContinue,
+                    style: FontData().montFont14TextStyle,
+                  ),
+                ),
+              ),
+              SizedBox(height: context.heightPx * 16),
+              Container(
+                margin: const EdgeInsets.symmetric(horizontal: 56),
+                decoration: BoxDecoration(
+                  color: AppColors.textFieldBgColor,
+                  border: Border.all(
+                    // color: CustomColors().white,
+                    color: Provider.of<LoginProvider>(context, listen: true).loginError
+                        ? AppColors.redColor
+                        : AppColors.themeColor,
+                    width: 2,
+                  ),
+                  borderRadius: const BorderRadius.all(Radius.circular(6.0)),
+                ),
+                child: TextFormField(
+                  controller: txtUserNameController,
+                  style: const FontData().montFont500TextStyle,
+                  decoration: InputDecoration(
+                    focusColor: Colors.white,
+                    enabledBorder: InputBorder.none,
 
-        return Scaffold(
-          resizeToAvoidBottomInset: false,
-          body: Container(
-            height: double.infinity,
-            width: double.infinity,
-            decoration: BoxDecoration(
-              color: AppColors.primaryColor.withOpacity(0.40),
-            ),
-            child: Form(
-              key: _formKey,
-              child: Column(
+                    prefixIcon: SvgPicture.asset(
+                      Assets.icons.iconUsername,
+                      fit: BoxFit.scaleDown,
+                      color: AppColors.textGrey,
+                    ),
+
+                    border: const OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(6.0)),
+                    ),
+
+                    fillColor: Colors.grey,
+
+                    hintText: username,
+
+                    //make hint text
+                    hintStyle: const FontData().montFont500TextStyle,
+                  ),
+                ),
+              ),
+              SizedBox(height: context.heightPx * 20),
+              Container(
+                margin: const EdgeInsets.symmetric(horizontal: 56),
+                decoration: BoxDecoration(
+                  color: AppColors.textFieldBgColor,
+                  border: Border.all(
+                    // color: CustomColors().white,
+                    color: Provider.of<LoginProvider>(context, listen: true).loginError
+                        ? AppColors.redColor
+                        : AppColors.whiteColor,
+                    width: 2,
+                  ),
+                  borderRadius: const BorderRadius.all(Radius.circular(6.0)),
+                ),
+                child: TextFormField(
+                  controller: txtUserPwdController,
+                  style: const FontData().montFont500TextStyle,
+                  decoration: InputDecoration(
+                    focusColor: Colors.white,
+                    enabledBorder: InputBorder.none,
+
+                    prefixIcon: SvgPicture.asset(
+                      Assets.icons.iconPassword,
+                      fit: BoxFit.scaleDown,
+                      color: AppColors.textGrey,
+                    ),
+
+                    border: const OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(6.0)),
+                    ),
+
+                    fillColor: Colors.grey,
+
+                    hintText: password,
+
+                    //make hint text
+                    hintStyle: const FontData().montFont500TextStyle,
+                  ),
+                ),
+              ),
+              SizedBox(height: context.heightPx * 16),
+              InkWell(
+                onTap: () => Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (context) => const PasswordRecovery()),
+                ),
+                child: Align(
+                  alignment: Alignment.centerRight,
+                  child: Padding(
+                    padding: StaticPadding.paddingH60(context),
+                    child: Text(
+                      forgotPassword,
+                      style: const FontData().montFont50012TextStyle,
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(height: context.heightPx * 16),
+              GestureDetector(
+                onTap: () async {
+                  // Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomePage()));
+
+                  messaging = FirebaseMessaging.instance;
+                  String? fcmToken = await messaging.getToken();
+                  debugPrint('Device token $fcmToken');
+                  FocusManager.instance.primaryFocus?.unfocus();
+                  if (_formKey.currentState!.validate()) {
+                    LoginModel loginModel = LoginModel(
+                      email: txtUserNameController.text,
+                      password: txtUserPwdController.text,
+                      deviceToken: fcmToken!,
+                    );
+                    await _logIn(loginModel);
+                  }
+                },
+                child: SizedBox(
+                  height: context.heightPx * 42,
+                  width: context.widthPx * 270,
+                  child: Container(
+                    decoration: const BoxDecoration(
+                      color: AppColors.themeColor,
+                      borderRadius: BorderRadius.all(Radius.circular(8.0)),
+                    ),
+                    child: Center(
+                      child: Text(
+                        login,
+                        // _display ? "hide logo" : "display logo",
+                        style: const FontData().montFont70016TextStyle,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(height: context.heightPx * 16),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Image.asset(Assets.images.imageLogin.path),
-                  SizedBox(
-                    height: context.heightPx * 100,
+                  Text(
+                    donthaveaccount,
+                    style: const FontData().montFont60012TextStyle,
                   ),
-                  Align(
-                    alignment: Alignment.centerLeft,
-                    child: Container(
-                      padding: StaticPadding.paddingH50(context),
-                      margin: const EdgeInsets.only(left: 12.0),
-                      child: Text(
-                        welcome,
-                        style: const FontData().montFont22TextStyle,
-                      ),
-                    ),
-                  ),
-                  Align(
-                    alignment: Alignment.centerLeft,
-                    child: Container(
-                      padding: StaticPadding.paddingH50(context),
-                      margin: EdgeInsets.only(left: 12.0),
-                      child: Text(
-                        logintoContinue,
-                        style: FontData().montFont14TextStyle,
-                      ),
-                    ),
-                  ),
-                  SizedBox(height: context.heightPx * 16),
-                  Container(
-                    margin: const EdgeInsets.symmetric(horizontal: 56),
-                    decoration: BoxDecoration(
-                      color: AppColors.textFieldBgColor,
-                      border: Border.all(
-                        // color: CustomColors().white,
-                        color: Provider.of<LoginProvider>(context, listen: true).loginError
-                            ? AppColors.redColor
-                            : AppColors.themeColor,
-                        width: 2,
-                      ),
-                      borderRadius: const BorderRadius.all(Radius.circular(6.0)),
-                    ),
-                    child: TextFormField(
-                      controller: txtUserNameController,
-                      style: const FontData().montFont500TextStyle,
-                      decoration: InputDecoration(
-                        focusColor: Colors.white,
-                        enabledBorder: InputBorder.none,
-
-                        prefixIcon: SvgPicture.asset(
-                          Assets.icons.iconUsername,
-                          fit: BoxFit.scaleDown,
-                          color: AppColors.textGrey,
-                        ),
-
-                        border: const OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(6.0)),
-                        ),
-
-                        fillColor: Colors.grey,
-
-                        hintText: username,
-
-                        //make hint text
-                        hintStyle: const FontData().montFont500TextStyle,
-                      ),
-                    ),
-                  ),
-                  SizedBox(height: context.heightPx * 20),
-                  Container(
-                    margin: const EdgeInsets.symmetric(horizontal: 56),
-                    decoration: BoxDecoration(
-                      color: AppColors.textFieldBgColor,
-                      border: Border.all(
-                        // color: CustomColors().white,
-                        color: Provider.of<LoginProvider>(context, listen: true).loginError
-                            ? AppColors.redColor
-                            : AppColors.whiteColor,
-                        width: 2,
-                      ),
-                      borderRadius: const BorderRadius.all(Radius.circular(6.0)),
-                    ),
-                    child: TextFormField(
-                      controller: txtUserPwdController,
-                      style: const FontData().montFont500TextStyle,
-                      decoration: InputDecoration(
-                        focusColor: Colors.white,
-                        enabledBorder: InputBorder.none,
-
-                        prefixIcon: SvgPicture.asset(
-                          Assets.icons.iconPassword,
-                          fit: BoxFit.scaleDown,
-                          color: AppColors.textGrey,
-                        ),
-
-                        border: const OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(6.0)),
-                        ),
-
-                        fillColor: Colors.grey,
-
-                        hintText: password,
-
-                        //make hint text
-                        hintStyle: const FontData().montFont500TextStyle,
-                      ),
-                    ),
-                  ),
-                  SizedBox(height: context.heightPx * 16),
-                  InkWell(
-                    onTap: () => Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(builder: (context) => const PasswordRecovery()),
-                    ),
-                    child: Align(
-                      alignment: Alignment.centerRight,
-                      child: Padding(
-                        padding: StaticPadding.paddingH60(context),
-                        child: Text(
-                          forgotPassword,
-                          style: const FontData().montFont50012TextStyle,
-                        ),
-                      ),
-                    ),
-                  ),
-                  SizedBox(height: context.heightPx * 16),
+                  SizedBox(width: context.widthPx * 4),
                   GestureDetector(
-                    onTap: () async {
-                      // Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomePage()));
-
-                      messaging = FirebaseMessaging.instance;
-                      String? fcmToken = await messaging.getToken();
-                      debugPrint('Device token $fcmToken');
-                      FocusManager.instance.primaryFocus?.unfocus();
-                      if (_formKey.currentState!.validate()) {
-                        LoginModel loginModel = LoginModel(
-                          email: txtUserNameController.text,
-                          password: txtUserPwdController.text,
-                          deviceToken: fcmToken!,
-                        );
-                        await _logIn(loginModel);
-                      }
-                    },
-                    //onTap: () => handlePressed(),
-                    // loginProvider.login(txtUserNameController.text.toString(), txtUserPwdController.text.toString(), token??''),
-                    //     loginUser(),
-
-                    // loginUserDetails();
-
-                    //   Provider.of<LoginProvider>(context, listen: false)
-                    //       .signInToApp(
-                    // context,
-                    // txtUserPwdController.text.toString(),
-                    // txtUserPwdController.text.toString(),
-                    // token ?? ''),
-
-                    child: SizedBox(
-                      height: context.heightPx * 42,
-                      width: context.widthPx * 270,
-                      child: Container(
-                        decoration: const BoxDecoration(
-                          color: AppColors.themeColor,
-                          borderRadius: BorderRadius.all(Radius.circular(8.0)),
-                        ),
-                        child: Center(
-                          child: Text(
-                            login,
-                            // _display ? "hide logo" : "display logo",
-                            style: const FontData().montFont70016TextStyle,
-                          ),
-                        ),
-                      ),
+                    onTap: () =>
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => const RegisterScreen())),
+                    child: Text(
+                      register,
+                      style: const FontData().montFont70012TextStyle,
                     ),
-                  ),
-                  SizedBox(height: context.heightPx * 16),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        donthaveaccount,
-                        style: const FontData().montFont60012TextStyle,
-                      ),
-                      SizedBox(width: context.widthPx * 4),
-                      GestureDetector(
-
-                        onTap: () =>
-                            Navigator.push(context, MaterialPageRoute(builder: (context) => const RegisterScreen())),
-                        child: Text(
-                          register,
-                          style: const FontData().montFont70012TextStyle,
-                        ),
-                      ),
-                    ],
                   ),
                 ],
               ),
-            ),
+            ],
           ),
-        );
-
-
+        ),
+      ),
+    );
   }
+
+  // Future<void> _signInSignUp(SignInSignUpModel signInSignUpModel) async {
+  //   String apiError = '';
+  //   handleFutureWithAlert(
+  //     context: context,
+  //     getErrorMessage: () {
+  //       return apiError;
+  //     },
+  //     function: () async {
+  //       SignUpModel model = await SignInServices.signInSignUp(signInSignUpModel);
+  //       if (model.status) {
+  //         apiSuccess = model.message;
+  //         debugPrint('........userId........${model.id}');
+  //         if (mounted) {
+  //           await context
+  //               .read<AuthenticationProvider>()
+  //               .saveUserDetails(authToken: model.token, userName: '', userId: model.id, onBoarding: '');
+  //         }
+  //         RegExp(r'^-?(([0-9]*)|(([0-9]*)\.([0-9]*)))$').hasMatch(widget.userEmail)
+  //             ? context.router.replaceAll([PhoneNumberRoute(userNumber: widget.userEmail)])
+  //             : context.router.replaceAll([OtpVerifyRoute(logPath: 'email', otp: '', mobile: widget.userEmail)]);
+  //
+  //         return ApiStatus.success;
+  //       } else {
+  //         apiError = model.message;
+  //
+  //         return ApiStatus.error;
+  //       }
+  //     },
+  //   );
+  // }
 
   Future<void> _logIn(LoginModel loginModel) async {
     String apiError = '';
@@ -295,21 +307,21 @@ class _LoginScreenState extends State<LoginScreen> {
       function: () async {
         LoginSuccessModel model = await LoginService.loginInfo(loginModel);
         // print(model.status);
-        if (model.message=='success') {
+        if (model.message == 'success') {
           apiSuccess = model.message;
 
           debugPrint('message:${model.message}');
-        //  debugPrint('Login :.................${model.id}');
           Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => SportsTypeScreen()));
 
-        if (mounted) {
-            await context
-                .read<AuthenticationProvider>()
-                .saveUserDetails(authToken: model.token, userName: '', userId: model.id, onBoarding: '');
-
-
+          if (mounted) {
+            await context.read<AuthenticationProvider>().saveUserDetails(
+                  authToken: model.token,
+                  userName: '',
+                  userId: model.id,
+                );
           }
 
+          //  debugPrint('Login :.................${model.id}');
 
           return ApiStatus.success;
         } else {
@@ -317,34 +329,39 @@ class _LoginScreenState extends State<LoginScreen> {
 
           return ApiStatus.error;
         }
+        // else {
+        //   apiError = model.message;
+        //
+        //   return ApiStatus.error;
+        // }
       },
     );
   }
 }
 
-  // void handlePressed() {
-  //   Provider.of<LoginProvider>(context, listen: false).signInToApp(txtUserNameController.text, txtUserPwdController.text);
-  //   clearControllers();
-  // }
+// void handlePressed() {
+//   Provider.of<LoginProvider>(context, listen: false).signInToApp(txtUserNameController.text, txtUserPwdController.text);
+//   clearControllers();
+// }
 
-  // void forgotPasswordPressed() {
-  //   clearControllers();
-  //   Provider.of<LoginProvider>(context, listen: false).setLoginError(false);
-  //   Provider.of<LoginProvider>(context, listen: false).setErrorMessage('');
-  //   const Routes().goTo(context, const AuthenticationCodeScreen());
-  // }
-  //
-  // void clearControllers() {
-  //   FocusScope.of(context).unfocus();
-  //   // emailController.text = '';
-  //   // passwordController.text = '';
-  // }
-  //
-  // void setObscure1() {
-  //   setState(() {
-  //     _isObscure1 = !_isObscure1;
-  //   });
-  // }
+// void forgotPasswordPressed() {
+//   clearControllers();
+//   Provider.of<LoginProvider>(context, listen: false).setLoginError(false);
+//   Provider.of<LoginProvider>(context, listen: false).setErrorMessage('');
+//   const Routes().goTo(context, const AuthenticationCodeScreen());
+// }
+//
+// void clearControllers() {
+//   FocusScope.of(context).unfocus();
+//   // emailController.text = '';
+//   // passwordController.text = '';
+// }
+//
+// void setObscure1() {
+//   setState(() {
+//     _isObscure1 = !_isObscure1;
+//   });
+// }
 
 // void loginUserDetails() {
 //   if (isLogin) {
@@ -352,4 +369,3 @@ class _LoginScreenState extends State<LoginScreen> {
 //     userDataBox!.put('password', txtUserPwdController.text);
 //   }
 // }
-
