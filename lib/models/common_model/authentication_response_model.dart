@@ -4,43 +4,91 @@
 //
 //     final SignUpModel = SignUpModelFromJson(jsonString);
 
-import 'dart:convert';
 
-LoginSuccessModel signUpModelFromJson(String str) => LoginSuccessModel.fromJson(json.decode(str));
+// To parse this JSON data, do
+//
+//     final loginSuccessModel = loginSuccessModelFromJson(jsonString);
 
-String signUpModelToJson(LoginSuccessModel data) => json.encode(data.toJson());
+import 'package:meta/meta.dart';
+
+
+
 
 class LoginSuccessModel {
   LoginSuccessModel({
     required this.status,
-    required this.statusCode,
     required this.message,
-    required this.token,
-    required this.id,
+    required this.data,
   });
 
-  bool status;
-  int statusCode;
-  String message;
-  String token;
-  int id;
+  final bool status;
+  final String message;
+  final Data data;
 
   factory LoginSuccessModel.fromJson(Map<String, dynamic> json) => LoginSuccessModel(
-    status: json['status'] ?? false,
-    statusCode: json['statusCode'] ?? 400,
-    message: json['message'] ?? '',
-    token: json['token'] ?? '',
-    id: json['id'] ?? 0,
+    status: json["status"] ?? true,
+    message: json["message"] ?? '',
+    data: json['data'] == null
+        ? Data.fromJson(json["data"]) : json['data'],
   );
 
   Map<String, dynamic> toJson() => {
-    'status': status,
-    'statusCode': statusCode,
-    'message': message,
-    'token': token,
-    'id': id,
+    "status": status,
+    "message": message,
+    "data": data.toJson(),
   };
 }
+
+class Data {
+  Data({
+    required this.token,
+  });
+
+  final String token;
+
+  factory Data.fromJson(Map<String, dynamic> json) => Data(
+    token: json["token"],
+  );
+
+  Map<String, dynamic> toJson() => {
+    "token": token,
+  };
+}
+
+//
+//
+//
+// class LoginSuccessModel {
+//   LoginSuccessModel({
+//     required this.status,
+//     required this.statusCode,
+//     required this.message,
+//     required this.token,
+//     required this.id,
+//   });
+//
+//   bool status;
+//   int statusCode;
+//   String message;
+//   String token;
+//   int id;
+//
+//   factory LoginSuccessModel.fromJson(Map<String, dynamic> json) => LoginSuccessModel(
+//     status: json['status'] ?? false,
+//     statusCode: json['statusCode'] ?? 400,
+//     message: json['message'] ?? '',
+//     token: json['token'] ?? '',
+//     id: json['id'] ?? 0,
+//   );
+//
+//   Map<String, dynamic> toJson() => {
+//     'status': status,
+//     'statusCode': statusCode,
+//     'message': message,
+//     'token': token,
+//     'id': id,
+//   };
+// }
 
 
 

@@ -305,21 +305,32 @@ class _LoginScreenState extends State<LoginScreen> {
         return apiError;
       },
       function: () async {
+        final provider= context.read<AuthenticationProvider>();
         LoginSuccessModel model = await LoginService.loginInfo(loginModel);
         // print(model.status);
         if (model.message == 'success') {
           apiSuccess = model.message;
 
           debugPrint('message:${model.message}');
+          debugPrint('message:${model.data.token}');
           Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => SportsTypeScreen()));
 
-          if (mounted) {
-            await context.read<AuthenticationProvider>().saveUserDetails(
-                  authToken: model.token,
-                  userName: '',
-                  userId: model.id,
-                );
-          }
+          await provider.saveUserDetails(
+                authToken: model.data.token,
+                userName: '',
+
+              );
+
+
+
+
+
+            // await context.read<AuthenticationProvider>().saveUserDetails(
+            //       authToken: model.token,
+            //       userName: '',
+            //       userId: model.id,
+            //     );
+
 
           //  debugPrint('Login :.................${model.id}');
 

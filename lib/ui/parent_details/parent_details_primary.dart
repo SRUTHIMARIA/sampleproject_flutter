@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_template/gen/assets.gen.dart';
 import 'package:flutter_template/models/common_model/api_error_response_model.dart';
+import 'package:flutter_template/models/common_model/authentication_response_model.dart';
 import 'package:flutter_template/models/parent_model/parent_response_model.dart';
 import 'package:flutter_template/models/parent_model/parent_type_model.dart';
 import 'package:flutter_template/providers/parent_details_provider/parent_detail_provider.dart';
@@ -15,6 +16,7 @@ import 'package:flutter_template/utils/static/enums.dart';
 import 'package:flutter_template/widgets/alert_widgets/future_handling_alert.dart';
 import 'package:provider/provider.dart';
 
+import '../../providers/authentication_provider.dart';
 import '../../utils/theme/app_colors.dart';
 
 class ParentDetailPrimary extends StatefulWidget {
@@ -37,15 +39,15 @@ class _ParentDetailPrimaryState extends State<ParentDetailPrimary> {
   final _formKey = GlobalKey<FormState>();
 
 
-  // @override
-  // void initState() {
-  //   // TODO: implement initState
-  //   super.initState();
-  //   WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
-  //   await _parentType(ParentTypeModel(type: 'primary'));
-  //   });
-  //
-  // }
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
+    await _parentType(ParentTypeModel(type: 'primary'));
+    });
+
+  }
 
 
 
@@ -298,11 +300,21 @@ class _ParentDetailPrimaryState extends State<ParentDetailPrimary> {
         return apiError;
       },
       function: () async {
-        ApiErrorResponseModel model = await ParentDetailService.parentDetails(parentResponseModel);
+        final provider= context.read<AuthenticationProvider>();
+
+        LoginSuccessModel model = await ParentDetailService.parentDetails(parentResponseModel);
         debugPrint(model.status.toString());
         if (model.message=="success") {
           apiSuccess = model.message;
+          debugPrint('message:${model.data.token}');
+
           Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => ParentDetailsSecondary()));
+
+          await provider.saveUserDetails(
+            authToken: model.data.token,
+            userName: '',
+
+          );
          // context.router.replaceAll([const ParentDetailsSecondary()]);
 
           return ApiStatus.success;
@@ -315,27 +327,27 @@ class _ParentDetailPrimaryState extends State<ParentDetailPrimary> {
     );
   }
 
-  // Future<void> _parentType(ParentTypeModel parentTypeModel) async {
-  //   String apiError = '';
-  //   handleFutureWithAlert(
-  //     context: context,
-  //     getErrorMessage: () {
-  //       return apiError;
-  //     },
-  //     function: () async {
-  //       ApiErrorResponseModel model = await ParentDetailService.parentType(parentTypeModel);
-  //       debugPrint(model.status.toString());
-  //       if (model.status) {
-  //         apiSuccess = model.message;
-  //         // context.router.replaceAll([const ParentDetailsSecondary()]);
-  //
-  //         return ApiStatus.success;
-  //       } else {
-  //         apiError = model.message;
-  //
-  //         return ApiStatus.error;
-  //       }
-  //     },
-  //   );
-  // }
+  Future<void> _parentType(ParentTypeModel parentTypeModel) async {
+    String apiError = '';
+    handleFutureWithAlert(
+      context: context,
+      getErrorMessage: () {
+        return apiError;
+      },
+      function: () async {
+        ApiErrorResponseModel model = await ParentDetailService.parentType(parentTypeModel);
+        debugPrint(model.status.toString());
+        if (model.status) {
+          apiSuccess = model.message;
+          // context.router.replaceAll([const ParentDetailsSecondary()]);
+
+          return ApiStatus.success;
+        } else {
+          apiError = model.message;
+
+          return ApiStatus.error;
+        }
+      },
+    );
+  }
 }

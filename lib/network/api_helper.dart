@@ -60,6 +60,7 @@ class ApiHelper {
 
   Future<dynamic> get(Function(Map<String, dynamic>) jsonToObjectFn) async {
     log('...................${jsonEncode(body)}');
+    log('...................${_getHeaders()}');
 
     return await _callApi(http.get(Uri.parse(url), headers: _getHeaders()), jsonToObjectFn);
   }

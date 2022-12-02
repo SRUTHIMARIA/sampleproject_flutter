@@ -2,13 +2,11 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_template/gen/assets.gen.dart';
-import 'package:flutter_template/models/common_model/api_error_response_model.dart';
-import 'package:flutter_template/models/common_model/authentication_response_model.dart';
+
 import 'package:flutter_template/models/sports_list_model/sports_list_model.dart';
-import 'package:flutter_template/providers/authentication_provider.dart';
-import 'package:flutter_template/providers/sports_list_provider.dart';
+
 import 'package:flutter_template/services/api/sportslist_service/sports_list_service.dart';
-import 'package:flutter_template/ui/login_screen/login_screen.dart';
+
 import 'package:flutter_template/ui/student_basic_profile/age_group_selection.dart';
 import 'package:flutter_template/ui/student_basic_profile/sports_type_widgets/sports_type_widgets.dart';
 import 'package:flutter_template/utils/constants/font_data.dart';
@@ -118,21 +116,14 @@ class _SportsTypeScreenState extends State<SportsTypeScreen> {
                           nextLine: false,
                           label: 'BASKET BALL',
                           image: Assets.images.sportsBatminton,
-                          onPress: () {
-                            if(AuthenticationProvider.token.isNotEmpty){
-                              debugPrint(AuthenticationProvider.token);
-                            }else{
-                            debugPrint("null");
-                            }
+                          onPress: ()=>
 
-                          }
-
-                          //     Navigator.push(
-                          //   context,
-                          //   MaterialPageRoute(
-                          //     builder: (context) => AgeGroupSelection(),
-                          //   ),
-                          // ),
+                              Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => AgeGroupSelection(),
+                            ),
+                          ),
                         ),
                         SizedBox(width: context.widthPx * 20),
                         SportsTypeWidget(
@@ -334,10 +325,9 @@ class _SportsTypeScreenState extends State<SportsTypeScreen> {
       function: () async {
         SportsListModel model = await SportsListService.getSportsList();
         debugPrint(model.status.toString());
-        if (model.message=='success.') {
+        if (model.message=='success') {
           apiSuccess = model.message;
           debugPrint(model.status.toString());
-          debugPrint(AuthenticationProvider.token);
           Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => AgeGroupSelection()));
 
           return ApiStatus.success;

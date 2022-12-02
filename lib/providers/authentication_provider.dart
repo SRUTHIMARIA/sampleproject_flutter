@@ -16,13 +16,13 @@ class AuthenticationProvider extends ChangeNotifier {
   Future<void> saveUserDetails({
     required String authToken,
     required String userName,
-    required String onBoarding,
-    required int userId,
+    // required String onBoarding,
+    // required int userId,
   }) async {
     await Future.wait([
       SecureStorageHelper.saveString(key: StaticKeys.tokenLocation, dataToStore: authToken),
       SecureStorageHelper.saveString(key: StaticKeys.userNameLocation, dataToStore: userName),
-      SecureStorageHelper.saveInt(key: StaticKeys.userIdLocation, dataToStore: userId),
+     // SecureStorageHelper.saveInt(key: StaticKeys.userIdLocation, dataToStore: userId),
     ]);
     _token = authToken;
     _currentUserName = userName;

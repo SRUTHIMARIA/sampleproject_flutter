@@ -206,6 +206,7 @@ class _AspirationsState extends State<Aspirations> {
         return apiError;
       },
       function: () async {
+          final provider= context.read<AuthenticationProvider>();
         LoginSuccessModel model = await AspirationsService.aspirationsInfo(aspirationsModel);
         debugPrint(model.status.toString());
 
@@ -213,15 +214,14 @@ class _AspirationsState extends State<Aspirations> {
           apiSuccess = model.message;
           Navigator.pushReplacement(
               context, MaterialPageRoute(builder: (context) => SelfEvaluationQuiz()),);
-          if (mounted) {
-            await context
-                .read<AuthenticationProvider>()
-                .saveUserDetails(authToken: model.token, userName: '', userId: model.id,);
-            debugPrint(model.token.toString());
+
+            await provider
+                .saveUserDetails(authToken: model.data.token, userName: '');
+            debugPrint(model.data.token.toString());
 
 
 
-          }
+
 
           return ApiStatus.success;
         } else {
