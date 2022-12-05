@@ -23,19 +23,19 @@ class AtheleteAssist {
 
   //parent details apis
   static const getParentProfileType =baseUrl+'/parent_profiles?type=';
-  static const parentProfileDetails = '$baseUrl/parent_profiles';
+  static const parentProfileDetails = baseUrl+'/parent_profiles';
 
   //medical details
-  static const addMedicalDetails='$baseUrl/medical-details/details';
-  static const getMedicalDetails='$baseUrl/medical-details/details?type=';
-  static const physicalOrMedical='$baseUrl/medical-details/more-info';
-  static const savePostPermission='$baseUrl/medical-details/permission-to-post';
-  static const saveDoctor='$baseUrl/medical-details/information';
+  static const addMedicalDetails=baseUrl+'/medical-details/details';
+  static const getMedicalDetails=baseUrl+'/medical-details/details?type=';
+  static const physicalOrMedical=baseUrl+'/medical-details/more-info';
+  static const savePostPermission=baseUrl+'/medical-details/permission-to-post';
+  static const saveDoctor=baseUrl+'/medical-details/information';
 
   //enrollment apis
-  static const studentEnrollment='$baseUrl/student-enrollment';
-  static const saveAspirations='$baseUrl/aspirations';
-  static const getAspirations='$baseUrl/aspirations';
+  static const studentEnrollment=baseUrl+'/student-enrollment';
+  static const saveAspirations=baseUrl+'/aspirations';
+  static const getAspirations=baseUrl+'/aspirations';
 
 
 
