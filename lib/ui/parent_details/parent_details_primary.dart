@@ -29,7 +29,6 @@ class ParentDetailPrimary extends StatefulWidget {
 class _ParentDetailPrimaryState extends State<ParentDetailPrimary> {
   var nameController = TextEditingController();
   var phoneController = TextEditingController();
-
   var dobController = TextEditingController();
   var emailController = TextEditingController();
   var relationshipController = TextEditingController();
@@ -44,7 +43,7 @@ class _ParentDetailPrimaryState extends State<ParentDetailPrimary> {
     // TODO: implement initState
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
-    await _parentType(ParentTypeModel(type: 'primary'));
+    await _parentType();
     });
 
   }
@@ -113,7 +112,7 @@ class _ParentDetailPrimaryState extends State<ParentDetailPrimary> {
                                 margin: EdgeInsets.symmetric(horizontal: 56),
                                 decoration: BoxDecoration(
                                   color: AppColors.textFieldBgColor,
-                                  borderRadius: BorderRadius.circular(6.0),
+                                  borderRadius: const BorderRadius.all(Radius.circular(6.0)),
                                 ),
                                 child: TextFormField(
                                   controller: nameController,
@@ -236,7 +235,7 @@ class _ParentDetailPrimaryState extends State<ParentDetailPrimary> {
                                     contentPadding: EdgeInsets.only(left: context.heightPx * 16),
 
                                     border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(6.0),
+                                      borderRadius: const BorderRadius.all(Radius.circular(6.0)),
                                     ),
 
                                     hintText: relationship,
@@ -302,19 +301,21 @@ class _ParentDetailPrimaryState extends State<ParentDetailPrimary> {
       function: () async {
         final provider= context.read<AuthenticationProvider>();
 
-        LoginSuccessModel model = await ParentDetailService.parentDetails(parentResponseModel);
+        ApiErrorResponseModel model = await ParentDetailService.parentDetails(parentResponseModel);
         debugPrint(model.status.toString());
         if (model.message=="success") {
           apiSuccess = model.message;
-          debugPrint('message:${model.data.token}');
+          //
+          //
+          // await provider.saveUserDetails(
+          //   authToken: model.data.token,
+          //   userName: '',
+          //
+          // );
 
           Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => ParentDetailsSecondary()));
 
-          await provider.saveUserDetails(
-            authToken: model.data.token,
-            userName: '',
 
-          );
          // context.router.replaceAll([const ParentDetailsSecondary()]);
 
           return ApiStatus.success;
@@ -327,7 +328,7 @@ class _ParentDetailPrimaryState extends State<ParentDetailPrimary> {
     );
   }
 
-  Future<void> _parentType(ParentTypeModel parentTypeModel) async {
+  Future<void> _parentType() async {
     String apiError = '';
     handleFutureWithAlert(
       context: context,
@@ -335,10 +336,12 @@ class _ParentDetailPrimaryState extends State<ParentDetailPrimary> {
         return apiError;
       },
       function: () async {
-        ApiErrorResponseModel model = await ParentDetailService.parentType(parentTypeModel);
-        debugPrint(model.status.toString());
-        if (model.status) {
+        ParentTypeModel model = await ParentDetailService.parentType();
+
+        if (model.message == 'success') {
           apiSuccess = model.message;
+          debugPrint(model.message);
+
           // context.router.replaceAll([const ParentDetailsSecondary()]);
 
           return ApiStatus.success;

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_template/gen/assets.gen.dart';
 import 'package:flutter_template/models/common_model/api_error_response_model.dart';
+import 'package:flutter_template/models/common_model/authentication_response_model.dart';
 import 'package:flutter_template/models/medical_detail_model/add_medical_model.dart';
 import 'package:flutter_template/models/medical_detail_model/get_medical_details_model.dart';
 import 'package:flutter_template/models/medical_detail_model/save_permission_model.dart';
@@ -40,16 +41,16 @@ class _AtheleteMedicalInfoAllergiesState extends State<AtheleteMedicalInfoAllerg
   final _formKey = GlobalKey<FormState>();
 
 
-  // @override
-  // void initState() {
-  //   // TODO: implement initState
-  //   super.initState();
-  //
-  //   WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
-  //     _medicalDetailsType(GetMedicalDetailsModel(params: 'allergy'));
-  //     _savePermissionDetails(SavePermissionResponseModel(permission_status: "yes", saveNextPage: true));
-  //   });
-  // }
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
+      _medicalDetailsType();
+    //  _savePermissionDetails(SavePermissionResponseModel(permission_status: "yes", saveNextPage: true));
+    });
+  }
 
 
   @override
@@ -353,7 +354,7 @@ class _AtheleteMedicalInfoAllergiesState extends State<AtheleteMedicalInfoAllerg
     );
   }
 
-  Future<void> _medicalDetailsType(GetMedicalDetailsModel getMedicalDetailsModel) async {
+  Future<void> _medicalDetailsType() async {
     String apiError = '';
     handleFutureWithAlert(
       context: context,
@@ -361,7 +362,7 @@ class _AtheleteMedicalInfoAllergiesState extends State<AtheleteMedicalInfoAllerg
         return apiError;
       },
       function: () async {
-        ApiErrorResponseModel model = await MedicalDetailService.getMedicalDetails(getMedicalDetailsModel);
+        GetMedicalDetailsModel model = await MedicalDetailService.getMedicalDetails();
         debugPrint(model.status.toString());
         if (model.status) {
           apiSuccess = model.message;

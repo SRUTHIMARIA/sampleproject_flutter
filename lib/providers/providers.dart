@@ -29,7 +29,7 @@ class ProviderRegister {
     ChangeNotifierProvider<ResetpasswordProvider>(create: (_) => ResetpasswordProvider(),),
     ChangeNotifierProvider<DrawerScreenProvider>(create: (_) => DrawerScreenProvider(),),
     ChangeNotifierProvider<ChatProvider>(create: (_) => ChatProvider(),),
-    ChangeNotifierProvider<ParentDetailProvider>(create: (_) => ParentDetailProvider(),),
+   // ChangeNotifierProvider<ParentDetailProvider>(create: (_) => ParentDetailProvider(),),
     ChangeNotifierProvider<SportsListProvider>(create: (_) => SportsListProvider(),),
 
 

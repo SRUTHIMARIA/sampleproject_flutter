@@ -1,4 +1,5 @@
 import 'package:flutter_template/models/common_model/api_error_response_model.dart';
+import 'package:flutter_template/models/common_model/authentication_response_model.dart';
 import 'package:flutter_template/models/medical_detail_model/add_medical_model.dart';
 import 'package:flutter_template/models/medical_detail_model/get_medical_details_model.dart';
 import 'package:flutter_template/models/medical_detail_model/physio_medical_model.dart';
@@ -14,9 +15,9 @@ class MedicalDetailService {
         .post((p0) => ApiErrorResponseModel.fromJson(p0));
   }
 
-  static Future<ApiErrorResponseModel> getMedicalDetails(GetMedicalDetailsModel getMedicalDetailsModel) async {
+  static Future<GetMedicalDetailsModel> getMedicalDetails() async {
     return await ApiHelper(
-      url: '${AtheleteAssist.getMedicalDetails}$getMedicalDetailsModel',).get((p0) => ApiErrorResponseModel.fromJson(p0),
+      url: AtheleteAssist.getMedicalDetails,).get((p0) => GetMedicalDetailsModel.fromJson(p0),
     );
   }
 
@@ -31,8 +32,8 @@ class MedicalDetailService {
         .post((p0) => ApiErrorResponseModel.fromJson(p0));
   }
 
-  static Future<ApiErrorResponseModel> saveDoctorInfo(SaveDoctorResponseModel saveDoctorResponseModel) async {
-    return await ApiHelper(url: AtheleteAssist.savePostPermission, body: saveDoctorResponseModel.toJson())
-        .post((p0) => ApiErrorResponseModel.fromJson(p0));
+  static Future<LoginSuccessModel> saveDoctorInfo(SaveDoctorResponseModel saveDoctorResponseModel) async {
+    return await ApiHelper(url: AtheleteAssist.saveDoctor, body: saveDoctorResponseModel.toJson())
+        .post((p0) => LoginSuccessModel.fromJson(p0));
   }
 }

@@ -1,11 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:flutter_template/gen/assets.gen.dart';
+import 'package:flutter_template/models/common_model/api_error_response_model.dart';
+import 'package:flutter_template/models/parent_model/parent_response_model.dart';
+import 'package:flutter_template/models/parent_model/parent_type_model.dart';
+import 'package:flutter_template/providers/authentication_provider.dart';
+import 'package:flutter_template/services/api/parent_details_service/parent_type_service.dart';
 import 'package:flutter_template/ui/medical_details/athelete_medical_info_allergies.dart';
 
 import 'package:flutter_template/utils/constants/font_data.dart';
 import 'package:flutter_template/utils/constants/strings.dart';
 import 'package:flutter_template/utils/extensions/context_extensions.dart';
+import 'package:flutter_template/utils/static/enums.dart';
+import 'package:flutter_template/widgets/alert_widgets/future_handling_alert.dart';
+import 'package:provider/provider.dart';
 
 import '../../utils/theme/app_colors.dart';
 
@@ -17,13 +25,26 @@ class ParentDetailsSecondary extends StatefulWidget {
 }
 
 class _ParentDetailsSecondaryState extends State<ParentDetailsSecondary> {
+  var nameController = TextEditingController();
+  var phoneController = TextEditingController();
+  var dobController = TextEditingController();
+  var emailController = TextEditingController();
+  var relationshipController = TextEditingController();
   bool isAgree = false;
+  String apiSuccess = '';
 
-  final List<Color> _colors = [
-    AppColors.gradientColorSplash,
-    AppColors.gradientColor2Splash
-  ];
-  final List<double> _stops = [0.0, 0.7];
+  final _formKey = GlobalKey<FormState>();
+
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
+      await _parentType();
+    });
+
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -42,210 +63,306 @@ class _ParentDetailsSecondaryState extends State<ParentDetailsSecondary> {
           // ),
         ),
         child: SingleChildScrollView(
-
           child: Container(
-            child: Column(
-              children: [
-                SizedBox(
-                  height: context.heightPx * 70,
-                ),
-                Row(
-                  children: [
-                    Container(
-                      margin: EdgeInsets.only(left: context.heightPx * 49),
-                      child: SvgPicture.asset(Assets.icons.iconBackarrow),
-                    ),
-                    Container(
-
+            child: Form(
+              key: _formKey,
+              child: Column(
+                children: [
+                  SizedBox(
+                    height: context.heightPx * 70,
+                  ),
+                  Row(
+                    children: [
+                      Container(
+                        margin: EdgeInsets.only(left: context.heightPx * 49),
+                        child: SvgPicture.asset(Assets.icons.iconBackarrow),
+                      ),
+                      Container(
+                        margin: EdgeInsets.only(left: 12.0),
+                        child: Text(
+                          addParentDetails,
+                          style: const FontData().montFont70020TextStyle,
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: context.heightPx * 20,
+                  ),
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: Container(
+                      padding: EdgeInsets.symmetric(horizontal: 46),
                       margin: EdgeInsets.only(left: 12.0),
                       child: Text(
-                        addParentDetails,
-                        style: const FontData().montFont70020TextStyle,
+                        secondaryContact,
+                        style: const FontData().montFont500TextStyle,
                       ),
                     ),
-                  ],
-                ),
-                SizedBox(
-                  height: context.heightPx * 20,
-                ),
-
-                Align(
-                  alignment: Alignment.centerLeft,
-                  child: Container(
-                    padding: EdgeInsets.symmetric(horizontal: 46),
-                    margin: EdgeInsets.only(left: 12.0),
-                    child: Text(
-                      secondaryContact,
-                      style: const FontData().montFont500TextStyle,
+                  ),
+                  SizedBox(
+                    height: context.heightPx * 16,
+                  ),
+                  Container(
+                    margin: EdgeInsets.symmetric(horizontal: 56),
+                    decoration: BoxDecoration(
+                      color: AppColors.textFieldBgColor,
+                      borderRadius: const BorderRadius.all(Radius.circular(6.0)),
                     ),
-                  ),
-                ),
-                SizedBox(
-                  height: context.heightPx * 16,
-                ),
+                    child: TextFormField(
+                      controller: nameController,
+                      style: FontData().montFont500TextStyle,
+                      decoration: InputDecoration(
+                        focusColor: Colors.white,
+                        enabledBorder: InputBorder.none,
+                        contentPadding: EdgeInsets.only(left: context.heightPx * 16),
 
-                Container(
-                  margin: EdgeInsets.symmetric(horizontal: 56),
+                        border: OutlineInputBorder(
+                          borderRadius: const BorderRadius.all(Radius.circular(6.0)),
+                        ),
 
-                  decoration: BoxDecoration(
-                    color: AppColors.textFieldBgColor,
-                    borderRadius: BorderRadius.circular(6.0),
-                  ),
-                  child: TextFormField(
-                    style: FontData().montFont500TextStyle,
-                    decoration: InputDecoration(
-                      focusColor: Colors.white,
-                      enabledBorder: InputBorder.none,
-                      contentPadding: EdgeInsets.only(left: context.heightPx *16),
+                        fillColor: Colors.grey,
 
+                        hintText: name,
 
-
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(6.0),
+                        //make hint text
+                        hintStyle: FontData().montFont500TextStyle,
                       ),
-
-                      fillColor: Colors.grey,
-
-                      hintText: name,
-
-                      //make hint text
-                      hintStyle:  FontData().montFont500TextStyle,
-
-
-
                     ),
                   ),
-                ),
-                SizedBox(height: context.heightPx*20,),
-                Container(
-                  margin: EdgeInsets.symmetric(horizontal: 56),
-                  decoration: BoxDecoration(
-                    color: AppColors.textFieldBgColor,
-                    borderRadius: BorderRadius.circular(6.0),
+                  SizedBox(
+                    height: context.heightPx * 20,
                   ),
-                  child: TextFormField(
-                    style: FontData().montFont500TextStyle,
 
-                    decoration: InputDecoration(
-                      focusColor: Colors.white,
-                      enabledBorder: InputBorder.none,
-                      contentPadding: EdgeInsets.only(left: context.heightPx *16),
+                  Container(
+                    margin: EdgeInsets.symmetric(horizontal: 56),
+                    decoration: BoxDecoration(
+                      color: AppColors.textFieldBgColor,
+                      borderRadius: const BorderRadius.all(Radius.circular(6.0)),
+                    ),
+                    child: TextFormField(
+                      controller: phoneController,
+                      style: FontData().montFont500TextStyle,
+                      decoration: InputDecoration(
+                        focusColor: Colors.white,
+                        enabledBorder: InputBorder.none,
+                        contentPadding: EdgeInsets.only(left: context.heightPx * 16),
 
+                        border: OutlineInputBorder(
+                          borderRadius: const BorderRadius.all(Radius.circular(6.0)),
+                        ),
 
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(6.0),
+                        hintText: phoneno,
+
+                        //make hint text
+                        hintStyle: FontData().montFont500TextStyle,
                       ),
-
-                      fillColor: Colors.grey,
-
-                      hintText: dob,
-
-                      //make hint text
-                      hintStyle:  FontData().montFont500TextStyle,
-
                     ),
                   ),
-                ),
-                SizedBox(height: context.heightPx*20,),
 
-                Container(
-                  margin: EdgeInsets.symmetric(horizontal: 56),
-                  decoration: BoxDecoration(
-                    color: AppColors.textFieldBgColor,
-                    borderRadius: BorderRadius.circular(6.0),
+
+                  SizedBox(
+                    height: context.heightPx * 16,
                   ),
-                  child: TextFormField(
-                    style: FontData().montFont500TextStyle,
 
-                    decoration: InputDecoration(
-                      focusColor: Colors.white,
-                      enabledBorder: InputBorder.none,
-                      contentPadding: EdgeInsets.only(left: context.heightPx *16),
+                  Container(
+                    margin: EdgeInsets.symmetric(horizontal: 56),
+                    decoration: BoxDecoration(
+                      color: AppColors.textFieldBgColor,
+                      borderRadius: BorderRadius.circular(6.0),
+                    ),
+                    child: TextFormField(
+                      controller: dobController,
+                      style: FontData().montFont500TextStyle,
+                      decoration: InputDecoration(
+                        focusColor: Colors.white,
+                        enabledBorder: InputBorder.none,
+                        contentPadding: EdgeInsets.only(left: context.heightPx * 16),
 
+                        border: OutlineInputBorder(
+                          borderRadius: const BorderRadius.all(Radius.circular(6.0)),
+                        ),
 
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(6.0),
+                        fillColor: Colors.grey,
+
+                        hintText: dob,
+
+                        //make hint text
+                        hintStyle: FontData().montFont500TextStyle,
                       ),
-
-                      fillColor: Colors.grey,
-
-                      hintText: email,
-
-                      //make hint text
-                      hintStyle:  FontData().montFont500TextStyle,
-
                     ),
                   ),
-                ),
-                SizedBox(height: context.heightPx*20,),
-
-                Container(
-                  margin: EdgeInsets.symmetric(horizontal: 56),
-                  decoration: BoxDecoration(
-                    color: AppColors.textFieldBgColor,
-                    borderRadius: BorderRadius.circular(6.0),
+                  SizedBox(
+                    height: context.heightPx * 20,
                   ),
-                  child: TextFormField(
-                    style: FontData().montFont500TextStyle,
+                  Container(
+                    margin: EdgeInsets.symmetric(horizontal: 56),
+                    decoration: BoxDecoration(
+                      color: AppColors.textFieldBgColor,
+                      borderRadius: const BorderRadius.all(Radius.circular(6.0)),
+                    ),
+                    child: TextFormField(
+                      controller: emailController,
+                      style: FontData().montFont500TextStyle,
+                      decoration: InputDecoration(
+                        focusColor: Colors.white,
+                        enabledBorder: InputBorder.none,
+                        contentPadding: EdgeInsets.only(left: context.heightPx * 16),
 
-                    decoration: InputDecoration(
-                      focusColor: Colors.white,
-                      enabledBorder: InputBorder.none,
-                      contentPadding: EdgeInsets.only(left: context.heightPx *16),
+                        border: OutlineInputBorder(
+                          borderRadius: const BorderRadius.all(Radius.circular(6.0)),
+                        ),
 
+                        fillColor: Colors.grey,
 
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(6.0),
+                        hintText: email,
+
+                        //make hint text
+                        hintStyle: FontData().montFont500TextStyle,
                       ),
-
-                      fillColor: Colors.grey,
-
-                      hintText: relationship,
-
-                      //make hint text
-                      hintStyle:  FontData().montFont500TextStyle,
-
                     ),
                   ),
-                ),
-                SizedBox(
-                  height: context.heightPx * 20,
-                ),
+                  SizedBox(
+                    height: context.heightPx * 20,
+                  ),
+                  Container(
+                    margin: EdgeInsets.symmetric(horizontal: 56),
+                    decoration: BoxDecoration(
+                      color: AppColors.textFieldBgColor,
+                      borderRadius: const BorderRadius.all(Radius.circular(6.0)),
+                    ),
+                    child: TextFormField(
+                      controller: relationshipController,
+                      style: FontData().montFont500TextStyle,
+                      decoration: InputDecoration(
+                        focusColor: Colors.white,
+                        enabledBorder: InputBorder.none,
+                        contentPadding: EdgeInsets.only(left: context.heightPx * 16),
 
+                        border: OutlineInputBorder(
+                          borderRadius: const BorderRadius.all(Radius.circular(6.0)),
+                        ),
 
+                        fillColor: Colors.grey,
 
+                        hintText: relationship,
 
-                GestureDetector(
-                  onTap: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context)=>AtheleteMedicalInfoAllergies()));
-                  },
+                        //make hint text
+                        hintStyle: FontData().montFont500TextStyle,
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: context.heightPx * 20,
+                  ),
+                  GestureDetector(
+                    onTap: () async{
+                      //   await context.read<ParentDetailProvider>().parentType(widget.type);
 
-                  child: Container(
-                    height: context.heightPx * 42,
-                    width: context.widthPx * 280,
+                      FocusManager.instance.primaryFocus?.unfocus();
+                      if (_formKey.currentState!.validate()) {
+                        ParentResponseModel parentResponseModel = ParentResponseModel(
+                            phone: phoneController.text,
+                            name: nameController.text,
+                            dob: dobController.text,
+                            email: emailController.text,
+                            relationship: relationshipController.text,
+                            saveNextPage: true,
+                            skip: true,
+                            type: 'secondary'
+                        );
+                        await _parentDetailPrimary(parentResponseModel);
+                      }
+                    },
+                    // onTap: () =>
+                    //   Navigator.push(context, MaterialPageRoute(builder: (context) => AtheleteMedicalInfoAllergies())),
+
                     child: Container(
-                      decoration: const BoxDecoration(
-                        color: AppColors.themeColor,
-                        borderRadius: BorderRadius.all(Radius.circular(8.0)),),
-                      child: Center(
-                        child: Text(
-                          save,
-                          // _display ? "hide logo" : "display logo",
-                          style: const FontData().montFont70016TextStyle,
+                      height: context.heightPx * 42,
+                      width: context.widthPx * 280,
+                      child: Container(
+                        decoration: const BoxDecoration(
+                          color: AppColors.themeColor,
+                          borderRadius: BorderRadius.all(Radius.circular(8.0)),
+                        ),
+                        child: Center(
+                          child: Text(
+                            save,
+                            // _display ? "hide logo" : "display logo",
+                            style: const FontData().montFont70016TextStyle,
+                          ),
                         ),
                       ),
                     ),
                   ),
-                ),
-
-
-
-
-              ],
+                ],
+              ),
             ),
           ),
         ),
       ),
+    );
+  }
+
+  Future<void> _parentDetailPrimary(ParentResponseModel parentResponseModel) async {
+    String apiError = '';
+    handleFutureWithAlert(
+      context: context,
+      getErrorMessage: () {
+        return apiError;
+      },
+      function: () async {
+
+        ApiErrorResponseModel model = await ParentDetailService.parentDetails(parentResponseModel);
+        debugPrint(model.status.toString());
+        if (model.message=="success") {
+          apiSuccess = model.message;
+          //
+          //
+          // await provider.saveUserDetails(
+          //   authToken: model.data.token,
+          //   userName: '',
+          //
+          // );
+
+          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => AtheleteMedicalInfoAllergies()));
+
+
+          // context.router.replaceAll([const ParentDetailsSecondary()]);
+
+          return ApiStatus.success;
+        } else {
+          apiError = model.message;
+
+          return ApiStatus.error;
+        }
+      },
+    );
+  }
+
+  Future<void> _parentType() async {
+    String apiError = '';
+    handleFutureWithAlert(
+      context: context,
+      getErrorMessage: () {
+        return apiError;
+      },
+      function: () async {
+        ParentTypeModel model = await ParentDetailService.parentType();
+
+        if (model.message == 'success') {
+          apiSuccess = model.message;
+          debugPrint(model.message);
+
+          // context.router.replaceAll([const ParentDetailsSecondary()]);
+
+          return ApiStatus.success;
+        } else {
+          apiError = model.message;
+
+          return ApiStatus.error;
+        }
+      },
     );
   }
 }

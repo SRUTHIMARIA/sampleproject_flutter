@@ -9,11 +9,21 @@ class AtheleteAssist {
 
   //sports apis
   static const getSportsList = baseUrl+'/sports-list';
-  static const setSportsList = '$baseUrl/student-sports';
+  static const setSportsList = baseUrl+'/student-sports';
   //age groups api
-  static const getAgeGroup='$baseUrl/age-groups';
+  static const getAgeGroup=baseUrl+'/age-groups';
+
+  //age selection api
+  static const saveAgeSelection=baseUrl+'/save-age-students';
+  static const getAgeSelection=baseUrl+'/get-age-students';
+
+  //student feedback api
+
+  static const saveStudentFeedback=baseUrl+'/student-feedbacks';
+  static const getStudentFeedback=baseUrl+'/student-feedbacks';
+
   //parent details apis
-  static const getParentProfileType ='$baseUrl/parent_profiles?type=';
+  static const getParentProfileType =baseUrl+'/parent_profiles?type=';
   static const parentProfileDetails = '$baseUrl/parent_profiles';
   //medical details
   static const addMedicalDetails='$baseUrl/medical-details/details';

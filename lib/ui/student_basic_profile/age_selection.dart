@@ -1,17 +1,25 @@
 import 'package:animated_widgets/widgets/translation_animated.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:flutter_template/models/age_selection_model/age_selection_save_model.dart';
+import 'package:flutter_template/models/age_selection_model/age_students_model.dart';
+import 'package:flutter_template/models/common_model/authentication_response_model.dart';
+import 'package:flutter_template/providers/authentication_provider.dart';
+import 'package:flutter_template/services/api/age_selection_service/age_selection_service.dart';
+import 'package:flutter_template/ui/student_basic_profile/age_group_selection.dart';
 import 'package:flutter_template/utils/constants/font_data.dart';
 import 'package:flutter_template/ui/student_basic_profile/whyjoin_screen.dart';
 import 'package:flutter_template/utils/constants/strings.dart';
 import 'package:flutter_template/utils/extensions/context_extensions.dart';
+import 'package:flutter_template/utils/static/enums.dart';
 import 'package:flutter_template/utils/theme/app_colors.dart';
+import 'package:flutter_template/widgets/alert_dialog/future_handling_alert.dart';
+import 'package:provider/provider.dart';
 
 import '../../gen/assets.gen.dart';
 import '../../utils/static/static_padding.dart';
 
 class AgeSelectionScreen extends StatefulWidget {
-
   @override
   State<AgeSelectionScreen> createState() => _AgeSelectionScreenState();
 }
@@ -21,6 +29,16 @@ class _AgeSelectionScreenState extends State<AgeSelectionScreen> {
   bool closeTopContainer = false;
   double topContainer = 0;
   ScrollController controller = ScrollController();
+  String apiSuccess = '';
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
+      // context.read<SportsListProvider>().getSportsListData();
+      await _ageSelection();
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -42,8 +60,9 @@ class _AgeSelectionScreenState extends State<AgeSelectionScreen> {
             Row(
               children: [
                 InkWell(
-                  onTap:()=>Navigator.pop(context),
-                  child: Container(
+                  onTap: () => Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => AgeGroupSelection())),
+
+        child: Container(
                     margin: EdgeInsets.only(left: context.heightPx * 49),
                     child: SvgPicture.asset(Assets.icons.backarrow),
                   ),
@@ -116,9 +135,7 @@ class _AgeSelectionScreenState extends State<AgeSelectionScreen> {
               child: InkWell(
                 onTap: () =>
                     Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => WhyJoinScreen())),
-                child:
-
-                ListWheelScrollView.useDelegate(
+                child: ListWheelScrollView.useDelegate(
                   itemExtent: 90,
                   onSelectedItemChanged: (index) => setState(() {
                     _selectedItemIndex = index;
@@ -132,7 +149,10 @@ class _AgeSelectionScreenState extends State<AgeSelectionScreen> {
                   childDelegate: ListWheelChildLoopingListDelegate(
                     children: <Widget>[
                       ElevatedButton(
-                        onPressed: null,
+                        onPressed: () async => await _saveAgeSelection(SaveAgeStudentsModel(
+                          age: '20',
+                          saveNextPage: true,
+                        )),
                         child: Text(
                           '16',
                           textAlign: TextAlign.center,
@@ -364,6 +384,61 @@ class _AgeSelectionScreenState extends State<AgeSelectionScreen> {
           ],
         ),
       ),
+    );
+  }
+
+  Future<void> _saveAgeSelection(SaveAgeStudentsModel saveAgeStudentsModel) async {
+    String apiError = '';
+    handleFutureWithAlert(
+      context: context,
+      getErrorMessage: () {
+        return apiError;
+      },
+      function: () async {
+        final provider = context.read<AuthenticationProvider>();
+        LoginSuccessModel model = await AgeSelectionService.saveAgeSelectionInfo(saveAgeStudentsModel);
+        debugPrint(model.status.toString());
+
+        if (model.message == 'success') {
+          apiSuccess = model.message;
+          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => WhyJoinScreen()));
+
+          await provider.saveUserDetails(authToken: model.data.token, userName: '');
+          debugPrint(model.data.token.toString());
+
+          return ApiStatus.success;
+        } else {
+          apiError = model.message;
+
+          return ApiStatus.error;
+        }
+      },
+    );
+  }
+
+  Future<void> _ageSelection() async {
+    String apiError = '';
+    handleFutureWithAlert(
+      context: context,
+      getErrorMessage: () {
+        return apiError;
+      },
+      function: () async {
+        GetAgeStudentsModel model = await AgeSelectionService.getAgeSelection();
+        debugPrint(model.status.toString());
+        if (model.message == 'success') {
+          apiSuccess = model.message;
+          debugPrint(model.message);
+
+          // context.router.replaceAll([const ParentDetailsSecondary()]);
+
+          return ApiStatus.success;
+        } else {
+          apiError = model.message;
+
+          return ApiStatus.error;
+        }
+      },
     );
   }
 }

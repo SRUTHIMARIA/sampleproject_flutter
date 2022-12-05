@@ -2,13 +2,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_template/firebase_options.dart';
 import 'package:flutter_template/providers/authentication_provider.dart';
-import 'package:flutter_template/providers/common_function_provider/common_function_provider.dart';
 import 'package:flutter_template/providers/providers.dart';
-import 'package:flutter_template/ui/enrollment_details/aspirations.dart';
-import 'package:flutter_template/ui/login_screen/login_screen.dart';
-import 'package:flutter_template/ui/medical_details/physio_info.dart';
-import 'package:flutter_template/ui/splash_screen/splash_screen.dart';
-import 'package:flutter_template/ui/student_basic_profile/age_selection.dart';
+import 'package:flutter_template/ui/medical_details/medical_details.dart';
 import 'package:flutter_template/utils/globals.dart';
 import 'package:provider/provider.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -54,7 +49,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: Aspirations(),
+      home: MedicalDetails(),
     );
   }
 }

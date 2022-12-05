@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:flutter_template/gen/assets.gen.dart';
 import 'package:flutter_template/models/common_model/api_error_response_model.dart';
+import 'package:flutter_template/models/common_model/authentication_response_model.dart';
 import 'package:flutter_template/models/medical_detail_model/physio_medical_model.dart';
+import 'package:flutter_template/providers/authentication_provider.dart';
 import 'package:flutter_template/services/api/medical_details_service/medical_detail_service.dart';
 import 'package:flutter_template/ui/medical_details/athelete_medical_about.dart';
 
@@ -11,6 +13,7 @@ import 'package:flutter_template/utils/constants/strings.dart';
 import 'package:flutter_template/utils/extensions/context_extensions.dart';
 import 'package:flutter_template/utils/static/enums.dart';
 import 'package:flutter_template/widgets/alert_widgets/future_handling_alert.dart';
+import 'package:provider/provider.dart';
 
 import '../../models/medical_detail_model/save_doctor_model.dart';
 import '../../utils/theme/app_colors.dart';
@@ -224,6 +227,7 @@ class _PhysioInfoState extends State<PhysioInfo> {
       ),
     );
   }
+
   Future<void> _saveDoctorDetails(SaveDoctorResponseModel saveDoctorResponseModel) async {
     String apiError = '';
     handleFutureWithAlert(
@@ -232,11 +236,24 @@ class _PhysioInfoState extends State<PhysioInfo> {
         return apiError;
       },
       function: () async {
-        ApiErrorResponseModel model = await MedicalDetailService.saveDoctorInfo(saveDoctorResponseModel);
+        final provider= context.read<AuthenticationProvider>();
+
+        LoginSuccessModel model = await MedicalDetailService.saveDoctorInfo(saveDoctorResponseModel);
         debugPrint(model.status.toString());
-        if (model.status) {
+        if (model.message=="success") {
           apiSuccess = model.message;
+          debugPrint(model.data.token.toString());
+
+
+          await provider.saveUserDetails(
+            authToken: model.data.token,
+            userName: '',
+
+          );
+
           Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => AtheleteMedicalInfoAbout()));
+
+
           // context.router.replaceAll([const ParentDetailsSecondary()]);
 
           return ApiStatus.success;
@@ -248,5 +265,29 @@ class _PhysioInfoState extends State<PhysioInfo> {
       },
     );
   }
+  // Future<void> _saveDoctorDetails(SaveDoctorResponseModel saveDoctorResponseModel) async {
+  //   String apiError = '';
+  //   handleFutureWithAlert(
+  //     context: context,
+  //     getErrorMessage: () {
+  //       return apiError;
+  //     },
+  //     function: () async {
+  //       ApiErrorResponseModel model = await MedicalDetailService.saveDoctorInfo(saveDoctorResponseModel);
+  //       debugPrint(model.status.toString());
+  //       if (model.status) {
+  //         apiSuccess = model.message;
+  //         Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => AtheleteMedicalInfoAbout()));
+  //         // context.router.replaceAll([const ParentDetailsSecondary()]);
+  //
+  //         return ApiStatus.success;
+  //       } else {
+  //         apiError = model.message;
+  //
+  //         return ApiStatus.error;
+  //       }
+  //     },
+  //   );
+  // }
 
 }

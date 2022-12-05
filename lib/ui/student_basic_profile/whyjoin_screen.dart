@@ -1,9 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:flutter_template/models/common_model/api_error_response_model.dart';
+import 'package:flutter_template/models/common_model/authentication_response_model.dart';
+import 'package:flutter_template/models/student_feedback_model/get_student_feedbacks_model.dart';
+import 'package:flutter_template/models/student_feedback_model/student_feedback_model.dart';
+import 'package:flutter_template/providers/authentication_provider.dart';
+import 'package:flutter_template/services/api/student_feedback_service/student_feedback_service.dart';
 import 'package:flutter_template/utils/constants/font_data.dart';
 import 'package:flutter_template/utils/constants/strings.dart';
 import 'package:flutter_template/utils/extensions/context_extensions.dart';
+import 'package:flutter_template/utils/static/enums.dart';
 import 'package:flutter_template/utils/theme/app_colors.dart';
+import 'package:flutter_template/widgets/alert_widgets/future_handling_alert.dart';
+import 'package:provider/provider.dart';
 
 import '../../gen/assets.gen.dart';
 import '../../utils/static/static_padding.dart';
@@ -19,6 +28,19 @@ class _WhyJoinScreenState extends State<WhyJoinScreen> {
   bool closeTopContainer = false;
   double topContainer = 0;
   ScrollController controller = ScrollController();
+
+  String apiSuccess = '';
+  var txtFeedbackController = TextEditingController();
+
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
+      // context.read<SportsListProvider>().getSportsListData();
+      await _getStudentFeedbacks();
+    });
+  }
 
 
   @override
@@ -85,6 +107,7 @@ class _WhyJoinScreenState extends State<WhyJoinScreen> {
                 borderRadius: const BorderRadius.all(Radius.circular(6.0)),
               ),
               child: TextFormField(
+                controller: txtFeedbackController,
                 keyboardType: TextInputType.multiline,
                 minLines: 1,
                 maxLines: 5,
@@ -111,8 +134,9 @@ class _WhyJoinScreenState extends State<WhyJoinScreen> {
             ),
 
             GestureDetector(
-              onTap: () =>
-                Navigator.push(context, MaterialPageRoute(builder: (context)=>ParentDetailPrimary())),
+              onTap: () async=>
+               await _saveStudentFeedback(StudentFeedbackModel(feedback: txtFeedbackController.text, saveNextPage: true)),
+
 
               child: Container(
                 margin: EdgeInsets.only(left: context.heightPx *52),
@@ -136,6 +160,59 @@ class _WhyJoinScreenState extends State<WhyJoinScreen> {
           ],
         ),
       ),
+    );
+  }
+
+  Future<void> _saveStudentFeedback(StudentFeedbackModel studentFeedbackModel) async {
+    String apiError = '';
+    handleFutureWithAlert(
+      context: context,
+      getErrorMessage: () {
+        return apiError;
+      },
+      function: () async {
+        final provider = context.read<AuthenticationProvider>();
+        ApiErrorResponseModel model = await StudentFeedbackService.studentFeedbackInfo(studentFeedbackModel);
+        debugPrint(model.status.toString());
+
+        if (model.message == 'success') {
+          apiSuccess = model.message;
+          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>ParentDetailPrimary()));
+
+
+          return ApiStatus.success;
+        } else {
+          apiError = model.message;
+
+          return ApiStatus.error;
+        }
+      },
+    );
+  }
+
+  Future<void> _getStudentFeedbacks() async {
+    String apiError = '';
+    handleFutureWithAlert(
+      context: context,
+      getErrorMessage: () {
+        return apiError;
+      },
+      function: () async {
+        GetStudentFeedbackModel model = await StudentFeedbackService.getStudentFeedbackInfo();
+        debugPrint(model.status.toString());
+        if (model.message == 'success') {
+          apiSuccess = model.message;
+          debugPrint(model.message);
+
+          // context.router.replaceAll([const ParentDetailsSecondary()]);
+
+          return ApiStatus.success;
+        } else {
+          apiError = model.message;
+
+          return ApiStatus.error;
+        }
+      },
     );
   }
 }

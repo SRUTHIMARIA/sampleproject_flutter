@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_template/gen/assets.gen.dart';
 import 'package:flutter_template/models/common_model/api_error_response_model.dart';
+import 'package:flutter_template/models/common_model/authentication_response_model.dart';
 import 'package:flutter_template/models/medical_detail_model/add_medical_model.dart';
 import 'package:flutter_template/models/medical_detail_model/get_medical_details_model.dart';
 import 'package:flutter_template/models/medical_detail_model/save_permission_model.dart';
@@ -12,7 +13,9 @@ import 'package:flutter_template/utils/constants/font_data.dart';
 import 'package:flutter_template/utils/constants/strings.dart';
 import 'package:flutter_template/utils/extensions/context_extensions.dart';
 import 'package:flutter_template/utils/static/enums.dart';
+import 'package:provider/provider.dart';
 
+import '../../providers/authentication_provider.dart';
 import '../../utils/static/static_padding.dart';
 import '../../utils/theme/app_colors.dart';
 import '../../widgets/alert_widgets/future_handling_alert.dart';
@@ -40,7 +43,7 @@ class _AtheleteMedicalInfoInjuriesState extends State<AtheleteMedicalInfoInjurie
     super.initState();
 
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
-      _medicalDetailsType(GetMedicalDetailsModel(params: 'injury'));
+      _medicalDetailsType();
       _savePermissionDetails(SavePermissionResponseModel(permission_status: "yes", saveNextPage: true));
     });
   }
@@ -298,10 +301,12 @@ class _AtheleteMedicalInfoInjuriesState extends State<AtheleteMedicalInfoInjurie
         return apiError;
       },
       function: () async {
+        final provider= context.read<AuthenticationProvider>();
         ApiErrorResponseModel model = await MedicalDetailService.medicalDetails(addOrUpdateMedicalResponseModel);
         debugPrint(model.status.toString());
         if (model.status) {
           apiSuccess = model.message;
+
           Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => MedicalDetails()));
           // context.router.replaceAll([const ParentDetailsSecondary()]);
 
@@ -340,7 +345,7 @@ class _AtheleteMedicalInfoInjuriesState extends State<AtheleteMedicalInfoInjurie
     );
   }
 
-  Future<void> _medicalDetailsType(GetMedicalDetailsModel getMedicalDetailsModel) async {
+  Future<void> _medicalDetailsType() async {
     String apiError = '';
     handleFutureWithAlert(
       context: context,
@@ -348,7 +353,7 @@ class _AtheleteMedicalInfoInjuriesState extends State<AtheleteMedicalInfoInjurie
         return apiError;
       },
       function: () async {
-        ApiErrorResponseModel model = await MedicalDetailService.getMedicalDetails(getMedicalDetailsModel);
+        GetMedicalDetailsModel model = await MedicalDetailService.getMedicalDetails();
         debugPrint(model.status.toString());
         if (model.status) {
           apiSuccess = model.message;
