@@ -38,6 +38,4 @@ class AtheleteAssist {
   static const getAspirations=baseUrl+'/aspirations';
 
 
-
-
 }

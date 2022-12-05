@@ -1,6 +1,5 @@
 import 'dart:ui';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_template/gen/assets.gen.dart';
@@ -74,7 +73,7 @@ class _WhoAmIScreenState extends State<WhoAmIScreen> {
                   margin: EdgeInsets.symmetric(horizontal: 56),
                   decoration: BoxDecoration(
                     color: AppColors.textFieldBgColor,
-                    borderRadius: BorderRadius.circular(10.0),
+                    borderRadius: const BorderRadius.all(Radius.circular(10.0)),
                   ),
                   child: TextFormField(
                     keyboardType: TextInputType.multiline,
@@ -88,7 +87,7 @@ class _WhoAmIScreenState extends State<WhoAmIScreen> {
                           EdgeInsets.only(left: context.heightPx * 16),
 
                       border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10.0),
+                        borderRadius: const BorderRadius.all(Radius.circular(10.0)),
                       ),
                       focusedBorder: InputBorder.none,
 
@@ -109,7 +108,7 @@ class _WhoAmIScreenState extends State<WhoAmIScreen> {
                   margin: EdgeInsets.symmetric(horizontal: 56),
                   decoration: BoxDecoration(
                     color: AppColors.textFieldBgColor,
-                    borderRadius: BorderRadius.circular(10.0),
+                    borderRadius: const BorderRadius.all(Radius.circular(10.0)),
                   ),
                   child: TextFormField(
                     keyboardType: TextInputType.multiline,
@@ -123,7 +122,7 @@ class _WhoAmIScreenState extends State<WhoAmIScreen> {
                           EdgeInsets.only(left: context.heightPx * 16),
 
                       border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10.0),
+                        borderRadius: const BorderRadius.all(Radius.circular(10.0)),
                       ),
 
                       fillColor: AppColors.textFieldBgColor,
@@ -149,7 +148,7 @@ class _WhoAmIScreenState extends State<WhoAmIScreen> {
                   height: context.heightPx * 12,
                 ),
                 InkWell(
-                  onTap: (){
+                  onTap: ()=>
                     showModalBottomSheet(
                       context: context,
 
@@ -172,13 +171,12 @@ class _WhoAmIScreenState extends State<WhoAmIScreen> {
                               children: [
                                 SizedBox(height: context.heightPx*40,),
                                 InkWell(
-                                  onTap: (){
-                                    Navigator.push(context, MaterialPageRoute(builder: (context)=>WhoAmIScreenTwo()));
-                                  },
+                                  onTap: ()=>
+                                    Navigator.push(context, MaterialPageRoute(builder: (context)=>WhoAmIScreenTwo())),
                                   child: DecoratedBox(
                                     position: DecorationPosition.background,
                                     decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(16.0),
+                                      borderRadius: const BorderRadius.all(Radius.circular(16.0)),
                                       boxShadow: [
                                         BoxShadow(
                                           color: Colors.blue,
@@ -194,7 +192,7 @@ class _WhoAmIScreenState extends State<WhoAmIScreen> {
                                       height: context.heightPx *155,
                                       decoration: BoxDecoration(
                                         color: AppColors.whiteColor,
-                                        borderRadius: BorderRadius.circular(16.0),
+                                        borderRadius: const BorderRadius.all(Radius.circular(16.0)),
 
                                       ),
 
@@ -219,14 +217,12 @@ class _WhoAmIScreenState extends State<WhoAmIScreen> {
 
 
                                   ),
-                                )],
+                                ),],
                             ),
                           ),
                         );
                       },
-                    );
-
-                  },
+                    ),
                   child: Container( margin: const EdgeInsets.symmetric(horizontal: 56),
                       child: Image.asset(Assets.images.imageAddphoto.path),),
                 ),
