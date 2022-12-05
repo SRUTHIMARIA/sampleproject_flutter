@@ -21,9 +21,9 @@ class AspirationsModel {
   final String inTwelveMonths;
 
   factory AspirationsModel.fromJson(Map<String, dynamic> json) => AspirationsModel(
-    inSixMonths: json["in_six_months"],
-    saveNextPage: json["saveNextPage"],
-    inTwelveMonths: json["in_twelve_months"],
+    inSixMonths: json["in_six_months"] ?? '',
+    saveNextPage: json["saveNextPage"] ?? '',
+    inTwelveMonths: json["in_twelve_months"]?? '',
   );
 
   Map<String, dynamic> toJson() => {

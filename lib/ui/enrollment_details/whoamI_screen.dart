@@ -3,13 +3,22 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_template/gen/assets.gen.dart';
+import 'package:flutter_template/models/common_model/api_error_response_model.dart';
+import 'package:flutter_template/models/common_model/authentication_response_model.dart';
+import 'package:flutter_template/models/self_evaluation_model/get_selfevaluation.dart';
+import 'package:flutter_template/models/self_evaluation_model/self_evaluation_model.dart';
+import 'package:flutter_template/providers/authentication_provider.dart';
+import 'package:flutter_template/services/api/self_evaluation_service/self_evaluation_service.dart';
 import 'package:flutter_template/ui/enrollment_details/whoamI_screen2.dart';
 
 import 'package:flutter_template/utils/constants/font_data.dart';
 import 'package:flutter_template/utils/extensions/context_extensions.dart';
+import 'package:flutter_template/utils/static/enums.dart';
+import 'package:provider/provider.dart';
 
 import '../../utils/constants/strings.dart';
 import '../../utils/theme/app_colors.dart';
+import '../../widgets/alert_dialog/future_handling_alert.dart';
 
 class WhoAmIScreen extends StatefulWidget {
   const WhoAmIScreen({Key? key}) : super(key: key);
@@ -20,11 +29,19 @@ class WhoAmIScreen extends StatefulWidget {
 
 class _WhoAmIScreenState extends State<WhoAmIScreen> {
   bool isAgree = false;
+  String apiSuccess = '';
+  var myValuesController = TextEditingController();
+  var motivatedByController = TextEditingController();
 
-  // final List<Color> _colors = [
-  //   AppColors.gradientColorSplash,
-  //   AppColors.gradientColor2Splash
-  // ];
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
+      // context.read<SportsListProvider>().getSportsListData();
+    // await _getSelfEvaluationDetails();
+    });
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -76,15 +93,16 @@ class _WhoAmIScreenState extends State<WhoAmIScreen> {
                     borderRadius: const BorderRadius.all(Radius.circular(10.0)),
                   ),
                   child: TextFormField(
+                    controller: myValuesController,
                     keyboardType: TextInputType.multiline,
-                    minLines: 1,//Normal textInputField will be displayed
+                    minLines: 1,
+                    //Normal textInputField will be displayed
                     maxLines: 5,
                     style: FontData().montFont500TextStyle,
                     decoration: InputDecoration(
                       focusColor: Colors.white,
                       enabledBorder: InputBorder.none,
-                      contentPadding:
-                          EdgeInsets.only(left: context.heightPx * 16),
+                      contentPadding: EdgeInsets.only(left: context.heightPx * 16),
 
                       border: OutlineInputBorder(
                         borderRadius: const BorderRadius.all(Radius.circular(10.0)),
@@ -111,15 +129,16 @@ class _WhoAmIScreenState extends State<WhoAmIScreen> {
                     borderRadius: const BorderRadius.all(Radius.circular(10.0)),
                   ),
                   child: TextFormField(
+                    controller: motivatedByController,
                     keyboardType: TextInputType.multiline,
-                    minLines: 1,//Normal textInputField will be displayed
+                    minLines: 1,
+                    //Normal textInputField will be displayed
                     maxLines: 5,
                     style: FontData().montFont500TextStyle,
                     decoration: InputDecoration(
                       focusColor: Colors.white,
                       enabledBorder: InputBorder.none,
-                      contentPadding:
-                          EdgeInsets.only(left: context.heightPx * 16),
+                      contentPadding: EdgeInsets.only(left: context.heightPx * 16),
 
                       border: OutlineInputBorder(
                         borderRadius: const BorderRadius.all(Radius.circular(10.0)),
@@ -139,104 +158,161 @@ class _WhoAmIScreenState extends State<WhoAmIScreen> {
                   height: context.heightPx * 20,
                 ),
                 Container(
-                    margin: const EdgeInsets.symmetric(horizontal: 56),
-                    child: Text(
-                      peopleInspire,
-                      style: FontData().montFont500TextStyle,
-                    ),),
+                  margin: const EdgeInsets.symmetric(horizontal: 56),
+                  child: Text(
+                    peopleInspire,
+                    style: FontData().montFont500TextStyle,
+                  ),
+                ),
                 SizedBox(
                   height: context.heightPx * 12,
                 ),
                 InkWell(
-                  onTap: ()=>
-                    showModalBottomSheet(
-                      context: context,
+                  onTap: () => showModalBottomSheet(
+                    context: context,
+                    backgroundColor: Colors.transparent,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.only(topRight: Radius.circular(30.0), topLeft: Radius.circular(30.0)),
+                    ),
+                    builder: (BuildContext context) {
+                      return BackdropFilter(
+                        filter: ImageFilter.blur(sigmaX: 20, sigmaY: 20),
+                        child: Container(
+                          height: context.heightPx * 260,
+                          decoration: BoxDecoration(
+                            color: AppColors.textFieldBgColor,
+                            borderRadius:
+                                BorderRadius.only(topRight: Radius.circular(30.0), topLeft: Radius.circular(30.0)),
+                          ),
+                          child: Column(
+                            children: [
+                              SizedBox(
+                                height: context.heightPx * 40,
+                              ),
+                              InkWell(
+                                onTap: () async => await _selfEvaluationDetails(SelfEvaluationModel(
+                                    myValues: myValuesController.text,
+                                    saveNextPage: true,
+                                    motivatedBy: motivatedByController.text,
+                                    inspiredBy: [],)),
 
-                      backgroundColor: Colors.transparent,
-
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.only(topRight:Radius.circular(30.0),topLeft:Radius.circular(30.0)),
-                      ),
-                      builder: (BuildContext context) {
-                        return BackdropFilter(
-                          filter: ImageFilter.blur(sigmaX: 20, sigmaY: 20),
-                          child: Container(
-                            height: context.heightPx*260,
-                            decoration: BoxDecoration(
-                              color: AppColors.textFieldBgColor,
-
-                              borderRadius: BorderRadius.only(topRight:Radius.circular(30.0),topLeft:Radius.circular(30.0)),
-                            ),
-                            child: Column(
-                              children: [
-                                SizedBox(height: context.heightPx*40,),
-                                InkWell(
-                                  onTap: ()=>
-                                    Navigator.push(context, MaterialPageRoute(builder: (context)=>WhoAmIScreenTwo())),
-                                  child: DecoratedBox(
-                                    position: DecorationPosition.background,
+                                // Navigator.push(context, MaterialPageRoute(builder: (context)=>WhoAmIScreenTwo())),
+                                child: DecoratedBox(
+                                  position: DecorationPosition.background,
+                                  decoration: BoxDecoration(
+                                    borderRadius: const BorderRadius.all(Radius.circular(16.0)),
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Colors.blue,
+                                        blurRadius: 10,
+                                        spreadRadius: 2,
+                                        offset: Offset(5, 0),
+                                      ),
+                                    ],
+                                  ),
+                                  child: Container(
+                                    width: context.widthPx * 276,
+                                    height: context.heightPx * 155,
                                     decoration: BoxDecoration(
+                                      color: AppColors.whiteColor,
                                       borderRadius: const BorderRadius.all(Radius.circular(16.0)),
-                                      boxShadow: [
-                                        BoxShadow(
-                                          color: Colors.blue,
-                                          blurRadius: 10,
-                                          spreadRadius: 2,
-                                          offset: Offset(5, 0),
+                                    ),
+                                    child: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.center,
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      children: [
+                                        Container(
+                                          child: Image.asset(Assets.images.imageAddphoto.path),
+                                        ),
+                                        Container(
+                                          // margin: const EdgeInsets.symmetric(horizontal: 56),
+                                          child: Text(
+                                            uploadphoto,
+                                            style: FontData().montFont70012TextStyle,
+                                          ),
                                         ),
                                       ],
                                     ),
-                                    child: Container(
-
-                                      width: context.widthPx*276,
-                                      height: context.heightPx *155,
-                                      decoration: BoxDecoration(
-                                        color: AppColors.whiteColor,
-                                        borderRadius: const BorderRadius.all(Radius.circular(16.0)),
-
-                                      ),
-
-                                      child: Column(
-                                        crossAxisAlignment: CrossAxisAlignment.center,
-                                        mainAxisAlignment: MainAxisAlignment.center,
-                                        children: [
-                                          Container(
-
-                                            child: Image.asset(Assets.images.imageAddphoto.path),
-
-                                          ),
-                                          Container(
-                                            // margin: const EdgeInsets.symmetric(horizontal: 56),
-                                            child: Text(
-                                              uploadphoto,
-                                              style: FontData().montFont70012TextStyle,
-                                            ),),
-                                        ],
-                                      ),
-                                    ),
-
-
                                   ),
-                                ),],
-                            ),
+                                ),
+                              ),
+                            ],
                           ),
-                        );
-                      },
-                    ),
-                  child: Container( margin: const EdgeInsets.symmetric(horizontal: 56),
-                      child: Image.asset(Assets.images.imageAddphoto.path),),
+                        ),
+                      );
+                    },
+                  ),
+                  child: Container(
+                    margin: const EdgeInsets.symmetric(horizontal: 56),
+                    child: Image.asset(Assets.images.imageAddphoto.path),
+                  ),
                 ),
-
                 Align(
                   alignment: Alignment.bottomRight,
-                  child: Container( margin: const EdgeInsets.symmetric(horizontal: 56),
-                    child: Image.asset(Assets.images.imageWhoamI.path),),
+                  child: Container(
+                    margin: const EdgeInsets.symmetric(horizontal: 56),
+                    child: Image.asset(Assets.images.imageWhoamI.path),
+                  ),
                 ),
               ],
             ),
           ),
         ),
       ),
+    );
+  }
+
+  Future<void> _selfEvaluationDetails(SelfEvaluationModel selfEvaluationModel) async {
+    String apiError = '';
+    handleFutureWithAlert(
+      context: context,
+      getErrorMessage: () {
+        return apiError;
+      },
+      function: () async {
+        final provider = context.read<AuthenticationProvider>();
+        ApiErrorResponseModel model = await SelfEvaluationService.selfEvaluationInfo(selfEvaluationModel);
+        debugPrint(model.status.toString());
+
+
+        if (model.message == 'success') {
+          apiSuccess = model.message;
+          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>WhoAmIScreenTwo()));
+
+
+          return ApiStatus.success;
+        } else {
+          apiError = model.message;
+
+          return ApiStatus.error;
+        }
+      },
+    );
+  }
+
+  Future<void> _getSelfEvaluationDetails() async {
+    String apiError = '';
+    handleFutureWithAlert(
+      context: context,
+      getErrorMessage: () {
+        return apiError;
+      },
+      function: () async {
+        GetSelfEvalutionModel model = await SelfEvaluationService.getSelfEvaluationInfo();
+        debugPrint(model.status.toString());
+        if (model.message == 'success') {
+          apiSuccess = model.message;
+          debugPrint(model.message);
+
+          // context.router.replaceAll([const ParentDetailsSecondary()]);
+
+          return ApiStatus.success;
+        } else {
+          apiError = model.message;
+
+          return ApiStatus.error;
+        }
+      },
     );
   }
 }

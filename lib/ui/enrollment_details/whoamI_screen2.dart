@@ -1,12 +1,18 @@
-import 'dart:ui';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_template/gen/assets.gen.dart';
+import 'package:flutter_template/models/common_model/api_error_response_model.dart';
+import 'package:flutter_template/models/self_evaluation_model/get_selfevaluation.dart';
+import 'package:flutter_template/models/self_evaluation_model/self_evaluation_model.dart';
+import 'package:flutter_template/providers/authentication_provider.dart';
+import 'package:flutter_template/services/api/self_evaluation_service/self_evaluation_service.dart';
 
 import 'package:flutter_template/utils/constants/font_data.dart';
 import 'package:flutter_template/utils/extensions/context_extensions.dart';
+import 'package:flutter_template/utils/static/enums.dart';
+import 'package:flutter_template/widgets/alert_dialog/future_handling_alert.dart';
+import 'package:provider/provider.dart';
 
 import '../../utils/constants/strings.dart';
 import '../../utils/theme/app_colors.dart';
@@ -20,11 +26,25 @@ class WhoAmIScreenTwo extends StatefulWidget {
 
 class _WhoAmIScreenTwoState extends State<WhoAmIScreenTwo> {
   bool isAgree = false;
+  String apiSuccess = '';
+  int imageId=1;
 
-  // final List<Color> _colors = [
-  //   AppColors.gradientColorSplash,
-  //   AppColors.gradientColor2Splash
-  // ];
+  var myValuesController = TextEditingController();
+  var motivatedByController = TextEditingController();
+  var nameController = TextEditingController();
+  var descriptionController = TextEditingController();
+
+
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
+      // context.read<SportsListProvider>().getSportsListData();
+      // await _getSelfEvaluationDetails();
+    });
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -73,9 +93,13 @@ class _WhoAmIScreenTwoState extends State<WhoAmIScreenTwo> {
                   margin: EdgeInsets.symmetric(horizontal: 56),
                   decoration: BoxDecoration(
                     color: AppColors.textFieldBgColor,
-                    borderRadius: BorderRadius.circular(10.0),
+                    borderRadius: const BorderRadius.all(Radius.circular(10.0)),
                   ),
                   child: TextFormField(
+                    controller: myValuesController,
+                    keyboardType: TextInputType.multiline,
+                    minLines: 1,
+                    maxLines: 5,
                     style: FontData().montFont500TextStyle,
                     decoration: InputDecoration(
                       focusColor: Colors.white,
@@ -84,8 +108,10 @@ class _WhoAmIScreenTwoState extends State<WhoAmIScreenTwo> {
                       EdgeInsets.only(left: context.heightPx * 16),
 
                       border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10.0),
+                        borderRadius: const BorderRadius.all(Radius.circular(10.0)),
                       ),
+                      focusedBorder: InputBorder.none,
+
 
                       fillColor: Colors.grey,
 
@@ -104,9 +130,13 @@ class _WhoAmIScreenTwoState extends State<WhoAmIScreenTwo> {
                   margin: EdgeInsets.symmetric(horizontal: 56),
                   decoration: BoxDecoration(
                     color: AppColors.textFieldBgColor,
-                    borderRadius: BorderRadius.circular(10.0),
+                    borderRadius: const BorderRadius.all(Radius.circular(10.0)),
                   ),
                   child: TextFormField(
+                    controller: motivatedByController,
+                    keyboardType: TextInputType.multiline,
+                    minLines: 1,
+                    maxLines: 5,
                     style: FontData().montFont500TextStyle,
                     decoration: InputDecoration(
                       focusColor: Colors.white,
@@ -115,8 +145,10 @@ class _WhoAmIScreenTwoState extends State<WhoAmIScreenTwo> {
                       EdgeInsets.only(left: context.heightPx * 16),
 
                       border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10.0),
+                        borderRadius: const BorderRadius.all(Radius.circular(10.0)),
                       ),
+
+                      focusedBorder: InputBorder.none,
 
                       fillColor: Colors.grey,
 
@@ -143,12 +175,10 @@ class _WhoAmIScreenTwoState extends State<WhoAmIScreenTwo> {
                   margin: EdgeInsets.symmetric(horizontal: 56),
                   decoration: BoxDecoration(
                     color: AppColors.textFieldBgColor,
-                    borderRadius: BorderRadius.circular(6.0),
+                    borderRadius: const BorderRadius.all(Radius.circular(6.0)),
                   ),
                   child: TextFormField(
-                    keyboardType: TextInputType.multiline,
-                    minLines: 1,
-                    maxLines: 5,
+                    controller: nameController,
                     style: FontData().montFont500TextStyle,
                     decoration: InputDecoration(
                       focusColor: AppColors.textFieldBgColor,
@@ -156,7 +186,7 @@ class _WhoAmIScreenTwoState extends State<WhoAmIScreenTwo> {
                       focusedBorder: InputBorder.none,
 
                       border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(6.0),
+                        borderRadius: const BorderRadius.all(Radius.circular(6.0)),
                       ),
 
                       fillColor: AppColors.textFieldBgColor,
@@ -176,14 +206,14 @@ class _WhoAmIScreenTwoState extends State<WhoAmIScreenTwo> {
                   margin: EdgeInsets.symmetric(horizontal: 56),
                   decoration: BoxDecoration(
                     color: AppColors.textFieldBgColor,
-                    borderRadius: BorderRadius.circular(6.0),
+                    borderRadius: const BorderRadius.all(Radius.circular(6.0)),
                   ),
                   child: Row(
                     children: [
                       Container(
                           margin: EdgeInsets.symmetric(horizontal: 10),
 
-                          child: Image.asset(Assets.images.uploadedImage.path)),
+                          child: Image.asset(Assets.images.uploadedImage.path),),
                       SizedBox(
                         height: context.heightPx * 6,
                       ),
@@ -191,16 +221,17 @@ class _WhoAmIScreenTwoState extends State<WhoAmIScreenTwo> {
                         child: Align(
                           alignment: Alignment.topCenter,
                           child: TextFormField(
-
-
+                             controller: descriptionController,
+                            keyboardType: TextInputType.multiline,
+                            minLines: 1,
+                            maxLines: 5,
                             style: const FontData().montFont500TextStyle,
                             decoration: InputDecoration(
                               focusColor: AppColors.textFieldBgColor,
                               enabledBorder: InputBorder.none,
                               focusedBorder: InputBorder.none,
-
                               border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(6.0),
+                                borderRadius: const BorderRadius.all(Radius.circular(6.0)),
                               ),
 
                               fillColor: AppColors.textFieldBgColor,
@@ -222,18 +253,30 @@ class _WhoAmIScreenTwoState extends State<WhoAmIScreenTwo> {
                 ),
             Align(
               alignment: Alignment.center,
-              child: Container(
-                height: context.heightPx * 42,
-                width: context.widthPx * 280,
+              child: InkWell(
+                onTap: ()async => await _selfEvaluationDetails(SelfEvaluationModel(
+              myValues: myValuesController.text,
+              saveNextPage: true,
+              motivatedBy: motivatedByController.text,
+              inspiredBy: [
+                imageId,
+
+                nameController.text,
+                descriptionController.text,
+              ],)),
                 child: Container(
-                  decoration: const BoxDecoration(
-                    color: AppColors.themeColor,
-                    borderRadius: BorderRadius.all(Radius.circular(8.0)),),
-                  child: Center(
-                    child: Text(
-                      save,
-                      // _display ? "hide logo" : "display logo",
-                      style: const FontData().montFont70016TextStyle,
+                  height: context.heightPx * 42,
+                  width: context.widthPx * 280,
+                  child: Container(
+                    decoration: const BoxDecoration(
+                      color: AppColors.themeColor,
+                      borderRadius: BorderRadius.all(Radius.circular(8.0)),),
+                    child: Center(
+                      child: Text(
+                        save,
+                        // _display ? "hide logo" : "display logo",
+                        style: const FontData().montFont70016TextStyle,
+                      ),
                     ),
                   ),
                 ),
@@ -247,6 +290,60 @@ class _WhoAmIScreenTwoState extends State<WhoAmIScreenTwo> {
           ),
         ),
       ),
+    );
+  }
+
+  Future<void> _selfEvaluationDetails(SelfEvaluationModel selfEvaluationModel) async {
+    String apiError = '';
+    handleFutureWithAlert(
+      context: context,
+      getErrorMessage: () {
+        return apiError;
+      },
+      function: () async {
+        final provider = context.read<AuthenticationProvider>();
+        ApiErrorResponseModel model = await SelfEvaluationService.selfEvaluationInfo(selfEvaluationModel);
+        debugPrint(model.status.toString());
+
+
+        if (model.message == 'success') {
+          apiSuccess = model.message;
+          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>WhoAmIScreenTwo()));
+
+
+          return ApiStatus.success;
+        } else {
+          apiError = model.message;
+
+          return ApiStatus.error;
+        }
+      },
+    );
+  }
+
+  Future<void> _getSelfEvaluationDetails() async {
+    String apiError = '';
+    handleFutureWithAlert(
+      context: context,
+      getErrorMessage: () {
+        return apiError;
+      },
+      function: () async {
+        GetSelfEvalutionModel model = await SelfEvaluationService.getSelfEvaluationInfo();
+        debugPrint(model.status.toString());
+        if (model.message == 'success') {
+          apiSuccess = model.message;
+          debugPrint(model.message);
+
+          // context.router.replaceAll([const ParentDetailsSecondary()]);
+
+          return ApiStatus.success;
+        } else {
+          apiError = model.message;
+
+          return ApiStatus.error;
+        }
+      },
     );
   }
 }

@@ -26,9 +26,9 @@ class LoginSuccessModel {
   final Data data;
 
   factory LoginSuccessModel.fromJson(Map<String, dynamic> json) => LoginSuccessModel(
-    status: json["status"] ?? true,
+    status: json["status"],
     message: json["message"] ?? '',
-    data: json["data"]==null? Data.fromJson(json["data"]):json["data"],
+    data:  Data.fromJson(json["data"]),
   );
 
   Map<String, dynamic> toJson() => {

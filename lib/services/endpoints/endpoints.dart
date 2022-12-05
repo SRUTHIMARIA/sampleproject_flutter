@@ -36,6 +36,9 @@ class AtheleteAssist {
   static const studentEnrollment=baseUrl+'/student-enrollment';
   static const saveAspirations=baseUrl+'/aspirations';
   static const getAspirations=baseUrl+'/aspirations';
+  // self evaluation apis
 
+  static const selfEvaluation=baseUrl+'/self-evaluations';
+  static const getSelfEvaluation=baseUrl+'/self-evaluations';
 
 }

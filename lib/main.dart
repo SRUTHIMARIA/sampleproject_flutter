@@ -3,7 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_template/firebase_options.dart';
 import 'package:flutter_template/providers/authentication_provider.dart';
 import 'package:flutter_template/providers/providers.dart';
+import 'package:flutter_template/ui/enrollment_details/whoamI_screen.dart';
+import 'package:flutter_template/ui/enrollment_details/whoamI_screen2.dart';
+import 'package:flutter_template/ui/login_screen/login_screen.dart';
 import 'package:flutter_template/ui/medical_details/medical_details.dart';
+import 'package:flutter_template/ui/parent_details/parent_details_primary.dart';
+import 'package:flutter_template/ui/student_basic_profile/whyjoin_screen.dart';
 import 'package:flutter_template/utils/globals.dart';
 import 'package:provider/provider.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -49,7 +54,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: MedicalDetails(),
+      home: WhoAmIScreenTwo(),
     );
   }
 }
