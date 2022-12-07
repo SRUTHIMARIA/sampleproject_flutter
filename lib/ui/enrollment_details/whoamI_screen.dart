@@ -1,24 +1,31 @@
+import 'dart:convert';
+import 'dart:io';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_template/gen/assets.gen.dart';
 import 'package:flutter_template/models/common_model/api_error_response_model.dart';
-import 'package:flutter_template/models/common_model/authentication_response_model.dart';
 import 'package:flutter_template/models/self_evaluation_model/get_selfevaluation.dart';
 import 'package:flutter_template/models/self_evaluation_model/self_evaluation_model.dart';
 import 'package:flutter_template/providers/authentication_provider.dart';
 import 'package:flutter_template/services/api/self_evaluation_service/self_evaluation_service.dart';
+import 'package:flutter_template/services/endpoints/endpoints.dart';
 import 'package:flutter_template/ui/enrollment_details/whoamI_screen2.dart';
 
 import 'package:flutter_template/utils/constants/font_data.dart';
+import 'package:flutter_template/utils/constants/strings.dart';
 import 'package:flutter_template/utils/extensions/context_extensions.dart';
 import 'package:flutter_template/utils/static/enums.dart';
+import 'package:flutter_template/widgets/snackbar/text_snackbar.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 
-import '../../utils/constants/strings.dart';
+import '../../services/api/self_evaluation_service/self_evaluation_widgets/image_picker_bottomsheet.dart';
 import '../../utils/theme/app_colors.dart';
 import '../../widgets/alert_dialog/future_handling_alert.dart';
+import 'package:http/http.dart' as http;
+import 'package:http_parser/http_parser.dart';
 
 class WhoAmIScreen extends StatefulWidget {
   const WhoAmIScreen({Key? key}) : super(key: key);
@@ -32,16 +39,38 @@ class _WhoAmIScreenState extends State<WhoAmIScreen> {
   String apiSuccess = '';
   var myValuesController = TextEditingController();
   var motivatedByController = TextEditingController();
+  XFile? profileImage;
+  ImagePicker picker = ImagePicker();
 
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
       // context.read<SportsListProvider>().getSportsListData();
-    // await _getSelfEvaluationDetails();
+      await _getSelfEvaluationDetails();
     });
   }
 
+  Future<dynamic> uploadProfileImage(File file) async {
+    debugPrint(file.path);
+    final request = http.MultipartRequest('POST', Uri.parse(AtheleteAssist.selfEvaluation));
+
+    var token = AuthenticationProvider.token;
+    request.headers['Authorization'] = 'Bearer $token';
+    request.files
+        .add(await http.MultipartFile.fromPath('profile_image', file.path, contentType: MediaType('image', 'jpg')));
+    var response = await request.send();
+    final res = await http.Response.fromStream(response);
+    if (res.statusCode == 200) {
+      AppSnackBar.showSnackBarWithText(text: 'Profile Image Updated Successfully', context: context);
+    } else {
+      AppSnackBar.showSnackBarWithText(text: 'Profile Image upload failed', context: context);
+    }
+    final body = json.decode(res.body);
+    debugPrint(body);
+
+    return body;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -189,12 +218,54 @@ class _WhoAmIScreenState extends State<WhoAmIScreen> {
                               SizedBox(
                                 height: context.heightPx * 40,
                               ),
+
+                              // ElevatedButton(
+                              //     onPressed: () async {
+                              //       profileImage = await picker.pickImage(source: ImageSource.gallery);
+                              //
+                              //       setState(() {
+                              //       });
+                              //       },
+                              //
+                              //     child: Text(uploadphoto),
+                              // ),
+
+                              // profileImage == null?Container():Image.file(File(profileImage!.path),width: 200,height: 100,),
                               InkWell(
-                                onTap: () async => await _selfEvaluationDetails(SelfEvaluationModel(
+                                onTap: () async {
+                                  // profileImage = await picker.pickImage(source: ImageSource.gallery),
+                                  showModalBottomSheet<void>(
+                                    context: context,
+                                    backgroundColor: Colors.transparent,
+                                    // isScrollControlled: true,
+                                    builder: (ctx) {
+                                      return ImageUploadBottomSheetWidget(
+                                        profileContext: context,
+                                        profileImage: (XFile? image) =>
+                                         setState(() {
+                                          profileImage = image;
+                                          uploadProfileImage(File(profileImage!.path));
+                                        }),
+                                      );
+                                    },
+                                  );
+
+                                  // ImageUploadBottomSheetWidget(
+                                  //   profileContext: context,
+                                  //   profileImage: (XFile? image) =>
+                                  //       setState(() async {
+                                  //    profileImage = image;
+                                  //     image = await picker.pickImage(source: ImageSource.camera);
+                                  //     uploadProfileImage(File(profileImage!.path));
+                                  //   }),
+                                  // ),
+                                  await _selfEvaluationDetails(InspirationsPostParams(
                                     myValues: myValuesController.text,
                                     saveNextPage: true,
                                     motivatedBy: motivatedByController.text,
-                                    inspiredBy: [],)),
+                                    inspiredBy: [],
+                                  ));
+                                },
 
                                 // Navigator.push(context, MaterialPageRoute(builder: (context)=>WhoAmIScreenTwo())),
                                 child: DecoratedBox(
@@ -242,10 +313,20 @@ class _WhoAmIScreenState extends State<WhoAmIScreen> {
                       );
                     },
                   ),
-                  child: Container(
-                    margin: const EdgeInsets.symmetric(horizontal: 56),
-                    child: Image.asset(Assets.images.imageAddphoto.path),
-                  ),
+                  child: profileImage == null
+                      ? Container(
+                          margin: const EdgeInsets.symmetric(horizontal: 56),
+                          child: Image.asset(Assets.images.imageAddphoto.path),
+                        )
+                      : Container(
+                          margin: const EdgeInsets.symmetric(horizontal: 56),
+                          child: Image.file(
+                            File(profileImage!.path),
+                            fit: BoxFit.scaleDown,
+                            width: 100,
+                            height: 100,
+                          ),
+                        ),
                 ),
                 Align(
                   alignment: Alignment.bottomRight,
@@ -262,7 +343,7 @@ class _WhoAmIScreenState extends State<WhoAmIScreen> {
     );
   }
 
-  Future<void> _selfEvaluationDetails(SelfEvaluationModel selfEvaluationModel) async {
+  Future<void> _selfEvaluationDetails(InspirationsPostParams inspirationsPostParams) async {
     String apiError = '';
     handleFutureWithAlert(
       context: context,
@@ -271,14 +352,12 @@ class _WhoAmIScreenState extends State<WhoAmIScreen> {
       },
       function: () async {
         final provider = context.read<AuthenticationProvider>();
-        ApiErrorResponseModel model = await SelfEvaluationService.selfEvaluationInfo(selfEvaluationModel);
+        ApiErrorResponseModel model = await SelfEvaluationService.selfEvaluationInfo(inspirationsPostParams);
         debugPrint(model.status.toString());
-
 
         if (model.message == 'success') {
           apiSuccess = model.message;
-          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>WhoAmIScreenTwo()));
-
+          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => WhoAmIScreenTwo()));
 
           return ApiStatus.success;
         } else {

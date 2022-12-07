@@ -26,9 +26,8 @@ class GetSelfEvalutionModel {
     data:
     // json['data'] == null
     //     ? Data.fromJson(json["data"]),
-    json['data'] == null
-        ? Data.fromJson(json["data"])
-        : json['data'],
+
+       Data.fromJson(json["data"]),
   );
 
   Map<String, dynamic> toJson() => {

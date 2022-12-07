@@ -1,19 +1,14 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_template/gen/assets.gen.dart';
 import 'package:flutter_template/models/common_model/api_error_response_model.dart';
 import 'package:flutter_template/models/self_evaluation_model/get_selfevaluation.dart';
 import 'package:flutter_template/models/self_evaluation_model/self_evaluation_model.dart';
-import 'package:flutter_template/providers/authentication_provider.dart';
 import 'package:flutter_template/services/api/self_evaluation_service/self_evaluation_service.dart';
-
 import 'package:flutter_template/utils/constants/font_data.dart';
 import 'package:flutter_template/utils/extensions/context_extensions.dart';
 import 'package:flutter_template/utils/static/enums.dart';
 import 'package:flutter_template/widgets/alert_dialog/future_handling_alert.dart';
-import 'package:provider/provider.dart';
-
 import '../../utils/constants/strings.dart';
 import '../../utils/theme/app_colors.dart';
 
@@ -33,7 +28,7 @@ class _WhoAmIScreenTwoState extends State<WhoAmIScreenTwo> {
   var motivatedByController = TextEditingController();
   var nameController = TextEditingController();
   var descriptionController = TextEditingController();
-
+  List<InspiredBy> inspirationByModel = [];
 
 
   @override
@@ -254,16 +249,13 @@ class _WhoAmIScreenTwoState extends State<WhoAmIScreenTwo> {
             Align(
               alignment: Alignment.center,
               child: InkWell(
-                onTap: ()async => await _selfEvaluationDetails(SelfEvaluationModel(
+                onTap: ()async => await _selfEvaluationDetails(InspirationsPostParams(
               myValues: myValuesController.text,
               saveNextPage: true,
               motivatedBy: motivatedByController.text,
-              inspiredBy: [
-                imageId,
-
-                nameController.text,
-                descriptionController.text,
-              ],)),
+                  inspiredBy: [
+                    ],
+        )),
                 child: Container(
                   height: context.heightPx * 42,
                   width: context.widthPx * 280,
@@ -293,7 +285,7 @@ class _WhoAmIScreenTwoState extends State<WhoAmIScreenTwo> {
     );
   }
 
-  Future<void> _selfEvaluationDetails(SelfEvaluationModel selfEvaluationModel) async {
+  Future<void> _selfEvaluationDetails(InspirationsPostParams inspirationsPostParams) async {
     String apiError = '';
     handleFutureWithAlert(
       context: context,
@@ -301,8 +293,7 @@ class _WhoAmIScreenTwoState extends State<WhoAmIScreenTwo> {
         return apiError;
       },
       function: () async {
-        final provider = context.read<AuthenticationProvider>();
-        ApiErrorResponseModel model = await SelfEvaluationService.selfEvaluationInfo(selfEvaluationModel);
+        ApiErrorResponseModel model = await SelfEvaluationService.selfEvaluationInfo(inspirationsPostParams);
         debugPrint(model.status.toString());
 
 
