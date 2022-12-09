@@ -337,6 +337,6 @@ class _AtheleteMedicalInfoAboutState extends State<AtheleteMedicalInfoAbout> {
 
 
 
-                )),),);
+                ),),),);
   }
 }

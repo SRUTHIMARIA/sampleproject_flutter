@@ -40,5 +40,6 @@ class AtheleteAssist {
 
   static const selfEvaluation=baseUrl+'/self-evaluations';
   static const getSelfEvaluation=baseUrl+'/self-evaluations';
+  static const saveInspiredImages=baseUrl+'/save-inspired-images';
 
 }

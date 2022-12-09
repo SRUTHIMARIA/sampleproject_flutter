@@ -36,9 +36,12 @@ class WhoAmIScreen extends StatefulWidget {
 
 class _WhoAmIScreenState extends State<WhoAmIScreen> {
   bool isAgree = false;
+  bool isVisible = false;
   String apiSuccess = '';
   var myValuesController = TextEditingController();
   var motivatedByController = TextEditingController();
+  var nameController = TextEditingController();
+
   XFile? profileImage;
   ImagePicker picker = ImagePicker();
 
@@ -47,13 +50,13 @@ class _WhoAmIScreenState extends State<WhoAmIScreen> {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
       // context.read<SportsListProvider>().getSportsListData();
-      await _getSelfEvaluationDetails();
+      // await _getSelfEvaluationDetails();
     });
   }
 
   Future<dynamic> uploadProfileImage(File file) async {
     debugPrint(file.path);
-    final request = http.MultipartRequest('POST', Uri.parse(AtheleteAssist.selfEvaluation));
+    final request = http.MultipartRequest('POST', Uri.parse(AtheleteAssist.saveInspiredImages));
 
     var token = AuthenticationProvider.token;
     request.headers['Authorization'] = 'Bearer $token';
@@ -62,9 +65,9 @@ class _WhoAmIScreenState extends State<WhoAmIScreen> {
     var response = await request.send();
     final res = await http.Response.fromStream(response);
     if (res.statusCode == 200) {
-      AppSnackBar.showSnackBarWithText(text: 'Profile Image Updated Successfully', context: context);
+      AppSnackBar.showSnackBarWithText(text: 'Image uploaded Successfully', context: context);
     } else {
-      AppSnackBar.showSnackBarWithText(text: 'Profile Image upload failed', context: context);
+      AppSnackBar.showSnackBarWithText(text: 'Image upload failed', context: context);
     }
     final body = json.decode(res.body);
     debugPrint(body);
@@ -193,6 +196,36 @@ class _WhoAmIScreenState extends State<WhoAmIScreen> {
                     style: FontData().montFont500TextStyle,
                   ),
                 ),
+              Visibility(
+                visible: false,
+                child: Container(
+                    margin: EdgeInsets.symmetric(horizontal: 56),
+                    decoration: BoxDecoration(
+                      color: AppColors.textFieldBgColor,
+                      borderRadius: const BorderRadius.all(Radius.circular(6.0)),
+                    ),
+                    child: TextFormField(
+                      controller: nameController,
+                      style: FontData().montFont500TextStyle,
+                      decoration: InputDecoration(
+                        focusColor: AppColors.textFieldBgColor,
+                        enabledBorder: InputBorder.none,
+                        focusedBorder: InputBorder.none,
+
+                        border: OutlineInputBorder(
+                          borderRadius: const BorderRadius.all(Radius.circular(6.0)),
+                        ),
+
+                        fillColor: AppColors.textFieldBgColor,
+                        contentPadding: EdgeInsets.only(left: 20.0),
+                        hintText: name,
+
+                        //make hint text
+                        hintStyle: FontData().montFont500TextStyle,
+                      ),
+                    ),
+                  ),
+              ),
                 SizedBox(
                   height: context.heightPx * 12,
                 ),
@@ -232,6 +265,14 @@ class _WhoAmIScreenState extends State<WhoAmIScreen> {
 
                               // profileImage == null?Container():Image.file(File(profileImage!.path),width: 200,height: 100,),
                               InkWell(
+
+                                  onHover: (value) {
+                                    print(value);
+                                    setState(() {
+                                      isVisible = !isVisible;
+                                    });
+                                  },
+
                                 onTap: () async {
                                   // profileImage = await picker.pickImage(source: ImageSource.gallery),
                                   showModalBottomSheet<void>(
@@ -250,21 +291,14 @@ class _WhoAmIScreenState extends State<WhoAmIScreen> {
                                     },
                                   );
 
-                                  // ImageUploadBottomSheetWidget(
-                                  //   profileContext: context,
-                                  //   profileImage: (XFile? image) =>
-                                  //       setState(() async {
-                                  //    profileImage = image;
-                                  //     image = await picker.pickImage(source: ImageSource.camera);
-                                  //     uploadProfileImage(File(profileImage!.path));
-                                  //   }),
-                                  // ),
-                                  await _selfEvaluationDetails(InspirationsPostParams(
-                                    myValues: myValuesController.text,
-                                    saveNextPage: true,
-                                    motivatedBy: motivatedByController.text,
-                                    inspiredBy: [],
-                                  ));
+
+
+                                  // await _selfEvaluationDetails(InspirationsPostParams(
+                                  //   myValues: myValuesController.text,
+                                  //   saveNextPage: true,
+                                  //   motivatedBy: motivatedByController.text,
+                                  //   inspiredBy: [],
+                                  // ));
                                 },
 
                                 // Navigator.push(context, MaterialPageRoute(builder: (context)=>WhoAmIScreenTwo())),

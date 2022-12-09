@@ -220,6 +220,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   SizedBox(
                     height: context.heightPx * 20,
                   ),
+
+
                   Container(
                     margin: const EdgeInsets.symmetric(horizontal: 56),
                     decoration: const BoxDecoration(

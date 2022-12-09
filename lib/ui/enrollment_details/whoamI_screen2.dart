@@ -38,7 +38,7 @@ class _WhoAmIScreenTwoState extends State<WhoAmIScreenTwo> {
       // context.read<SportsListProvider>().getSportsListData();
       // await _getSelfEvaluationDetails();
     });
-  }
+   }
 
 
   @override
@@ -102,16 +102,12 @@ class _WhoAmIScreenTwoState extends State<WhoAmIScreenTwo> {
                       contentPadding:
                       EdgeInsets.only(left: context.heightPx * 16),
 
+
                       border: OutlineInputBorder(
                         borderRadius: const BorderRadius.all(Radius.circular(10.0)),
                       ),
                       focusedBorder: InputBorder.none,
-
-
-                      fillColor: Colors.grey,
-
                       hintText: values,
-
                       //make hint text
                       hintStyle: FontData().montFont500TextStyle,
                     ),
@@ -144,11 +140,7 @@ class _WhoAmIScreenTwoState extends State<WhoAmIScreenTwo> {
                       ),
 
                       focusedBorder: InputBorder.none,
-
-                      fillColor: Colors.grey,
-
                       hintText: motivated,
-
                       //make hint text
                       hintStyle: FontData().montFont500TextStyle,
                     ),
@@ -187,7 +179,6 @@ class _WhoAmIScreenTwoState extends State<WhoAmIScreenTwo> {
                       fillColor: AppColors.textFieldBgColor,
                       contentPadding: EdgeInsets.only(left: 20.0),
                       hintText: name,
-
                       //make hint text
                       hintStyle: FontData().montFont500TextStyle,
                     ),
@@ -228,11 +219,9 @@ class _WhoAmIScreenTwoState extends State<WhoAmIScreenTwo> {
                               border: OutlineInputBorder(
                                 borderRadius: const BorderRadius.all(Radius.circular(6.0)),
                               ),
-
                               fillColor: AppColors.textFieldBgColor,
                               contentPadding: EdgeInsets.only(left: 4.0),
                               hintText: inspire,
-
                               //make hint text
                               hintStyle: const FontData().montFont500TextStyle,
                             ),
@@ -253,9 +242,7 @@ class _WhoAmIScreenTwoState extends State<WhoAmIScreenTwo> {
               myValues: myValuesController.text,
               saveNextPage: true,
               motivatedBy: motivatedByController.text,
-                  inspiredBy: [
-                    ],
-        )),
+                  inspiredBy: [],)),
                 child: Container(
                   height: context.heightPx * 42,
                   width: context.widthPx * 280,

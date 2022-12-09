@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_template/firebase_options.dart';
 import 'package:flutter_template/providers/authentication_provider.dart';
 import 'package:flutter_template/providers/providers.dart';
+import 'package:flutter_template/ui/enrollment_details/whoamI_screen.dart';
 import 'package:flutter_template/ui/login_screen/login_screen.dart';
 import 'package:flutter_template/utils/globals.dart';
 import 'package:provider/provider.dart';
@@ -49,7 +50,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: LoginScreen(),
+      home: WhoAmIScreen(),
     );
   }
 }
