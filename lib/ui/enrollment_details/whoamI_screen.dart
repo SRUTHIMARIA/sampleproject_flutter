@@ -54,23 +54,36 @@ class _WhoAmIScreenState extends State<WhoAmIScreen> {
     });
   }
 
+  /*  verify this
+    var token = AuthenticationProvider.token
+
+console response     var response = await request.send();
+
+    final res = await http.Response.fromStream(response);
+console this also
+   */
+
   Future<dynamic> uploadProfileImage(File file) async {
     debugPrint(file.path);
-    final request = http.MultipartRequest('POST', Uri.parse(AtheleteAssist.saveInspiredImages));
+    final request = http.MultipartRequest('POST', Uri.parse('https://athlete.devateam.com/api/save-inspired-images'));
+   // final request = http.MultipartRequest('POST', Uri.parse(AtheleteAssist.saveInspiredImages));
 
     var token = AuthenticationProvider.token;
     request.headers['Authorization'] = 'Bearer $token';
+    request.headers['Accept']='application/json';
+    request.headers['Content-Type'] = 'application/json';
     request.files
-        .add(await http.MultipartFile.fromPath('profile_image', file.path, contentType: MediaType('image', 'jpg')));
+        .add(await http.MultipartFile.fromPath('profile_image', file.path, contentType: MediaType('image','jpg')));
     var response = await request.send();
     final res = await http.Response.fromStream(response);
+    debugPrint(res.statusCode.toString());
     if (res.statusCode == 200) {
       AppSnackBar.showSnackBarWithText(text: 'Image uploaded Successfully', context: context);
     } else {
       AppSnackBar.showSnackBarWithText(text: 'Image upload failed', context: context);
     }
     final body = json.decode(res.body);
-    debugPrint(body);
+    debugPrint(body.toString());
 
     return body;
   }
