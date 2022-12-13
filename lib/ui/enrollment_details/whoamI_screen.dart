@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
 import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_template/gen/assets.gen.dart';
@@ -10,9 +9,7 @@ import 'package:flutter_template/models/self_evaluation_model/get_selfevaluation
 import 'package:flutter_template/models/self_evaluation_model/self_evaluation_model.dart';
 import 'package:flutter_template/providers/authentication_provider.dart';
 import 'package:flutter_template/services/api/self_evaluation_service/self_evaluation_service.dart';
-import 'package:flutter_template/services/endpoints/endpoints.dart';
 import 'package:flutter_template/ui/enrollment_details/whoamI_screen2.dart';
-
 import 'package:flutter_template/utils/constants/font_data.dart';
 import 'package:flutter_template/utils/constants/strings.dart';
 import 'package:flutter_template/utils/extensions/context_extensions.dart';
@@ -20,7 +17,6 @@ import 'package:flutter_template/utils/static/enums.dart';
 import 'package:flutter_template/widgets/snackbar/text_snackbar.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
-
 import '../../services/api/self_evaluation_service/self_evaluation_widgets/image_picker_bottomsheet.dart';
 import '../../utils/theme/app_colors.dart';
 import '../../widgets/alert_dialog/future_handling_alert.dart';
