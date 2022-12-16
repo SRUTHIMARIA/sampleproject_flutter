@@ -19,6 +19,7 @@ import 'package:flutter_template/utils/extensions/context_extensions.dart';
 import 'package:flutter_template/utils/static/enums.dart';
 import 'package:flutter_template/utils/static/static_padding.dart';
 import 'package:flutter_template/widgets/alert_dialog/future_handling_alert.dart';
+import 'package:hive/hive.dart';
 import 'package:provider/provider.dart';
 
 import '../../utils/theme/app_colors.dart';
@@ -39,32 +40,32 @@ class _LoginScreenState extends State<LoginScreen> {
   late FirebaseMessaging messaging;
   final _formKey = GlobalKey<FormState>();
 
-  // Box? userDataBox;
-  // // String? token;
-  // // //
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   userDataBox = Hive.box('userDetailBox');
-  //   // getDeviceToken();
-  //   // createBox();
-  //   // getData();
-  // }
+  Box? userDataBox;
+  // String? token;
+  // //
+  @override
+  void initState() {
+    super.initState();
+    userDataBox = Hive.box('userDetailBox');
+    // getDeviceToken();
+    // createBox();
+    // getData();
+  }
 
-  //
-  // void createBox() async {
-  //   userDataBox = await Hive.openBox('userdata');
-  //   getData();
-  // }
-  //
-  // void getData() async {
-  //   if (userDataBox!.get('email') != null) {
-  //     txtUserNameController.text = userDataBox!.get('email');
-  //   }
-  //   if (userDataBox!.get('password') != null) {
-  //     txtUserPwdController.text = userDataBox!.get('password');
-  //   }
-  // }
+
+  void createBox() async {
+    userDataBox = await Hive.openBox('userdata');
+    getData();
+  }
+
+  void getData() async {
+    if (userDataBox!.get('email') != null) {
+      txtUserNameController.text = userDataBox!.get('email');
+    }
+    if (userDataBox!.get('password') != null) {
+      txtUserPwdController.text = userDataBox!.get('password');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
